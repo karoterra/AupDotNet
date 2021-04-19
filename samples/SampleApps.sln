@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadWriteAup", "ReadWriteAup\ReadWriteAup.csproj", "{9C59EA85-E12D-4FDC-977F-9CF0CA9C5A3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AviUtlProject", "..\src\AviUtlProject\AviUtlProject.csproj", "{C7C22914-ED39-4AD8-87F3-8D5F069FC49D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C59EA85-E12D-4FDC-977F-9CF0CA9C5A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C59EA85-E12D-4FDC-977F-9CF0CA9C5A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C59EA85-E12D-4FDC-977F-9CF0CA9C5A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C59EA85-E12D-4FDC-977F-9CF0CA9C5A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C22914-ED39-4AD8-87F3-8D5F069FC49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C22914-ED39-4AD8-87F3-8D5F069FC49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C22914-ED39-4AD8-87F3-8D5F069FC49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C22914-ED39-4AD8-87F3-8D5F069FC49D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B653325-C1CE-4445-8AE0-56FCA6415330}
+	EndGlobalSection
+EndGlobal

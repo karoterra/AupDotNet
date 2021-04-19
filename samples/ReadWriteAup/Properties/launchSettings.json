@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ReadWriteAup": {
+      "commandName": "Project",
+      "commandLineArgs": "\"data\\sample1.aup\""
+    }
+  }
+}
