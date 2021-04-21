@@ -1,6 +1,6 @@
 using System;
 
-namespace Karoterra.AviUtlProject.ExEdit
+namespace Karoterra.AupDotNet.ExEdit
 {
     [Flags]
     public enum LayerFlag

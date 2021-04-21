@@ -3,9 +3,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Karoterra.AviUtlProject;
+using Karoterra.AupDotNet;
 
-namespace AviUtlProjectTests
+namespace AupDotNetTests
 {
     [TestClass]
     public class AviUtlProjectTest

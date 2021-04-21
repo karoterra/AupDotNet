@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.Extensions;
 
-namespace AviUtlProjectTests.Extensions
+namespace AupDotNetTests.Extensions
 {
     [TestClass]
     public class IntegerExtensionsTest

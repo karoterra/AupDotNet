@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using Karoterra.AviUtlProject;
+using Karoterra.AupDotNet;
 
 namespace ReadWriteAup
 {

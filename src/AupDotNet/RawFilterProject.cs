@@ -1,7 +1,7 @@
 using System.IO;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.Extensions;
 
-namespace Karoterra.AviUtlProject
+namespace Karoterra.AupDotNet
 {
     public class RawFilterProject : FilterProject
     {

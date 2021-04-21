@@ -1,4 +1,4 @@
-namespace Karoterra.AviUtlProject.ExEdit.Filters
+namespace Karoterra.AupDotNet.ExEdit.Filters
 {
     public class CustomFilter : Filter
     {

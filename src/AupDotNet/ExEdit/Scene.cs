@@ -1,7 +1,7 @@
 using System;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.Extensions;
 
-namespace Karoterra.AviUtlProject.ExEdit
+namespace Karoterra.AupDotNet.ExEdit
 {
     public class Scene
     {

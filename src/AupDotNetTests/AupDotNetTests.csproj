@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AviUtlProject\AviUtlProject.csproj" />
+    <ProjectReference Include="..\AupDotNet\AupDotNet.csproj" />
   </ItemGroup>
 
 </Project>

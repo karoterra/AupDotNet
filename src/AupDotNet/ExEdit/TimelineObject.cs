@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Karoterra.AviUtlProject.ExEdit.Filters;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.ExEdit.Filters;
+using Karoterra.AupDotNet.Extensions;
 
-namespace Karoterra.AviUtlProject.ExEdit
+namespace Karoterra.AupDotNet.ExEdit
 {
     public class TimelineObject
     {

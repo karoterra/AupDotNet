@@ -2,9 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.Extensions;
 
-namespace AviUtlProjectTests.Extensions
+namespace AupDotNetTests.Extensions
 {
     [TestClass]
     public class StringExtensionsTest

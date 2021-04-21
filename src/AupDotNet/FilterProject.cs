@@ -1,8 +1,8 @@
 using System.IO;
 using System.Text;
-using Karoterra.AviUtlProject.Extensions;
+using Karoterra.AupDotNet.Extensions;
 
-namespace Karoterra.AviUtlProject
+namespace Karoterra.AupDotNet
 {
     public abstract class FilterProject
     {

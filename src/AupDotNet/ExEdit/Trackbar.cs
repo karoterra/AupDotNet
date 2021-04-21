@@ -1,4 +1,4 @@
-namespace Karoterra.AviUtlProject.ExEdit
+namespace Karoterra.AupDotNet.ExEdit
 {
     public class Trackbar
     {

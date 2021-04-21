@@ -1,6 +1,6 @@
 using System;
 
-namespace Karoterra.AviUtlProject.Extensions
+namespace Karoterra.AupDotNet.Extensions
 {
     public static class IntegerExtensions
     {

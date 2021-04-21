@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Karoterra.AviUtlProject.Extensions
+namespace Karoterra.AupDotNet.Extensions
 {
     public static class StringExtensions
     {

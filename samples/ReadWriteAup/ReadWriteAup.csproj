@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AviUtlProject\AviUtlProject.csproj" />
+    <ProjectReference Include="..\..\src\AupDotNet\AupDotNet.csproj" />
   </ItemGroup>
 
 </Project>
