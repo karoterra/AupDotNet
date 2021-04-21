@@ -15,13 +15,13 @@ namespace Karoterra.AviUtlProject
 
         public RawFilterProject(BinaryReader reader)
         {
-            var header = Sjis.GetString(reader.ReadBytes(18));
+            var header = reader.ReadBytes(18).ToSjisString();
             if(header != Header)
             {
                 throw new FileFormatException("Cannot find FilterProject header.");
             }
             var nameLength = reader.ReadInt32();
-            Name = reader.ReadBytes(nameLength).ToSjisString();
+            Name = reader.ReadBytes(nameLength).ToSjisString().CutNull();
             var dataSize = reader.ReadInt32();
             Data = new byte[dataSize];
             AviUtlProject.Decomp(reader, Data);

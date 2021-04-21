@@ -7,19 +7,13 @@ namespace Karoterra.AviUtlProject
     public abstract class FilterProject
     {
         protected static readonly string Header = "FilterProject 0.1\0";
-        protected static readonly Encoding Sjis;
         public string Name { get; set; }
-
-        static FilterProject()
-        {
-            Sjis = Encoding.GetEncoding(932);
-        }
 
         public abstract byte[] DumpData();
 
         public void Write(BinaryWriter writer)
         {
-            writer.Write(Sjis.GetBytes(Header));
+            writer.Write(Header.ToSjisBytes());
             var name = Name.ToSjisBytes();
             writer.Write(name.Length + 1);
             writer.Write(name);

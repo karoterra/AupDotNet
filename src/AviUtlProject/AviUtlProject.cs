@@ -10,7 +10,6 @@ namespace Karoterra.AviUtlProject
     public class AviUtlProject
     {
         const string Header = "AviUtl ProjectFile version 0.18\0";
-        static readonly Encoding Sjis;
 
         public uint HandleSize { get; set; }
         public uint Flag { get; set; }
@@ -35,16 +34,11 @@ namespace Karoterra.AviUtlProject
 
         public List<FilterProject> FilterProjects { get; set; }
 
-        static AviUtlProject()
-        {
-            Sjis = Encoding.GetEncoding(932);
-        }
-
         public void Read(BinaryReader reader)
         {
             var baseStream = reader.BaseStream;
 
-            var header = Sjis.GetString(reader.ReadBytes(32));
+            var header = reader.ReadBytes(32).ToSjisString();
             if (header != Header)
             {
                 throw new FileFormatException("Cannot find AviUtl ProjectFile header.");
@@ -52,11 +46,11 @@ namespace Karoterra.AviUtlProject
 
             HandleSize = reader.ReadUInt32();
             Flag = reader.ReadUInt32();
-            EditFilename = reader.ReadBytes(260).ToSjisString();
-            OutputFilename = reader.ReadBytes(260).ToSjisString();
+            EditFilename = reader.ReadBytes(260).ToSjisString().CutNull();
+            OutputFilename = reader.ReadBytes(260).ToSjisString().CutNull();
             var buf = new byte[HandleSize - 260 * 2 - 4];
             Decomp(reader, buf);
-            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, 260).ToSjisString();
+            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, 260).ToSjisString().CutNull();
             EditHandleData = buf.Skip(260).ToArray();
             FrameNum = reader.ReadInt32();
 
@@ -83,7 +77,7 @@ namespace Karoterra.AviUtlProject
 
         public void Write(BinaryWriter writer)
         {
-            writer.Write(Sjis.GetBytes(Header));
+            writer.Write(Header.ToSjisBytes());
             writer.Write(HandleSize);
             writer.Write(Flag);
             writer.Write(EditFilename.ToSjisBytes(260));
@@ -104,7 +98,7 @@ namespace Karoterra.AviUtlProject
             Comp(writer, Array8);
             Comp(writer, Vcm);
             writer.Write(DataBeforeFooter);
-            writer.Write(Sjis.GetBytes(Header));
+            writer.Write(Header.ToSjisBytes());
 
             foreach(var filter in FilterProjects)
             {
@@ -115,7 +109,7 @@ namespace Karoterra.AviUtlProject
         byte[] SkipToFooter(BinaryReader reader)
         {
             int index = 0;
-            var footer = Sjis.GetBytes(Header);
+            var footer = Header.ToSjisBytes();
             var skippedData = new List<byte>();
             while (true)
             {

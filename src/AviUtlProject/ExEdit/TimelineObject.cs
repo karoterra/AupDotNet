@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Karoterra.AviUtlProject.ExEdit.Filters;
+using Karoterra.AviUtlProject.Extensions;
+
+namespace Karoterra.AviUtlProject.ExEdit
+{
+    public class TimelineObject
+    {
+        public static readonly int BaseSize = 0x5C8;
+        public static readonly int ExtSizeOffset = 0xF4;
+        public static readonly int MaxFilter = 12;
+
+        public static readonly uint NoChainGroup = 0xFFFF_FFFF;
+        public static readonly uint NoGroup = 0;
+
+        public uint Size => (uint)(BaseSize + ExtSize);
+
+        public uint Field0x0 { get; set; }
+        public uint StartFrame { get; set; }
+        public uint EndFrame { get; set; }
+        public string Preview { get; set; }
+        public uint ChainGroup { get; set; }
+        public bool Chain { get; set; }
+
+        public uint ExtSize => Chain ? 0 : (uint)Filters.Sum(x => x.Type.ExtSize);
+
+        public uint Group { get; set; }
+        public uint LayerIndex { get; set; }
+        public uint SceneIndex { get; set; }
+
+        public Filter[] Filters { get; set; }
+
+        public TimelineObject(ReadOnlySpan<byte> data, FilterType[] filterTypes)
+        {
+            Field0x0 = data.Slice(0, 4).ToUInt32();
+            StartFrame = data.Slice(8, 4).ToUInt32();
+            EndFrame = data.Slice(12, 4).ToUInt32();
+            Preview = data.Slice(0x10, 64).ToSjisString().CutNull();
+            ChainGroup = data.Slice(0x50, 4).ToUInt32();
+            var extSize = data.Slice(0xF4, 4).ToUInt32();
+            Chain = (ChainGroup != 0xFFFF_FFFF && extSize == 0) ? true : false;
+            Group = data.Slice(0x4BC, 4).ToUInt32();
+            LayerIndex = data.Slice(0x5C0, 4).ToUInt32();
+            SceneIndex = data.Slice(0x5C4, 4).ToUInt32();
+
+            var filters = new List<Filter>();
+            int trackbarCount = 0;
+            for (int i = 0; i < MaxFilter; i++)
+            {
+                var typeIndex = data.Slice(0x54 + i * 12, 4).ToUInt32();
+                if (typeIndex == 0xFFFF_FFFF)
+                {
+                    break;
+                }
+                var type = filterTypes[typeIndex];
+                var offset = data.Slice(0x54 + i * 12 + 8, 4).ToInt32();
+                var extData = Chain ? new byte[0] : data.Slice(BaseSize + offset, (int)type.ExtSize).ToArray();
+                var flag = (FilterFlag)data[0xE4 + i];
+
+                var trackbars = new Trackbar[type.TrackbarNum];
+                for (int j = 0; j < trackbars.Length; j++)
+                {
+                    var index = trackbarCount + j;
+                    var current = data.Slice(0xF8 + index * 4, 4).ToInt32();
+                    var next = data.Slice(0x1F8 + index * 4, 4).ToInt32();
+                    var transition = data.Slice(0x2F8 + index * 4, 4).ToUInt32();
+                    var param = data.Slice(0x4C0 + index * 4, 4).ToInt32();
+                    trackbars[j] = new Trackbar(current, next, transition, param);
+                }
+
+                filters.Add(new CustomFilter(type, flag, trackbars, extData));
+                trackbarCount += trackbars.Length;
+            }
+            Filters = filters.ToArray();
+        }
+
+        public void Dump(Span<byte> data, FilterType[] filterTypes)
+        {
+            Field0x0.ToBytes().CopyTo(data);
+            var field0x4 = (SceneIndex == 0) ? LayerIndex : 0xFFFF_FFFF;
+            field0x4.ToBytes().CopyTo(data.Slice(4));
+            StartFrame.ToBytes().CopyTo(data.Slice(8));
+            EndFrame.ToBytes().CopyTo(data.Slice(12));
+            Preview.ToSjisBytes().CopyTo(data.Slice(0x10));
+            ChainGroup.ToBytes().CopyTo(data.Slice(0x50));
+            ExtSize.ToBytes().CopyTo(data.Slice(0xF4));
+            Group.ToBytes().CopyTo(data.Slice(0x4BC));
+            LayerIndex.ToBytes().CopyTo(data.Slice(0x5C0));
+            SceneIndex.ToBytes().CopyTo(data.Slice(0x5C4));
+
+            var extCursor = 0;
+            var trackbarCount = 0;
+            var variableCount = 0;
+            for (int i = 0; i < Filters.Length; i++)
+            {
+                var typeIndex = Array.FindIndex(filterTypes, x => x.Name == Filters[i].Type.Name);
+                typeIndex.ToBytes().CopyTo(data.Slice(0x54 + i * 12));
+                ((ushort)trackbarCount).ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 4));
+                ((ushort)variableCount).ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 6));
+                extCursor.ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 8));
+                data[0xE4 + i] = (byte)Filters[i].Flag;
+
+                for (int j = 0; j < Filters[i].Trackbars.Length; j++)
+                {
+                    var trackbar = Filters[i].Trackbars[j];
+                    var index = trackbarCount + j;
+                    trackbar.Current.ToBytes().CopyTo(data.Slice(0xF8 + index * 4));
+                    trackbar.Next.ToBytes().CopyTo(data.Slice(0x1F8 + index * 4));
+                    trackbar.Transition.ToBytes().CopyTo(data.Slice(0x2F8 + index * 4));
+                    trackbar.Parameter.ToBytes().CopyTo(data.Slice(0x4C0 + index * 4));
+                }
+
+                if (!Chain)
+                {
+                    var extData = Filters[i].DumpExtData();
+                    extData.CopyTo(data.Slice(BaseSize + extCursor));
+                    extCursor += extData.Length;
+                }
+
+                trackbarCount += Filters[i].Trackbars.Length;
+                variableCount += (int)Filters[i].Type.ParamNum;
+            }
+            ((ushort)trackbarCount).ToBytes().CopyTo(data.Slice(0xF0));
+            ((ushort)variableCount).ToBytes().CopyTo(data.Slice(0xF2));
+            for (int i = Filters.Length; i < MaxFilter; i++)
+            {
+                0xFFFF_FFFF.ToBytes().CopyTo(data.Slice(0x54 + i * 12));
+            }
+        }
+    }
+}
