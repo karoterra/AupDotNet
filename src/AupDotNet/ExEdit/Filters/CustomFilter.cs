@@ -3,11 +3,19 @@ namespace Karoterra.AupDotNet.ExEdit.Filters
     public class CustomFilter : Filter
     {
         public byte[] Data { get; set; }
-        public CustomFilter(FilterType type, FilterFlag flag, Trackbar[] trackbars, byte[] data)
+
+        private Trackbar[] _trackbars;
+        public override Trackbar[] Trackbars => _trackbars;
+
+        private uint[] _checkboxes;
+        public override uint[] Checkboxes => _checkboxes;
+
+        public CustomFilter(FilterType type, FilterFlag flag, Trackbar[] trackbars, uint[] checkboxes, byte[] data)
+            : base(type)
         {
-            Type = type;
             Flag = flag;
-            Trackbars = trackbars;
+            _trackbars = trackbars;
+            _checkboxes = checkboxes;
             Data = data;
         }
 

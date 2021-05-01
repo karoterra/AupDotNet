@@ -7,5 +7,7 @@ namespace Karoterra.AupDotNet.ExEdit
     {
         Hide = 1,
         Lock = 2,
+        Link = 0x10,
+        Clipping = 0x20,
     }
 }

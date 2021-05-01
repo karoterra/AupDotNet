@@ -7,11 +7,11 @@ namespace Karoterra.AupDotNet.ExEdit
     {
         public static readonly int Size = 112;
 
-        public uint Flag { get; set; }
-        public uint TrackbarNum { get; set; }
-        public uint ParamNum { get; set; }
-        public uint ExtSize { get; set; }
-        public string Name { get; set; }
+        public readonly uint Flag;
+        public readonly uint TrackbarNum;
+        public readonly uint CheckboxNum;
+        public readonly uint ExtSize;
+        public readonly string Name;
 
         public FilterType(ReadOnlySpan<byte> data)
         {
@@ -21,7 +21,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
             Flag = data.Slice(0, 4).ToUInt32();
             TrackbarNum = data.Slice(4, 4).ToUInt32();
-            ParamNum = data.Slice(8, 4).ToUInt32();
+            CheckboxNum = data.Slice(8, 4).ToUInt32();
             ExtSize = data.Slice(12, 4).ToUInt32();
             Name = data.Slice(16).ToSjisString().CutNull();
         }
@@ -30,7 +30,7 @@ namespace Karoterra.AupDotNet.ExEdit
         {
             Flag.ToBytes().CopyTo(data);
             TrackbarNum.ToBytes().CopyTo(data.Slice(4));
-            ParamNum.ToBytes().CopyTo(data.Slice(8));
+            CheckboxNum.ToBytes().CopyTo(data.Slice(8));
             ExtSize.ToBytes().CopyTo(data.Slice(12));
             Name.ToSjisBytes().CopyTo(data.Slice(16));
         }
