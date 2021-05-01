@@ -11,6 +11,7 @@ namespace Karoterra.AupDotNet.ExEdit
         public static readonly int BaseSize = 0x5C8;
         public static readonly int ExtSizeOffset = 0xF4;
         public static readonly int MaxFilter = 12;
+        public static readonly int MaxPreviewLength = 64;
 
         public static readonly uint NoChainGroup = 0xFFFF_FFFF;
         public static readonly uint NoGroup = 0;
@@ -20,7 +21,21 @@ namespace Karoterra.AupDotNet.ExEdit
         public TimelineObjectFlag Flag { get; set; }
         public uint StartFrame { get; set; }
         public uint EndFrame { get; set; }
-        public string Preview { get; set; }
+
+        private string _preview;
+        public string Preview
+        {
+            get => _preview;
+            set
+            {
+                if (value.GetSjisByteCount() >= MaxPreviewLength)
+                {
+                    throw new MaxByteCountOfStringException(nameof(Preview), MaxPreviewLength);
+                }
+                _preview = value;
+            }
+        }
+
         public uint ChainGroup { get; set; }
         public bool Chain { get; set; }
 
@@ -93,7 +108,7 @@ namespace Karoterra.AupDotNet.ExEdit
             field0x4.ToBytes().CopyTo(data.Slice(4));
             StartFrame.ToBytes().CopyTo(data.Slice(8));
             EndFrame.ToBytes().CopyTo(data.Slice(12));
-            Preview.ToSjisBytes().CopyTo(data.Slice(0x10));
+            Preview.ToSjisBytes(MaxPreviewLength).CopyTo(data.Slice(0x10, MaxPreviewLength));
             ChainGroup.ToBytes().CopyTo(data.Slice(0x50));
             ExtSize.ToBytes().CopyTo(data.Slice(0xF4));
             Field0x4B8.ToBytes().CopyTo(data.Slice(0x4B8));

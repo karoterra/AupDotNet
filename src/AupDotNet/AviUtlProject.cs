@@ -10,12 +10,52 @@ namespace Karoterra.AupDotNet
     public class AviUtlProject
     {
         const string Header = "AviUtl ProjectFile version 0.18\0";
+        const int MaxFilename = 260;
 
         public uint HandleSize { get; set; }
         public uint Flag { get; set; }
-        public string EditFilename { get; set; }
-        public string OutputFilename { get; set; }
-        public string ProjectFilename { get; set; }
+
+        private string _editFilename;
+        public string EditFilename
+        {
+            get => _editFilename;
+            set
+            {
+                if (value.GetSjisByteCount() >= MaxFilename)
+                {
+                    throw new MaxByteCountOfStringException(nameof(EditFilename), MaxFilename);
+                }
+                _editFilename = value;
+            }
+        }
+
+        private string _outputFilename;
+        public string OutputFilename
+        {
+            get => _outputFilename;
+            set
+            {
+                if (value.GetSjisByteCount() >= MaxFilename)
+                {
+                    throw new MaxByteCountOfStringException(nameof(OutputFilename), MaxFilename);
+                }
+                _outputFilename = value;
+            }
+        }
+
+        private string _projectFilename;
+        public string ProjectFilename
+        {
+            get => _projectFilename;
+            set
+            {
+                if (value.GetSjisByteCount() >= MaxFilename){
+                    throw new MaxByteCountOfStringException(nameof(ProjectFilename), MaxFilename);
+                }
+                _projectFilename = value;
+            }
+        }
+
         public byte[] EditHandleData { get; set; }
         public int FrameNum { get; set; }
 
@@ -38,7 +78,7 @@ namespace Karoterra.AupDotNet
         {
             var baseStream = reader.BaseStream;
 
-            var header = reader.ReadBytes(32).ToSjisString();
+            var header = reader.ReadBytes(Header.GetSjisByteCount()).ToSjisString();
             if (header != Header)
             {
                 throw new FileFormatException("Cannot find AviUtl ProjectFile header.");
@@ -46,12 +86,12 @@ namespace Karoterra.AupDotNet
 
             HandleSize = reader.ReadUInt32();
             Flag = reader.ReadUInt32();
-            EditFilename = reader.ReadBytes(260).ToSjisString().CutNull();
-            OutputFilename = reader.ReadBytes(260).ToSjisString().CutNull();
-            var buf = new byte[HandleSize - 260 * 2 - 4];
+            EditFilename = reader.ReadBytes(MaxFilename).ToSjisString().CutNull();
+            OutputFilename = reader.ReadBytes(MaxFilename).ToSjisString().CutNull();
+            var buf = new byte[HandleSize - MaxFilename * 2 - 4];
             Decomp(reader, buf);
-            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, 260).ToSjisString().CutNull();
-            EditHandleData = buf.Skip(260).ToArray();
+            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, MaxFilename).ToSjisString().CutNull();
+            EditHandleData = buf.Skip(MaxFilename).ToArray();
             FrameNum = reader.ReadInt32();
 
             Video = ReadCompressedUInt32Array(reader, FrameNum);
@@ -80,12 +120,12 @@ namespace Karoterra.AupDotNet
             writer.Write(Header.ToSjisBytes());
             writer.Write(HandleSize);
             writer.Write(Flag);
-            writer.Write(EditFilename.ToSjisBytes(260));
-            writer.Write(OutputFilename.ToSjisBytes(260));
-            Comp(writer, ProjectFilename.ToSjisBytes(260));
+            writer.Write(EditFilename.ToSjisBytes(MaxFilename));
+            writer.Write(OutputFilename.ToSjisBytes(MaxFilename));
+            Comp(writer, ProjectFilename.ToSjisBytes(MaxFilename));
             Comp(writer, EditHandleData);
             writer.Write(FrameNum);
-            foreach(var array in new uint[][]{ Video, Audio, Array2, Array3 })
+            foreach (var array in new uint[][] { Video, Audio, Array2, Array3 })
             {
                 var buf = new byte[array.Length * sizeof(uint)];
                 Buffer.BlockCopy(array, 0, buf, 0, buf.Length);
@@ -100,7 +140,7 @@ namespace Karoterra.AupDotNet
             writer.Write(DataBeforeFooter);
             writer.Write(Header.ToSjisBytes());
 
-            foreach(var filter in FilterProjects)
+            foreach (var filter in FilterProjects)
             {
                 filter.Write(writer);
             }

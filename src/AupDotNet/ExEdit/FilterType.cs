@@ -6,6 +6,7 @@ namespace Karoterra.AupDotNet.ExEdit
     public class FilterType
     {
         public static readonly int Size = 112;
+        public static readonly int MaxNameLength = 96;
 
         public readonly uint Flag;
         public readonly uint TrackbarNum;
@@ -32,7 +33,7 @@ namespace Karoterra.AupDotNet.ExEdit
             TrackbarNum.ToBytes().CopyTo(data.Slice(4));
             CheckboxNum.ToBytes().CopyTo(data.Slice(8));
             ExtSize.ToBytes().CopyTo(data.Slice(12));
-            Name.ToSjisBytes().CopyTo(data.Slice(16));
+            Name.ToSjisBytes(MaxNameLength).CopyTo(data.Slice(16, MaxNameLength));
         }
     }
 }

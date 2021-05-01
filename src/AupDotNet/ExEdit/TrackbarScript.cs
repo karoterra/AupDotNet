@@ -7,7 +7,19 @@ namespace Karoterra.AupDotNet.ExEdit
     {
         public static readonly int Size = 128;
 
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value.GetSjisByteCount() >= Size)
+                {
+                    throw new MaxByteCountOfStringException(nameof(Name), Size);
+                }
+                _name = value;
+            }
+        }
 
         public TrackbarScript(ReadOnlySpan<byte> data)
         {
@@ -20,7 +32,7 @@ namespace Karoterra.AupDotNet.ExEdit
 
         public void Dump(Span<byte> data)
         {
-            Name.ToSjisBytes().CopyTo(data);
+            Name.ToSjisBytes(Size).CopyTo(data);
         }
     }
 }

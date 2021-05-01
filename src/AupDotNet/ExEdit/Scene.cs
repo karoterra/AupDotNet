@@ -6,10 +6,25 @@ namespace Karoterra.AupDotNet.ExEdit
     public class Scene
     {
         public static readonly int Size = 220;
+        public static readonly int MaxNameLength = 64;
 
         public uint SceneIndex { get; set; }
         public SceneFlag Flag { get; set; }
-        public string Name { get; set; }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value.GetSjisByteCount() >= MaxNameLength)
+                {
+                    throw new MaxByteCountOfStringException(nameof(Name), MaxNameLength);
+                }
+                _name = value;
+            }
+        }
+
         public uint Height { get; set; }
         public uint Width { get; set; }
         public uint Field0x50 { get; set; }
@@ -73,7 +88,7 @@ namespace Karoterra.AupDotNet.ExEdit
         {
             SceneIndex.ToBytes().CopyTo(data);
             ((uint)Flag).ToBytes().CopyTo(data.Slice(4));
-            Name.ToSjisBytes().CopyTo(data.Slice(8));
+            Name.ToSjisBytes(MaxNameLength).CopyTo(data.Slice(8, MaxNameLength));
             Height.ToBytes().CopyTo(data.Slice(0x48));
             Width.ToBytes().CopyTo(data.Slice(0x4C));
             Field0x50.ToBytes().CopyTo(data.Slice(0x50));
