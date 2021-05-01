@@ -10,7 +10,9 @@ namespace Karoterra.AupDotNet
     public class AviUtlProject
     {
         const string Header = "AviUtl ProjectFile version 0.18\0";
-        const int MaxFilename = 260;
+        public readonly int MaxFilename = 260;
+        public readonly int MaxConfigFiles = 96;
+        public readonly int MaxImages = 256;
 
         public uint HandleSize { get; set; }
         public uint Flag { get; set; }
@@ -49,7 +51,8 @@ namespace Karoterra.AupDotNet
             get => _projectFilename;
             set
             {
-                if (value.GetSjisByteCount() >= MaxFilename){
+                if (value.GetSjisByteCount() >= MaxFilename)
+                {
                     throw new MaxByteCountOfStringException(nameof(ProjectFilename), MaxFilename);
                 }
                 _projectFilename = value;
@@ -57,22 +60,32 @@ namespace Karoterra.AupDotNet
         }
 
         public byte[] EditHandleData { get; set; }
-        public int FrameNum { get; set; }
 
-        public uint[] Video { get; set; }
-        public uint[] Audio { get; set; }
-        public uint[] Array2 { get; set; }
-        public uint[] Array3 { get; set; }
-        public byte[] Inter { get; set; }
-        public byte[] Index24Fps { get; set; }
-        public byte[] EditFlag { get; set; }
-        public byte[] Config { get; set; }
-        public byte[] Array8 { get; set; }
-        public byte[] Vcm { get; set; }
+        public readonly List<FrameData> Frames = new List<FrameData>();
+
+        public readonly List<byte[]> ConfigFiles = new List<byte[]>();
+        public readonly List<byte[]> Images = new List<byte[]>();
 
         public byte[] DataBeforeFooter { get; set; }
 
-        public List<FilterProject> FilterProjects { get; set; }
+        public readonly List<FilterProject> FilterProjects = new List<FilterProject>();
+
+        public AviUtlProject()
+        {
+        }
+
+        public AviUtlProject(BinaryReader reader)
+        {
+            Read(reader);
+        }
+
+        public AviUtlProject(string path)
+        {
+            using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+            {
+                Read(reader);
+            }
+        }
 
         public void Read(BinaryReader reader)
         {
@@ -92,22 +105,60 @@ namespace Karoterra.AupDotNet
             Decomp(reader, buf);
             ProjectFilename = new ReadOnlySpan<byte>(buf, 0, MaxFilename).ToSjisString().CutNull();
             EditHandleData = buf.Skip(MaxFilename).ToArray();
-            FrameNum = reader.ReadInt32();
+            var frameNum = reader.ReadInt32();
 
-            Video = ReadCompressedUInt32Array(reader, FrameNum);
-            Audio = ReadCompressedUInt32Array(reader, FrameNum);
-            Array2 = ReadCompressedUInt32Array(reader, FrameNum);
-            Array3 = ReadCompressedUInt32Array(reader, FrameNum);
-            Inter = ReadCompressedUInt8Array(reader, FrameNum);
-            Index24Fps = ReadCompressedUInt8Array(reader, FrameNum);
-            EditFlag = ReadCompressedUInt8Array(reader, FrameNum);
-            Config = ReadCompressedUInt8Array(reader, FrameNum);
-            Array8 = ReadCompressedUInt8Array(reader, FrameNum);
-            Vcm = ReadCompressedUInt8Array(reader, FrameNum);
+            var videos = ReadCompressedUInt32Array(reader, frameNum);
+            var audios = ReadCompressedUInt32Array(reader, frameNum);
+            var array2 = ReadCompressedUInt32Array(reader, frameNum);
+            var array3 = ReadCompressedUInt32Array(reader, frameNum);
+            var inters = ReadCompressedUInt8Array(reader, frameNum);
+            var index24Fps = ReadCompressedUInt8Array(reader, frameNum);
+            var editFlags = ReadCompressedUInt8Array(reader, frameNum);
+            var configs = ReadCompressedUInt8Array(reader, frameNum);
+            var array8 = ReadCompressedUInt8Array(reader, frameNum);
+            var vcms = ReadCompressedUInt8Array(reader, frameNum);
+            Frames.Clear();
+            for (int i = 0; i < frameNum; i++)
+            {
+                Frames.Add(new FrameData()
+                {
+                    Video = videos[i],
+                    Audio = audios[i],
+                    Field2 = array2[i],
+                    Field3 = array3[i],
+                    Inter = inters[i],
+                    Index24Fps = index24Fps[i],
+                    EditFlag = editFlags[i],
+                    Config = configs[i],
+                    Field8 = array8[i],
+                    Vcm = vcms[i]
+                });
+            }
+
+            var editHandleData = new ReadOnlySpan<byte>(EditHandleData);
+            ConfigFiles.Clear();
+            for (int i = 0; i < MaxConfigFiles; i++)
+            {
+                if (EditHandleData[0x20A08 + i * MaxFilename] != 0)
+                {
+                    var size = reader.ReadInt32();
+                    ConfigFiles.Add(reader.ReadBytes(size));
+                }
+            }
+            Images.Clear();
+            for (int i = 0; i < MaxImages; i++)
+            {
+                if (editHandleData.Slice(0x4BBA88 + i * sizeof(int), sizeof(int)).ToInt32() != 0)
+                {
+                    var size = reader.ReadInt32();
+                    Images.Add(reader.ReadBytes(size));
+                }
+            }
+
 
             DataBeforeFooter = SkipToFooter(reader);
 
-            FilterProjects = new List<FilterProject>();
+            FilterProjects.Clear();
             while (baseStream.Position != baseStream.Length)
             {
                 var filter = new RawFilterProject(reader);
@@ -124,19 +175,29 @@ namespace Karoterra.AupDotNet
             writer.Write(OutputFilename.ToSjisBytes(MaxFilename));
             Comp(writer, ProjectFilename.ToSjisBytes(MaxFilename));
             Comp(writer, EditHandleData);
-            writer.Write(FrameNum);
-            foreach (var array in new uint[][] { Video, Audio, Array2, Array3 })
+            writer.Write(Frames.Count);
+            CompressUInt32Array(writer, Frames.Select(f => f.Video).ToArray());
+            CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
+            CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
+            CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
+            Comp(writer, Frames.Select(f => f.Inter).ToArray());
+            Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
+            Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
+            Comp(writer, Frames.Select(f => f.Config).ToArray());
+            Comp(writer, Frames.Select(f => f.Field8).ToArray());
+            Comp(writer, Frames.Select(f => f.Vcm).ToArray());
+
+            foreach (var config in ConfigFiles)
             {
-                var buf = new byte[array.Length * sizeof(uint)];
-                Buffer.BlockCopy(array, 0, buf, 0, buf.Length);
-                Comp(writer, buf);
+                writer.Write(config.Length);
+                writer.Write(config);
             }
-            Comp(writer, Inter);
-            Comp(writer, Index24Fps);
-            Comp(writer, EditFlag);
-            Comp(writer, Config);
-            Comp(writer, Array8);
-            Comp(writer, Vcm);
+            foreach (var image in Images)
+            {
+                writer.Write(image.Length);
+                writer.Write(image);
+            }
+
             writer.Write(DataBeforeFooter);
             writer.Write(Header.ToSjisBytes());
 
@@ -242,6 +303,13 @@ namespace Karoterra.AupDotNet
                     }
                 }
             }
+        }
+
+        public static void CompressUInt32Array(BinaryWriter writer, uint[] array)
+        {
+            var buf = new byte[array.Length * sizeof(uint)];
+            Buffer.BlockCopy(array, 0, buf, 0, buf.Length);
+            Comp(writer, buf);
         }
 
         static bool IsSame4Bytes(ReadOnlySpan<byte> x)
