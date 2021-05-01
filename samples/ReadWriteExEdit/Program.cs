@@ -66,17 +66,17 @@ namespace ReadWriteExEdit
                 {
                     Console.WriteLine($"  {ts.Name}");
                 }
-                Console.WriteLine($"オブジェクトの種類 ({exedit.FilterTypes.Length})");
-                foreach (var ft in exedit.FilterTypes)
+                Console.WriteLine($"オブジェクトの種類 ({exedit.EffectTypes.Length})");
+                foreach (var ft in exedit.EffectTypes)
                 {
                     Console.WriteLine($"  {ft.Name}");
                 }
                 Console.WriteLine($"オブジェクト ({exedit.Objects.Count})");
                 foreach (var obj in exedit.Objects)
                 {
-                    var name = (obj.Preview.Length != 0) ? obj.Preview.Replace("\r\n", " ") : obj.Filters[0].Type.Name;
+                    var name = (obj.Preview.Length != 0) ? obj.Preview.Replace("\r\n", " ") : obj.Effects[0].Type.Name;
                     Console.WriteLine($"  Scene:{obj.SceneIndex} Layer:{obj.LayerIndex} {name}");
-                    foreach (var filter in obj.Filters)
+                    foreach (var filter in obj.Effects)
                     {
                         Console.WriteLine($"    {filter.Type.Name}");
                     }

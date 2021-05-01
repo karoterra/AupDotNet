@@ -1,6 +1,6 @@
-namespace Karoterra.AupDotNet.ExEdit.Filters
+namespace Karoterra.AupDotNet.ExEdit.Effects
 {
-    public class CustomFilter : Filter
+    public class CustomEffect : Effect
     {
         public byte[] Data { get; set; }
 
@@ -10,7 +10,7 @@ namespace Karoterra.AupDotNet.ExEdit.Filters
         private uint[] _checkboxes;
         public override uint[] Checkboxes => _checkboxes;
 
-        public CustomFilter(FilterType type, FilterFlag flag, Trackbar[] trackbars, uint[] checkboxes, byte[] data)
+        public CustomEffect(EffectType type, EffectFlag flag, Trackbar[] trackbars, uint[] checkboxes, byte[] data)
             : base(type)
         {
             Flag = flag;

@@ -3,7 +3,7 @@ using System;
 namespace Karoterra.AupDotNet.ExEdit
 {
     [Flags]
-    public enum FilterFlag
+    public enum EffectFlag
     {
         Enable = 1,
         Fold = 2,

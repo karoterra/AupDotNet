@@ -1,15 +1,15 @@
 namespace Karoterra.AupDotNet.ExEdit
 {
-    public abstract class Filter
+    public abstract class Effect
     {
-        public readonly FilterType Type;
-        public FilterFlag Flag { get; set; }
+        public readonly EffectType Type;
+        public EffectFlag Flag { get; set; }
         public virtual Trackbar[] Trackbars { get; }
         public virtual uint[] Checkboxes { get; }
 
-        public Filter(FilterType filterType)
+        public Effect(EffectType effectType)
         {
-            Type = filterType;
+            Type = effectType;
         }
 
         public abstract byte[] DumpExtData();

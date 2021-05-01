@@ -40,7 +40,7 @@ namespace Karoterra.AupDotNet.ExEdit
         public readonly List<Layer> Layers;
         public readonly List<Scene> Scenes;
         public TrackbarScript[] TrackbarScripts { get; set; }
-        public FilterType[] FilterTypes { get; set; }
+        public EffectType[] EffectTypes { get; set; }
         public readonly List<TimelineObject> Objects;
 
         public ExEditProject()
@@ -52,7 +52,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Name = "拡張編集";
 
             var data = new ReadOnlySpan<byte>(rawFilter.Data);
-            var filterTypeNum = data.Slice(4, 4).ToUInt32();
+            var effectTypeNum = data.Slice(4, 4).ToUInt32();
             var objectNum = data.Slice(8, 4).ToUInt32();
             Field0xC = data.Slice(0xC, 4).ToUInt32();
             Zoom = data.Slice(0x10, 4).ToUInt32();
@@ -102,16 +102,16 @@ namespace Karoterra.AupDotNet.ExEdit
                 TrackbarScripts[i] = new TrackbarScript(data.Slice(cursor, TrackbarScript.Size));
                 cursor += TrackbarScript.Size;
             }
-            FilterTypes = new FilterType[filterTypeNum];
-            for (int i = 0; i < FilterTypes.Length; i++)
+            EffectTypes = new EffectType[effectTypeNum];
+            for (int i = 0; i < EffectTypes.Length; i++)
             {
-                FilterTypes[i] = new FilterType(data.Slice(cursor, FilterType.Size));
-                cursor += FilterType.Size;
+                EffectTypes[i] = new EffectType(data.Slice(cursor, EffectType.Size));
+                cursor += EffectType.Size;
             }
             Objects = new List<TimelineObject>((int)objectNum);
             for (int i = 0; i < objectNum; i++)
             {
-                Objects.Add(new TimelineObject(data.Slice(cursor), FilterTypes));
+                Objects.Add(new TimelineObject(data.Slice(cursor), EffectTypes));
                 cursor += (int)Objects[i].Size;
             }
         }
@@ -119,12 +119,12 @@ namespace Karoterra.AupDotNet.ExEdit
         public override byte[] DumpData()
         {
             int size = 0x100 + Layer.Size * Layers.Count + Scene.Size * Scenes.Count;
-            size += TrackbarScript.Size * TrackbarScripts.Length + FilterType.Size * FilterTypes.Length;
+            size += TrackbarScript.Size * TrackbarScripts.Length + EffectType.Size * EffectTypes.Length;
             size += Objects.Sum(obj => (int)obj.Size);
             var data = new byte[size];
 
             "80EE".ToSjisBytes().CopyTo(data, 0);
-            FilterTypes.Length.ToBytes().CopyTo(data, 4);
+            EffectTypes.Length.ToBytes().CopyTo(data, 4);
             Objects.Count.ToBytes().CopyTo(data, 8);
             Field0xC.ToBytes().CopyTo(data, 0xC);
             Zoom.ToBytes().CopyTo(data, 0x10);
@@ -173,14 +173,14 @@ namespace Karoterra.AupDotNet.ExEdit
                 ts.Dump(new Span<byte>(data, cursor, TrackbarScript.Size));
                 cursor += TrackbarScript.Size;
             }
-            foreach (var ft in FilterTypes)
+            foreach (var ft in EffectTypes)
             {
-                ft.Dump(new Span<byte>(data, cursor, FilterType.Size));
-                cursor += FilterType.Size;
+                ft.Dump(new Span<byte>(data, cursor, EffectType.Size));
+                cursor += EffectType.Size;
             }
             foreach (var obj in Objects)
             {
-                obj.Dump(new Span<byte>(data, cursor, (int)obj.Size), FilterTypes, EditingScene);
+                obj.Dump(new Span<byte>(data, cursor, (int)obj.Size), EffectTypes, EditingScene);
                 cursor += (int)obj.Size;
             }
 

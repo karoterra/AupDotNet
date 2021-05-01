@@ -3,7 +3,7 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
-    public class FilterType
+    public class EffectType
     {
         public static readonly int Size = 112;
         public static readonly int MaxNameLength = 96;
@@ -14,7 +14,7 @@ namespace Karoterra.AupDotNet.ExEdit
         public readonly uint ExtSize;
         public readonly string Name;
 
-        public FilterType(ReadOnlySpan<byte> data)
+        public EffectType(ReadOnlySpan<byte> data)
         {
             if (data.Length < Size)
             {
