@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Karoterra.AupDotNet.Extensions;
 
@@ -40,11 +41,19 @@ namespace Karoterra.AupDotNet.ExEdit
         public readonly List<Layer> Layers;
         public readonly List<Scene> Scenes;
         public TrackbarScript[] TrackbarScripts { get; set; }
-        public EffectType[] EffectTypes { get; set; }
+
+        private List<EffectType> _effectTypes;
+        public readonly ReadOnlyCollection<EffectType> EffectTypes;
+
         public readonly List<TimelineObject> Objects;
 
         public ExEditProject()
         {
+            Layers = new List<Layer>();
+            Scenes = new List<Scene>();
+            _effectTypes = EffectType.Defaults.ToList();
+            EffectTypes = new ReadOnlyCollection<EffectType>(_effectTypes);
+            Objects = new List<TimelineObject>();
         }
 
         public ExEditProject(RawFilterProject rawFilter)
@@ -102,10 +111,11 @@ namespace Karoterra.AupDotNet.ExEdit
                 TrackbarScripts[i] = new TrackbarScript(data.Slice(cursor, TrackbarScript.Size));
                 cursor += TrackbarScript.Size;
             }
-            EffectTypes = new EffectType[effectTypeNum];
-            for (int i = 0; i < EffectTypes.Length; i++)
+            _effectTypes = new List<EffectType>();
+            EffectTypes = new ReadOnlyCollection<EffectType>(_effectTypes);
+            for (int i = 0; i < effectTypeNum; i++)
             {
-                EffectTypes[i] = new EffectType(data.Slice(cursor, EffectType.Size));
+                _effectTypes.Add(new EffectType(data.Slice(cursor, EffectType.Size), i));
                 cursor += EffectType.Size;
             }
             Objects = new List<TimelineObject>((int)objectNum);
@@ -119,12 +129,12 @@ namespace Karoterra.AupDotNet.ExEdit
         public override byte[] DumpData()
         {
             int size = 0x100 + Layer.Size * Layers.Count + Scene.Size * Scenes.Count;
-            size += TrackbarScript.Size * TrackbarScripts.Length + EffectType.Size * EffectTypes.Length;
+            size += TrackbarScript.Size * TrackbarScripts.Length + EffectType.Size * EffectTypes.Count;
             size += Objects.Sum(obj => (int)obj.Size);
             var data = new byte[size];
 
             "80EE".ToSjisBytes().CopyTo(data, 0);
-            EffectTypes.Length.ToBytes().CopyTo(data, 4);
+            EffectTypes.Count.ToBytes().CopyTo(data, 4);
             Objects.Count.ToBytes().CopyTo(data, 8);
             Field0xC.ToBytes().CopyTo(data, 0xC);
             Zoom.ToBytes().CopyTo(data, 0x10);
@@ -180,7 +190,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
             foreach (var obj in Objects)
             {
-                obj.Dump(new Span<byte>(data, cursor, (int)obj.Size), EffectTypes, EditingScene);
+                obj.Dump(new Span<byte>(data, cursor, (int)obj.Size), EditingScene);
                 cursor += (int)obj.Size;
             }
 

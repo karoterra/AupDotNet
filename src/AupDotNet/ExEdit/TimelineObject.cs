@@ -46,9 +46,9 @@ namespace Karoterra.AupDotNet.ExEdit
         public uint LayerIndex { get; set; }
         public uint SceneIndex { get; set; }
 
-        public readonly List<Effect> Effects;
+        public readonly List<Effect> Effects = new List<Effect>();
 
-        public TimelineObject(ReadOnlySpan<byte> data, EffectType[] effectTypes)
+        public TimelineObject(ReadOnlySpan<byte> data, IReadOnlyList<EffectType> effectTypes)
         {
             Flag = (TimelineObjectFlag)(data.Slice(0, 4).ToUInt32());
             StartFrame = data.Slice(8, 4).ToUInt32();
@@ -62,13 +62,13 @@ namespace Karoterra.AupDotNet.ExEdit
             LayerIndex = data.Slice(0x5C0, 4).ToUInt32();
             SceneIndex = data.Slice(0x5C4, 4).ToUInt32();
 
-            Effects = new List<Effect>();
+            Effects.Clear();
             int trackbarCount = 0;
             int checkboxCount = 0;
             for (int i = 0; i < MaxEffect; i++)
             {
-                var typeIndex = data.Slice(0x54 + i * 12, 4).ToUInt32();
-                if (typeIndex == 0xFFFF_FFFF)
+                var typeIndex = data.Slice(0x54 + i * 12, 4).ToInt32();
+                if (typeIndex == -1)
                 {
                     break;
                 }
@@ -101,7 +101,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
-        public void Dump(Span<byte> data, EffectType[] effectTypes, uint editingScene)
+        public void Dump(Span<byte> data, uint editingScene)
         {
             ((uint)Flag).ToBytes().CopyTo(data);
             var field0x4 = (SceneIndex == editingScene) ? LayerIndex : 0xFFFF_FFFF;
@@ -121,8 +121,7 @@ namespace Karoterra.AupDotNet.ExEdit
             var checkboxCount = 0;
             for (int i = 0; i < Effects.Count; i++)
             {
-                var typeIndex = Array.FindIndex(effectTypes, x => x.Name == Effects[i].Type.Name);
-                typeIndex.ToBytes().CopyTo(data.Slice(0x54 + i * 12));
+                Effects[i].Type.Id.ToBytes().CopyTo(data.Slice(0x54 + i * 12));
                 ((ushort)trackbarCount).ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 4));
                 ((ushort)checkboxCount).ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 6));
                 extCursor.ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 8));

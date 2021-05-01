@@ -66,7 +66,7 @@ namespace ReadWriteExEdit
                 {
                     Console.WriteLine($"  {ts.Name}");
                 }
-                Console.WriteLine($"オブジェクトの種類 ({exedit.EffectTypes.Length})");
+                Console.WriteLine($"オブジェクトの種類 ({exedit.EffectTypes.Count})");
                 foreach (var ft in exedit.EffectTypes)
                 {
                     Console.WriteLine($"  {ft.Name}");

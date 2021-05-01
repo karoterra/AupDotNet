@@ -3,10 +3,12 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
-    public class EffectType
+    public partial class EffectType
     {
         public static readonly int Size = 112;
         public static readonly int MaxNameLength = 96;
+
+        public readonly int Id;
 
         public readonly uint Flag;
         public readonly uint TrackbarNum;
@@ -14,12 +16,23 @@ namespace Karoterra.AupDotNet.ExEdit
         public readonly uint ExtSize;
         public readonly string Name;
 
-        public EffectType(ReadOnlySpan<byte> data)
+        public EffectType(int id, uint flag, uint trackbarNum, uint checkboxNum, uint extSize, string name)
+        {
+            Id = id;
+            Flag = flag;
+            TrackbarNum = trackbarNum;
+            CheckboxNum = checkboxNum;
+            ExtSize = extSize;
+            Name = name;
+        }
+
+        public EffectType(ReadOnlySpan<byte> data, int id)
         {
             if (data.Length < Size)
             {
                 throw new ArgumentException($"data length requires {Size} bytes.");
             }
+            Id = id;
             Flag = data.Slice(0, 4).ToUInt32();
             TrackbarNum = data.Slice(4, 4).ToUInt32();
             CheckboxNum = data.Slice(8, 4).ToUInt32();
