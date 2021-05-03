@@ -88,14 +88,16 @@ namespace Karoterra.AupDotNet.ExEdit
                     trackbars[j] = new Trackbar(current, next, transition, param);
                 }
 
-                var checkboxes = new uint[type.CheckboxNum];
+                var checkboxes = new int[type.CheckboxNum];
                 for (int j = 0; j < checkboxes.Length; j++)
                 {
                     var index = checkboxCount + j;
-                    checkboxes[j] = data.Slice(0x3F8 + index * 4, 4).ToUInt32();
+                    checkboxes[j] = data.Slice(0x3F8 + index * 4, 4).ToInt32();
                 }
 
-                Effects.Add(new CustomEffect(type, flag, trackbars, checkboxes, extData));
+                Effect effect = EffectFactory.Create(type, trackbars, checkboxes, extData);
+                effect.Flag = flag;
+                Effects.Add(effect);
                 trackbarCount += trackbars.Length;
                 checkboxCount += (int)type.CheckboxNum;
             }
@@ -127,7 +129,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 extCursor.ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 8));
                 data[0xE4 + i] = (byte)Effects[i].Flag;
 
-                for (int j = 0; j < Effects[i].Trackbars.Length; j++)
+                for (int j = 0; j < Effects[i].Trackbars.Count; j++)
                 {
                     var trackbar = Effects[i].Trackbars[j];
                     var index = trackbarCount + j;
@@ -150,7 +152,7 @@ namespace Karoterra.AupDotNet.ExEdit
                     extCursor += extData.Length;
                 }
 
-                trackbarCount += Effects[i].Trackbars.Length;
+                trackbarCount += Effects[i].Trackbars.Count;
                 checkboxCount += (int)Effects[i].Type.CheckboxNum;
             }
             ((ushort)trackbarCount).ToBytes().CopyTo(data.Slice(0xF0));

@@ -22,6 +22,11 @@ namespace Karoterra.AupDotNet.Extensions
             return sjis.GetString(bytes.ToArray());
         }
 
+        public static string ToUTF16String(this ReadOnlySpan<byte> bytes)
+        {
+            return Encoding.Unicode.GetString(bytes.ToArray());
+        }
+
         public static byte[] ToSjisBytes(this string s)
         {
             return sjis.GetBytes(s);
@@ -34,6 +39,18 @@ namespace Karoterra.AupDotNet.Extensions
             return bytes;
         }
 
+        public static byte[] ToUTF16Bytes(this string s)
+        {
+            return Encoding.Unicode.GetBytes(s);
+        }
+
+        public static byte[] ToUTF16Bytes(this string s, int length)
+        {
+            var bytes = new byte[length];
+            Encoding.Unicode.GetBytes(s).CopyTo(bytes, 0);
+            return bytes;
+        }
+
         public static string CutNull(this string s)
         {
             return s.Split('\0')[0];
@@ -42,6 +59,11 @@ namespace Karoterra.AupDotNet.Extensions
         public static int GetSjisByteCount(this string s)
         {
             return sjis.GetByteCount(s);
+        }
+
+        public static int GetUTF16ByteCount(this string s)
+        {
+            return Encoding.Unicode.GetByteCount(s);
         }
     }
 }

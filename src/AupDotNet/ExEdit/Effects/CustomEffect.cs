@@ -1,22 +1,32 @@
+using System;
+
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
     public class CustomEffect : Effect
     {
-        public byte[] Data { get; set; }
+        public byte[] Data { get; }
 
-        private Trackbar[] _trackbars;
-        public override Trackbar[] Trackbars => _trackbars;
-
-        private uint[] _checkboxes;
-        public override uint[] Checkboxes => _checkboxes;
-
-        public CustomEffect(EffectType type, EffectFlag flag, Trackbar[] trackbars, uint[] checkboxes, byte[] data)
+        public CustomEffect(EffectType type)
             : base(type)
         {
-            Flag = flag;
-            _trackbars = trackbars;
-            _checkboxes = checkboxes;
-            Data = data;
+            Data = new byte[Type.ExtSize];
+        }
+
+        public CustomEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)
+            : base(type, trackbars, checkboxes)
+        {
+            if (data.Length == 0)
+            {
+                Data = new byte[Type.ExtSize];
+            }
+            else if (data.Length == Type.ExtSize)
+            {
+                Data = data;
+            }
+            else
+            {
+                throw new ArgumentException("data's length is invalid.");
+            }
         }
 
         public override byte[] DumpExtData()
