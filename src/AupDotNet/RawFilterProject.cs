@@ -21,7 +21,7 @@ namespace Karoterra.AupDotNet
                 throw new FileFormatException("Cannot find FilterProject header.");
             }
             var nameLength = reader.ReadInt32();
-            Name = reader.ReadBytes(nameLength).ToSjisString().CutNull();
+            Name = reader.ReadBytes(nameLength).ToCleanSjisString();
             var dataSize = reader.ReadInt32();
             Data = new byte[dataSize];
             AviUtlProject.Decomp(reader, Data);

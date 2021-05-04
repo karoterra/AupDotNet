@@ -37,7 +37,7 @@ namespace Karoterra.AupDotNet.ExEdit
             TrackbarNum = data.Slice(4, 4).ToUInt32();
             CheckboxNum = data.Slice(8, 4).ToUInt32();
             ExtSize = data.Slice(12, 4).ToUInt32();
-            Name = data.Slice(16).ToSjisString().CutNull();
+            Name = data.Slice(16).ToCleanSjisString();
         }
 
         public void Dump(Span<byte> data)

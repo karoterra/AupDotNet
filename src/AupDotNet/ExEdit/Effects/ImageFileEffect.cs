@@ -43,7 +43,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 {
                     var span = new ReadOnlySpan<byte>(data);
                     Field0x0 = span.Slice(0, 4).ToInt32();
-                    Filename = span.Slice(4, MaxFilenameLength).ToSjisString().CutNull();
+                    Filename = span.Slice(4, MaxFilenameLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {

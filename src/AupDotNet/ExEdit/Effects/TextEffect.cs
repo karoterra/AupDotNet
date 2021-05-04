@@ -110,8 +110,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     Precision = span[7] != 0;
                     Color = span.Slice(8, 4).ToColor();
                     Color2 = span.Slice(0xC, 4).ToColor();
-                    Font = span.Slice(0x10, MaxFontLength).ToSjisString().CutNull();
-                    Text = span.Slice(0x30, MaxTextLength).ToUTF16String().CutNull();
+                    Font = span.Slice(0x10, MaxFontLength).ToCleanSjisString();
+                    Text = span.Slice(0x30, MaxTextLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {

@@ -53,7 +53,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Flag = (TimelineObjectFlag)(data.Slice(0, 4).ToUInt32());
             StartFrame = data.Slice(8, 4).ToUInt32();
             EndFrame = data.Slice(12, 4).ToUInt32();
-            Preview = data.Slice(0x10, 64).ToSjisString().CutNull();
+            Preview = data.Slice(0x10, 64).ToCleanSjisString();
             ChainGroup = data.Slice(0x50, 4).ToUInt32();
             var extSize = data.Slice(0xF4, 4).ToUInt32();
             Chain = (ChainGroup != 0xFFFF_FFFF && extSize == 0) ? true : false;

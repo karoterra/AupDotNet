@@ -58,7 +58,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
             SceneIndex = data.Slice(0, 4).ToUInt32();
             Flag = (SceneFlag)data.Slice(4, 4).ToUInt32();
-            Name = data.Slice(8, 64).ToSjisString().CutNull();
+            Name = data.Slice(8, 64).ToCleanSjisString();
             Height = data.Slice(0x48, 4).ToUInt32();
             Width = data.Slice(0x4C, 4).ToUInt32();
             Field0x50 = data.Slice(0x50, 4).ToUInt32();

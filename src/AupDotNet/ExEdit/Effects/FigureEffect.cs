@@ -50,7 +50,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     var span = new ReadOnlySpan<byte>(data);
                     FigureType = (FigureType)span.Slice(0, 4).ToInt32();
                     Color = span.Slice(4, 4).ToColor();
-                    Filename = span.Slice(8, MaxFilenameLength).ToSjisString().CutNull();
+                    Filename = span.Slice(8, MaxFilenameLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {

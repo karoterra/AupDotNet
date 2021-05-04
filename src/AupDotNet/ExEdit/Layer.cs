@@ -34,7 +34,7 @@ namespace Karoterra.AupDotNet.ExEdit
             SceneIndex = data.Slice(0, 4).ToUInt32();
             LayerIndex = data.Slice(4, 4).ToUInt32();
             Flag = (LayerFlag)data.Slice(8, 4).ToUInt32();
-            Name = data.Slice(12).ToSjisString().CutNull();
+            Name = data.Slice(12).ToCleanSjisString();
         }
 
         public void Dump(Span<byte> data)

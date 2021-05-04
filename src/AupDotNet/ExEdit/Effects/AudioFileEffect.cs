@@ -62,7 +62,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 if (data.Length == Type.ExtSize)
                 {
                     var span = new ReadOnlySpan<byte>(data);
-                    Filename = span.Slice(0, MaxFilenameLength).ToSjisString().CutNull();
+                    Filename = span.Slice(0, MaxFilenameLength).ToCleanSjisString();
                     Field0x100 = span.Slice(0x100, 4).ToUInt32();
                     Field0x104 = span.Slice(0x104, 4).ToUInt32();
                     Field0x108 = span.Slice(0x108, 4).ToUInt32();

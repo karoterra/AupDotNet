@@ -22,6 +22,48 @@ namespace Karoterra.AupDotNet.Extensions
             return sjis.GetString(bytes.ToArray());
         }
 
+        public static string ToCleanSjisString(this byte[] bytes)
+        {
+            int count = 0;
+            bool full = false;
+            foreach (byte b in bytes)
+            {
+                if (b == 0) break;
+                if (full)
+                {
+                    count += 2;
+                    full = false;
+                }
+                else
+                {
+                    if ((b <= 0x7F) || (0xA0 <= b && b <= 0xDF)) count++;
+                    else full = true;
+                }
+            }
+            return sjis.GetString(bytes, 0, count);
+        }
+
+        public static string ToCleanSjisString(this ReadOnlySpan<byte> bytes)
+        {
+            int count = 0;
+            bool full = false;
+            foreach (byte b in bytes)
+            {
+                if (b == 0) break;
+                if (full)
+                {
+                    count += 2;
+                    full = false;
+                }
+                else
+                {
+                    if ((b <= 0x7F) || (0xA0 <= b && b <= 0xDF)) count++;
+                    else full = true;
+                }
+            }
+            return sjis.GetString(bytes.Slice(0, count).ToArray());
+        }
+
         public static string ToUTF16String(this ReadOnlySpan<byte> bytes)
         {
             return Encoding.Unicode.GetString(bytes.ToArray());

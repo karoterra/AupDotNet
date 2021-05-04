@@ -99,11 +99,11 @@ namespace Karoterra.AupDotNet
 
             HandleSize = reader.ReadUInt32();
             Flag = reader.ReadUInt32();
-            EditFilename = reader.ReadBytes(MaxFilename).ToSjisString().CutNull();
-            OutputFilename = reader.ReadBytes(MaxFilename).ToSjisString().CutNull();
+            EditFilename = reader.ReadBytes(MaxFilename).ToCleanSjisString();
+            OutputFilename = reader.ReadBytes(MaxFilename).ToCleanSjisString();
             var buf = new byte[HandleSize - MaxFilename * 2 - 4];
             Decomp(reader, buf);
-            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, MaxFilename).ToSjisString().CutNull();
+            ProjectFilename = new ReadOnlySpan<byte>(buf, 0, MaxFilename).ToCleanSjisString();
             EditHandleData = buf.Skip(MaxFilename).ToArray();
             var frameNum = reader.ReadInt32();
 

@@ -27,7 +27,7 @@ namespace Karoterra.AupDotNet.ExEdit
             {
                 throw new ArgumentException($"data length requires {Size} bytes.");
             }
-            Name = data.ToSjisString().CutNull();
+            Name = data.ToCleanSjisString();
         }
 
         public void Dump(Span<byte> data)

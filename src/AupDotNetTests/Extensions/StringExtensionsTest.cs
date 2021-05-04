@@ -9,20 +9,28 @@ namespace AupDotNetTests.Extensions
     [TestClass]
     public class StringExtensionsTest
     {
-        [TestMethod]
-        public void Test_CutNull()
+        [DataTestMethod]
+        [DataRow("abcあいう", "abcあいう")]
+        [DataRow("abcあいう", "abcあいう\0xxx")]
+        [DataRow("", "\0abcあいう")]
+        public void Test_CutNull(string dst, string src)
         {
-            string x = "abcあいう";
-            string y = "abcあいう";
-            Assert.AreEqual(x.CutNull(), y);
+            Assert.AreEqual(dst, src.CutNull());
+        }
 
-            x = "abcあいう\0xxx";
-            y = "abcあいう";
-            Assert.AreEqual(x.CutNull(), y);
-
-            x = "\0abcあいう";
-            y = "";
-            Assert.AreEqual(x.CutNull(), y);
+        [DataTestMethod]
+        [DataRow("する", new byte[] { 0x82, 0xB7, 0x82, 0xE9 })]
+        [DataRow("する", new byte[] { 0x82, 0xB7, 0x82, 0xE9, 0x00 })]
+        [DataRow("する", new byte[] { 0x82, 0xB7, 0x82, 0xE9, 0x95 })]
+        [DataRow("する", new byte[] { 0x82, 0xB7, 0x82, 0xE9, 0x95, 0x00 })]
+        [DataRow("AあB", new byte[] { 0x41, 0x82, 0xA0, 0x42 })]
+        [DataRow("AあB", new byte[] { 0x41, 0x82, 0xA0, 0x42, 0x00 })]
+        [DataRow("AあB", new byte[] { 0x41, 0x82, 0xA0, 0x42, 0x82 })]
+        [DataRow("AあB", new byte[] { 0x41, 0x82, 0xA0, 0x42, 0x82, 0x00 })]
+        public void Test_ToCleanSjisString(string str, byte[] bytes)
+        {
+            Assert.AreEqual(str, bytes.ToCleanSjisString());
+            Assert.AreEqual(str, new ReadOnlySpan<byte>(bytes).ToCleanSjisString());
         }
     }
 }

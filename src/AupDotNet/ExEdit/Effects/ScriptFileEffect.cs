@@ -65,8 +65,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     var span = new ReadOnlySpan<byte>(data);
                     ScriptId = span.Slice(0, 2).ToInt16();
                     Directory = (ScriptDirectory)span.Slice(2, 2).ToInt16();
-                    Name = span.Slice(4, MaxNameLength).ToSjisString().CutNull();
-                    Params = span.Slice(0x104, MaxParamsLength).ToSjisString().CutNull();
+                    Name = span.Slice(4, MaxNameLength).ToCleanSjisString();
+                    Params = span.Slice(0x104, MaxParamsLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {
