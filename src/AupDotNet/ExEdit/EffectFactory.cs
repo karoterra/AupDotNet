@@ -21,6 +21,8 @@ namespace Karoterra.AupDotNet.ExEdit
                     return new FigureEffect(trackbars, checkboxes, data);
                 case EffectTypeId.FrameBuffer:
                     return new FrameBufferEffect(trackbars, checkboxes);
+                case EffectTypeId.Waveform:
+                    return new WaveformEffect(trackbars, checkboxes, data);
                 case EffectTypeId.StandardDraw:
                     return new StandardDrawEffect(trackbars, checkboxes, data);
                 case EffectTypeId.ExtendedDraw:
@@ -29,10 +31,26 @@ namespace Karoterra.AupDotNet.ExEdit
                     return new StandardPlaybackEffect(trackbars, checkboxes);
                 case EffectTypeId.SceneChange:
                     return new SceneChangeEffect(trackbars, checkboxes, data);
+                case EffectTypeId.Shadow:
+                    return new ShadowEffect(trackbars, checkboxes, data);
+                case EffectTypeId.Border:
+                    return new BorderEffect(trackbars, checkboxes, data);
+                case EffectTypeId.Wipe:
+                    return new WipeEffect(trackbars, checkboxes, data);
+                case EffectTypeId.Mask:
+                    return new MaskEffect(trackbars, checkboxes, data);
+                case EffectTypeId.Displacement:
+                    return new DisplacementEffect(trackbars, checkboxes, data);
                 case EffectTypeId.AnimationEffect:
                     return new AnimationEffect(trackbars, checkboxes, data);
                 case EffectTypeId.CustomObject:
                     return new CustomObjectEffect(trackbars, checkboxes, data);
+                case EffectTypeId.VideoComposition:
+                    return new VideoCompositionEffect(trackbars, checkboxes, data);
+                case EffectTypeId.ImageComposition:
+                    return new ImageCompositionEffect(trackbars, checkboxes, data);
+                case EffectTypeId.PartialFilter:
+                    return new PartialFilterEffect(trackbars, checkboxes, data);
                 case EffectTypeId.CameraEffect:
                     return new CameraEffect(trackbars, checkboxes, data);
                 default:
