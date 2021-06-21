@@ -80,7 +80,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
-            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
+            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 0);
             Field0x100.ToBytes().CopyTo(data, 0x100);
             Field0x104.ToBytes().CopyTo(data, 0x104);
             Field0x108.ToBytes().CopyTo(data, 0x108);

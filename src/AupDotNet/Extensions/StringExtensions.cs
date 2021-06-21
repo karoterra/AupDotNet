@@ -69,6 +69,11 @@ namespace Karoterra.AupDotNet.Extensions
             return Encoding.Unicode.GetString(bytes.ToArray());
         }
 
+        public static string ToCleanUTF16String(this ReadOnlySpan<byte> bytes)
+        {
+            return bytes.ToUTF16String().CutNull();
+        }
+
         public static byte[] ToSjisBytes(this string s)
         {
             return sjis.GetBytes(s);

@@ -77,7 +77,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             var data = new byte[Type.ExtSize];
             ((int)FigureType).ToBytes().CopyTo(data, 0);
-            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 8);
+            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             Mode.ToBytes().CopyTo(data, 0x104);
             ((int)Calc).ToBytes().CopyTo(data, 0x108);
             return data;

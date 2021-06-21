@@ -111,7 +111,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     Color = span.Slice(8, 4).ToColor();
                     Color2 = span.Slice(0xC, 4).ToColor();
                     Font = span.Slice(0x10, MaxFontLength).ToCleanSjisString();
-                    Text = span.Slice(0x30, MaxTextLength).ToCleanSjisString();
+                    Text = span.Slice(0x30, MaxTextLength).ToCleanUTF16String();
                 }
                 else if (data.Length != 0)
                 {
