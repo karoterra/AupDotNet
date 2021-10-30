@@ -10,8 +10,8 @@ namespace Karoterra.AupDotNet
         public byte Index24Fps;
         public byte EditFlag;
         public byte Config;
-        public byte Field8;
         public byte Vcm;
+        public byte Field9;
 
         public FrameData()
         {

@@ -62,8 +62,8 @@ namespace Karoterra.AupDotNet
             var index24Fps = AupUtil.DecompressUInt8Array(reader, frameNum);
             var editFlags = AupUtil.DecompressUInt8Array(reader, frameNum);
             var configs = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var array8 = AupUtil.DecompressUInt8Array(reader, frameNum);
             var vcms = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var array9 = AupUtil.DecompressUInt8Array(reader, frameNum);
             Frames.Clear();
             for (int i = 0; i < frameNum; i++)
             {
@@ -77,8 +77,8 @@ namespace Karoterra.AupDotNet
                     Index24Fps = index24Fps[i],
                     EditFlag = editFlags[i],
                     Config = configs[i],
-                    Field8 = array8[i],
-                    Vcm = vcms[i]
+                    Vcm = vcms[i],
+                    Field9 = array9[i],
                 });
             }
 
@@ -125,8 +125,8 @@ namespace Karoterra.AupDotNet
             AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Field8).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
 
             foreach (var config in ConfigFiles)
             {
