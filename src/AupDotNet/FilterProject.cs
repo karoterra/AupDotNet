@@ -20,7 +20,7 @@ namespace Karoterra.AupDotNet
             writer.Write((byte)0);
             var data = DumpData();
             writer.Write(data.Length);
-            AviUtlProject.Comp(writer, data);
+            AupUtil.Comp(writer, data);
         }
     }
 }

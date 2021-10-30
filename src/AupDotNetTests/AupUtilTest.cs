@@ -2,13 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Karoterra.AupDotNet;
 
 namespace AupDotNetTests
 {
     [TestClass]
-    public class AviUtlProjectTest
+    public class AupUtilTest
     {
         [DataTestMethod]
         [DataRow(new byte[] { 0, 0, 0, 0 }, new byte[] { 0x84, 0x00 })]
@@ -24,7 +23,7 @@ namespace AupDotNetTests
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
             {
-                AviUtlProject.Comp(writer, input);
+                AupUtil.Comp(writer, input);
                 stream.Position = 0;
                 var bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);

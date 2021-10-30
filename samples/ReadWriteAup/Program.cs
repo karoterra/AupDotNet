@@ -29,9 +29,9 @@ namespace ReadWriteAup
                 aup.Read(reader);
             }
 
-            Console.WriteLine($"Edit filename: {aup.EditFilename}");
-            Console.WriteLine($"Output filename: {aup.OutputFilename}");
-            Console.WriteLine($"Project filename: {aup.ProjectFilename}");
+            Console.WriteLine($"Edit filename: {aup.EditHandle.EditFilename}");
+            Console.WriteLine($"Output filename: {aup.EditHandle.OutputFilename}");
+            Console.WriteLine($"Project filename: {aup.EditHandle.ProjectFilename}");
             Console.WriteLine("FilterProjects");
             foreach (var filter in aup.FilterProjects)
             {

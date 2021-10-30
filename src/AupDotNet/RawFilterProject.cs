@@ -24,7 +24,7 @@ namespace Karoterra.AupDotNet
             Name = reader.ReadBytes(nameLength).ToCleanSjisString();
             var dataSize = reader.ReadInt32();
             Data = new byte[dataSize];
-            AviUtlProject.Decomp(reader, Data);
+            AupUtil.Decomp(reader, Data);
         }
 
         public override byte[] DumpData()
