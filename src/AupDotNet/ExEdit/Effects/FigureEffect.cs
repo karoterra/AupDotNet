@@ -22,13 +22,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             get => _filename;
             set
             {
-                if (value.GetSjisByteCount() >= MaxFilenameLength)
+                int maxlen = ExternalImage ? MaxFilenameLength - 1 : MaxFilenameLength;
+                if (value.GetSjisByteCount() >= maxlen)
                 {
-                    throw new MaxByteCountOfStringException(nameof(Filename), MaxFilenameLength);
+                    throw new MaxByteCountOfStringException(nameof(Filename), maxlen);
                 }
                 _filename = value;
             }
         }
+
+        public bool ExternalImage { get; set; } = false;
 
         public FigureEffect()
             : base(EffectType.Defaults[Id])
@@ -51,6 +54,11 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     FigureType = (FigureType)span.Slice(0, 4).ToInt32();
                     Color = span.Slice(4, 4).ToColor();
                     Filename = span.Slice(8, MaxFilenameLength).ToCleanSjisString();
+                    if (!string.IsNullOrEmpty(Filename) && Filename[0] == '*')
+                    {
+                        ExternalImage = true;
+                        Filename = Filename.Substring(1);
+                    }
                 }
                 else if (data.Length != 0)
                 {
@@ -64,7 +72,11 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ((int)FigureType).ToBytes().CopyTo(data, 0);
             Color.ToBytes().CopyTo(data, 4);
-            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 8);
+            if (!string.IsNullOrEmpty(Filename))
+            {
+                var filename = ExternalImage ? $"*{Filename}" : Filename;
+                filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 8);
+            }
             return data;
         }
     }
