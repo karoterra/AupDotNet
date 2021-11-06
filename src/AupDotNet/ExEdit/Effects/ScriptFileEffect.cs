@@ -5,6 +5,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// AnimationEffect、CustomObjectEffect、CameraEffect、SceneChangeEffect用のベースクラス
+    /// </summary>
     public abstract class ScriptFileEffect : Effect
     {
         public readonly int MaxNameLength = 256;
@@ -16,7 +19,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
-        public int ScriptId { get; set; }
+        public short ScriptId { get; set; }
         public ScriptDirectory Directory { get; set; }
 
         private string _name = "";
@@ -68,7 +71,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
-            ((short)ScriptId).ToBytes().CopyTo(data, 0);
+            ScriptId.ToBytes().CopyTo(data, 0);
             ((short)Directory).ToBytes().CopyTo(data, 2);
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             BuildParams().ToSjisBytes(MaxParamsLength).CopyTo(data, 0x104);
