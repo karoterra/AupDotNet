@@ -4,6 +4,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// テキスト
+    /// </summary>
     public class TextEffect : Effect
     {
         public readonly int MaxFontLength = 32;
@@ -39,8 +42,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         public bool Italic
         {
-            get => Checkboxes[1] != 0;
-            set => Checkboxes[1] = value ? 1 : 0;
+            get => Checkboxes[4] != 0;
+            set => Checkboxes[4] = value ? 1 : 0;
         }
 
         public TextType TextType { get; set; }

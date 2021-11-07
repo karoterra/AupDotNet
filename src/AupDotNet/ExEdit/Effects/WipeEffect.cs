@@ -3,6 +3,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// ワイプ
+    /// </summary>
     public class WipeEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
@@ -20,8 +23,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         public bool ReverseOut
         {
-            get => Checkboxes[0] != 0;
-            set => Checkboxes[0] = value ? 1 : 0;
+            get => Checkboxes[1] != 0;
+            set => Checkboxes[1] = value ? 1 : 0;
         }
 
         public int WipeType { get; set; }

@@ -3,13 +3,16 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// ディスプレイスメントマップ
+    /// </summary>
     public class DisplacementEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
         private const int Id = (int)EffectTypeId.Displacement;
 
-        public Trackbar Param0 => Trackbars[0];
-        public Trackbar Param1 => Trackbars[1];
+        public Trackbar DeformX => Trackbars[0];
+        public Trackbar DeformY => Trackbars[1];
         public Trackbar X => Trackbars[2];
         public Trackbar Y => Trackbars[3];
         public Trackbar Rotate => Trackbars[4];
