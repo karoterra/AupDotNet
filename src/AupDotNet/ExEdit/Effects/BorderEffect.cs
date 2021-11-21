@@ -4,17 +4,25 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 縁取り
+    /// </summary>
     public class BorderEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
         private const int Id = (int)EffectTypeId.Border;
 
+        /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
+
+        /// <summary>ぼかし</summary>
         public Trackbar Blur => Trackbars[1];
 
+        /// <summary>縁色の設定</summary>
         public Color Color { get; set; } = Color.Black;
 
         private string _filename = "";
+        /// <summary>パターン画像ファイル</summary>
         public string Filename
         {
             get => _filename;
@@ -46,7 +54,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 if (data.Length == Type.ExtSize)
                 {
                     var span = new ReadOnlySpan<byte>(data);
-                    Color = span.Slice(0, 4).ToColor();
+                    Color = span.Slice(0, 4).ToColor(true);
                     Filename = span.Slice(4, MaxFilenameLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
@@ -59,7 +67,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
-            Color.ToBytes().CopyTo(data, 0);
+            Color.ToBytes(true).CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
         }

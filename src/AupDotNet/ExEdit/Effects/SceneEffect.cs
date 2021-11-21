@@ -10,15 +10,20 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     {
         private const int Id = (int)EffectTypeId.Scene;
 
+        /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[0];
+
+        /// <summary>再生速度</summary>
         public Trackbar Speed => Trackbars[1];
 
+        /// <summary>ループ再生</summary>
         public bool Loop
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>シーン選択</summary>
         public int Scene { get; set; }
 
         public SceneEffect()

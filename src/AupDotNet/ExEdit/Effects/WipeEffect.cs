@@ -11,25 +11,45 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxFilenameLength = 256;
         private const int Id = (int)EffectTypeId.Wipe;
 
+        /// <summary>イン</summary>
         public Trackbar In => Trackbars[0];
+
+        /// <summary>アウト</summary>
         public Trackbar Out => Trackbars[1];
+
+        /// <summary>ぼかし</summary>
         public Trackbar Blur => Trackbars[2];
 
+        /// <summary>反転(イン)</summary>
         public bool ReverseIn
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>反転(アウト)</summary>
         public bool ReverseOut
         {
             get => Checkboxes[1] != 0;
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// ワイプの種類
+        /// <list type="bullet">
+        ///     <item>0. ワイプ(円)</item>
+        ///     <item>1. ワイプ(四角)</item>
+        ///     <item>2. ワイプ(時計)</item>
+        ///     <item>3. ワイプ(横)</item>
+        ///     <item>4. ワイプ(縦)</item>
+        /// </list>
+        /// </summary>
         public int WipeType { get; set; }
 
         private string _filename = "";
+        /// <summary>
+        /// transitionフォルダの画像を選んだ時はファイル名(拡張子無し)がここに入る
+        /// </summary>
         public string Filename
         {
             get => _filename;

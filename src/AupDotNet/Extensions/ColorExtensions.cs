@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Karoterra.AupDotNet.ExEdit;
 
 namespace Karoterra.AupDotNet.Extensions
 {
@@ -19,6 +20,14 @@ namespace Karoterra.AupDotNet.Extensions
                 alpha ? x.A : (byte)0
             };
             return b;
+        }
+
+        public static YCbCr ToYCbCr(this ReadOnlySpan<byte> x)
+        {
+            short y = x.ToInt16();
+            short cb = x.Slice(2).ToInt16();
+            short cr = x.Slice(4).ToInt16();
+            return new YCbCr(y, cb, cr);
         }
     }
 }

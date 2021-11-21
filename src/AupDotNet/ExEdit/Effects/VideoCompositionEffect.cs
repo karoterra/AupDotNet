@@ -8,24 +8,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxFilenameLength = 260;
         private const int Id = (int)EffectTypeId.VideoComposition;
 
+        /// <summary>再生範囲,オフセット</summary>
         public Trackbar Position => Trackbars[0];
+
+        /// <summary>再生速度</summary>
         public Trackbar Speed => Trackbars[1];
+
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[2];
+
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[3];
+
+        /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[4];
 
+        /// <summary>ループ再生</summary>
         public bool LoopPlayback
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>動画ファイルの同期</summary>
         public bool Sync
         {
             get => Checkboxes[1] != 0;
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>ループ画像</summary>
         public bool LoopImage
         {
             get => Checkboxes[2] != 0;
@@ -33,6 +45,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;
@@ -48,6 +61,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         public byte[] Field0x104 { get; set; } = new byte[20];
 
+        /// <summary>
+        /// <list type="bullet">
+        ///     <item>0. 色情報を上書き</item>
+        ///     <item>1. 輝度をアルファ値として上書き</item>
+        ///     <item>2. 輝度をアルファ値として乗算</item>
+        /// </list>
+        /// </summary>
         public int Mode { get; set; }
 
         public VideoCompositionEffect()

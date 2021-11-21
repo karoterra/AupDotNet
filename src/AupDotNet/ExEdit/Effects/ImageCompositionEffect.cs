@@ -12,6 +12,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Y => Trackbars[1];
         public Trackbar Zoom => Trackbars[2];
 
+        /// <summary>ループ画像</summary>
         public bool Loop
         {
             get => Checkboxes[0] != 0;
@@ -19,6 +20,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;
@@ -32,6 +34,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// <list type="bullet">
+        ///     <item>0. 前方から合成</item>
+        ///     <item>1. 後方から合成</item>
+        ///     <item>2. 色情報を上書き</item>
+        ///     <item>3. 輝度をアルファ値として上書き</item>
+        ///     <item>4. 輝度をアルファ値として乗算</item>
+        /// </list>
+        /// </summary>
         public int Mode { get; set; }
 
         public ImageCompositionEffect()

@@ -3,9 +3,12 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 部分フィルタ(フィルタオブジェクト)
+    /// </summary>
     public class PartialFilterEffect : Effect
     {
-        public readonly int MaxFilenameLength = 256;
+        public readonly int MaxNameLength = 256;
         private const int Id = (int)EffectTypeId.PartialFilter;
 
         public Trackbar X => Trackbars[0];
@@ -15,6 +18,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar AspectRatio => Trackbars[4];
         public Trackbar Blur => Trackbars[5];
 
+        /// <summary>マスクの反転</summary>
         public bool Invert
         {
             get => Checkboxes[1] != 0;
@@ -23,18 +27,34 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         public FigureType FigureType { get; set; } = FigureType.Square;
 
-        public string _filename = "";
-        public string Filename
+        public string _name = "";
+        public string Name
         {
-            get => _filename;
+            get => _name;
             set
             {
-                if (value.GetSjisByteCount() >= MaxFilenameLength)
+                if (value.GetSjisByteCount() >= MaxNameLength)
                 {
-                    throw new MaxByteCountOfStringException(nameof(Filename), MaxFilenameLength);
+                    throw new MaxByteCountOfStringException(nameof(Name), MaxNameLength);
                 }
-                _filename = value;
+                _name = value;
             }
+        }
+
+        public FigureNameType NameType
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name)) return FigureNameType.BuiltIn;
+                else if (Name[0] == '*') return FigureNameType.File;
+                else return FigureNameType.Figure;
+            }
+        }
+
+        public string Filename
+        {
+            get => NameType == FigureNameType.File ? Name.Substring(1) : null;
+            set => Name = $"*{value}";
         }
 
         public PartialFilterEffect()
@@ -56,7 +76,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 {
                     var span = new ReadOnlySpan<byte>(data);
                     FigureType = (FigureType)span.Slice(0, 4).ToInt32();
-                    Filename = span.Slice(4, MaxFilenameLength).ToCleanSjisString();
+                    Name = span.Slice(4, MaxNameLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {
@@ -69,7 +89,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             var data = new byte[Type.ExtSize];
             ((int)FigureType).ToBytes().CopyTo(data, 0);
-            Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
+            Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             return data;
         }
     }

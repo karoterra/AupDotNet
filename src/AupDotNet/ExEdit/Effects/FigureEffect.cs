@@ -4,9 +4,12 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 図形
+    /// </summary>
     public class FigureEffect : Effect
     {
-        public readonly int MaxFilenameLength = 256;
+        public readonly int MaxNameLength = 256;
         private const int Id = (int)EffectTypeId.Figure;
 
         public Trackbar Size => Trackbars[0];
@@ -16,22 +19,35 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public FigureType FigureType { get; set; } = FigureType.Circle;
         public Color Color { get; set; } = Color.White;
 
-        public string _filename = "";
-        public string Filename
+        public string _name = "";
+        public string Name
         {
-            get => _filename;
+            get => _name;
             set
             {
-                int maxlen = ExternalImage ? MaxFilenameLength - 1 : MaxFilenameLength;
-                if (value.GetSjisByteCount() >= maxlen)
+                if (value.GetSjisByteCount() >= MaxNameLength)
                 {
-                    throw new MaxByteCountOfStringException(nameof(Filename), maxlen);
+                    throw new MaxByteCountOfStringException(nameof(Name), MaxNameLength);
                 }
-                _filename = value;
+                _name = value;
             }
         }
 
-        public bool ExternalImage { get; set; } = false;
+        public FigureNameType NameType
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name)) return FigureNameType.BuiltIn;
+                else if (Name[0] == '*') return FigureNameType.File;
+                else return FigureNameType.Figure;
+            }
+        }
+
+        public string Filename
+        {
+            get => NameType == FigureNameType.File ? Name.Substring(1) : null;
+            set => Name = $"*{value}";
+        }
 
         public FigureEffect()
             : base(EffectType.Defaults[Id])
@@ -53,12 +69,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     var span = new ReadOnlySpan<byte>(data);
                     FigureType = (FigureType)span.Slice(0, 4).ToInt32();
                     Color = span.Slice(4, 4).ToColor();
-                    Filename = span.Slice(8, MaxFilenameLength).ToCleanSjisString();
-                    if (!string.IsNullOrEmpty(Filename) && Filename[0] == '*')
-                    {
-                        ExternalImage = true;
-                        Filename = Filename.Substring(1);
-                    }
+                    Name = span.Slice(8, MaxNameLength).ToCleanSjisString();
                 }
                 else if (data.Length != 0)
                 {
@@ -72,11 +83,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ((int)FigureType).ToBytes().CopyTo(data, 0);
             Color.ToBytes().CopyTo(data, 4);
-            if (!string.IsNullOrEmpty(Filename))
-            {
-                var filename = ExternalImage ? $"*{Filename}" : Filename;
-                filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 8);
-            }
+            Name.ToSjisBytes(MaxNameLength).CopyTo(data, 8);
             return data;
         }
     }

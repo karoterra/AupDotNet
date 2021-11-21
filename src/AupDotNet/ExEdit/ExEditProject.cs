@@ -56,8 +56,10 @@ namespace Karoterra.AupDotNet.ExEdit
             Objects = new List<TimelineObject>();
         }
 
-        public ExEditProject(RawFilterProject rawFilter)
+        public ExEditProject(RawFilterProject rawFilter, IEffectFactory effectFactory = null)
         {
+            if (effectFactory == null) effectFactory = new EffectFactory();
+
             Name = "拡張編集";
 
             var data = new ReadOnlySpan<byte>(rawFilter.Data);
@@ -121,7 +123,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Objects = new List<TimelineObject>((int)objectNum);
             for (int i = 0; i < objectNum; i++)
             {
-                Objects.Add(new TimelineObject(data.Slice(cursor), EffectTypes));
+                Objects.Add(new TimelineObject(data.Slice(cursor), EffectTypes, effectFactory));
                 cursor += (int)Objects[i].Size;
             }
         }

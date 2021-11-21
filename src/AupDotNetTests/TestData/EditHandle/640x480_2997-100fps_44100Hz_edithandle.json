@@ -1,0 +1,15 @@
+{
+  "EditFilename": "640x480_2997-100fps_44100Hz.exedit",
+  "OutputFilename": "D:\\TestData\\output.avi",
+  "ProjectFilename": "D:\\TestData\\EditHandle\\640x480_2997-100fps_44100Hz.aup",
+  "Width": 640,
+  "Height": 480,
+  "FrameNum": 6,
+  "SelectedFrameStart": 0,
+  "SelectedFrameEnd": 5,
+  "CurrentFrame": 3,
+  "AudioCh": 2,
+  "AudioRate": 44100,
+  "VideoScale": 100,
+  "VideoRate": 2997
+}

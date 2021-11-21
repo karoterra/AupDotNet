@@ -7,7 +7,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <list type="definition">
     ///     <item>
     ///         <term>組み込みシーンチェンジ</term>
-    ///         <description>Nameは空、ScriptIdにインデックスが入る。</description>
+    ///         <description>Nameは空、ScriptIdにインデックス入り、Paramsはnull。</description>
     ///     </item>
     ///     <item>
     ///         <term>exedit.scnのスクリプト</term>
@@ -15,7 +15,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     ///     </item>
     ///     <item>
     ///         <term>ユーザ定義スクリプト</term>
-    ///         <description>Nameにスクリプト名、ScriptIdに1が入る。</description>
+    ///         <description>Nameにスクリプト名、ScriptIdに2が入る。</description>
     ///     </item>
     ///     <item>
     ///         <term>transition画像</term>

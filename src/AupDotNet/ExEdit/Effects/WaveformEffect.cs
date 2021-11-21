@@ -4,16 +4,27 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 音声波形表示
+    /// </summary>
     public class WaveformEffect : Effect
     {
-        public readonly int MaxFilenameLength = 256;
+        public readonly int MaxFilenameLength = 260;
         private const int Id = (int)EffectTypeId.Waveform;
 
+        /// <summary>横幅</summary>
         public Trackbar Width => Trackbars[0];
+
+        /// <summary>高さ</summary>
         public Trackbar Height => Trackbars[1];
+
+        /// <summary>音量</summary>
         public Trackbar Volume => Trackbars[2];
+
+        /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[3];
 
+        /// <summary>編集全体の音声を基にする</summary>
         public bool ReferScene
         {
             get => Checkboxes[3] != 0;
@@ -21,6 +32,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;
@@ -34,17 +46,32 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
-        public byte[] Field0x104 { get; set; } = new byte[20];
+        public byte[] Field0x104 { get; } = new byte[20];
 
+        /// <summary>波形の種類</summary>
         public short PresetType { get; set; }
 
+        /// <summary>波形タイプ(0/1)</summary>
         public short Mode { get; set; }
+
+        /// <summary>横解像度</summary>
         public short ResW { get; set; }
+
+        /// <summary>縦解像度</summary>
         public short ResH { get; set; }
+
+        /// <summary>横スペース(%)</summary>
         public short PadW { get; set; }
+
+        /// <summary>縦スペース(%)</summary>
         public short PadH { get; set; }
+
+        /// <summary>波形タイプ(0/1)</summary>
         public Color Color { get; set; }
+
         public int SampleN { get; set; }
+
+        /// <summary>ミラー</summary>
         public bool Mirror { get; set; }
 
         public WaveformEffect()

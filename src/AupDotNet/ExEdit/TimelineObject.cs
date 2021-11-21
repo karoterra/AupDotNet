@@ -48,8 +48,10 @@ namespace Karoterra.AupDotNet.ExEdit
 
         public readonly List<Effect> Effects = new List<Effect>();
 
-        public TimelineObject(ReadOnlySpan<byte> data, IReadOnlyList<EffectType> effectTypes)
+        public TimelineObject(ReadOnlySpan<byte> data, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
         {
+            if (effectFactory == null) effectFactory = new EffectFactory();
+
             Flag = (TimelineObjectFlag)(data.Slice(0, 4).ToUInt32());
             StartFrame = data.Slice(8, 4).ToUInt32();
             EndFrame = data.Slice(12, 4).ToUInt32();
@@ -95,7 +97,7 @@ namespace Karoterra.AupDotNet.ExEdit
                     checkboxes[j] = data.Slice(0x3F8 + index * 4, 4).ToInt32();
                 }
 
-                Effect effect = EffectFactory.Create(type, trackbars, checkboxes, extData);
+                Effect effect = effectFactory.Create(type, trackbars, checkboxes, extData);
                 effect.Flag = flag;
                 Effects.Add(effect);
                 trackbarCount += trackbars.Length;

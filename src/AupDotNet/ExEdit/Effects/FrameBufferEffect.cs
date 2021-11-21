@@ -1,11 +1,13 @@
-using System;
-
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// フレームバッファ
+    /// </summary>
     public class FrameBufferEffect : NoExtDataEffect
     {
         private const int Id = (int)EffectTypeId.FrameBuffer;
 
+        /// <summary>フレームバッファをクリア</summary>
         public bool ClearBuffer
         {
             get => Checkboxes[0] != 0;

@@ -13,21 +13,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxTextLength = 2048;
         private const int Id = (int)EffectTypeId.Text;
 
+        /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
+
+        /// <summary>表示速度</summary>
         public Trackbar Speed => Trackbars[1];
 
+        /// <summary>自動スクロール</summary>
         public bool AutoScroll
         {
             get => Checkboxes[2] != 0;
             set => Checkboxes[2] = value ? 1 : 0;
         }
 
+        /// <summary>文字毎に個別オブジェクト</summary>
         public bool Split
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>移動座標上に表示する</summary>
         public bool DisplayOnMoving
         {
             get => Checkboxes[1] != 0;
@@ -47,14 +53,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public TextType TextType { get; set; }
+
+        /// <summary>オブジェクトの長さを自動調整</summary>
         public bool AutoAdjust { get; set; }
+
+        /// <summary>滑らかにする</summary>
         public bool Soft { get; set; } = true;
+
+        /// <summary>等間隔モード</summary>
         public bool Monospace { get; set; }
         public TextAlign Align { get; set; }
+
+        /// <summary>字間</summary>
         public int SpacingX { get; set; }
+
+        /// <summary>行間</summary>
         public int SpacingY { get; set; }
+
+        /// <summary>高精度モード</summary>
         public bool Precision { get; set; } = true;
+
+        /// <summary>文字色の設定</summary>
         public Color Color { get; set; }
+
+        /// <summary>影・縁色の設定</summary>
         public Color Color2 { get; set; }
 
         public string _font = "MS UI Gothic";

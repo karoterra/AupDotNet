@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 {
     public class AudioFileEffect : Effect
     {
-        public readonly int MaxFilenameLength = 256;
+        public readonly int MaxFilenameLength = 260;
         private const int Id = (int)EffectTypeId.AudioFile;
 
         public Trackbar Position => Trackbars[0];
@@ -37,12 +37,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
-        public uint Field0x100 { get; set; }
-        public uint Field0x104 { get; set; }
-        public uint Field0x108 { get; set; }
-        public uint Field0x10C { get; set; }
-        public uint Field0x110 { get; set; }
-        public uint Field0x114 { get; set; }
+        public byte[] Data { get; } = new byte[20];
 
         public AudioFileEffect()
             : base(EffectType.Defaults[Id])
@@ -63,12 +58,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 {
                     var span = new ReadOnlySpan<byte>(data);
                     Filename = span.Slice(0, MaxFilenameLength).ToCleanSjisString();
-                    Field0x100 = span.Slice(0x100, 4).ToUInt32();
-                    Field0x104 = span.Slice(0x104, 4).ToUInt32();
-                    Field0x108 = span.Slice(0x108, 4).ToUInt32();
-                    Field0x10C = span.Slice(0x10C, 4).ToUInt32();
-                    Field0x110 = span.Slice(0x110, 4).ToUInt32();
-                    Field0x114 = span.Slice(0x114, 4).ToUInt32();
+                    Data = span.Slice(MaxFilenameLength, 20).ToArray();
                 }
                 else if (data.Length != 0)
                 {
@@ -81,12 +71,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             var data = new byte[Type.ExtSize];
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 0);
-            Field0x100.ToBytes().CopyTo(data, 0x100);
-            Field0x104.ToBytes().CopyTo(data, 0x104);
-            Field0x108.ToBytes().CopyTo(data, 0x108);
-            Field0x10C.ToBytes().CopyTo(data, 0x10C);
-            Field0x110.ToBytes().CopyTo(data, 0x110);
-            Field0x114.ToBytes().CopyTo(data, 0x114);
+            Data.CopyTo(data, MaxFilenameLength);
             return data;
         }
     }

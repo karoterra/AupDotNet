@@ -48,5 +48,22 @@ namespace Karoterra.AupDotNet.ExEdit
             ExtSize.ToBytes().CopyTo(data.Slice(12));
             Name.ToSjisBytes(MaxNameLength).CopyTo(data.Slice(16, MaxNameLength));
         }
+
+        public override bool Equals(object obj)
+        {
+            var et = obj as EffectType;
+            return et != null &&
+                Id == et.Id &&
+                Flag == et.Flag &&
+                TrackbarNum == et.TrackbarNum &&
+                CheckboxNum == et.CheckboxNum &&
+                ExtSize == et.ExtSize &&
+                Name == et.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id ^ (int)Flag ^ (int)TrackbarNum ^ (int)CheckboxNum ^ (int)ExtSize ^ Name.GetHashCode();
+        }
     }
 }
