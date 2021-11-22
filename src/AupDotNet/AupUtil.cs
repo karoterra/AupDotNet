@@ -68,29 +68,18 @@ namespace Karoterra.AupDotNet
             return x[0] == x[1] && x[0] == x[2] && x[0] == x[3];
         }
 
-        public static void Comp(BinaryWriter writer, byte[] data)
+        public static void Comp(BinaryWriter writer, ReadOnlySpan<byte> data)
         {
-            var span = new ReadOnlySpan<byte>(data);
-            while (span.Length > 0)
+            while (data.Length > 0)
             {
-                if (span.Length >= 4 && IsSame4Bytes(span))
+                if (data.Length >= 4 && IsSame4Bytes(data))
                 {
-                    byte b = span[0];
+                    byte b = data[0];
                     int rep = 4;
-                    while (rep < span.Length)
+                    while (rep < data.Length && b == data[rep])
                     {
-                        if (b == span[rep])
-                        {
-                            rep++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        if (rep >= 0x7F_FFFF)
-                        {
-                            break;
-                        }
+                        rep++;
+                        if (rep >= 0x7F_FFFF) break;
                     }
                     if (rep < 0x80)
                     {
@@ -99,31 +88,19 @@ namespace Karoterra.AupDotNet
                     }
                     else
                     {
-                        writer.Write((byte)0x80);
-                        var size = BitConverter.GetBytes(rep).Take(3).ToArray();
-                        writer.Write(size);
+                        int sizeData = (rep << 8) | 0x80;
+                        writer.Write(sizeData.ToBytes());
                     }
                     writer.Write(b);
-                    span = span.Slice(rep);
+                    data = data.Slice(rep);
                 }
                 else
                 {
-                    int rep = 4;
-                    while (rep < span.Length)
+                    int rep = 0;
+                    while (rep < data.Length && (data.Length - rep < 4 || !IsSame4Bytes(data.Slice(rep))))
                     {
-                        if (!IsSame4Bytes(span.Slice(rep - 3)))
-                        {
-                            rep++;
-                        }
-                        else
-                        {
-                            rep -= 3;
-                            break;
-                        }
-                        if (rep >= 0x7F_FFFF)
-                        {
-                            break;
-                        }
+                        rep++;
+                        if (rep >= 0x7F_FFFF) break;
                     }
                     if (rep < 0x80)
                     {
@@ -131,12 +108,11 @@ namespace Karoterra.AupDotNet
                     }
                     else
                     {
-                        writer.Write((byte)0x00);
-                        var size = BitConverter.GetBytes(rep).Take(3).ToArray();
-                        writer.Write(size);
+                        int sizeData = rep << 8;
+                        writer.Write(sizeData.ToBytes());
                     }
-                    writer.Write(span.Slice(0, rep).ToArray());
-                    span = span.Slice(rep);
+                    writer.Write(data.Slice(0, rep).ToArray());
+                    data = data.Slice(rep);
                 }
             }
         }

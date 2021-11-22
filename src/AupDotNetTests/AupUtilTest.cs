@@ -10,24 +10,67 @@ namespace AupDotNetTests
     public class AupUtilTest
     {
         [DataTestMethod]
-        [DataRow(new byte[] { 0, 0, 0, 0 }, new byte[] { 0x84, 0x00 })]
-        [DataRow(new byte[] { 1, 1, 1, 1, 1 }, new byte[] { 0x85, 0x01 })]
-        [DataRow(new byte[] { 2, 2, 2, 2, 3, 3, 3, 3 }, new byte[] { 0x84, 0x02, 0x84, 0x03 })]
-        [DataRow(new byte[] { 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3 }, new byte[] { 0x85, 0x02, 0x86, 0x03 })]
-        [DataRow(new byte[] { 1, 2, 3, 4 }, new byte[] { 0x04, 1, 2, 3, 4 })]
-        [DataRow(new byte[] { 1, 2, 3, 4, 5, 6 }, new byte[] { 0x06, 1, 2, 3, 4, 5, 6 })]
-        [DataRow(new byte[] { 1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 0, 0 }, new byte[] { 0x06, 1, 2, 3, 4, 5, 6, 0x86, 0 })]
-        [DataRow(new byte[] { 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6 }, new byte[] { 0x86, 0, 0x06, 1, 2, 3, 4, 5, 6 })]
-        public void Test_Comp(byte[] input, byte[] output)
+        [DataRow("empty")]
+        [DataRow("size1")]
+        [DataRow("size2")]
+        [DataRow("size3")]
+        [DataRow("size4_comp")]
+        [DataRow("size4_raw")]
+        [DataRow("size5_comp")]
+        [DataRow("size5_raw")]
+        [DataRow("size127_comp")]
+        [DataRow("size127_raw")]
+        [DataRow("size128_comp")]
+        [DataRow("size128_raw")]
+        [DataRow("c4c4")]
+        [DataRow("c5c6")]
+        [DataRow("c130c4")]
+        [DataRow("r3c4")]
+        [DataRow("c4r3")]
+        public void Test_Comp(string name)
         {
+            byte[] raw = File.ReadAllBytes($@"TestData\CompDecomp\{name}_raw.dat");
+            byte[] comp = File.ReadAllBytes($@"TestData\CompDecomp\{name}_comp.dat");
+
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
             {
-                AupUtil.Comp(writer, input);
+                AupUtil.Comp(writer, raw);
                 stream.Position = 0;
-                var bytes = new byte[stream.Length];
-                stream.Read(bytes, 0, bytes.Length);
-                Assert.IsTrue(output.SequenceEqual(bytes));
+                var actual = new byte[stream.Length];
+                stream.Read(actual, 0, actual.Length);
+                Assert.IsTrue(comp.SequenceEqual(actual), name);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("empty")]
+        [DataRow("size1")]
+        [DataRow("size2")]
+        [DataRow("size3")]
+        [DataRow("size4_comp")]
+        [DataRow("size4_raw")]
+        [DataRow("size5_comp")]
+        [DataRow("size5_raw")]
+        [DataRow("size127_comp")]
+        [DataRow("size127_raw")]
+        [DataRow("size128_comp")]
+        [DataRow("size128_raw")]
+        [DataRow("c4c4")]
+        [DataRow("c5c6")]
+        [DataRow("c130c4")]
+        [DataRow("r3c4")]
+        [DataRow("c4r3")]
+        public void Test_Decomp(string name)
+        {
+            byte[] raw = File.ReadAllBytes($@"TestData\CompDecomp\{name}_raw.dat");
+
+            using (var stream = File.OpenRead($@"TestData\CompDecomp\{name}_comp.dat"))
+            using (var reader = new BinaryReader(stream))
+            {
+                var actual = new byte[raw.Length];
+                AupUtil.Decomp(reader, actual);
+                Assert.IsTrue(raw.SequenceEqual(actual), name);
             }
         }
     }
