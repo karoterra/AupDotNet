@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 放射ブラー
     /// </summary>
-    public class RadialBlurEffect : NoExtDataEffect
+    public class RadialBlurEffect : Effect
     {
         public static EffectType EffectType { get; }
 

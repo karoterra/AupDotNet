@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// フェード
     /// </summary>
-    public class FadeEffect : NoExtDataEffect
+    public class FadeEffect : Effect
     {
         public static EffectType EffectType { get; }
 

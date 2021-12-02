@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 標準再生
     /// </summary>
-    public class StandardPlaybackEffect : NoExtDataEffect
+    public class StandardPlaybackEffect : Effect
     {
         public static EffectType EffectType { get; }
 

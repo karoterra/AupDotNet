@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// ローテーション(基本効果)
     /// </summary>
-    public class Rotation90Effect : NoExtDataEffect
+    public class Rotation90Effect : Effect
     {
         public static EffectType EffectType { get; }
 

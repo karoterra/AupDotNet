@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// ラスター
     /// </summary>
-    public class RasterEffect : NoExtDataEffect
+    public class RasterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

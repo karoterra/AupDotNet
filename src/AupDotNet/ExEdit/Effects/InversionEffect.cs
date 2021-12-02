@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 反転(基本効果)
     /// </summary>
-    public class InversionEffect : NoExtDataEffect
+    public class InversionEffect : Effect
     {
         public static EffectType EffectType { get; }
 

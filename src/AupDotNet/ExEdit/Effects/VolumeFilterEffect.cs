@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 音量の調整(フィルタオブジェクト)
     /// </summary>
-    public class VolumeFilterEffect : NoExtDataEffect
+    public class VolumeFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

@@ -26,20 +26,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public ClipResizeFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public ClipResizeFilterEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    data.CopyTo(Data, 0);
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            data.CopyTo(Data);
         }
 
         public override byte[] DumpExtData()

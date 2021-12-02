@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// シャドー(カメラ制御)
     /// </summary>
-    public class CameraShadowEffect : NoExtDataEffect
+    public class CameraShadowEffect : Effect
     {
         public static EffectType EffectType { get; }
 

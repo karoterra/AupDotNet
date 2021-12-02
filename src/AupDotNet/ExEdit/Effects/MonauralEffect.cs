@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// モノラル化
     /// </summary>
-    public class MonauralEffect : NoExtDataEffect
+    public class MonauralEffect : Effect
     {
         public static EffectType EffectType { get; }
 

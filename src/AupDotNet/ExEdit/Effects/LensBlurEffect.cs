@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// レンズブラー
     /// </summary>
-    public class LensBlurEffect : NoExtDataEffect
+    public class LensBlurEffect : Effect
     {
         public static EffectType EffectType { get; }
 

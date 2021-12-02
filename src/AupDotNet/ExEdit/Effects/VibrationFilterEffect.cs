@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 振動(フィルタオブジェクト)
     /// </summary>
-    public class VibrationFilterEffect : NoExtDataEffect
+    public class VibrationFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

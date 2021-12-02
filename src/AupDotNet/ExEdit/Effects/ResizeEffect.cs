@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// リサイズ(基本効果)
     /// </summary>
-    public class ResizeEffect : NoExtDataEffect
+    public class ResizeEffect : Effect
     {
         public static EffectType EffectType { get; }
 

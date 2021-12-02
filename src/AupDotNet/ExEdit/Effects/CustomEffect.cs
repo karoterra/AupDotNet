@@ -12,21 +12,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Data = new byte[Type.ExtSize];
         }
 
-        public CustomEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)
+        public CustomEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
             : base(type, trackbars, checkboxes)
         {
-            if (data.Length == 0)
-            {
-                Data = new byte[Type.ExtSize];
-            }
-            else if (data.Length == Type.ExtSize)
-            {
-                Data = data;
-            }
-            else
-            {
-                throw new ArgumentException("data's length is invalid.");
-            }
+            Data = new byte[Type.ExtSize];
+        }
+
+
+        public CustomEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(type, trackbars, checkboxes)
+        {
+            Data = new byte[Type.ExtSize];
+            ParseExtData(data);
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            data.CopyTo(Data);
         }
 
         public override byte[] DumpExtData()

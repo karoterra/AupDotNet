@@ -62,22 +62,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public CameraControlEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public CameraControlEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Range = span.Slice(0, 4).ToInt32();
-                    span.Slice(4, 16).CopyTo(Data);
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Range = data.Slice(0, 4).ToInt32();
+            data.Slice(4, 16).CopyTo(Data);
         }
 
         public override byte[] DumpExtData()

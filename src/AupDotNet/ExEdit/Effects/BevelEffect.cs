@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 凸エッジ
     /// </summary>
-    public class BevelEffect : NoExtDataEffect
+    public class BevelEffect : Effect
     {
         public static EffectType EffectType { get; }
 

@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 極座標変換
     /// </summary>
-    public class PolarTransformEffect : NoExtDataEffect
+    public class PolarTransformEffect : Effect
     {
         public static EffectType EffectType { get; }
 

@@ -56,24 +56,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public NoiseEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public NoiseEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    NoiseType = span.Slice(0, 4).ToInt32();
-                    Mode = span.Slice(4, 4).ToInt32();
-                    Seed = span.Slice(8, 4).ToInt32();
-                    Field0xC = span.Slice(0xC, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            NoiseType = data.Slice(0, 4).ToInt32();
+            Mode = data.Slice(4, 4).ToInt32();
+            Seed = data.Slice(8, 4).ToInt32();
+            Field0xC = data.Slice(0xC, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

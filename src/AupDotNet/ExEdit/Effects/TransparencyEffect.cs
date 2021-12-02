@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 透明度(基本効果)
     /// </summary>
-    public class TransparencyEffect : NoExtDataEffect
+    public class TransparencyEffect : Effect
     {
         public static EffectType EffectType { get; }
 

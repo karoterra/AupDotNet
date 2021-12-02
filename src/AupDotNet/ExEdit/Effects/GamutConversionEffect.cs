@@ -41,24 +41,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public GamutConversionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public GamutConversionEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Color = span.ToYCbCr();
-                    Status = span.Slice(6, 2).ToBool();
-                    Color2 = span.Slice(8, 6).ToYCbCr();
-                    Status2 = span.Slice(14, 2).ToBool();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Color = data.ToYCbCr();
+            Status = data.Slice(6, 2).ToBool();
+            Color2 = data.Slice(8, 6).ToYCbCr();
+            Status2 = data.Slice(14, 2).ToBool();
         }
 
         public override byte[] DumpExtData()

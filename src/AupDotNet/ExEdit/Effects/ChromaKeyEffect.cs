@@ -51,23 +51,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Color = span.ToYCbCr();
-                    Field0x6 = span.Slice(6, 2).ToInt16();
-                    Status = span.Slice(8, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Color = data.ToYCbCr();
+            Field0x6 = data.Slice(6, 2).ToInt16();
+            Status = data.Slice(8, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

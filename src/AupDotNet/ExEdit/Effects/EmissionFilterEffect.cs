@@ -39,22 +39,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public EmissionFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public EmissionFilterEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Color = span.ToColor();
-                    NoColor = span[3] != 0;
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Color = data.ToColor();
+            NoColor = data[3] != 0;
         }
 
         public override byte[] DumpExtData()

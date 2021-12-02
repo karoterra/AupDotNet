@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// モーションブラー
     /// </summary>
-    public class MotionBlurEffect : NoExtDataEffect
+    public class MotionBlurEffect : Effect
     {
         public static EffectType EffectType { get; }
 

@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 拡大率(基本効果)
     /// </summary>
-    public class ZoomEffect : NoExtDataEffect
+    public class ZoomEffect : Effect
     {
         public static EffectType EffectType { get; }
 

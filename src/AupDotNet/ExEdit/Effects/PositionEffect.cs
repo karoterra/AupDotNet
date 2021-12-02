@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 座標(基本効果)
     /// </summary>
-    public class PositionEffect : NoExtDataEffect
+    public class PositionEffect : Effect
     {
         public static EffectType EffectType { get; }
 

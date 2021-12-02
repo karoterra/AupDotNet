@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// ぼかしフィルタ(AviUtl組込みフィルタ)
     /// </summary>
-    public class BlurFilter2Effect : NoExtDataEffect
+    public class BlurFilter2Effect : Effect
     {
         public static EffectType EffectType { get; }
 

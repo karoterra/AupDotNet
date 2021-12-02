@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// クリッピング
     /// </summary>
-    public class ClippingEffect : NoExtDataEffect
+    public class ClippingEffect : Effect
     {
         public static EffectType EffectType { get; }
 

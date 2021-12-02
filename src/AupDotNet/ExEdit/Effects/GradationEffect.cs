@@ -62,26 +62,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public GradationEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public GradationEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    BlendMode = (BlendMode)span.Slice(0, 4).ToInt32();
-                    Color = span.Slice(4, 4).ToColor();
-                    NoColor = span[7] != 0;
-                    Color2 = span.Slice(8, 4).ToColor();
-                    NoColor2 = span[11] != 0;
-                    Shape = span.Slice(12, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            BlendMode = (BlendMode)data.Slice(0, 4).ToInt32();
+            Color = data.Slice(4, 4).ToColor();
+            NoColor = data[7] != 0;
+            Color2 = data.Slice(8, 4).ToColor();
+            NoColor2 = data[11] != 0;
+            Shape = data.Slice(12, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

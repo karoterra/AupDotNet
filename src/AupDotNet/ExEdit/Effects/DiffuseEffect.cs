@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 拡散光
     /// </summary>
-    public class DiffuseEffect : NoExtDataEffect
+    public class DiffuseEffect : Effect
     {
         public static EffectType EffectType { get; }
 

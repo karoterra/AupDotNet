@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// シャープフィルタ(AviUtl組込みフィルタ)
     /// </summary>
-    public class SharpenFilterEffect : NoExtDataEffect
+    public class SharpenFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

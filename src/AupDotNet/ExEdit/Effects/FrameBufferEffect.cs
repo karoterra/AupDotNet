@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// フレームバッファ
     /// </summary>
-    public class FrameBufferEffect : NoExtDataEffect
+    public class FrameBufferEffect : Effect
     {
         public static EffectType EffectType { get; }
 

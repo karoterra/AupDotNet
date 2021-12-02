@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 直前オブジェクト
     /// </summary>
-    public class PreviousObjectEffect : NoExtDataEffect
+    public class PreviousObjectEffect : Effect
     {
         public static EffectType EffectType { get; }
 

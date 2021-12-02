@@ -59,7 +59,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
-        public byte[] Field0x104 { get; set; } = new byte[20];
+        public byte[] Field0x104 { get; } = new byte[20];
 
         /// <summary>
         /// <list type="bullet">
@@ -80,23 +80,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Filename = span.Slice(0, MaxFilenameLength).ToCleanSjisString();
-                    Field0x104 = span.Slice(0x104, 20).ToArray();
-                    Mode = span.Slice(0x118, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
+            data.Slice(0x104, 20).CopyTo(Field0x104);
+            Mode = data.Slice(0x118, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

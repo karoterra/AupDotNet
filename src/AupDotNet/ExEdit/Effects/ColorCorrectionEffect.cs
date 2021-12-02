@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 色調補正
     /// </summary>
-    public class ColorCorrectionEffect : NoExtDataEffect
+    public class ColorCorrectionEffect : Effect
     {
         public static EffectType EffectType { get; }
 

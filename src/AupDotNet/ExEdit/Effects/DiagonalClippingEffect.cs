@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 斜めクリッピング
     /// </summary>
-    public class DiagonalClippingEffect : NoExtDataEffect
+    public class DiagonalClippingEffect : Effect
     {
         public static EffectType EffectType { get; }
 

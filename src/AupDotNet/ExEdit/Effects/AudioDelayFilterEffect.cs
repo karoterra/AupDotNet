@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 音声ディレイ(フィルタオブジェクト)
     /// </summary>
-    public class AudioDelayFilterEffect : NoExtDataEffect
+    public class AudioDelayFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

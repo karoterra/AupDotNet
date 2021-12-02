@@ -5,14 +5,14 @@ namespace Karoterra.AupDotNet.ExEdit
 {
     public abstract class Effect
     {
-        public readonly EffectType Type;
+        public EffectType Type { get; }
         public EffectFlag Flag { get; set; }
 
         public Trackbar[] Trackbars { get; }
 
         public int[] Checkboxes { get; }
 
-        public Effect(EffectType type)
+        protected Effect(EffectType type)
         {
             Type = type;
             Trackbars = new Trackbar[Type.TrackbarNum];
@@ -32,7 +32,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
-        public Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
+        protected Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
         {
             Type = type;
             if (trackbars.Length != type.TrackbarNum)
@@ -47,6 +47,34 @@ namespace Karoterra.AupDotNet.ExEdit
             Checkboxes = checkboxes.Clone() as int[];
         }
 
-        public abstract byte[] DumpExtData();
+        protected Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : this(type, trackbars, checkboxes)
+        {
+            ParseExtData(data);
+        }
+
+        protected virtual void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+        }
+
+        public void ParseExtData(ReadOnlySpan<byte> data)
+        {
+            if (data != null)
+            {
+                if (data.Length == Type.ExtSize)
+                {
+                    ParseExtDataInternal(data);
+                }
+                else if (data.Length != 0)
+                {
+                    throw new ArgumentException("data's length is invalid.");
+                }
+            }
+        }
+
+        public virtual byte[] DumpExtData()
+        {
+            return new byte[Type.ExtSize];
+        }
     }
 }

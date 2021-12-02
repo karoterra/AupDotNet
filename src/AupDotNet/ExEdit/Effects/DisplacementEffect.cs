@@ -111,24 +111,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    FigureType = (FigureType)span.Slice(0, 4).ToInt32();
-                    Name = span.Slice(4, MaxNameLength).ToCleanSjisString();
-                    Mode = span.Slice(0x104, 4).ToInt32();
-                    Calc = (DisplacementCalc)span.Slice(0x108, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            FigureType = (FigureType)data.Slice(0, 4).ToInt32();
+            Name = data.Slice(4, MaxNameLength).ToCleanSjisString();
+            Mode = data.Slice(0x104, 4).ToInt32();
+            Calc = (DisplacementCalc)data.Slice(0x108, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

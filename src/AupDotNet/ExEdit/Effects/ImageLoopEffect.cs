@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 画像ループ
     /// </summary>
-    public class ImageLoopEffect : NoExtDataEffect
+    public class ImageLoopEffect : Effect
     {
         public static EffectType EffectType { get; }
 

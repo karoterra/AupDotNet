@@ -52,22 +52,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public AudioFileEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public AudioFileEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Filename = span.Slice(0, MaxFilenameLength).ToCleanSjisString();
-                    Data = span.Slice(MaxFilenameLength, 20).ToArray();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
+            data.Slice(MaxFilenameLength, 20).CopyTo(Data);
         }
 
         public override byte[] DumpExtData()

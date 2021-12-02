@@ -44,23 +44,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public RippleEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public RippleEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Num = span.Slice(0, 4).ToInt32();
-                    Interval = span.Slice(4, 4).ToInt32();
-                    Add = span.Slice(8, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Num = data.Slice(0, 4).ToInt32();
+            Interval = data.Slice(4, 4).ToInt32();
+            Add = data.Slice(8, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

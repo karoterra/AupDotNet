@@ -37,22 +37,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public ImageFileEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public ImageFileEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Field0x0 = span.Slice(0, 4).ToInt32();
-                    Filename = span.Slice(4, MaxFilenameLength).ToCleanSjisString();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Field0x0 = data.Slice(0, 4).ToInt32();
+            Filename = data.Slice(4, MaxFilenameLength).ToCleanSjisString();
         }
 
         public override byte[] DumpExtData()

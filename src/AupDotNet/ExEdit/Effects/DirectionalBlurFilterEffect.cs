@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 方向ブラー(フィルタオブジェクト)
     /// </summary>
-    public class DirectionalBlurFilterEffect : NoExtDataEffect
+    public class DirectionalBlurFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

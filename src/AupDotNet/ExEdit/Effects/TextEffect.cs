@@ -117,32 +117,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public TextEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public TextEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    TextType = (TextType)span[0];
-                    AutoAdjust = span[1] != 0;
-                    Soft = span[2] != 0;
-                    Monospace = span[3] != 0;
-                    Align = (TextAlign)span[4];
-                    SpacingX = unchecked((sbyte)span[5]);
-                    SpacingY = unchecked((sbyte)span[6]);
-                    Precision = span[7] != 0;
-                    Color = span.Slice(8, 4).ToColor();
-                    Color2 = span.Slice(0xC, 4).ToColor();
-                    Font = span.Slice(0x10, MaxFontLength).ToCleanSjisString();
-                    Text = span.Slice(0x30, MaxTextLength).ToCleanUTF16String();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            TextType = (TextType)data[0];
+            AutoAdjust = data[1] != 0;
+            Soft = data[2] != 0;
+            Monospace = data[3] != 0;
+            Align = (TextAlign)data[4];
+            SpacingX = unchecked((sbyte)data[5]);
+            SpacingY = unchecked((sbyte)data[6]);
+            Precision = data[7] != 0;
+            Color = data.Slice(8, 4).ToColor();
+            Color2 = data.Slice(0xC, 4).ToColor();
+            Font = data.Slice(0x10, MaxFontLength).ToCleanSjisString();
+            Text = data.Slice(0x30, MaxTextLength).ToCleanUTF16String();
         }
 
         public override byte[] DumpExtData()

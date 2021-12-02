@@ -49,23 +49,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public FlashEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public FlashEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Color = span.ToColor();
-                    NoColor = span[3] != 0;
-                    Mode = span.Slice(4, 4).ToInt32();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Color = data.ToColor();
+            NoColor = data[3] != 0;
+            Mode = data.Slice(4, 4).ToInt32();
         }
 
         public override byte[] DumpExtData()

@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 縁塗りつぶし(AviUtl組込みフィルタ)
     /// </summary>
-    public class FillBorderEffect : NoExtDataEffect
+    public class FillBorderEffect : Effect
     {
         public static EffectType EffectType { get; }
 

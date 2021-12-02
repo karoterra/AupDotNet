@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -25,7 +26,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public CustomObjectEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
+        public CustomObjectEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }

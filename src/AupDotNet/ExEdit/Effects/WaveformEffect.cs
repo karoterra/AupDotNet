@@ -84,31 +84,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
 
-        public WaveformEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType, trackbars, checkboxes)
+        public WaveformEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Filename = span.Slice(0, MaxFilenameLength).ToCleanSjisString();
-                    Field0x104 = span.Slice(0x104, 20).ToArray();
-                    PresetType = span.Slice(0x118, 2).ToInt16();
-                    Mode = span.Slice(0x11A, 2).ToInt16();
-                    ResW = span.Slice(0x11C, 2).ToInt16();
-                    ResH = span.Slice(0x11E, 2).ToInt16();
-                    PadW = span.Slice(0x120, 2).ToInt16();
-                    PadH = span.Slice(0x122, 2).ToInt16();
-                    Color = span.Slice(0x124, 4).ToColor();
-                    SampleN = span.Slice(0x128, 4).ToInt32();
-                    Mirror = span[0x12C] != 0;
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
+            data.Slice(0x104, 20).CopyTo(Field0x104);
+            PresetType = data.Slice(0x118, 2).ToInt16();
+            Mode = data.Slice(0x11A, 2).ToInt16();
+            ResW = data.Slice(0x11C, 2).ToInt16();
+            ResH = data.Slice(0x11E, 2).ToInt16();
+            PadW = data.Slice(0x120, 2).ToInt16();
+            PadH = data.Slice(0x122, 2).ToInt16();
+            Color = data.Slice(0x124, 4).ToColor();
+            SampleN = data.Slice(0x128, 4).ToInt32();
+            Mirror = data[0x12C] != 0;
         }
 
         public override byte[] DumpExtData()

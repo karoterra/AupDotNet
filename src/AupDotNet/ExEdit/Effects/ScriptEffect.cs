@@ -34,21 +34,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             : base(EffectType, trackbars, checkboxes)
         {
         }
-        public ScriptEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-           : base(EffectType, trackbars, checkboxes)
+        public ScriptEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+           : base(EffectType, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    Text = span.Slice(0, MaxTextLength).ToCleanUTF16String();
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            Text = data.Slice(0, MaxTextLength).ToCleanUTF16String();
         }
 
         public override byte[] DumpExtData()

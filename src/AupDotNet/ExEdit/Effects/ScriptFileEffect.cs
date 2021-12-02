@@ -38,34 +38,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         public Dictionary<string, string> Params { get; set; }
 
-        public ScriptFileEffect(EffectType type)
+        protected ScriptFileEffect(EffectType type)
             : base(type)
         {
         }
 
-        public ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
+        protected ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
             : base(type, trackbars, checkboxes)
         {
         }
 
-        public ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(type, trackbars, checkboxes)
+        protected ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
+            : base(type, trackbars, checkboxes, data)
         {
-            if (data != null)
-            {
-                if (data.Length == Type.ExtSize)
-                {
-                    var span = new ReadOnlySpan<byte>(data);
-                    ScriptId = span.Slice(0, 2).ToInt16();
-                    Directory = (ScriptDirectory)span.Slice(2, 2).ToInt16();
-                    Name = span.Slice(4, MaxNameLength).ToCleanSjisString();
-                    Params = ParseParams(span.Slice(0x104, MaxParamsLength).ToCleanSjisString());
-                }
-                else if (data.Length != 0)
-                {
-                    throw new ArgumentException("data's length is invalid.");
-                }
-            }
+        }
+
+        protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
+        {
+            ScriptId = data.Slice(0, 2).ToInt16();
+            Directory = (ScriptDirectory)data.Slice(2, 2).ToInt16();
+            Name = data.Slice(4, MaxNameLength).ToCleanSjisString();
+            Params = ParseParams(data.Slice(0x104, MaxParamsLength).ToCleanSjisString());
         }
 
         public override byte[] DumpExtData()
@@ -107,7 +100,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 bool isString = false;
                 for (; i < str.Length; i++)
                 {
-                    if (str[i] == '"' && str[i-1] != '\\')
+                    if (str[i] == '"' && str[i - 1] != '\\')
                     {
                         isString = !isString;
                     }

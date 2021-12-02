@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 反転(フィルタオブジェクト)
     /// </summary>
-    public class InversionFilterEffect : NoExtDataEffect
+    public class InversionFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

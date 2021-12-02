@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 領域拡張(基本効果)
     /// </summary>
-    public class AreaExpansionEffect : NoExtDataEffect
+    public class AreaExpansionEffect : Effect
     {
         public static EffectType EffectType { get; }
 

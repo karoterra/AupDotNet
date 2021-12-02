@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 境界ぼかし
     /// </summary>
-    public class BorderBlurEffect : NoExtDataEffect
+    public class BorderBlurEffect : Effect
     {
         public static EffectType EffectType { get; }
 

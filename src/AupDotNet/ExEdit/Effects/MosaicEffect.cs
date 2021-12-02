@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// モザイク
     /// </summary>
-    public class MosaicEffect : NoExtDataEffect
+    public class MosaicEffect : Effect
     {
         public static EffectType EffectType { get; }
 

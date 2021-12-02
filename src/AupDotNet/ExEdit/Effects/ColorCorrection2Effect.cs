@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// 色調補正(AviUtl組込みフィルタ)
     /// </summary>
-    public class ColorCorrection2Effect : NoExtDataEffect
+    public class ColorCorrection2Effect : Effect
     {
         public static EffectType EffectType { get; }
 

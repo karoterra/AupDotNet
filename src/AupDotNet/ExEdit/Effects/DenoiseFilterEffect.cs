@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// ノイズ除去フィルタ(AviUtl組込みフィルタ)
     /// </summary>
-    public class DenoiseFilterEffect : NoExtDataEffect
+    public class DenoiseFilterEffect : Effect
     {
         public static EffectType EffectType { get; }
 

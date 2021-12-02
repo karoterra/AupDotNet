@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// オブジェクト分割
     /// </summary>
-    public class SplitEffect : NoExtDataEffect
+    public class SplitEffect : Effect
     {
         public static EffectType EffectType { get; }
 

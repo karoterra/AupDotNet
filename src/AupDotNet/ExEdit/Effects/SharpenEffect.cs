@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// シャープ
     /// </summary>
-    public class SharpenEffect : NoExtDataEffect
+    public class SharpenEffect : Effect
     {
         public static EffectType EffectType { get; }
 

@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// <summary>
     /// オフスクリーン描画
     /// </summary>
-    public class OffScreenEffect : NoExtDataEffect
+    public class OffScreenEffect : Effect
     {
         public static EffectType EffectType { get; }
 
