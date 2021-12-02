@@ -10,7 +10,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class FigureEffect : Effect
     {
         public readonly int MaxNameLength = 256;
-        private const int Id = (int)EffectTypeId.Figure;
+        public static EffectType EffectType { get; }
 
         public Trackbar Size => Trackbars[0];
         public Trackbar AspectRatio => Trackbars[1];
@@ -50,17 +50,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public FigureEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public FigureEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public FigureEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -85,6 +85,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes().CopyTo(data, 4);
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 8);
             return data;
+        }
+
+        static FigureEffect()
+        {
+            EffectType = new EffectType(
+                4, 0x04000408, 3, 2, 264, "図形",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("サイズ", 1, 0, 4000, 100),
+                    new TrackbarDefinition("縦横比", 10, -1000, 1000, 0),
+                    new TrackbarDefinition("ライン幅", 1, 0, 4000, 4000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("背景", false, 0),
+                    new CheckboxDefinition("色の設定", false, 0),
+                }
+            );
         }
     }
 }

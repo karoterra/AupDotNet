@@ -6,7 +6,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class ImageCompositionEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
-        private const int Id = (int)EffectTypeId.ImageComposition;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -46,17 +46,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Mode { get; set; }
 
         public ImageCompositionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ImageCompositionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ImageCompositionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -79,6 +79,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mode.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static ImageCompositionEffect()
+        {
+            EffectType = new EffectType(
+                83, 0x04000420, 3, 3, 260, "画像ファイル合成",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 1, -1000, 1000, 0),
+                    new TrackbarDefinition("Y", 1, -1000, 1000, 0),
+                    new TrackbarDefinition("拡大率", 10, 0, 8000, 1000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("ループ画像", true, 0),
+                    new CheckboxDefinition("参照ファイル", false, 0),
+                    new CheckboxDefinition("前方から合成", false, 0),
+                }
+            );
         }
     }
 }

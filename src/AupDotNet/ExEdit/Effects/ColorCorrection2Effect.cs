@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorCorrection2Effect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.ColorCorrection2;
+        public static EffectType EffectType { get; }
 
         /// <summary>明るさ</summary>
         public Trackbar Brightness => Trackbars[0];
@@ -26,13 +26,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Tone => Trackbars[5];
 
         public ColorCorrection2Effect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ColorCorrection2Effect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ColorCorrection2Effect()
+        {
+            EffectType = new EffectType(
+                105, 0x02001000, 6, 0, 0, "色調補正",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("明るさ", 1, -256, 256, 0),
+                    new TrackbarDefinition("コントラスト", 1, -256, 256, 0),
+                    new TrackbarDefinition("ガンマ", 1, -256, 256, 0),
+                    new TrackbarDefinition("輝度", 1, -256, 256, 0),
+                    new TrackbarDefinition("色の濃さ", 1, -256, 256, 0),
+                    new TrackbarDefinition("色合い", 1, -256, 256, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

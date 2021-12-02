@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LensBlurFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.LensBlurFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>範囲</summary>
         public Trackbar Size => Trackbars[0];
@@ -14,13 +14,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Intensity => Trackbars[1];
 
         public LensBlurFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public LensBlurFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static LensBlurFilterEffect()
+        {
+            EffectType = new EffectType(
+                48, 0x04000000, 2, 0, 0, "レンズブラー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("範囲", 1, 0, 1000, 5),
+                    new TrackbarDefinition("光の強さ", 1, 0, 60, 32),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

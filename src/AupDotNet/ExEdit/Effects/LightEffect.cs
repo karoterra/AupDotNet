@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LightEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Light;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -30,17 +30,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Color Color { get; set; }
 
         public LightEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public LightEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public LightEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -61,6 +61,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Color.ToBytes(true).CopyTo(data, 0);
             return data;
+        }
+
+        static LightEffect()
+        {
+            EffectType = new EffectType(
+                33, 0x04000420, 3, 2, 4, "ライト",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 3000, 1000),
+                    new TrackbarDefinition("拡散", 1, 0, 500, 25),
+                    new TrackbarDefinition("比率", 10, -1000, 1000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("逆光", true, 0),
+                    new CheckboxDefinition("色の設定", false, 0),
+                }
+            );
         }
     }
 }

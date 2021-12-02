@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DirectionalBlurFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.DirectionalBlurFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>範囲</summary>
         public Trackbar Size => Trackbars[0];
@@ -14,13 +14,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Angle => Trackbars[1];
 
         public DirectionalBlurFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public DirectionalBlurFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static DirectionalBlurFilterEffect()
+        {
+            EffectType = new EffectType(
+                46, 0x44000000, 2, 0, 0, "方向ブラー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("範囲", 1, 0, 500, 20),
+                    new TrackbarDefinition("角度", 10, -36000, 36000, 500),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

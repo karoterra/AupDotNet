@@ -8,13 +8,16 @@ namespace Karoterra.AupDotNet.ExEdit
         public static readonly int Size = 112;
         public static readonly int MaxNameLength = 96;
 
-        public readonly int Id;
+        public int Id { get; }
 
-        public readonly uint Flag;
-        public readonly uint TrackbarNum;
-        public readonly uint CheckboxNum;
-        public readonly uint ExtSize;
-        public readonly string Name;
+        public uint Flag { get; }
+        public uint TrackbarNum { get; }
+        public uint CheckboxNum { get; }
+        public uint ExtSize { get; }
+        public string Name { get; }
+
+        public TrackbarDefinition[] Trackbars { get; }
+        public CheckboxDefinition[] Checkboxes { get; }
 
         public EffectType(int id, uint flag, uint trackbarNum, uint checkboxNum, uint extSize, string name)
         {
@@ -24,6 +27,9 @@ namespace Karoterra.AupDotNet.ExEdit
             CheckboxNum = checkboxNum;
             ExtSize = extSize;
             Name = name;
+
+            Trackbars = new TrackbarDefinition[TrackbarNum];
+            Checkboxes = new CheckboxDefinition[CheckboxNum];
         }
 
         public EffectType(ReadOnlySpan<byte> data, int id)
@@ -38,6 +44,25 @@ namespace Karoterra.AupDotNet.ExEdit
             CheckboxNum = data.Slice(8, 4).ToUInt32();
             ExtSize = data.Slice(12, 4).ToUInt32();
             Name = data.Slice(16).ToCleanSjisString();
+
+            Trackbars = new TrackbarDefinition[TrackbarNum];
+            Checkboxes = new CheckboxDefinition[CheckboxNum];
+        }
+
+        public EffectType(
+            int id, uint flag, uint trackbarNum, uint checkboxNum, uint extSize, string name,
+            TrackbarDefinition[] trackbars, CheckboxDefinition[] checkboxes)
+            : this(id, flag, trackbarNum, checkboxNum, extSize, name)
+        {
+            trackbars.CopyTo(Trackbars, 0);
+            checkboxes.CopyTo(Checkboxes, 0);
+        }
+
+        public EffectType(ReadOnlySpan<byte> data, int id, TrackbarDefinition[] trackbars, CheckboxDefinition[] checkboxes)
+            : this(data, id)
+        {
+            trackbars.CopyTo(Trackbars, 0);
+            checkboxes.CopyTo(Checkboxes, 0);
         }
 
         public void Dump(Span<byte> data)

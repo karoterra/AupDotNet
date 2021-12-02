@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class EmissionFilterEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.EmissionFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -30,17 +30,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public bool NoColor { get; set; }
 
         public EmissionFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public EmissionFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public EmissionFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -63,6 +63,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes().CopyTo(data, 0);
             data[3] = (byte)(NoColor ? 1 : 0);
             return data;
+        }
+
+        static EmissionFilterEffect()
+        {
+            EffectType = new EffectType(
+                24, 0x04000400, 4, 1, 4, "発光",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 2000, 1000),
+                    new TrackbarDefinition("拡散", 1, 10, 2000, 250),
+                    new TrackbarDefinition("しきい値", 10, 0, 2000, 800),
+                    new TrackbarDefinition("拡散速度", 1, 0, 60, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("光色の設定", false, 0),
+                }
+            );
         }
     }
 }

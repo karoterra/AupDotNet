@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class AudioFadeEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.AudioFade;
+        public static EffectType EffectType { get; }
 
         /// <summary>イン</summary>
         public Trackbar In => Trackbars[0];
@@ -14,13 +14,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Out => Trackbars[1];
 
         public AudioFadeEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public AudioFadeEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static AudioFadeEffect()
+        {
+            EffectType = new EffectType(
+                89, 0x04200020, 2, 0, 0, "音量フェード",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("イン", 100, 0, 1000, 50),
+                    new TrackbarDefinition("アウト", 100, 0, 1000, 50),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

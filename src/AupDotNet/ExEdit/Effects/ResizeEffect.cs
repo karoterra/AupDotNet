@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ResizeEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Resize;
+        public static EffectType EffectType { get; }
 
         /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[0];
@@ -28,13 +28,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ResizeEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ResizeEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ResizeEffect()
+        {
+            EffectType = new EffectType(
+                56, 0x04008020, 3, 2, 0, "リサイズ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("拡大率", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("X", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("Y", 100, 0, 500000, 10000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("補間なし", true, 0),
+                    new CheckboxDefinition("ドット数でサイズ指定", true, 0),
+                }
+            );
         }
     }
 }

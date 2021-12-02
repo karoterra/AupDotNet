@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class PolarTransformEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.PolarTransform;
+        public static EffectType EffectType { get; }
 
         /// <summary>中心幅</summary>
         public Trackbar Margin => Trackbars[0];
@@ -20,13 +20,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Spiral => Trackbars[3];
 
         public PolarTransformEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public PolarTransformEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static PolarTransformEffect()
+        {
+            EffectType = new EffectType(
+                68, 0x04000020, 4, 0, 0, "極座標変換",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("中心幅", 1, 0, 2000, 0),
+                    new TrackbarDefinition("拡大率", 10, 1000, 8000, 1000),
+                    new TrackbarDefinition("回転", 10, -36000, 36000, 0),
+                    new TrackbarDefinition("渦巻", 100, -800, 800, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

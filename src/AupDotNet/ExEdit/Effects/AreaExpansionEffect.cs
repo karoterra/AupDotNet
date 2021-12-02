@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class AreaExpansionEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.AreaExpansion;
+        public static EffectType EffectType { get; }
 
         public Trackbar Top => Trackbars[0];
         public Trackbar Bottom => Trackbars[1];
@@ -20,13 +20,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public AreaExpansionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public AreaExpansionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static AreaExpansionEffect()
+        {
+            EffectType = new EffectType(
+                55, 0x04008020, 4, 1, 0, "領域拡張",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("上", 1, 0, 4000, 0),
+                    new TrackbarDefinition("下", 1, 0, 4000, 0),
+                    new TrackbarDefinition("左", 1, 0, 4000, 0),
+                    new TrackbarDefinition("右", 1, 0, 4000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("塗りつぶし", true, 0),
+                }
+            );
         }
     }
 }

@@ -131,7 +131,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 extCursor.ToBytes().CopyTo(data.Slice(0x54 + i * 12 + 8));
                 data[0xE4 + i] = (byte)Effects[i].Flag;
 
-                for (int j = 0; j < Effects[i].Trackbars.Count; j++)
+                for (int j = 0; j < Effects[i].Trackbars.Length; j++)
                 {
                     var trackbar = Effects[i].Trackbars[j];
                     var index = trackbarCount + j;
@@ -154,7 +154,7 @@ namespace Karoterra.AupDotNet.ExEdit
                     extCursor += extData.Length;
                 }
 
-                trackbarCount += Effects[i].Trackbars.Count;
+                trackbarCount += (int)Effects[i].Type.TrackbarNum;
                 checkboxCount += (int)Effects[i].Type.CheckboxNum;
             }
             ((ushort)trackbarCount).ToBytes().CopyTo(data.Slice(0xF0));

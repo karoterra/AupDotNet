@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class InversionEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Inversion;
+        public static EffectType EffectType { get; }
 
         /// <summary>上下反転</summary>
         public bool Vertical
@@ -43,13 +43,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public InversionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public InversionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static InversionEffect()
+        {
+            EffectType = new EffectType(
+                60, 0x04008020, 0, 5, 0, "反転",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("上下反転", true, 0),
+                    new CheckboxDefinition("左右反転", true, 0),
+                    new CheckboxDefinition("輝度反転", true, 0),
+                    new CheckboxDefinition("色相反転", true, 0),
+                    new CheckboxDefinition("透明度反転", true, 0),
+                }
+            );
         }
     }
 }

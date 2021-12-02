@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RasterFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.RasterFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>横幅</summary>
         public Trackbar Width => Trackbars[0];
@@ -31,13 +31,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public RasterFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public RasterFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static RasterFilterEffect()
+        {
+            EffectType = new EffectType(
+                64, 0x04000000, 3, 2, 0, "ラスター",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("横幅", 1, 0, 2000, 100),
+                    new TrackbarDefinition("高さ", 1, 0, 2000, 100),
+                    new TrackbarDefinition("周期", 100, -4000, 4000, 100),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("縦ラスター", true, 0),
+                    new CheckboxDefinition("ランダム振幅", true, 0),
+                }
+            );
         }
     }
 }

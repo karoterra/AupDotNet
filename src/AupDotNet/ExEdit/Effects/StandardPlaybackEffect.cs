@@ -7,19 +7,32 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class StandardPlaybackEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.StandardPlayback;
+        public static EffectType EffectType { get; }
 
         public Trackbar Volume => Trackbars[0];
         public Trackbar Pan => Trackbars[1];
 
         public StandardPlaybackEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public StandardPlaybackEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static StandardPlaybackEffect()
+        {
+            EffectType = new EffectType(
+                12, 0x04200090, 2, 0, 0, "標準再生",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("音量", 10, 0, 5000, 1000),
+                    new TrackbarDefinition("左右", 10, -1000, 1000, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

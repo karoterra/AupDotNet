@@ -5,16 +5,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class OffScreenEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.OffScreen;
+        public static EffectType EffectType { get; }
 
         public OffScreenEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public OffScreenEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static OffScreenEffect()
+        {
+            EffectType = new EffectType(
+                86, 0x04000020, 0, 0, 0, "オフスクリーン描画",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ChromaKeyEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.ChromaKey;
+        public static EffectType EffectType { get; }
 
         /// <summary>色相範囲</summary>
         public Trackbar HueRange => Trackbars[0];
@@ -42,17 +42,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public short Field0x6 { get; set; }
 
         public ChromaKeyEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -77,6 +77,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x6.ToBytes().CopyTo(data, 6);
             Status.ToBytes().CopyTo(data, 8);
             return data;
+        }
+
+        static ChromaKeyEffect()
+        {
+            EffectType = new EffectType(
+                30, 0x04000420, 3, 3, 12, "クロマキー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("色相範囲", 1, 0, 256, 24),
+                    new TrackbarDefinition("彩度範囲", 1, 0, 256, 96),
+                    new TrackbarDefinition("境界補正", 1, 0, 5, 1),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("色彩補正", true, 0),
+                    new CheckboxDefinition("透過補正", true, 0),
+                    new CheckboxDefinition("キー色の取得", false, 0),
+                }
+            );
         }
     }
 }

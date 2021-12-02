@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class WipeEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
-        private const int Id = (int)EffectTypeId.Wipe;
+        public static EffectType EffectType { get; }
 
         /// <summary>イン</summary>
         public Trackbar In => Trackbars[0];
@@ -64,17 +64,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public WipeEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public WipeEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public WipeEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -97,6 +97,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             WipeType.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static WipeEffect()
+        {
+            EffectType = new EffectType(
+                40, 0x04000420, 3, 3, 260, "ワイプ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("イン", 100, 0, 1000, 50),
+                    new TrackbarDefinition("アウト", 100, 0, 1000, 50),
+                    new TrackbarDefinition("ぼかし", 1, 0, 100, 2),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("反転(イン)", true, 0),
+                    new CheckboxDefinition("反転(アウト)", true, 0),
+                    new CheckboxDefinition("ワイプ(円)", false, 0),
+                }
+            );
         }
     }
 }

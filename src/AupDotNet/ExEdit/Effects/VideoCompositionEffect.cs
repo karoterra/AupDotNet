@@ -6,7 +6,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class VideoCompositionEffect : Effect
     {
         public readonly int MaxFilenameLength = 260;
-        private const int Id = (int)EffectTypeId.VideoComposition;
+        public static EffectType EffectType { get; }
 
         /// <summary>再生範囲,オフセット</summary>
         public Trackbar Position => Trackbars[0];
@@ -71,17 +71,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Mode { get; set; }
 
         public VideoCompositionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -106,6 +106,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x104.CopyTo(data, 0x104);
             Mode.ToBytes().CopyTo(data, 0x118);
             return data;
+        }
+
+        static VideoCompositionEffect()
+        {
+            EffectType = new EffectType(
+                82, 0x04000420, 5, 5, 284, "動画ファイル合成",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("再生位置", 1, 1, 1, 1),
+                    new TrackbarDefinition("再生速度", 10, -20000, 20000, 1000),
+                    new TrackbarDefinition("X", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("Y", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("拡大率", 10, 0, 8000, 1000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("ループ再生", true, 0),
+                    new CheckboxDefinition("動画ファイルの同期", true, 0),
+                    new CheckboxDefinition("ループ画像", true, 0),
+                    new CheckboxDefinition("参照ファイル", false, 0),
+                    new CheckboxDefinition("色情報を上書き", false, 0),
+                }
+            );
         }
     }
 }

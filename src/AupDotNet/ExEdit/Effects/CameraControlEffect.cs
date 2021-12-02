@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraControlEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.CameraControl;
+        public static EffectType EffectType { get; }
 
         /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
@@ -53,17 +53,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public byte[] Data { get; } = new byte[16];
 
         public CameraControlEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public CameraControlEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public CameraControlEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -86,6 +86,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Range.ToBytes().CopyTo(data, 0);
             Data.CopyTo(data, 4);
             return data;
+        }
+
+        static CameraControlEffect()
+        {
+            EffectType = new EffectType(
+                95, 0x45800400, 10, 1, 20, "カメラ制御",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Z", 10, -999999, 999999, -10240),
+                    new TrackbarDefinition("目標X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("目標Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("目標Z", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("目標ﾚｲﾔ", 1, 0, 100, 0),
+                    new TrackbarDefinition("傾き", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("深度ぼけ", 10, 0, 100, 0),
+                    new TrackbarDefinition("視野角", 100, 0, 12000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("Zバッファ/シャドウマップを有効にする", true, 1),
+                }
+            );
         }
     }
 }

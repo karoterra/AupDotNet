@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class TimeControlEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.TimeControl;
+        public static EffectType EffectType { get; }
 
         /// <summary>位置</summary>
         public Trackbar Position => Trackbars[0];
@@ -32,17 +32,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public byte[] Data { get; } = new byte[16];
 
         public TimeControlEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public TimeControlEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public TimeControlEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -65,6 +65,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Range.ToBytes().CopyTo(data, 0);
             Data.CopyTo(data, 4);
             return data;
+        }
+
+        static TimeControlEffect()
+        {
+            EffectType = new EffectType(
+                93, 0x05000400, 3, 1, 20, "時間制御",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("位置", 100, 0, 10000, 0),
+                    new TrackbarDefinition("繰り返し", 1, 1, 100, 1),
+                    new TrackbarDefinition("コマ落ち", 1, 1, 100, 1),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("フレーム番号指定", true, 0),
+                }
+            );
         }
     }
 }

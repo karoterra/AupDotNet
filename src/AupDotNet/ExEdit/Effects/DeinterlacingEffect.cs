@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DeinterlacingEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Deinterlacing;
+        public static EffectType EffectType { get; }
 
         /// <summary>
         /// <list type="bullet">
@@ -20,17 +20,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Mode { get; set; }
 
         public DeinterlacingEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public DeinterlacingEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public DeinterlacingEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -51,6 +51,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Mode.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static DeinterlacingEffect()
+        {
+            EffectType = new EffectType(
+                84, 0x04000420, 0, 1, 4, "インターレース解除",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("奇数解除", false, 0),
+                }
+            );
         }
     }
 }

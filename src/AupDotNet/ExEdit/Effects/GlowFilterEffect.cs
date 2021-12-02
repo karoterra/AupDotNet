@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class GlowFilterEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.GlowFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -33,17 +33,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int ShapeType { get; set; }
 
         public GlowFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public GlowFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public GlowFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -68,6 +68,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             data[3] = (byte)(NoColor ? 1 : 0);
             ShapeType.ToBytes().CopyTo(data, 4);
             return data;
+        }
+
+        static GlowFilterEffect()
+        {
+            EffectType = new EffectType(
+                29, 0x04000400, 4, 2, 8, "グロー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 4000, 400),
+                    new TrackbarDefinition("拡散", 1, 0, 200, 30),
+                    new TrackbarDefinition("しきい値", 10, 0, 2000, 400),
+                    new TrackbarDefinition("ぼかし", 1, 0, 50, 1),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("通常", false, 0),
+                    new CheckboxDefinition("光色の設定", false, 0),
+                }
+            );
         }
     }
 }

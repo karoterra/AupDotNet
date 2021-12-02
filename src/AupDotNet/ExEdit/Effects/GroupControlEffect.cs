@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class GroupControlEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.GroupControl;
+        public static EffectType EffectType { get; }
 
         /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
@@ -51,17 +51,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public byte[] Data { get; } = new byte[16];
 
         public GroupControlEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public GroupControlEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public GroupControlEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -84,6 +84,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Range.ToBytes().CopyTo(data, 0);
             Data.CopyTo(data, 4);
             return data;
+        }
+
+        static GroupControlEffect()
+        {
+            EffectType = new EffectType(
+                94, 0x45000420, 7, 2, 20, "グループ制御",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Z", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("拡大率", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("X軸回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Y軸回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Z軸回転", 100, -360000, 360000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("上位グループ制御の影響を受ける", true, 0),
+                    new CheckboxDefinition("同じグループのオブジェクトを対象にする", true, 1),
+                }
+            );
         }
     }
 }

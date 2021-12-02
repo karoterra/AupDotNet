@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RadialBlurFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.RadialBlurFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>範囲</summary>
         public Trackbar Size => Trackbars[0];
@@ -17,13 +17,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Y => Trackbars[2];
 
         public RadialBlurFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public RadialBlurFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static RadialBlurFilterEffect()
+        {
+            EffectType = new EffectType(
+                44, 0x44000000, 3, 0, 0, "放射ブラー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("範囲", 10, 0, 1000, 200),
+                    new TrackbarDefinition("X", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("Y", 1, -2000, 2000, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class SplitEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Split;
+        public static EffectType EffectType { get; }
 
         /// <summary>横分割数</summary>
         public Trackbar Horizontal => Trackbars[0];
@@ -14,13 +14,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Vertical => Trackbars[1];
 
         public SplitEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public SplitEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static SplitEffect()
+        {
+            EffectType = new EffectType(
+                87, 0x04000020, 2, 0, 0, "オブジェクト分割",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("横分割数", 1, 1, 100, 10),
+                    new TrackbarDefinition("縦分割数", 1, 1, 100, 10),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

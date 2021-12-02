@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class GradationEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Gradation;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -53,17 +53,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Shape { get; set; }
 
         public GradationEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public GradationEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public GradationEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -94,6 +94,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             data[11] = (byte)(NoColor2 ? 1 : 0);
             Shape.ToBytes().CopyTo(data, 12);
             return data;
+        }
+
+        static GradationEffect()
+        {
+            EffectType = new EffectType(
+                75, 0x04000420, 5, 4, 16, "グラデーション",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 1000, 1000),
+                    new TrackbarDefinition("中心X", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("中心Y", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("角度", 10, -36000, 36000, 0),
+                    new TrackbarDefinition("幅", 10, 0, 2000, 100),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("通常", false, 0),
+                    new CheckboxDefinition("線", false, 0),
+                    new CheckboxDefinition("開始色", false, 0),
+                    new CheckboxDefinition("終了色", false, 0),
+                }
+            );
         }
     }
 }

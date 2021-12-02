@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class PartialFilterEffect : Effect
     {
         public readonly int MaxNameLength = 256;
-        private const int Id = (int)EffectTypeId.PartialFilter;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -58,17 +58,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public PartialFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public PartialFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public PartialFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -91,6 +91,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             ((int)FigureType).ToBytes().CopyTo(data, 0);
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static PartialFilterEffect()
+        {
+            EffectType = new EffectType(
+                88, 0x44000500, 6, 2, 260, "部分フィルタ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("Y", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("サイズ", 1, 0, 4000, 100),
+                    new TrackbarDefinition("縦横比", 10, -1000, 1000, 0),
+                    new TrackbarDefinition("ぼかし", 1, 0, 1000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("背景", false, 0),
+                    new CheckboxDefinition("マスクの反転", true, 0),
+                }
+            );
         }
     }
 }

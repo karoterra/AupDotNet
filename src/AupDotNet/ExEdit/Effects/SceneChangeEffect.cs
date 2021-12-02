@@ -25,7 +25,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class SceneChangeEffect : ScriptFileEffect
     {
-        private const int Id = (int)EffectTypeId.SceneChange;
+        public static EffectType EffectType { get; }
 
         /// <summary>
         /// 組み込みシーンチェンジ名の一覧。
@@ -49,22 +49,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public SceneChangeEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public SceneChangeEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public SceneChangeEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes, data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
         static SceneChangeEffect()
         {
+            EffectType = new EffectType(
+                14, 0x04000400, 2, 3, 516, "シーンチェンジ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("調整", 100, 0, 0, 0),
+                    new TrackbarDefinition("track1", 100, 0, 0, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("反転", true, 0),
+                    new CheckboxDefinition("check0", true, 0),
+                    new CheckboxDefinition("クロスフェード", false, 0),
+                }
+            );
             Defaults = new List<string>()
             {
                 "クロスフェード",

@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorShiftFilterEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.ColorShiftFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>ずれ幅</summary>
         public Trackbar Shift => Trackbars[0];
@@ -30,17 +30,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int ShiftType { get; set; }
 
         public ColorShiftFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ColorShiftFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ColorShiftFilterEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -61,6 +61,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ShiftType.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static ColorShiftFilterEffect()
+        {
+            EffectType = new EffectType(
+                72, 0x04000400, 3, 1, 4, "色ずれ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("ずれ幅", 1, 0, 2000, 5),
+                    new TrackbarDefinition("角度", 10, -36000, 36000, 0),
+                    new TrackbarDefinition("強さ", 1, 0, 100, 100),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("赤緑", false, 0),
+                }
+            );
         }
     }
 }

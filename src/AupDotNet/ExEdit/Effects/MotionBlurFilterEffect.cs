@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MotionBlurFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.MotionBlurFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>間隔</summary>
         public Trackbar Interval => Trackbars[0];
@@ -21,13 +21,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public MotionBlurFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MotionBlurFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static MotionBlurFilterEffect()
+        {
+            EffectType = new EffectType(
+                50, 0x04000000, 2, 1, 0, "モーションブラー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("間隔", 1, 0, 100, 1),
+                    new TrackbarDefinition("分解能", 1, 1, 25, 10),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("出力時に分解能を上げる", true, 0),
+                }
+            );
         }
     }
 }

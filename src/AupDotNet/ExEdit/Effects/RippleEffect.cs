@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RippleEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Ripple;
+        public static EffectType EffectType { get; }
 
         /// <summary>中心X</summary>
         public Trackbar X => Trackbars[0];
@@ -35,17 +35,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Add { get; set; }
 
         public RippleEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public RippleEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public RippleEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -70,6 +70,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Interval.ToBytes().CopyTo(data, 4);
             Add.ToBytes().CopyTo(data, 8);
             return data;
+        }
+
+        static RippleEffect()
+        {
+            EffectType = new EffectType(
+                65, 0x04000420, 5, 1, 12, "波紋",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("中心X", 1, -4000, 4000, 0),
+                    new TrackbarDefinition("中心Y", 1, -4000, 4000, 0),
+                    new TrackbarDefinition("幅", 10, 10, 4000, 300),
+                    new TrackbarDefinition("高さ", 10, -4000, 4000, 150),
+                    new TrackbarDefinition("速度", 10, -20000, 20000, 1500),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("詳細設定", false, 0),
+                }
+            );
         }
     }
 }

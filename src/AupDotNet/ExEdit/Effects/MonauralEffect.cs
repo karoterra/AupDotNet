@@ -5,19 +5,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MonauralEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Monaural;
+        public static EffectType EffectType { get; }
 
         /// <summary>比率</summary>
         public Trackbar Ratio => Trackbars[0];
 
         public MonauralEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MonauralEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static MonauralEffect()
+        {
+            EffectType = new EffectType(
+                92, 0x04200020, 1, 0, 0, "モノラル化",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("比率", 1, -1000, 1000, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraOptionEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.CameraOption;
+        public static EffectType EffectType { get; }
 
         /// <summary>カメラの方を向く</summary>
         public bool Billboard
@@ -36,13 +36,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public CameraOptionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public CameraOptionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static CameraOptionEffect()
+        {
+            EffectType = new EffectType(
+                85, 0x04000020, 0, 4, 0, "カメラ制御オプション",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("カメラの方を向く", true, 0),
+                    new CheckboxDefinition("カメラの方を向く(縦横方向のみ)", true, 0),
+                    new CheckboxDefinition("カメラの方を向く(横方向のみ)", true, 0),
+                    new CheckboxDefinition("シャドーの対象から外す", true, 0),
+                }
+            );
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraEffect : ScriptFileEffect
     {
-        private const int Id = (int)EffectTypeId.CameraEffect;
+        public static EffectType EffectType { get; }
 
         /// <summary>
         /// exedit.camで定義されているスクリプト。
@@ -16,22 +16,37 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public static readonly IReadOnlyList<string> Defaults;
 
         public CameraEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public CameraEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public CameraEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes, data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
         static CameraEffect()
         {
+            EffectType = new EffectType(
+                97, 0x05000400, 4, 2, 516, "カメラ効果",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("track0", 100, 0, 0, 0),
+                    new TrackbarDefinition("track1", 100, 0, 0, 0),
+                    new TrackbarDefinition("track2", 100, 0, 0, 0),
+                    new TrackbarDefinition("track3", 100, 0, 0, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("手ぶれ", false, 0),
+                    new CheckboxDefinition("check0", true, 0),
+                }
+            );
             Defaults = new string[]
             {
                 "手ぶれ",

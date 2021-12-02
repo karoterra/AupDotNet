@@ -5,20 +5,34 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RotationEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Rotation;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
         public Trackbar Z => Trackbars[2];
 
         public RotationEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public RotationEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static RotationEffect()
+        {
+            EffectType = new EffectType(
+                54, 0x04008020, 3, 0, 0, "回転",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Y", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Z", 100, -360000, 360000, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class NoiseEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Noise;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -47,17 +47,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Field0xC { get; set; }
 
         public NoiseEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public NoiseEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public NoiseEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -84,6 +84,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Seed.ToBytes().CopyTo(data, 8);
             Field0xC.ToBytes().CopyTo(data, 0xC);
             return data;
+        }
+
+        static NoiseEffect()
+        {
+            EffectType = new EffectType(
+                70, 0x04000420, 7, 3, 16, "ノイズ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 2000, 1000),
+                    new TrackbarDefinition("速度X", 10, -4000, 8000, 0),
+                    new TrackbarDefinition("速度Y", 10, -4000, 8000, 0),
+                    new TrackbarDefinition("変化速度", 10, 0, 8000, 0),
+                    new TrackbarDefinition("周期X", 100, 0, 10000, 100),
+                    new TrackbarDefinition("周期Y", 100, 0, 10000, 100),
+                    new TrackbarDefinition("しきい値", 10, 0, 1000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("アルファ値と乗算", false, 0),
+                    new CheckboxDefinition("Type1", false, 0),
+                    new CheckboxDefinition("設定", false, 0),
+                }
+            );
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DiffuseFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.DiffuseFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -14,13 +14,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Diffusion => Trackbars[1];
 
         public DiffuseFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public DiffuseFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static DiffuseFilterEffect()
+        {
+            EffectType = new EffectType(
+                27, 0x04000000, 2, 0, 0, "拡散光",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 1000, 500),
+                    new TrackbarDefinition("拡散", 1, 0, 500, 12),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

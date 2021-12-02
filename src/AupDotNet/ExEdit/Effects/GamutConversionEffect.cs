@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class GamutConversionEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.GamutConversion;
+        public static EffectType EffectType { get; }
 
         /// <summary>色相範囲</summary>
         public Trackbar Hue => Trackbars[0];
@@ -32,17 +32,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public bool Status2 { get; set; }
 
         public GamutConversionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public GamutConversionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public GamutConversionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -69,6 +69,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color2.ToBytes().CopyTo(data, 8);
             Status2.ToBytes(2).CopyTo(data, 14);
             return data;
+        }
+
+        static GamutConversionEffect()
+        {
+            EffectType = new EffectType(
+                78, 0x04000420, 3, 2, 16, "特定色域変換",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("色相範囲", 1, 0, 256, 8),
+                    new TrackbarDefinition("彩度範囲", 1, 0, 256, 8),
+                    new TrackbarDefinition("境界補正", 1, 0, 8, 2),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("変換前の色の取得", false, 0),
+                    new CheckboxDefinition("変換後の色の取得", false, 0),
+                }
+            );
         }
     }
 }

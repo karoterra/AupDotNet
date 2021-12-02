@@ -3,9 +3,12 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 拡張描画
+    /// </summary>
     public class ExtendedDrawEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.ExtendedDraw;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -29,17 +32,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public BlendMode BlendMode { get; set; }
 
         public ExtendedDrawEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ExtendedDrawEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ExtendedDrawEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -60,6 +63,33 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ((int)BlendMode).ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static ExtendedDrawEffect()
+        {
+            EffectType = new EffectType(
+                11, 0x440004D0, 12, 2, 4, "拡張描画",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Z", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("拡大率", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("透明度", 10, 0, 1000, 0),
+                    new TrackbarDefinition("縦横比", 10, -1000, 1000, 0),
+                    new TrackbarDefinition("X軸回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Y軸回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("Z軸回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("中心X", 10, -20000, 20000, 0),
+                    new TrackbarDefinition("中心Y", 10, -20000, 20000, 0),
+                    new TrackbarDefinition("中心Z", 10, -20000, 20000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("通常", false, 0),
+                    new CheckboxDefinition("裏面を表示しない", true, 0),
+                }
+            );
         }
     }
 }

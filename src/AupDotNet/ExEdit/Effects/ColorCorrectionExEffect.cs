@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorCorrectionExEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.ColorCorrectionEx;
+        public static EffectType EffectType { get; }
 
         /// <summary>Y(offs)</summary>
         public Trackbar OffsetY => Trackbars[0];
@@ -74,13 +74,44 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ColorCorrectionExEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ColorCorrectionExEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ColorCorrectionExEffect()
+        {
+            EffectType = new EffectType(
+                106, 0x02001000, 15, 3, 0, "拡張色調補正",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("Y(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("Y(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("Cb(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("Cb(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("Cr(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("Cr(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("R(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("R(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("R(gamm)", 1, -256, 256, 0),
+                    new TrackbarDefinition("G(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("G(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("G(gamm)", 1, -256, 256, 0),
+                    new TrackbarDefinition("B(offs)", 1, -256, 256, 0),
+                    new TrackbarDefinition("B(gain)", 1, -256, 256, 0),
+                    new TrackbarDefinition("B(gamm)", 1, -256, 256, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("RGBの同期", true, 0),
+                    new CheckboxDefinition("TV -> PC スケール補正", true, 0),
+                    new CheckboxDefinition("PC -> TV スケール補正", true, 0),
+                }
+            );
         }
     }
 }

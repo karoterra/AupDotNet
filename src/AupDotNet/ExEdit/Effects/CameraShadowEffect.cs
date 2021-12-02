@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraShadowEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.CameraShadow;
+        public static EffectType EffectType { get; }
 
         /// <summary>光源X</summary>
         public Trackbar X => Trackbars[0];
@@ -23,13 +23,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Precision => Trackbars[4];
 
         public CameraShadowEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public CameraShadowEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static CameraShadowEffect()
+        {
+            EffectType = new EffectType(
+                98, 0x45000000, 5, 0, 0, "シャドー(カメラ制御)",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("光源X", 10, -200000, 200000, 10000),
+                    new TrackbarDefinition("光源Y", 10, -200000, 200000, -20000),
+                    new TrackbarDefinition("光源Z", 10, -200000, 200000, -20000),
+                    new TrackbarDefinition("濃さ", 10, 0, 1000, 400),
+                    new TrackbarDefinition("精度", 1, 20, 100, 50),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

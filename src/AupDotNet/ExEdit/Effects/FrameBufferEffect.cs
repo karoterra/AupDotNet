@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class FrameBufferEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.FrameBuffer;
+        public static EffectType EffectType { get; }
 
         /// <summary>フレームバッファをクリア</summary>
         public bool ClearBuffer
@@ -15,13 +15,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public FrameBufferEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public FrameBufferEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static FrameBufferEffect()
+        {
+            EffectType = new EffectType(
+                5, 0x04000008, 0, 1, 0, "フレームバッファ",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("フレームバッファをクリア", true, 0),
+                }
+            );
         }
     }
 }

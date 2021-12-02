@@ -3,10 +3,13 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 画像ファイル
+    /// </summary>
     public class ImageFileEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
-        private const int Id = (int)EffectTypeId.ImageFile;
+        public static EffectType EffectType { get; }
 
         public int Field0x0 { get; set; }
 
@@ -25,17 +28,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ImageFileEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ImageFileEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ImageFileEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -58,6 +61,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x0.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static ImageFileEffect()
+        {
+            EffectType = new EffectType(
+                1, 0x04000408, 0, 1, 260, "画像ファイル",
+                new TrackbarDefinition[] {},
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("参照ファイル", false, 0),
+                }
+            );
         }
     }
 }

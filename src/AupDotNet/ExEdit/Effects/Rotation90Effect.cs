@@ -5,19 +5,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class Rotation90Effect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Rotation90;
+        public static EffectType EffectType { get; }
 
         /// <summary>90度回転</summary>
         public Trackbar Rotation => Trackbars[0];
 
         public Rotation90Effect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public Rotation90Effect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static Rotation90Effect()
+        {
+            EffectType = new EffectType(
+                57, 0x04008020, 1, 0, 0, "ローテーション",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("90度回転", 1, -4, 4, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

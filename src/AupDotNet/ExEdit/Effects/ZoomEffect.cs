@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ZoomEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Zoom;
+        public static EffectType EffectType { get; }
 
         /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[0];
@@ -14,13 +14,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Y => Trackbars[2];
 
         public ZoomEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ZoomEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ZoomEffect()
+        {
+            EffectType = new EffectType(
+                52, 0x04008020, 3, 0, 0, "拡大率",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("拡大率", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("X", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("Y", 100, 0, 500000, 10000),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

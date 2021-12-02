@@ -3,10 +3,13 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 音声ファイル
+    /// </summary>
     public class AudioFileEffect : Effect
     {
         public readonly int MaxFilenameLength = 260;
-        private const int Id = (int)EffectTypeId.AudioFile;
+        public static EffectType EffectType { get; }
 
         public Trackbar Position => Trackbars[0];
         public Trackbar Speed => Trackbars[1];
@@ -40,17 +43,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public byte[] Data { get; } = new byte[20];
 
         public AudioFileEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public AudioFileEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public AudioFileEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -73,6 +76,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 0);
             Data.CopyTo(data, MaxFilenameLength);
             return data;
+        }
+
+        static AudioFileEffect()
+        {
+            EffectType = new EffectType(
+                2, 0x04200408, 2, 3, 280, "音声ファイル",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("再生位置", 100, 0, 0, 0),
+                    new TrackbarDefinition("再生速度", 10, 100, 8000, 1000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("ループ再生", true, 0),
+                    new CheckboxDefinition("動画ファイルと連携", true, 1),
+                    new CheckboxDefinition("参照ファイル", false, 0),
+                }
+            );
         }
     }
 }

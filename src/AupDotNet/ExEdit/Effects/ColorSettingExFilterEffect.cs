@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorSettingExFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.ColorSettingExFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>R, H</summary>
         public Trackbar R => Trackbars[0];
@@ -24,13 +24,32 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ColorSettingExFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ColorSettingExFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ColorSettingExFilterEffect()
+        {
+            EffectType = new EffectType(
+                77, 0x04000200, 3, 3, 0, "拡張色設定",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("R", 0, 0, 255, 0),  // HSVの時はmax=360
+                    new TrackbarDefinition("G", 0, 0, 255, 0),  // HSVの時はmax=100
+                    new TrackbarDefinition("B", 0, 0, 255, 0),  // HSVの時はmax=100
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("RGB⇔HSV", true, 0),
+                    new CheckboxDefinition("開始色", false, 0),
+                    new CheckboxDefinition("終了色", false, 0),
+                }
+            );
         }
     }
 }

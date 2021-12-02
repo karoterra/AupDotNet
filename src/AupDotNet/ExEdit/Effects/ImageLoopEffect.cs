@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ImageLoopEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.ImageLoop;
+        public static EffectType EffectType { get; }
 
         /// <summary>横回数</summary>
         public Trackbar NumX => Trackbars[0];
@@ -27,13 +27,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ImageLoopEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ImageLoopEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ImageLoopEffect()
+        {
+            EffectType = new EffectType(
+                66, 0x04000020, 4, 1, 0, "画像ループ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("横回数", 1, 1, 400, 1),
+                    new TrackbarDefinition("縦回数", 1, 1, 400, 1),
+                    new TrackbarDefinition("速度X", 10, -10000, 10000, 0),
+                    new TrackbarDefinition("速度Y", 10, -10000, 10000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("個別オブジェクト", true, 0),
+                }
+            );
         }
     }
 }

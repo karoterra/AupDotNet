@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class EdgeExtractionEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.EdgeExtraction;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -35,17 +35,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Color Color { get; set; }
 
         public EdgeExtractionEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public EdgeExtractionEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public EdgeExtractionEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -66,6 +66,24 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Color.ToBytes(true).CopyTo(data, 0);
             return data;
+        }
+
+        static EdgeExtractionEffect()
+        {
+            EffectType = new EffectType(
+                37, 0x04000420, 2, 3, 4, "エッジ抽出",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 10000, 1000),
+                    new TrackbarDefinition("しきい値", 100, -10000, 10000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("輝度エッジを抽出", true, 1),
+                    new CheckboxDefinition("透明度エッジを抽出", true, 0),
+                    new CheckboxDefinition("色の設定", false, 0),
+                }
+            );
         }
     }
 }

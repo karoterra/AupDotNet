@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class BlurFilter2Effect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.BlurFilter2;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -20,13 +20,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Upper => Trackbars[3];
 
         public BlurFilter2Effect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public BlurFilter2Effect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static BlurFilter2Effect()
+        {
+            EffectType = new EffectType(
+                102, 0x02000000, 4, 0, 0, "ぼかしフィルタ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 1, 0, 256, 256),
+                    new TrackbarDefinition("範囲", 1, 0, 3, 2),
+                    new TrackbarDefinition("下限値", 1, 0, 1024, 0),
+                    new TrackbarDefinition("上限値", 1, 0, 1024, 1024),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

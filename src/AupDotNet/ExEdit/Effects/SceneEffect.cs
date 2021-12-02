@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class SceneEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Scene;
+        public static EffectType EffectType { get; }
 
         /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[0];
@@ -27,17 +27,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Scene { get; set; }
 
         public SceneEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public SceneEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public SceneEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -57,6 +57,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Scene.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static SceneEffect()
+        {
+            EffectType = new EffectType(
+                7, 0x04000408, 2, 2, 4, "シーン",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("再生位置", 1, 1, 1, 1),
+                    new TrackbarDefinition("再生速度", 10, -20000, 20000, 1000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("ループ再生", true, 0),
+                    new CheckboxDefinition("シーン選択", false, 0),
+                }
+            );
         }
     }
 }

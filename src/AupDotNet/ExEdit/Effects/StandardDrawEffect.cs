@@ -3,9 +3,12 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 標準描画
+    /// </summary>
     public class StandardDrawEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.StandardDraw;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -17,17 +20,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public BlendMode BlendMode { get; set; }
 
         public StandardDrawEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public StandardDrawEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public StandardDrawEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -48,6 +51,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ((int)BlendMode).ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static StandardDrawEffect()
+        {
+            EffectType = new EffectType(
+                10, 0x440004D0, 6, 1, 4, "標準描画",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Z", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("拡大率", 100, 0, 500000, 10000),
+                    new TrackbarDefinition("透明度", 10, 0, 1000, 0),
+                    new TrackbarDefinition("回転", 100, -360000, 360000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("通常", false, 0),
+                }
+            );
         }
     }
 }

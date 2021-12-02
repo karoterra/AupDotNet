@@ -6,7 +6,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class MaskEffect : Effect
     {
         public readonly int MaxNameLength = 256;
-        private const int Id = (int)EffectTypeId.Mask;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -86,17 +86,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Mode { get; set; }
 
         public MaskEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MaskEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public MaskEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -121,6 +121,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             Mode.ToBytes().CopyTo(data, 0x104);
             return data;
+        }
+
+        static MaskEffect()
+        {
+            EffectType = new EffectType(
+                41, 0x04000620, 6, 3, 264, "マスク",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("Y", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("サイズ", 1, 0, 4000, 100),
+                    new TrackbarDefinition("縦横比", 10, -1000, 1000, 0),
+                    new TrackbarDefinition("ぼかし", 1, 0, 1000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("背景", false, 0),
+                    new CheckboxDefinition("マスクの反転", true, 0),
+                    new CheckboxDefinition("元のサイズに合わせる", true, 0),
+                }
+            );
         }
     }
 }

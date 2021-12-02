@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class CameraScriptEffect : Effect
     {
         public readonly int MaxTextLength = 2048;
-        private const int Id = (int)EffectTypeId.CameraScript;
+        public static EffectType EffectType { get; }
 
         private string _text = "";
         public string Text
@@ -26,16 +26,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public CameraScriptEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public CameraScriptEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
         public CameraScriptEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-           : base(EffectType.Defaults[Id], trackbars, checkboxes)
+           : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -56,6 +56,15 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Text.ToUTF16Bytes(MaxTextLength).CopyTo(data, 0);
             return data;
+        }
+
+        static CameraScriptEffect()
+        {
+            EffectType = new EffectType(
+                99, 0x05000400, 0, 0, 2048, "スクリプト(カメラ制御)",
+                new TrackbarDefinition[] { },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

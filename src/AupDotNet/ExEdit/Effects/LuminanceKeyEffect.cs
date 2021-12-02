@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LuminanceKeyEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.LuminanceKey;
+        public static EffectType EffectType { get; }
 
         /// <summary>基準輝度</summary>
         public Trackbar Reference => Trackbars[0];
@@ -28,17 +28,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int TransparentType { get; set; }
 
         public LuminanceKeyEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public LuminanceKeyEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public LuminanceKeyEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -59,6 +59,22 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             TransparentType.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static LuminanceKeyEffect()
+        {
+            EffectType = new EffectType(
+                32, 0x04000420, 2, 1, 4, "ルミナンスキー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("基準輝度", 1, 0, 8192, 2048),
+                    new TrackbarDefinition("ぼかし", 1, 0, 4096, 512),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("暗い部分を透過", false, 0),
+                }
+            );
         }
     }
 }

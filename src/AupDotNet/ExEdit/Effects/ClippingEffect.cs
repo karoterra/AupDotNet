@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ClippingEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Clipping;
+        public static EffectType EffectType { get; }
 
         public Trackbar Top => Trackbars[0];
         public Trackbar Bottom => Trackbars[1];
@@ -20,13 +20,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ClippingEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ClippingEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static ClippingEffect()
+        {
+            EffectType = new EffectType(
+                17, 0x04000020, 4, 1, 0, "クリッピング",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("上", 1, 0, 4000, 0),
+                    new TrackbarDefinition("下", 1, 0, 4000, 0),
+                    new TrackbarDefinition("左", 1, 0, 4000, 0),
+                    new TrackbarDefinition("右", 1, 0, 4000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("中心の位置を変更", true, 0),
+                }
+            );
         }
     }
 }

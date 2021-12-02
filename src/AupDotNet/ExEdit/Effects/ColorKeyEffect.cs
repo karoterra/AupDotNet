@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorKeyEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.ColorKey;
+        public static EffectType EffectType { get; }
 
         /// <summary>輝度範囲</summary>
         public Trackbar LuminanceRange => Trackbars[0];
@@ -28,17 +28,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public short Field0x6 { get; set; }
 
         public ColorKeyEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ColorKeyEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ColorKeyEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -63,6 +63,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x6.ToBytes().CopyTo(data, 6);
             Status.ToBytes().CopyTo(data, 8);
             return data;
+        }
+
+        static ColorKeyEffect()
+        {
+            EffectType = new EffectType(
+                31, 0x04000420, 3, 1, 12, "カラーキー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("輝度範囲", 1, 0, 4096, 0),
+                    new TrackbarDefinition("色差範囲", 1, 0, 4096, 0),
+                    new TrackbarDefinition("境界補正", 1, 0, 5, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("キー色の取得", false, 0),
+                }
+            );
         }
     }
 }

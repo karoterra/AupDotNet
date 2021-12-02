@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class DisplacementEffect : Effect
     {
         public readonly int MaxNameLength = 256;
-        private const int Id = (int)EffectTypeId.Displacement;
+        public static EffectType EffectType { get; }
 
         /// <summary>変形X,拡大変形,回転変形</summary>
         public Trackbar Param0 => Trackbars[0];
@@ -102,17 +102,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public DisplacementCalc Calc { get; set; }
 
         public DisplacementEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -139,6 +139,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mode.ToBytes().CopyTo(data, 0x104);
             ((int)Calc).ToBytes().CopyTo(data, 0x108);
             return data;
+        }
+
+        static DisplacementEffect()
+        {
+            EffectType = new EffectType(
+                69, 0x04000620, 8, 3, 268, "ディスプレイスメントマップ",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("param0", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("param0", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("X", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("Y", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("回転", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("サイズ", 1, 0, 4000, 200),
+                    new TrackbarDefinition("縦横比", 10, -1000, 1000, 0),
+                    new TrackbarDefinition("ぼかし", 1, 0, 1000, 5),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("背景", false, 0),
+                    new CheckboxDefinition("移動変形", false, 0),
+                    new CheckboxDefinition("元のサイズに合わせる", true, 0),
+                }
+            );
         }
     }
 }

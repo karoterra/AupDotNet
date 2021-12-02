@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class VibrationEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.Vibration;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -29,13 +29,32 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public VibrationEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public VibrationEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static VibrationEffect()
+        {
+            EffectType = new EffectType(
+                58, 0x04000020, 4, 2, 0, "振動",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 1, -500, 500, 10),
+                    new TrackbarDefinition("Y", 1, -500, 500, 10),
+                    new TrackbarDefinition("Z", 1, -500, 500, 0),
+                    new TrackbarDefinition("周期", 1, 1, 100, 1),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("ランダムに強さを変える", true, 1),
+                    new CheckboxDefinition("複雑に振動", true, 0),
+                }
+            );
         }
     }
 }

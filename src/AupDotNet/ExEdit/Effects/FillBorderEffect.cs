@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class FillBorderEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.FillBorder;
+        public static EffectType EffectType { get; }
 
         public Trackbar Top => Trackbars[0];
         public Trackbar Bottom => Trackbars[1];
@@ -27,13 +27,32 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public FillBorderEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public FillBorderEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static FillBorderEffect()
+        {
+            EffectType = new EffectType(
+                104, 0x02000000, 4, 2, 0, "縁塗りつぶし",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("上", 1, -1024, 1024, 0),
+                    new TrackbarDefinition("下", 1, -1024, 1024, 0),
+                    new TrackbarDefinition("左", 1, -1024, 1024, 0),
+                    new TrackbarDefinition("右", 1, -1024, 1024, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("中央に配置", true, 0),
+                    new CheckboxDefinition("縁の色で塗る", true, 0),
+                }
+            );
         }
     }
 }

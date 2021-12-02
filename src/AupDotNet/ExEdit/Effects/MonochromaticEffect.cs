@@ -9,7 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MonochromaticEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Monochromatic;
+        public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
@@ -25,17 +25,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Color Color { get; set; }
 
         public MonochromaticEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MonochromaticEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public MonochromaticEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -56,6 +56,22 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Color.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static MonochromaticEffect()
+        {
+            EffectType = new EffectType(
+                73, 0x04000420, 1, 2, 4, "単色化",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("強さ", 10, 0, 1000, 1000),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("色の設定", false, 0),
+                    new CheckboxDefinition("輝度を保持する", true, 1),
+                }
+            );
         }
     }
 }

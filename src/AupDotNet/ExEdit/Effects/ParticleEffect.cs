@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ParticleEffect : Effect
     {
-        private const int Id = (int)EffectTypeId.Particle;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -84,17 +84,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public BlendMode BlendMode { get; set; }
 
         public ParticleEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ParticleEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ParticleEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -115,6 +115,40 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             ((int)BlendMode).ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        static ParticleEffect()
+        {
+            EffectType = new EffectType(
+                13, 0x44000450, 16, 5, 4, "パーティクル出力",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Y", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("Z", 10, -999999, 999999, 0),
+                    new TrackbarDefinition("出力頻度", 10, 0, 5000, 200),
+                    new TrackbarDefinition("出力速度", 10, 0, 200000, 4000),
+                    new TrackbarDefinition("加速度", 10, -200000, 200000, 0),
+                    new TrackbarDefinition("出力方向", 10, -36000, 36000, 0),
+                    new TrackbarDefinition("拡散角度", 10, 0, 3600, 300),
+                    new TrackbarDefinition("透過率", 10, 0, 1000, 0),
+                    new TrackbarDefinition("透過速度", 10, -2000, 2000, 0),
+                    new TrackbarDefinition("拡大率", 100, 0, 80000, 10000),
+                    new TrackbarDefinition("拡大速度", 100, -80000, 80000, 0),
+                    new TrackbarDefinition("回転角", 100, -360000, 360000, 0),
+                    new TrackbarDefinition("回転速度", 100, -1000, 1000, 0),
+                    new TrackbarDefinition("重力", 10, -20000, 20000, 0),
+                    new TrackbarDefinition("生存時間", 10, 0, 6000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("出力方向の基準を移動方向にする", true, 0),
+                    new CheckboxDefinition("移動範囲の座標からランダムに出力", true, 0),
+                    new CheckboxDefinition("3Dランダム回転", true, 0),
+                    new CheckboxDefinition("通常", false, 0),
+                    new CheckboxDefinition("終了点で全て消えるように調節する", true, 1),
+                }
+            );
         }
     }
 }

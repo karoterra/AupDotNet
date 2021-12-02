@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MosaicFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.MosaicFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
@@ -18,13 +18,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public MosaicFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MosaicFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static MosaicFilterEffect()
+        {
+            EffectType = new EffectType(
+                22, 0x04000000, 1, 1, 0, "モザイク",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("サイズ", 1, 1, 2000, 12),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("タイル風", true, 0),
+                }
+            );
         }
     }
 }

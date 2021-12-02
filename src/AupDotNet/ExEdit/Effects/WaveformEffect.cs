@@ -10,7 +10,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class WaveformEffect : Effect
     {
         public readonly int MaxFilenameLength = 260;
-        private const int Id = (int)EffectTypeId.Waveform;
+        public static EffectType EffectType { get; }
 
         /// <summary>横幅</summary>
         public Trackbar Width => Trackbars[0];
@@ -75,17 +75,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public bool Mirror { get; set; }
 
         public WaveformEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public WaveformEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public WaveformEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -126,6 +126,28 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             SampleN.ToBytes().CopyTo(data, 0x128);
             data[0x12C] = Mirror ? (byte)1 : (byte)0;
             return data;
+        }
+
+        static WaveformEffect()
+        {
+            EffectType = new EffectType(
+                6, 0x04000408, 4, 5, 304, "音声波形表示",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("横幅", 1, 0, 2000, 640),
+                    new TrackbarDefinition("高さ", 1, 0, 2000, 240),
+                    new TrackbarDefinition("音量", 10, 0, 5000, 1000),
+                    new TrackbarDefinition("再生位置", 100, 0, 0, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("Type1", false, 0),
+                    new CheckboxDefinition("波形の色", false, 0),
+                    new CheckboxDefinition("参照ファイル", false, 0),
+                    new CheckboxDefinition("編集全体の音声を基にする", true, 1),
+                    new CheckboxDefinition("設定", false, 0),
+                }
+            );
         }
     }
 }

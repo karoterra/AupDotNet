@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DiagonalClippingEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.DiagonalClipping;
+        public static EffectType EffectType { get; }
 
         /// <summary>中心X</summary>
         public Trackbar X => Trackbars[0];
@@ -23,13 +23,29 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar Width => Trackbars[4];
 
         public DiagonalClippingEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public DiagonalClippingEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static DiagonalClippingEffect()
+        {
+            EffectType = new EffectType(
+                42, 0x04000020, 5, 0, 0, "斜めクリッピング",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("中心X", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("中心Y", 1, -2000, 2000, 0),
+                    new TrackbarDefinition("角度", 10, -36000, 36000, 0),
+                    new TrackbarDefinition("ぼかし", 1, 0, 2000, 1),
+                    new TrackbarDefinition("幅", 1, -2000, 2000, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

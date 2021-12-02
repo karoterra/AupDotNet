@@ -10,7 +10,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class BorderEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
-        private const int Id = (int)EffectTypeId.Border;
+        public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
@@ -37,17 +37,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public BorderEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public BorderEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public BorderEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -70,6 +70,23 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes(true).CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static BorderEffect()
+        {
+            EffectType = new EffectType(
+                35, 0x44000420, 2, 2, 260, "縁取り",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("サイズ", 1, 0, 500, 3),
+                    new TrackbarDefinition("ぼかし", 1, 0, 100, 10),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("縁色の設定", false, 0),
+                    new CheckboxDefinition("パターン画像ファイル", false, 0),
+                }
+            );
         }
     }
 }

@@ -5,19 +5,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class VolumeFilterEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.VolumeFilter;
+        public static EffectType EffectType { get; }
 
         /// <summary>レベル</summary>
         public Trackbar Level => Trackbars[0];
 
         public VolumeFilterEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public VolumeFilterEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static VolumeFilterEffect()
+        {
+            EffectType = new EffectType(
+                107, 0x02200000, 1, 0, 0, "音量の調整",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("レベル", 1, -256, 256, 0),
+                },
+                new CheckboxDefinition[] { }
+            );
         }
     }
 }

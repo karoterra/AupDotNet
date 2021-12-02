@@ -5,7 +5,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MotionBlurEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.MotionBlur;
+        public static EffectType EffectType { get; }
 
         /// <summary>間隔</summary>
         public Trackbar Interval => Trackbars[0];
@@ -35,13 +35,31 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public MotionBlurEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public MotionBlurEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static MotionBlurEffect()
+        {
+            EffectType = new EffectType(
+                49, 0x04000020, 2, 3, 0, "モーションブラー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("間隔", 1, 0, 100, 1),
+                    new TrackbarDefinition("分解能", 1, 1, 25, 10),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("残像", true, 0),
+                    new CheckboxDefinition("オフスクリーン描画", true, 1),
+                    new CheckboxDefinition("出力時に分解能を上げる", true, 0),
+                }
+            );
         }
     }
 }

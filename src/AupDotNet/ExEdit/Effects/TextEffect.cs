@@ -11,7 +11,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     {
         public readonly int MaxFontLength = 32;
         public readonly int MaxTextLength = 2048;
-        private const int Id = (int)EffectTypeId.Text;
+        public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
@@ -99,7 +99,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             get => _text;
             set
             {
-                if(value.GetUTF16ByteCount() >= MaxTextLength)
+                if (value.GetUTF16ByteCount() >= MaxTextLength)
                 {
                     throw new MaxByteCountOfStringException(nameof(Text), MaxTextLength);
                 }
@@ -108,17 +108,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public TextEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public TextEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public TextEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -161,6 +161,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Font.ToSjisBytes(MaxFontLength).CopyTo(data, 0x10);
             Text.ToUTF16Bytes(MaxTextLength).CopyTo(data, 0x30);
             return data;
+        }
+
+        static TextEffect()
+        {
+            EffectType = new EffectType(
+                3, 0x04000408, 2, 5, 2096, "テキスト",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("サイズ", 1, 1, 1000, 34),
+                    new TrackbarDefinition("表示速度", 10, 0, 8000, 0),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("文字毎に個別オブジェクト", true, 0),
+                    new CheckboxDefinition("移動座標上に表示する", true, 0),
+                    new CheckboxDefinition("自動スクロール", true, 0),
+                    new CheckboxDefinition("B", true, 0),
+                    new CheckboxDefinition("I", true, 0),
+                }
+            );
         }
     }
 }

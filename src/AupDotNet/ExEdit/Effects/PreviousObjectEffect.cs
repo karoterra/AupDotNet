@@ -7,16 +7,25 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class PreviousObjectEffect : NoExtDataEffect
     {
-        private const int Id = (int)EffectTypeId.PreviousObject;
+        public static EffectType EffectType { get; }
 
         public PreviousObjectEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public PreviousObjectEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
+        }
+
+        static PreviousObjectEffect()
+        {
+            EffectType = new EffectType(
+                9, 0x04000008, 0, 0, 0, "直前オブジェクト",
+                new TrackbarDefinition[] {},
+                new CheckboxDefinition[] {}
+            );
         }
     }
 }

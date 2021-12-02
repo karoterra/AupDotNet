@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
@@ -8,21 +8,28 @@ namespace Karoterra.AupDotNet.ExEdit
         public readonly EffectType Type;
         public EffectFlag Flag { get; set; }
 
-        private Trackbar[] _trackbars;
-        public ReadOnlyCollection<Trackbar> Trackbars { get; }
+        public Trackbar[] Trackbars { get; }
 
         public int[] Checkboxes { get; }
 
         public Effect(EffectType type)
         {
             Type = type;
-            _trackbars = new Trackbar[Type.TrackbarNum];
-            for (int i = 0; i < Type.TrackbarNum; i++)
+            Trackbars = new Trackbar[Type.TrackbarNum];
+            foreach (var (def, i) in type.Trackbars.Select((def, i) => (def, i)))
             {
-                _trackbars[i] = new Trackbar();
+                if (def == null)
+                    Trackbars[i] = new Trackbar();
+                else
+                    Trackbars[i] = new Trackbar(def.Default, def.Default, 0, 0);
             }
-            Trackbars = new ReadOnlyCollection<Trackbar>(_trackbars);
             Checkboxes = new int[Type.CheckboxNum];
+            foreach (var (def, i) in type.Checkboxes
+                .Select((def, i) => (def, i))
+                .Where(x => x.def != null && x.def.IsCheckbox))
+            {
+                Checkboxes[i] = def.Default;
+            }
         }
 
         public Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
@@ -32,13 +39,12 @@ namespace Karoterra.AupDotNet.ExEdit
             {
                 throw new ArgumentException("Trackbars' length is invalid");
             }
-            _trackbars = trackbars;
-            Trackbars = new ReadOnlyCollection<Trackbar>(_trackbars);
+            Trackbars = trackbars.Clone() as Trackbar[];
             if (checkboxes.Length != type.CheckboxNum)
             {
                 throw new ArgumentException("Checkboxes' length is invalid");
             }
-            Checkboxes = checkboxes;
+            Checkboxes = checkboxes.Clone() as int[];
         }
 
         public abstract byte[] DumpExtData();

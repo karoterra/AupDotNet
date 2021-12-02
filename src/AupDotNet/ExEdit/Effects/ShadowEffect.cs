@@ -10,7 +10,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     public class ShadowEffect : Effect
     {
         public readonly int MaxFilenameLength = 256;
-        private const int Id = (int)EffectTypeId.Shadow;
+        public static EffectType EffectType { get; }
 
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
@@ -47,17 +47,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         public ShadowEffect()
-            : base(EffectType.Defaults[Id])
+            : base(EffectType)
         {
         }
 
         public ShadowEffect(Trackbar[] trackbars, int[] checkboxes)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
         }
 
         public ShadowEffect(Trackbar[] trackbars, int[] checkboxes, byte[] data)
-            : base(EffectType.Defaults[Id], trackbars, checkboxes)
+            : base(EffectType, trackbars, checkboxes)
         {
             if (data != null)
             {
@@ -80,6 +80,26 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes(true).CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        static ShadowEffect()
+        {
+            EffectType = new EffectType(
+                34, 0x44000420, 4, 3, 260, "シャドー",
+                new TrackbarDefinition[]
+                {
+                    new TrackbarDefinition("X", 1, -1000, 1000, -40),
+                    new TrackbarDefinition("Y", 1, -1000, 1000, 24),
+                    new TrackbarDefinition("濃さ", 10, 0, 1000, 400),
+                    new TrackbarDefinition("拡散", 1, 0, 500, 10),
+                },
+                new CheckboxDefinition[]
+                {
+                    new CheckboxDefinition("影を別オブジェクトで描画", true, 0),
+                    new CheckboxDefinition("影色の設定", false, 0),
+                    new CheckboxDefinition("パターン画像ファイル", false, 0),
+                }
+            );
         }
     }
 }
