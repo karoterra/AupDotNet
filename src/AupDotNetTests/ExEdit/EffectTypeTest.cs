@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Karoterra.AupDotNet;
 using Karoterra.AupDotNet.ExEdit;
 using Karoterra.AupDotNet.ExEdit.Effects;
 
@@ -128,6 +128,18 @@ namespace AupDotNetTests.ExEdit
         {
             Assert.AreEqual(Defaults.Length, EffectType.Defaults.Length);
             foreach (var (expected, actual) in Defaults.Zip(EffectType.Defaults, (x, y) => (x, y)))
+            {
+                Assert.IsTrue(expected.Equals(actual), $"{expected.Id}: {expected.Name}");
+            }
+        }
+
+        [TestMethod]
+        public void Test_DefaultsWithAup()
+        {
+            AviUtlProject aup = new AviUtlProject(@"TestData\Exedit\EffectSet01.aup");
+            ExEditProject exedit = ExeditTestUtil.GetExEdit(aup);
+            Assert.AreEqual(exedit.EffectTypes.Count, EffectType.Defaults.Length);
+            foreach (var (expected, actual) in exedit.EffectTypes.Zip(EffectType.Defaults, (x, y) => (x, y)))
             {
                 Assert.IsTrue(expected.Equals(actual), $"{expected.Id}: {expected.Name}");
             }
