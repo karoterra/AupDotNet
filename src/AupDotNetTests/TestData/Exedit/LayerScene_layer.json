@@ -1,0 +1,50 @@
+[
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 0,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 1,
+        "Flag": 1,
+        "Name": "レイヤー2"
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 2,
+        "Flag": 2,
+        "Name": "3番目"
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 3,
+        "Flag": 16,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 4,
+        "Flag": 32,
+        "Name": "Layer 5"
+    },
+    {
+        "SceneIndex": 1,
+        "LayerIndex": 2,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 1,
+        "LayerIndex": 3,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 2,
+        "LayerIndex": 0,
+        "Flag": 51,
+        "Name": ""
+    }
+]

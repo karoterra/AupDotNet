@@ -3,6 +3,13 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    [Flags]
+    public enum SceneFlag
+    {
+        Base = 1,
+        Alpha = 2,
+    }
+
     public class Scene
     {
         public static readonly int Size = 220;
@@ -48,7 +55,11 @@ namespace Karoterra.AupDotNet.ExEdit
         public uint BpmGridBeat { get; set; }
         public uint LayerScroll { get; set; }
 
-        public readonly byte[] Field0xA0_0xDC = new byte[60];
+        public byte[] Field0xA0_0xDC { get; } = new byte[60];
+
+        public Scene()
+        {
+        }
 
         public Scene(ReadOnlySpan<byte> data)
         {

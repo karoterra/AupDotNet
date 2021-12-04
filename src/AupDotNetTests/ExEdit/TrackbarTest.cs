@@ -1,4 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using Karoterra.AupDotNet;
 using Karoterra.AupDotNet.ExEdit;
 
 namespace AupDotNetTests.ExEdit
@@ -140,6 +146,33 @@ namespace AupDotNetTests.ExEdit
             Assert.AreEqual("1,2,15@track@bar", trackbar.ToString(1, script));
             trackbar.Flag = TrackbarFlag.Deceleration | TrackbarFlag.Acceleration;
             Assert.AreEqual("1,2,15@track@bar", trackbar.ToString(1, script));
+        }
+
+        [DataTestMethod]
+        [DataRow(@"TestData\Exedit\Trackbar.aup")]
+        public void Test_Read(string filename)
+        {
+            AviUtlProject aup = new AviUtlProject(filename);
+            ExEditProject exedit = ExeditTestUtil.GetExEdit(aup);
+            string jsonPath = Path.Combine(
+                Path.GetDirectoryName(filename),
+                Path.GetFileNameWithoutExtension(filename) + "_trackbar.json");
+            string jsonText = File.ReadAllText(jsonPath);
+            List<Trackbar> expected = JsonSerializer.Deserialize<List<Trackbar>>(jsonText);
+            List<Trackbar> actual = exedit.Objects.SelectMany(
+                obj => obj.Effects.SelectMany(
+                    effect => effect.Trackbars)).ToList();
+
+            Assert.AreEqual(expected.Count, actual.Count);
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Current, actual[i].Current, $"{i}: Current");
+                Assert.AreEqual(expected[i].Next, actual[i].Next, $"{i}: Next");
+                Assert.AreEqual(expected[i].Type, actual[i].Type, $"{i}: Type");
+                Assert.AreEqual(expected[i].Flag, actual[i].Flag, $"{i}: Flag");
+                Assert.AreEqual(expected[i].ScriptIndex, actual[i].ScriptIndex, $"{i}: ScriptIndex");
+                Assert.AreEqual(expected[i].Parameter, actual[i].Parameter, $"{i}: Parameter");
+            }
         }
     }
 }

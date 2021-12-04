@@ -1,0 +1,14 @@
+[
+    {"Current": 1, "Next": 1, "Type": 0, "Flag": 0, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 2, "Next": 3, "Type": 1, "Flag": 64, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 4, "Next": 5, "Type": 1, "Flag": 32, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 6, "Next": 7, "Type": 7, "Flag": 96, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 8, "Next": 9, "Type": 2, "Flag": 0, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 10, "Next": 11, "Type": 3, "Flag": 0, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 12, "Next": 13, "Type": 4, "Flag": 0, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 14, "Next": 15, "Type": 5, "Flag": 0, "ScriptIndex": 0, "Parameter": 0},
+    {"Current": 16, "Next": 17, "Type": 6, "Flag": 0, "ScriptIndex": 0, "Parameter": 12},
+    {"Current": 18, "Next": 19, "Type": 8, "Flag": 0, "ScriptIndex": 0, "Parameter": -123},
+    {"Current": 20, "Next": 21, "Type": 15, "Flag": 0, "ScriptIndex": 1, "Parameter": 100},
+    {"Current": 22, "Next": 23, "Type": 15, "Flag": 0, "ScriptIndex": 2, "Parameter": 0}
+]

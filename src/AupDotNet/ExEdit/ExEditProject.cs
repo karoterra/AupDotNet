@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Karoterra.AupDotNet.Extensions;
 
@@ -36,23 +35,20 @@ namespace Karoterra.AupDotNet.ExEdit
         public uint EditingScene { get; set; }
         public uint Field0x78 { get; set; }
 
-        public readonly byte[] Field0x80_0xFF = new byte[128];
+        public byte[] Field0x80_0xFF { get; } = new byte[128];
 
-        public readonly List<Layer> Layers;
-        public readonly List<Scene> Scenes;
-        public TrackbarScript[] TrackbarScripts { get; set; }
-
-        private List<EffectType> _effectTypes;
-        public readonly ReadOnlyCollection<EffectType> EffectTypes;
-
-        public readonly List<TimelineObject> Objects;
+        public List<Layer> Layers { get; }
+        public List<Scene> Scenes { get; }
+        public List<TrackbarScript> TrackbarScripts { get; }
+        public List<EffectType> EffectTypes { get; }
+        public List<TimelineObject> Objects { get; }
 
         public ExEditProject()
         {
             Layers = new List<Layer>();
             Scenes = new List<Scene>();
-            _effectTypes = EffectType.Defaults.ToList();
-            EffectTypes = new ReadOnlyCollection<EffectType>(_effectTypes);
+            TrackbarScripts = new List<TrackbarScript>(TrackbarScript.Defaults);
+            EffectTypes = new List<EffectType>(EffectType.Defaults);
             Objects = new List<TimelineObject>();
         }
 
@@ -107,17 +103,16 @@ namespace Karoterra.AupDotNet.ExEdit
                 Scenes.Add(new Scene(data.Slice(cursor, Scene.Size)));
                 cursor += Scene.Size;
             }
-            TrackbarScripts = new TrackbarScript[trackbarScriptNum];
-            for (uint i = 0; i < TrackbarScripts.Length; i++)
+            TrackbarScripts = new List<TrackbarScript>((int)trackbarScriptNum);
+            for (uint i = 0; i < trackbarScriptNum; i++)
             {
-                TrackbarScripts[i] = new TrackbarScript(data.Slice(cursor, TrackbarScript.Size));
+                TrackbarScripts.Add(new TrackbarScript(data.Slice(cursor, TrackbarScript.Size)));
                 cursor += TrackbarScript.Size;
             }
-            _effectTypes = new List<EffectType>();
-            EffectTypes = new ReadOnlyCollection<EffectType>(_effectTypes);
+            EffectTypes = new List<EffectType>((int)effectTypeNum);
             for (int i = 0; i < effectTypeNum; i++)
             {
-                _effectTypes.Add(new EffectType(data.Slice(cursor, EffectType.Size), i));
+                EffectTypes.Add(new EffectType(data.Slice(cursor, EffectType.Size), i));
                 cursor += EffectType.Size;
             }
             Objects = new List<TimelineObject>((int)objectNum);
@@ -131,7 +126,7 @@ namespace Karoterra.AupDotNet.ExEdit
         public override byte[] DumpData()
         {
             int size = 0x100 + Layer.Size * Layers.Count + Scene.Size * Scenes.Count;
-            size += TrackbarScript.Size * TrackbarScripts.Length + EffectType.Size * EffectTypes.Count;
+            size += TrackbarScript.Size * TrackbarScripts.Count + EffectType.Size * EffectTypes.Count;
             size += Objects.Sum(obj => (int)obj.Size);
             var data = new byte[size];
 
@@ -166,7 +161,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Scene.Size.ToBytes().CopyTo(data, 0x70);
             Layer.Size.ToBytes().CopyTo(data, 0x74);
             Field0x78.ToBytes().CopyTo(data, 0x78);
-            TrackbarScripts.Length.ToBytes().CopyTo(data, 0x7C);
+            TrackbarScripts.Count.ToBytes().CopyTo(data, 0x7C);
             Field0x80_0xFF.CopyTo(data, 0x80);
 
             int cursor = 0x100;

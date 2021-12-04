@@ -1,0 +1,32 @@
+[
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 0,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 1,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 2,
+        "Flag": 1,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 3,
+        "Flag": 0,
+        "Name": ""
+    },
+    {
+        "SceneIndex": 0,
+        "LayerIndex": 4,
+        "Flag": 1,
+        "Name": ""
+    }
+]

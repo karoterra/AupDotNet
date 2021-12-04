@@ -262,5 +262,17 @@ namespace AupDotNetTests.ExEdit
             ValidateEffectTypeId(new ColorCorrectionExEffect(), EffectTypeId.ColorCorrectionEx);
             ValidateEffectTypeId(new VolumeFilterEffect(), EffectTypeId.VolumeFilter);
         }
+
+        [TestMethod]
+        public void Test_Dump()
+        {
+            foreach (var x in Defaults)
+            {
+                var data = new byte[EffectType.Size];
+                x.Dump(data);
+                var y = new EffectType(data, x.Id);
+                Assert.IsTrue(x.Equals(y), $"{x.Id}: {x.Name}");
+            }
+        }
     }
 }

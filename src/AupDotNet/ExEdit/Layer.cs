@@ -3,6 +3,15 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    [Flags]
+    public enum LayerFlag
+    {
+        Hide = 1,
+        Lock = 2,
+        Link = 0x10,
+        Clipping = 0x20,
+    }
+
     public class Layer
     {
         public static readonly int Size = 76;
@@ -23,6 +32,10 @@ namespace Karoterra.AupDotNet.ExEdit
                 }
                 _name = value;
             }
+        }
+
+        public Layer()
+        {
         }
 
         public Layer(ReadOnlySpan<byte> data)

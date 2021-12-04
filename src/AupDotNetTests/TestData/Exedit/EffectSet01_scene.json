@@ -1,0 +1,34 @@
+[
+    {
+        "SceneIndex": 0,
+        "Flag": 0,
+        "Name": "",
+        "Width": 0,
+        "Height": 0,
+        "MaxFrame": 0,
+        "Cursor": 0,
+        "Zoom": 0,
+        "TimeScroll": 0,
+        "EditingObject": 0,
+        "SelectedFrameStart": 0,
+        "SelectedFrameEnd": 0,
+        "EnableBpmGrid": false,
+        "BpmGridTempo": 0,
+        "BpmGridOffset": 0,
+        "EnableXYGrid": false,
+        "XYGridWidth": 0,
+        "XYGridHeight": 0,
+        "EnableCameraGrid": false,
+        "CameraGridSize": 0,
+        "CameraGridNum": 0,
+        "ShowOutsideFrame": false,
+        "OutsideFrameScale": 0,
+        "BpmGridBeat": 0,
+        "LayerScroll": 0,
+        "Field0xA0_0xDC": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        ]
+    }
+]

@@ -55,37 +55,52 @@ namespace AupDotNetTests
 
         [DataTestMethod]
         [DataRow(@"TestData\EditHandle\640x480_2997-100fps_44100Hz.aup")]
-        public void Test_ReadWrite(string filename)
+        public void Test_ReadWriteRead(string filename)
         {
-            AviUtlProject src = new AviUtlProject(filename);
-            string dstPath = Path.Combine(
-                Path.GetDirectoryName(filename),
-                Path.GetFileNameWithoutExtension(filename) + "_parsed.aup");
-            using (var writer = new BinaryWriter(File.OpenWrite(dstPath)))
+            AviUtlProject srcAup = new AviUtlProject(filename);
+            AviUtlProject dstAup;
+            using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms))
+            using (var reader = new BinaryReader(ms))
             {
-                src.Write(writer);
+                srcAup.Write(writer);
+                ms.Position = 0;
+                dstAup = new AviUtlProject(reader);
             }
-            AviUtlProject dst = new AviUtlProject(dstPath);
 
-            Assert.AreEqual(src.EditHandle.Flag, dst.EditHandle.Flag, "Flag");
-            Assert.AreEqual(src.EditHandle.EditFilename, dst.EditHandle.EditFilename, "EditFilename");
-            Assert.AreEqual(src.EditHandle.OutputFilename, dst.EditHandle.OutputFilename, "OutputFilename");
-            Assert.AreEqual(src.EditHandle.ProjectFilename, dst.EditHandle.ProjectFilename, "ProjectFilename");
-            Assert.AreEqual(src.EditHandle.Width, dst.EditHandle.Width, "Width");
-            Assert.AreEqual(src.EditHandle.Height, dst.EditHandle.Height, "Height");
-            Assert.AreEqual(src.EditHandle.FrameNum, dst.EditHandle.FrameNum, "FrameNum");
-            Assert.AreEqual(src.EditHandle.SelectedFrameStart, dst.EditHandle.SelectedFrameStart, "SelectedFrameStart");
-            Assert.AreEqual(src.EditHandle.SelectedFrameEnd, dst.EditHandle.SelectedFrameEnd, "SelectedFrameEnd");
-            Assert.AreEqual(src.EditHandle.CurrentFrame, dst.EditHandle.CurrentFrame, "CurrentFrame");
-            Assert.AreEqual(src.EditHandle.VideoDecodeBit, dst.EditHandle.VideoDecodeBit, "VideoDecodeBit");
-            Assert.AreEqual(src.EditHandle.VideoDecodeFormat, dst.EditHandle.VideoDecodeFormat, "VideoDecodeFormat");
-            Assert.AreEqual(src.EditHandle.AudioCh, dst.EditHandle.AudioCh, "AudioCh");
-            Assert.AreEqual(src.EditHandle.AudioRate, dst.EditHandle.AudioRate, "AudioRate");
-            Assert.AreEqual(src.EditHandle.VideoScale, dst.EditHandle.VideoScale, "VideoScale");
-            Assert.AreEqual(src.EditHandle.VideoRate, dst.EditHandle.VideoRate, "VideoRate");
+            var src = srcAup.EditHandle;
+            var dst = dstAup.EditHandle;
 
-            Assert.IsTrue(src.EditHandle.ConfigNames.SequenceEqual(src.EditHandle.ConfigNames), "ConfigNames");
-            Assert.IsTrue(src.EditHandle.ImageHandles.SequenceEqual(src.EditHandle.ImageHandles), "ImageHandles");
+            Assert.AreEqual(src.Flag, dst.Flag, "Flag");
+            Assert.AreEqual(src.EditFilename, dst.EditFilename, "EditFilename");
+            Assert.AreEqual(src.OutputFilename, dst.OutputFilename, "OutputFilename");
+            Assert.AreEqual(src.ProjectFilename, dst.ProjectFilename, "ProjectFilename");
+            Assert.AreEqual(src.Width, dst.Width, "Width");
+            Assert.AreEqual(src.Height, dst.Height, "Height");
+            Assert.AreEqual(src.FrameNum, dst.FrameNum, "FrameNum");
+            Assert.AreEqual(src.SelectedFrameStart, dst.SelectedFrameStart, "SelectedFrameStart");
+            Assert.AreEqual(src.SelectedFrameEnd, dst.SelectedFrameEnd, "SelectedFrameEnd");
+            Assert.AreEqual(src.CurrentFrame, dst.CurrentFrame, "CurrentFrame");
+            Assert.AreEqual(src.VideoDecodeBit, dst.VideoDecodeBit, "VideoDecodeBit");
+            Assert.AreEqual(src.VideoDecodeFormat, dst.VideoDecodeFormat, "VideoDecodeFormat");
+            Assert.AreEqual(src.AudioCh, dst.AudioCh, "AudioCh");
+            Assert.AreEqual(src.AudioRate, dst.AudioRate, "AudioRate");
+            Assert.AreEqual(src.VideoScale, dst.VideoScale, "VideoScale");
+            Assert.AreEqual(src.VideoRate, dst.VideoRate, "VideoRate");
+
+            Assert.IsTrue(src.ConfigNames.SequenceEqual(dst.ConfigNames), "ConfigNames");
+            Assert.IsTrue(src.ImageHandles.SequenceEqual(dst.ImageHandles), "ImageHandles");
+
+            var srcData = new ReadOnlySpan<byte>(src.Data);
+            var dstData = new ReadOnlySpan<byte>(dst.Data);
+            int start = 0;
+            int length = 0x20d18 - EditHandle.UncompressedSize;
+            Assert.IsTrue(srcData.Slice(start, length).SequenceEqual(dstData.Slice(start, length)));
+            start = 0x20d18 - EditHandle.UncompressedSize + EditHandle.MaxFilename * EditHandle.MaxConfigFiles;
+            length = 0x4bbd98 - EditHandle.UncompressedSize - start;
+            Assert.IsTrue(srcData.Slice(start, length).SequenceEqual(dstData.Slice(start, length)));
+            start = 0x4bbd98 - EditHandle.UncompressedSize + 4 * EditHandle.MaxImages;
+            Assert.IsTrue(srcData.Slice(start).SequenceEqual(dstData.Slice(start)));
         }
     }
 }
