@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -68,6 +69,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             data[3] = (byte)(NoColor ? 1 : 0);
             Mode.ToBytes().CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("no_color=");
+            writer.WriteLine(NoColor ? '1' : '0');
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
         }
 
         static FlashEffect()

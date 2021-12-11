@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -62,6 +63,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color2.ToBytes().CopyTo(data, 8);
             Status2.ToBytes(2).CopyTo(data, 14);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("color_yc=");
+            writer.WriteLine(Color.ToString());
+            writer.Write("status=");
+            writer.WriteLine(Status ? '1' : '0');
+            writer.Write("color_yc2=");
+            writer.WriteLine(Color2.ToString());
+            writer.Write("status2=");
+            writer.WriteLine(Status2 ? '1' : '0');
         }
 
         static GamutConversionEffect()

@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using Karoterra.AupDotNet.Extensions;
+using System.IO;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
@@ -69,6 +70,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             BuildParams().ToSjisBytes(MaxParamsLength).CopyTo(data, 0x104);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine(ScriptId);
+            writer.Write("filter=");
+            writer.WriteLine((int)Directory);
+            writer.Write("name=");
+            writer.WriteLine(Name);
+            writer.Write("param=");
+            writer.WriteLine(BuildParams());
         }
 
         public static Dictionary<string, string> ParseParams(string str)

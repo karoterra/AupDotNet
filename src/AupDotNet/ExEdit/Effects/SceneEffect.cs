@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -51,6 +52,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Scene.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("scene=");
+            writer.WriteLine(Scene);
         }
 
         static SceneEffect()

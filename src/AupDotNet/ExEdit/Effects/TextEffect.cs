@@ -1,9 +1,41 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    public enum TextType
+    {
+        Normal = 0,
+        Shadow = 1,
+        LightShadow = 2,
+        Outline = 3,
+        ThinOutline = 4,
+    }
+
+    public enum TextAlign
+    {
+        TopLeft = 0,
+        TopCenter,
+        TopRight,
+        MiddleLeft,
+        MiddleCenter,
+        MiddleRight,
+        BottomLeft,
+        BottomCenter,
+        BottomRight,
+        VerticalRightTop,
+        VerticalRightMiddle,
+        VerticalRightBottom,
+        VerticalCenterTop,
+        VerticalCenterMiddle,
+        VerticalCenterBottom,
+        VerticalLeftTop,
+        VerticalLeftMiddle,
+        VerticalLeftBottom,
+    }
+
     /// <summary>
     /// テキスト
     /// </summary>
@@ -52,6 +84,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[4] = value ? 1 : 0;
         }
 
+        /// <summary>文字装飾</summary>
         public TextType TextType { get; set; }
 
         /// <summary>オブジェクトの長さを自動調整</summary>
@@ -62,6 +95,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>等間隔モード</summary>
         public bool Monospace { get; set; }
+
+        /// <summary>文字揃え,縦書き</summary>
         public TextAlign Align { get; set; }
 
         /// <summary>字間</summary>
@@ -154,6 +189,34 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Font.ToSjisBytes(MaxFontLength).CopyTo(data, 0x10);
             Text.ToUTF16Bytes(MaxTextLength).CopyTo(data, 0x30);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine((int)TextType);
+            writer.Write("autoadjust=");
+            writer.WriteLine(AutoAdjust ? '1' : '0');
+            writer.Write("soft=");
+            writer.WriteLine(Soft ? '1' : '0');
+            writer.Write("monospace=");
+            writer.WriteLine(Monospace ? '1' : '0');
+            writer.Write("align=");
+            writer.WriteLine((int)Align);
+            writer.Write("spacing_x=");
+            writer.WriteLine(unchecked((byte)SpacingX));
+            writer.Write("spacing_y=");
+            writer.WriteLine(unchecked((byte)SpacingY));
+            writer.Write("precision=");
+            writer.WriteLine(Precision ? '1' : '0');
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("color2=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color2));
+            writer.Write("font=");
+            writer.WriteLine(Font);
+            writer.Write("text=");
+            writer.WriteLine(Text.ToUTF16ByteString(MaxTextLength));
         }
 
         static TextEffect()

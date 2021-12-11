@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -99,6 +100,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x104.CopyTo(data, 0x104);
             Mode.ToBytes().CopyTo(data, 0x118);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("file=");
+            writer.WriteLine(Filename);
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
         }
 
         static VideoCompositionEffect()

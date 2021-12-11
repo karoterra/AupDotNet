@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -90,6 +91,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             WipeType.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine(WipeType);
+            writer.Write("name=");
+            writer.WriteLine(Filename);
         }
 
         static WipeEffect()

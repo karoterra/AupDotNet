@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -73,6 +74,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes(true).CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("file=");
+            writer.WriteLine(Filename);
         }
 
         static ShadowEffect()

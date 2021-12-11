@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -63,6 +64,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Interval.ToBytes().CopyTo(data, 4);
             Add.ToBytes().CopyTo(data, 8);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("num=");
+            writer.WriteLine(Num);
+            writer.Write("interval=");
+            writer.WriteLine(Interval);
+            writer.Write("add=");
+            writer.WriteLine(Add);
         }
 
         static RippleEffect()

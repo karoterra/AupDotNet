@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -77,6 +78,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Seed.ToBytes().CopyTo(data, 8);
             Field0xC.ToBytes().CopyTo(data, 0xC);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine(NoiseType);
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
+            writer.Write("seed=");
+            writer.WriteLine(Seed);
         }
 
         static NoiseEffect()

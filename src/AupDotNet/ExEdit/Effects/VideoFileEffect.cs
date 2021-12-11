@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -11,15 +13,20 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxFilenameLength = 260;
         public static EffectType EffectType { get; }
 
+        /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[0];
+
+        /// <summary>再生速度</summary>
         public Trackbar Speed => Trackbars[1];
 
+        /// <summary>ループ再生</summary>
         public bool Loop
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>アルファチャンネルを読み込む</summary>
         public bool Alpha
         {
             get => Checkboxes[1] != 0;
@@ -27,6 +34,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;
@@ -69,6 +77,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 0);
             Data.CopyTo(data, MaxFilenameLength);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("file=");
+            writer.WriteLine(Filename);
         }
 
         static VideoFileEffect()

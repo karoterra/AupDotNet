@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
@@ -36,6 +37,18 @@ namespace Karoterra.AupDotNet.ExEdit
             Cb.ToBytes().CopyTo(b, 2);
             Cr.ToBytes().CopyTo(b, 4);
             return b;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder(4 * 3);
+            builder.Append($"{(byte)(Y & 0xff):x2}");
+            builder.Append($"{(byte)(Y >> 8):x2}");
+            builder.Append($"{(byte)(Cb & 0xff):x2}");
+            builder.Append($"{(byte)(Cb >> 8):x2}");
+            builder.Append($"{(byte)(Cr & 0xff):x2}");
+            builder.Append($"{(byte)(Cr >> 8):x2}");
+            return builder.ToString();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -35,7 +36,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
         }
         public ScriptEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
-           : base(EffectType, trackbars, checkboxes, data)
+            : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
@@ -49,6 +50,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Text.ToUTF16Bytes(MaxTextLength).CopyTo(data, 0);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("text=");
+            writer.WriteLine(Text.ToUTF16ByteString(MaxTextLength));
         }
 
         static ScriptEffect()

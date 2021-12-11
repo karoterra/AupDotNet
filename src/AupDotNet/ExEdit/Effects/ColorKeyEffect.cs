@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -56,6 +57,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x6.ToBytes().CopyTo(data, 6);
             Status.ToBytes().CopyTo(data, 8);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("color_yc=");
+            writer.WriteLine(Color.ToString());
+            writer.Write("status=");
+            writer.WriteLine(Status);
         }
 
         static ColorKeyEffect()

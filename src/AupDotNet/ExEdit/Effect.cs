@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Karoterra.AupDotNet.ExEdit
@@ -75,6 +77,48 @@ namespace Karoterra.AupDotNet.ExEdit
         public virtual byte[] DumpExtData()
         {
             return new byte[Type.ExtSize];
+        }
+
+        /// <summary>
+        /// オブジェクトファイルを出力する。
+        /// </summary>
+        /// <param name="writer">出力先</param>
+        /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
+        public void Export(TextWriter writer, IReadOnlyList<TrackbarScript> trackbarScripts, bool chain)
+        {
+            writer.Write("_name=");
+            writer.WriteLine(Type.Name);
+            for (int i = 0; i < Trackbars.Length; i++)
+            {
+                var def = Type.Trackbars[i];
+                if (def == null || string.IsNullOrEmpty(def.Name)) continue;
+
+                writer.Write(def.Name);
+                writer.Write('=');
+                var script = trackbarScripts[Trackbars[i].ScriptIndex];
+                writer.WriteLine(Trackbars[i].ToString(def.Scale, script));
+            }
+            for (int i = 0; i < Checkboxes.Length; i++)
+            {
+                var def = Type.Checkboxes[i];
+                if (def == null || !def.IsCheckbox) continue;
+
+                writer.Write(def.Name);
+                writer.Write('=');
+                writer.WriteLine(Checkboxes[i]);
+            }
+            if (!chain)
+            {
+                ExportExtData(writer);
+            }
+        }
+
+        /// <summary>
+        /// オブジェクトファイルにEffectの拡張データを出力する
+        /// </summary>
+        /// <param name="writer">出力先</param>
+        public virtual void ExportExtData(TextWriter writer)
+        {
         }
     }
 }

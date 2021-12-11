@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -62,6 +63,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Direction.ToBytes().CopyTo(data, 0);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine(Direction);
         }
 
         static MirrorEffect()

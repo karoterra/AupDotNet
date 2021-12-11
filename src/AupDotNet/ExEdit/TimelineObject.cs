@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Karoterra.AupDotNet.ExEdit.Effects;
 using Karoterra.AupDotNet.Extensions;
@@ -177,6 +178,60 @@ namespace Karoterra.AupDotNet.ExEdit
             for (int i = Effects.Count; i < MaxEffect; i++)
             {
                 0xFFFF_FFFF.ToBytes().CopyTo(data.Slice(0x54 + i * 12));
+            }
+        }
+
+        /// <summary>
+        /// オブジェクトファイルを出力する
+        /// </summary>
+        /// <param name="writer">出力先</param>
+        /// <param name="index">オブジェクトのインデックス</param>
+        /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
+        public void ExportObject(TextWriter writer, int index, IReadOnlyList<TrackbarScript> trackbarScripts)
+        {
+            writer.Write('[');
+            writer.Write(index);
+            writer.WriteLine(']');
+            writer.Write("start=");
+            writer.WriteLine(StartFrame + 1);
+            writer.Write("end=");
+            writer.WriteLine(EndFrame + 1);
+            writer.Write("layer=");
+            writer.WriteLine(LayerIndex + 1);
+            if (Group != NoGroup)
+            {
+                writer.Write("group=");
+                writer.WriteLine(Group);
+            }
+
+            bool media = Flag.HasFlag(TimelineObjectFlag.Media);
+            bool audio = Flag.HasFlag(TimelineObjectFlag.Audio);
+            bool mediaFilter = Flag.HasFlag(TimelineObjectFlag.MediaFilter);
+            bool control = Flag.HasFlag(TimelineObjectFlag.Control);
+            if (media || mediaFilter)
+            {
+                writer.Write("overlay=");
+                writer.WriteLine(Flag.HasFlag(TimelineObjectFlag.Clipping) ? 0 : 1);
+            }
+            if ((media && !audio) || (mediaFilter && control))
+            {
+                writer.Write("camera=");
+                writer.WriteLine(Flag.HasFlag(TimelineObjectFlag.Camera) ? 1 : 0);
+            }
+            if (audio)
+                writer.WriteLine("audio=1");
+
+            if (Chain)
+                writer.WriteLine("chain=1");
+
+            for (int i = 0; i < Effects.Count; i++)
+            {
+                writer.Write('[');
+                writer.Write(index);
+                writer.Write('.');
+                writer.Write(i);
+                writer.WriteLine(']');
+                Effects[i].Export(writer, trackbarScripts, Chain);
             }
         }
     }

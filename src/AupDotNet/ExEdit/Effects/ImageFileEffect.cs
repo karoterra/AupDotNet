@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -54,6 +56,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0x0.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("file=");
+            writer.WriteLine(Filename);
         }
 
         static ImageFileEffect()

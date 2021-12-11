@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -12,8 +13,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxNameLength = 256;
         public static EffectType EffectType { get; }
 
+        /// <summary>サイズ</summary>
         public Trackbar Size => Trackbars[0];
+
+        /// <summary>縦横比</summary>
         public Trackbar AspectRatio => Trackbars[1];
+
+        /// <summary>ライン幅</summary>
         public Trackbar LineWidth => Trackbars[2];
 
         public FigureType FigureType { get; set; } = FigureType.Circle;
@@ -78,6 +84,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Color.ToBytes().CopyTo(data, 4);
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 8);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine((int)FigureType);
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("name=");
+            writer.WriteLine(Name);
         }
 
         static FigureEffect()

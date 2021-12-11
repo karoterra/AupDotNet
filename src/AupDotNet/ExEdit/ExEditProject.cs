@@ -211,5 +211,43 @@ namespace Karoterra.AupDotNet.ExEdit
                 return diff;
             });
         }
+
+        public ExeditObjectFile ExportObject(int sceneIndex, EditHandle editHandle)
+        {
+            var scene = Scenes.Where(s => s.SceneIndex == sceneIndex).FirstOrDefault();
+            int width = 0, height = 0, length = 0;
+            if (scene != null)
+            {
+                width = (int)scene.Width;
+                height = (int)scene.Height;
+                length = (int)scene.MaxFrame;
+            }
+            if (width == 0)
+            {
+                width = editHandle.Width;
+                height = editHandle.Height;
+            }
+            if (sceneIndex == EditingScene)
+            {
+                length = editHandle.FrameNum;
+            }
+
+            var exo = new ExeditObjectFile()
+            {
+                Width = width,
+                Height = height,
+                Rate = editHandle.VideoRate,
+                Scale = editHandle.VideoScale,
+                Length = length,
+                AudioRate = editHandle.AudioRate,
+                AudioCh = editHandle.AudioCh,
+                Alpha = scene?.Flag.HasFlag(SceneFlag.Alpha) ?? false,
+                SceneName = scene?.Name ?? string.Empty,
+            };
+            exo.Objects.AddRange(Objects.Where(obj => obj.SceneIndex == sceneIndex));
+            exo.TrackbarScripts.AddRange(TrackbarScripts);
+
+            return exo;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -89,6 +90,22 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("blend=");
+            writer.WriteLine((int)BlendMode);
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("no_color=");
+            writer.WriteLine(NoColor ? '1' : '0');
+            writer.Write("color2=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color2));
+            writer.Write("no_color2=");
+            writer.WriteLine(NoColor2 ? '1' : '0');
+            writer.Write("type=");
+            writer.WriteLine(Shape);
+        }
+
         static GradationEffect()
         {
             EffectType = new EffectType(
@@ -99,7 +116,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("中心X", 1, -2000, 2000, 0),
                     new TrackbarDefinition("中心Y", 1, -2000, 2000, 0),
                     new TrackbarDefinition("角度", 10, -36000, 36000, 0),
-                    new TrackbarDefinition("幅", 10, 0, 2000, 100),
+                    new TrackbarDefinition("幅", 1, 0, 2000, 100),
                 },
                 new CheckboxDefinition[]
                 {

@@ -76,7 +76,7 @@ namespace Karoterra.AupDotNet.ExEdit
             string transition = $",{(script.EnableSpeed ? ((int)Flag | (int)Type) : (int)Type)}";
             if (Type == TrackbarType.Script)
                 transition += $"@{script.Name}";
-            string param = script.EnableParam ? $",{Parameter}" : string.Empty;
+            string param = (script.EnableParam && Parameter != 0) ? $",{Parameter}" : string.Empty;
 
             return $"{current}{next}{transition}{param}";
         }

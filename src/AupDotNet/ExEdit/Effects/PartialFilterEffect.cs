@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -84,6 +85,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             ((int)FigureType).ToBytes().CopyTo(data, 0);
             Name.ToSjisBytes(MaxNameLength).CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine((int)FigureType);
+            writer.Write("name=");
+            writer.WriteLine(Name);
         }
 
         static PartialFilterEffect()

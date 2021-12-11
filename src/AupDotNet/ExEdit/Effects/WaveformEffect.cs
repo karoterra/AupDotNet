@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -24,7 +25,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[3];
 
-        /// <summary>編集全体の音声を基にする</summary>
+        /// <summary>編集全体の音声を元にする</summary>
         public bool ReferScene
         {
             get => Checkboxes[3] != 0;
@@ -121,6 +122,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("file=");
+            writer.WriteLine(Filename);
+            writer.Write("type=");
+            writer.WriteLine(PresetType);
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
+            writer.Write("res_w=");
+            writer.WriteLine(ResW);
+            writer.Write("res_h=");
+            writer.WriteLine(ResH);
+            writer.Write("pad_w=");
+            writer.WriteLine(PadW);
+            writer.Write("pad_h=");
+            writer.WriteLine(PadH);
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("sample_n=");
+            writer.WriteLine(SampleN);
+            writer.Write("mirror=");
+            writer.WriteLine(Mirror ? '1' : '0');
+        }
+
         static WaveformEffect()
         {
             EffectType = new EffectType(
@@ -137,7 +162,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new CheckboxDefinition("Type1", false, 0),
                     new CheckboxDefinition("波形の色", false, 0),
                     new CheckboxDefinition("参照ファイル", false, 0),
-                    new CheckboxDefinition("編集全体の音声を基にする", true, 1),
+                    new CheckboxDefinition("編集全体の音声を元にする", true, 1),
                     new CheckboxDefinition("設定", false, 0),
                 }
             );

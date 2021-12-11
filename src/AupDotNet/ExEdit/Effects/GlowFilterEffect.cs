@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -29,7 +30,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>光色の設定(色指定なし)</summary>
         public bool NoColor { get; set; }
 
-        /// <summary>形状</summary>
+        /// <summary>
+        /// 形状
+        /// <list type="bullet">
+        ///     <item>0. 通常</item>
+        ///     <item>1. クロス(4本)</item>
+        ///     <item>2. クロス(4本斜め)</item>
+        ///     <item>3. クロス(8本)</item>
+        ///     <item>4. ライン(横)</item>
+        ///     <item>5. ライン(縦)</item>
+        /// </list>
+        /// </summary>
         public int ShapeType { get; set; }
 
         public GlowFilterEffect()
@@ -61,6 +72,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             data[3] = (byte)(NoColor ? 1 : 0);
             ShapeType.ToBytes().CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("color=");
+            writer.WriteLine(ExeditUtil.ColorToString(Color));
+            writer.Write("no_color=");
+            writer.WriteLine(NoColor ? '1' : '0');
+            writer.Write("type=");
+            writer.WriteLine(ShapeType);
         }
 
         static GlowFilterEffect()

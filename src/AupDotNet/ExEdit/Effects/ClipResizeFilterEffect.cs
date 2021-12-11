@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
@@ -41,6 +42,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             var data = new byte[Type.ExtSize];
             Data.CopyTo(data, 0);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("_exdata=");
+            writer.WriteLine(ExeditUtil.BytesToString(Data));
         }
 
         static ClipResizeFilterEffect()

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -134,6 +135,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("type=");
+            writer.WriteLine((int)FigureType);
+            writer.Write("name=");
+            writer.WriteLine(Name);
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
+            writer.Write("calc=");
+            writer.WriteLine((int)Calc);
+        }
+
         static DisplacementEffect()
         {
             EffectType = new EffectType(
@@ -141,7 +154,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 new TrackbarDefinition[]
                 {
                     new TrackbarDefinition("param0", 10, -40000, 40000, 0),
-                    new TrackbarDefinition("param0", 10, -40000, 40000, 0),
+                    new TrackbarDefinition("param1", 10, -40000, 40000, 0),
                     new TrackbarDefinition("X", 10, -40000, 40000, 0),
                     new TrackbarDefinition("Y", 10, -40000, 40000, 0),
                     new TrackbarDefinition("回転", 100, -360000, 360000, 0),

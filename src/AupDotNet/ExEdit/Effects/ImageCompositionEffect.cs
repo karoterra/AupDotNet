@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
@@ -72,6 +73,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mode.ToBytes().CopyTo(data, 0);
             Filename.ToSjisBytes(MaxFilenameLength).CopyTo(data, 4);
             return data;
+        }
+
+        public override void ExportExtData(TextWriter writer)
+        {
+            writer.Write("mode=");
+            writer.WriteLine(Mode);
+            writer.Write("file=");
+            writer.WriteLine(Filename);
         }
 
         static ImageCompositionEffect()
