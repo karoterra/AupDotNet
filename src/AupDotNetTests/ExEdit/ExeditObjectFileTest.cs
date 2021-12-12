@@ -18,6 +18,10 @@ namespace AupDotNetTests.ExEdit
         [DataRow(@"TestData\Exedit\LayerScene.aup", 1)]
         [DataRow(@"TestData\Exedit\LayerScene.aup", 2)]
         [DataRow(@"TestData\Exedit\Trackbar.aup", 0)]
+        [DataRow(@"TestData\Exedit\Chain.aup", 0)]
+        [DataRow(@"TestData\Exedit\Chain.aup", 1)]
+        [DataRow(@"TestData\Exedit\Group.aup", 0)]
+        [DataRow(@"TestData\Exedit\Group.aup", 1)]
         public void Test_Write(string filename, int scene)
         {
             AviUtlProject aup = new AviUtlProject(filename);
@@ -35,14 +39,18 @@ namespace AupDotNetTests.ExEdit
             var exoPath = Path.Combine(
                 Path.GetDirectoryName(filename),
                 $"{Path.GetFileNameWithoutExtension(filename)}_{scene}.exo");
-            var expected = File.ReadAllText(exoPath, Encoding.GetEncoding("shift-jis"));
+            var expected = File.ReadAllLines(exoPath, Encoding.GetEncoding("shift-jis"));
 
             using (var writer = new StringWriter())
             {
                 writer.NewLine = "\r\n";
                 exo.Write(writer);
 
-                Assert.AreEqual(expected, writer.ToString());
+                var actual = writer.ToString().Split("\r\n");
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    Assert.AreEqual(expected[i], actual[i], $"Line {i + 1}");
+                }
             }
         }
     }

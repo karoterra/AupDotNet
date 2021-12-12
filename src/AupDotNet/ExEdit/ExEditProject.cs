@@ -116,10 +116,12 @@ namespace Karoterra.AupDotNet.ExEdit
                 cursor += EffectType.Size;
             }
             Objects = new List<TimelineObject>((int)objectNum);
+            var lastChainGroup = TimelineObject.NoChainGroup;
             for (int i = 0; i < objectNum; i++)
             {
-                Objects.Add(new TimelineObject(data.Slice(cursor), EffectTypes, effectFactory));
+                Objects.Add(new TimelineObject(data.Slice(cursor), lastChainGroup, EffectTypes, effectFactory));
                 cursor += (int)Objects[i].Size;
+                lastChainGroup = Objects[i].ChainGroup;
             }
         }
 

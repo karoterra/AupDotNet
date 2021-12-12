@@ -64,7 +64,7 @@ namespace Karoterra.AupDotNet.ExEdit
 
         public readonly List<Effect> Effects = new List<Effect>();
 
-        public TimelineObject(ReadOnlySpan<byte> data, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
+        public TimelineObject(ReadOnlySpan<byte> data, uint lastChainGroup, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
 
@@ -74,7 +74,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Preview = data.Slice(0x10, 64).ToCleanSjisString();
             ChainGroup = data.Slice(0x50, 4).ToUInt32();
             var extSize = data.Slice(0xF4, 4).ToUInt32();
-            Chain = (ChainGroup != 0xFFFF_FFFF && extSize == 0) ? true : false;
+            Chain = ChainGroup != 0xFFFF_FFFF && ChainGroup == lastChainGroup && extSize == 0;
             Field0x4B8 = data.Slice(0x4B8, 4).ToUInt32();
             Group = data.Slice(0x4BC, 4).ToUInt32();
             LayerIndex = data.Slice(0x5C0, 4).ToUInt32();
