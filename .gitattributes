@@ -2,3 +2,6 @@
 
 *.aup binary
 *.dat binary
+
+*.exo text eol=crlf working-tree-encoding=sjis
+*.exa text eol=crlf working-tree-encoding=sjis
