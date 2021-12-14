@@ -1,0 +1,27 @@
+{
+    "Result": true,
+    "A": {
+        "Video": 1,
+        "Audio": 2,
+        "Field2": 3,
+        "Field3": 4,
+        "Inter": 5,
+        "Index24Fps": 6,
+        "EditFlag": 7,
+        "Config": 8,
+        "Vcm": 9,
+        "Field9": 10
+    },
+    "B": {
+        "Video": 1,
+        "Audio": 2,
+        "Field2": 3,
+        "Field3": 4,
+        "Inter": 5,
+        "Index24Fps": 6,
+        "EditFlag": 7,
+        "Config": 8,
+        "Vcm": 9,
+        "Field9": 10
+    }
+}
