@@ -8,7 +8,7 @@ namespace Karoterra.AupDotNet.ExEdit
     public class ExEditProject : FilterProject
     {
         public static readonly uint NoEditingObject = 0xFFFF_FFFF;
-        protected static readonly double BpmGridTempoScale = 10000.0;
+        protected static readonly int BpmGridTempoScale = 10000;
 
         public uint Field0xC { get; set; }
         public uint Zoom { get; set; }
@@ -20,7 +20,7 @@ namespace Karoterra.AupDotNet.ExEdit
         public uint Field0x28 { get; set; }
         public uint Version { get; set; }
         public bool EnableBpmGrid { get; set; }
-        public double BpmGridTempo { get; set; }
+        public uint BpmGridTempo { get; set; }
         public uint BpmGridOffset { get; set; }
         public bool EnableXYGrid { get; set; }
         public uint XYGridWidth { get; set; }
@@ -71,7 +71,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Field0x28 = data.Slice(0x28, 4).ToUInt32();
             Version = data.Slice(0x2C, 4).ToUInt32();
             EnableBpmGrid = data.Slice(0x30, 4).ToInt32() != 0;
-            BpmGridTempo = data.Slice(0x34, 4).ToUInt32() / BpmGridTempoScale;
+            BpmGridTempo = data.Slice(0x34, 4).ToUInt32();
             BpmGridOffset = data.Slice(0x38, 4).ToUInt32();
             EnableXYGrid = data.Slice(0x3C, 4).ToInt32() != 0;
             XYGridWidth = data.Slice(0x40, 4).ToUInt32();
@@ -145,7 +145,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Field0x28.ToBytes().CopyTo(data, 0x28);
             Version.ToBytes().CopyTo(data, 0x2C);
             (EnableBpmGrid ? 1 : 0).ToBytes().CopyTo(data, 0x30);
-            ((uint)(BpmGridTempo * BpmGridTempoScale)).ToBytes().CopyTo(data, 0x34);
+            BpmGridTempo.ToBytes().CopyTo(data, 0x34);
             BpmGridOffset.ToBytes().CopyTo(data, 0x38);
             (EnableXYGrid ? 1 : 0).ToBytes().CopyTo(data, 0x3C);
             XYGridWidth.ToBytes().CopyTo(data, 0x40);
