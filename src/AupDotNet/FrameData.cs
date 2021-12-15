@@ -19,8 +19,7 @@ namespace Karoterra.AupDotNet
 
         public override bool Equals(object obj)
         {
-            FrameData frame = obj as FrameData;
-            return frame != null &&
+            return obj is FrameData frame &&
                 Video == frame.Video && Audio == frame.Audio &&
                 Field2 == frame.Field2 && Field3 == frame.Field3 &&
                 Inter == frame.Inter && Index24Fps == frame.Index24Fps &&

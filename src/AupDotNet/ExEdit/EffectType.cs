@@ -76,8 +76,7 @@ namespace Karoterra.AupDotNet.ExEdit
 
         public override bool Equals(object obj)
         {
-            var et = obj as EffectType;
-            return et != null &&
+            return obj is EffectType et &&
                 Id == et.Id &&
                 Flag == et.Flag &&
                 TrackbarNum == et.TrackbarNum &&
