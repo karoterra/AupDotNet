@@ -1,0 +1,17 @@
+[
+  {
+    "Size": 1484,
+    "Flag": 65537,
+    "StartFrame": 0,
+    "EndFrame": 5,
+    "Preview": "",
+    "ChainGroup": 4294967295,
+    "Chain": false,
+    "ExtSize": 4,
+    "Field0x4B8": 0,
+    "Group": 0,
+    "LayerIndex": 0,
+    "SceneIndex": 0,
+    "EffectCount": 2
+  }
+]
