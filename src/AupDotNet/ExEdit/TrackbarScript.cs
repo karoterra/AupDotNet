@@ -52,10 +52,10 @@ namespace Karoterra.AupDotNet.ExEdit
         public bool EnableParam { get; set; } = true;
         public bool EnableSpeed { get; set; } = true;
 
-        private static char[] delim = new[] { '@' };
-        private static string twopointSign = "--twopoint";
-        private static string paramSign = "--param:";
-        private static string speedSign = "--speed:";
+        private static readonly char[] delim = new[] { '@' };
+        private static readonly string twopointSign = "--twopoint";
+        private static readonly string paramSign = "--param:";
+        private static readonly string speedSign = "--speed:";
 
         public TrackbarScript()
         {
