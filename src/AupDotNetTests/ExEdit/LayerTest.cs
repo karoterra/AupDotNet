@@ -43,7 +43,7 @@ namespace AupDotNetTests.ExEdit
             Layer layer = new Layer(expected);
             var actual = new byte[Layer.Size];
             layer.Dump(actual);
-            expected.SequenceEqual(actual);
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }

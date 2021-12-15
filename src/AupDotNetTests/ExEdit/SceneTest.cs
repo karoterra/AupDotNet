@@ -54,7 +54,7 @@ namespace AupDotNetTests.ExEdit
                 Assert.AreEqual(expected.OutsideFrameScale, actual.OutsideFrameScale, $"{i}: OutsideFrameScale");
                 Assert.AreEqual(expected.BpmGridBeat, actual.BpmGridBeat, $"{i}: BpmGridBeat");
                 Assert.AreEqual(expected.LayerScroll, actual.LayerScroll, $"{i}: LayerScroll");
-                Assert.IsTrue(expected.Field0xA0_0xDC.SequenceEqual(actual.Field0xA0_0xDC), $"{i}: Field0xA0_0xDC");
+                CollectionAssert.AreEqual(expected.Field0xA0_0xDC, actual.Field0xA0_0xDC, $"{i}: Field0xA0_0xDC");
             }
         }
 
@@ -66,7 +66,7 @@ namespace AupDotNetTests.ExEdit
             Scene scene = new Scene(expected);
             var actual = new byte[Scene.Size];
             scene.Dump(actual);
-            expected.SequenceEqual(actual);
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
