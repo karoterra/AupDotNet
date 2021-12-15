@@ -111,7 +111,11 @@ namespace Karoterra.AupDotNet
                         int sizeData = rep << 8;
                         writer.Write(sizeData.ToBytes());
                     }
+#if NET6_0_OR_GREATER
+                    writer.Write(data[..rep]);
+#else
                     writer.Write(data.Slice(0, rep).ToArray());
+#endif
                     data = data.Slice(rep);
                 }
             }

@@ -19,7 +19,11 @@ namespace Karoterra.AupDotNet.Extensions
 
         public static string ToSjisString(this ReadOnlySpan<byte> bytes)
         {
+#if NET6_0_OR_GREATER
+            return sjis.GetString(bytes);
+#else
             return sjis.GetString(bytes.ToArray());
+#endif
         }
 
         public static string ToCleanSjisString(this byte[] bytes)
@@ -61,12 +65,20 @@ namespace Karoterra.AupDotNet.Extensions
                     else full = true;
                 }
             }
+#if NET6_0_OR_GREATER
+            return sjis.GetString(bytes[..count]);
+#else
             return sjis.GetString(bytes.Slice(0, count).ToArray());
+#endif
         }
 
         public static string ToUTF16String(this ReadOnlySpan<byte> bytes)
         {
+#if NET6_0_OR_GREATER
+            return Encoding.Unicode.GetString(bytes);
+#else
             return Encoding.Unicode.GetString(bytes.ToArray());
+#endif
         }
 
         public static string ToCleanUTF16String(this ReadOnlySpan<byte> bytes)

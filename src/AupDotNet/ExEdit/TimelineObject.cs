@@ -92,7 +92,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 }
                 var type = effectTypes[typeIndex];
                 var offset = data.Slice(0x54 + i * 12 + 8, 4).ToInt32();
-                var extData = Chain ? new byte[0] : data.Slice(BaseSize + offset, (int)type.ExtSize).ToArray();
+                var extData = Chain ? Array.Empty<byte>() : data.Slice(BaseSize + offset, (int)type.ExtSize).ToArray();
                 var flag = (EffectFlag)data[0xE4 + i];
 
                 var trackbars = new Trackbar[type.TrackbarNum];
