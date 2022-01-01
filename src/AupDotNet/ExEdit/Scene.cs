@@ -3,22 +3,45 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// シーン情報フラグ
+    /// </summary>
     [Flags]
     public enum SceneFlag
     {
+        /// <summary>
+        /// おそらく常に有効なフラグ
+        /// </summary>
         Base = 1,
+
+        /// <summary>
+        /// アルファチャンネルあり
+        /// </summary>
         Alpha = 2,
     }
 
+    /// <summary>
+    /// 拡張編集のシーン情報を表すクラス。
+    /// </summary>
     public class Scene
     {
         public static readonly int Size = 220;
         public static readonly int MaxNameLength = 64;
 
+        /// <summary>
+        /// シーン番号
+        /// </summary>
         public uint SceneIndex { get; set; }
+
+        /// <summary>
+        /// シーンのフラグ
+        /// </summary>
         public SceneFlag Flag { get; set; }
 
         private string _name;
+        /// <summary>
+        /// シーン名
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -32,15 +55,51 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// 横幅。
+        /// </summary>
         public uint Width { get; set; }
+
+        /// <summary>
+        /// 高さ。
+        /// </summary>
         public uint Height { get; set; }
+
+        /// <summary>
+        /// フレーム数。
+        /// </summary>
         public uint MaxFrame { get; set; }
+
+        /// <summary>
+        /// カーソル位置。
+        /// </summary>
         public uint Cursor { get; set; }
+
+        /// <summary>
+        /// タイムラインのズームレベル。
+        /// </summary>
         public uint Zoom { get; set; }
+
+        /// <summary>
+        /// タイムラインの時間軸方向のスクロール位置。
+        /// </summary>
         public uint TimeScroll { get; set; }
+
+        /// <summary>
+        /// 選択中のオブジェクトのインデックス。
+        /// </summary>
         public uint EditingObject { get; set; }
+
+        /// <summary>
+        /// 選択中フレームの開始フレーム。
+        /// </summary>
         public uint SelectedFrameStart { get; set; }
+
+        /// <summary>
+        /// 選択中フレームの終了フレーム。
+        /// </summary>
         public uint SelectedFrameEnd { get; set; }
+
         public bool EnableBpmGrid { get; set; }
         public uint BpmGridTempo { get; set; }
         public uint BpmGridOffset { get; set; }
@@ -53,14 +112,26 @@ namespace Karoterra.AupDotNet.ExEdit
         public bool ShowOutsideFrame { get; set; }
         public uint OutsideFrameScale { get; set; }
         public uint BpmGridBeat { get; set; }
+        
+        /// <summary>
+        /// タイムラインのレイヤー方向のスクロール位置。
+        /// </summary>
         public uint LayerScroll { get; set; }
 
         public byte[] Field0xA0_0xDC { get; } = new byte[60];
 
+        /// <summary>
+        /// <see cref="Scene"/> のインスタンスを初期化します。
+        /// </summary>
         public Scene()
         {
         }
 
+        /// <summary>
+        /// <see cref="Scene"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">シーン情報</param>
+        /// <exception cref="ArgumentException"><c>data</c> の長さが正しくありません。</exception>
         public Scene(ReadOnlySpan<byte> data)
         {
             if (data.Length < Size)
@@ -95,6 +166,10 @@ namespace Karoterra.AupDotNet.ExEdit
             data.Slice(0xA0, Field0xA0_0xDC.Length).CopyTo(Field0xA0_0xDC);
         }
 
+        /// <summary>
+        /// シーン情報をダンプします。
+        /// </summary>
+        /// <param name="data">シーン情報を格納する配列</param>
         public void Dump(Span<byte> data)
         {
             SceneIndex.ToBytes().CopyTo(data);

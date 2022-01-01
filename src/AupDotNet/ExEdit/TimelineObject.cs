@@ -7,6 +7,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// オブジェクト情報フラグ
+    /// </summary>
     [Flags]
     public enum TimelineObjectFlag
     {
@@ -22,6 +25,9 @@ namespace Karoterra.AupDotNet.ExEdit
         Range = 0x0010_0000,
     }
 
+    /// <summary>
+    /// 拡張編集でタイムラインに配置するオブジェクトを表すクラス。
+    /// </summary>
     public class TimelineObject
     {
         public static readonly int BaseSize = 0x5C8;
@@ -32,13 +38,30 @@ namespace Karoterra.AupDotNet.ExEdit
         public static readonly uint NoChainGroup = 0xFFFF_FFFF;
         public static readonly uint NoGroup = 0;
 
+        /// <summary>
+        /// オブジェクト情報をダンプした際のバイト長。
+        /// </summary>
         public uint Size => (uint)(BaseSize + ExtSize);
 
+        /// <summary>
+        /// オブジェクトのフラグ
+        /// </summary>
         public TimelineObjectFlag Flag { get; set; }
+
+        /// <summary>
+        /// 開始フレーム。
+        /// </summary>
         public uint StartFrame { get; set; }
+
+        /// <summary>
+        /// 終了フレーム。
+        /// </summary>
         public uint EndFrame { get; set; }
 
         private string _preview;
+        /// <summary>
+        /// プレビュー文字列。
+        /// </summary>
         public string Preview
         {
             get => _preview;
@@ -52,18 +75,65 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// 中間点グループ。
+        /// </summary>
+        /// <remarks>
+        /// この値が同じオブジェクトが同一の中間点グループに属する連結したオブジェクトとなります。
+        /// 中間点で区切られたオブジェクトでない場合は <see cref="NoChainGroup"/> になります。
+        /// </remarks>
         public uint ChainGroup { get; set; }
+
+        /// <summary>
+        /// 中間点で区切られたオブジェクトの後続か。
+        /// </summary>
+        /// <remarks>
+        /// 中間点で区切られたオブジェクトの内、先頭以外のオブジェクトの場合に <c>true</c> になります。
+        /// それ以外の場合は <c>false</c> になります。
+        /// </remarks>
         public bool Chain { get; set; }
 
+        /// <summary>
+        /// 各フィルタ効果の拡張データの合計。
+        /// </summary>
+        /// <remarks>
+        /// 中間点で区切られたオブジェクトの後続の場合、この値は 0 になります。
+        /// </remarks>
         public uint ExtSize => Chain ? 0 : (uint)Effects.Sum(x => x.Type.ExtSize);
 
         public uint Field0x4B8 { get; set; }
+
+        /// <summary>
+        /// グループ番号。
+        /// </summary>
+        /// <remarks>
+        /// この値が同じオブジェクトが同一のグループに属するオブジェクトとなります。
+        /// いずれのグループにも属さない場合は <see cref="NoGroup"/> になります。
+        /// </remarks>
         public uint Group { get; set; }
+
+        /// <summary>
+        /// レイヤー番号。
+        /// </summary>
         public uint LayerIndex { get; set; }
+
+        /// <summary>
+        /// シーン番号。
+        /// </summary>
         public uint SceneIndex { get; set; }
 
+        /// <summary>
+        /// フィルタ効果。
+        /// </summary>
         public readonly List<Effect> Effects = new List<Effect>();
 
+        /// <summary>
+        /// <see cref="TimelineObject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">オブジェクト情報</param>
+        /// <param name="lastChainGroup">中間点グループ</param>
+        /// <param name="effectTypes">フィルタ効果定義</param>
+        /// <param name="effectFactory">フィルタ効果のファクトリ</param>
         public TimelineObject(ReadOnlySpan<byte> data, uint lastChainGroup, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
@@ -121,6 +191,11 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// オブジェクトをダンプします。
+        /// </summary>
+        /// <param name="data">オブジェクト情報を格納する配列</param>
+        /// <param name="editingScene">現在編集中のシーン</param>
         public void Dump(Span<byte> data, uint editingScene)
         {
             ((uint)Flag).ToBytes().CopyTo(data);
@@ -182,7 +257,7 @@ namespace Karoterra.AupDotNet.ExEdit
         }
 
         /// <summary>
-        /// オブジェクトファイルを出力する
+        /// オブジェクト情報をオブジェクトファイルに出力します。
         /// </summary>
         /// <param name="writer">出力先</param>
         /// <param name="index">オブジェクトのインデックス</param>

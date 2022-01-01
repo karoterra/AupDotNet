@@ -1,5 +1,8 @@
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// 組込みフィルタ効果のID。
+    /// </summary>
     public enum EffectTypeId
     {
         VideoFile = 0,

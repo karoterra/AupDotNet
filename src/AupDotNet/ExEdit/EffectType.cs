@@ -3,22 +3,63 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// フィルタ効果の定義を表すクラス。
+    /// </summary>
     public partial class EffectType
     {
         public static readonly int Size = 112;
         public static readonly int MaxNameLength = 96;
 
+        /// <summary>
+        /// フィルタ効果のID。
+        /// </summary>
         public int Id { get; }
 
+        /// <summary>
+        /// フィルタ効果の定義フラグ
+        /// </summary>
         public uint Flag { get; }
+
+        /// <summary>
+        /// トラックバーの個数。
+        /// </summary>
         public uint TrackbarNum { get; }
+
+        /// <summary>
+        /// チェックボックスの個数。
+        /// </summary>
         public uint CheckboxNum { get; }
+
+        /// <summary>
+        /// 拡張データのバイト長。
+        /// </summary>
         public uint ExtSize { get; }
+
+        /// <summary>
+        /// フィルタ効果の名前。
+        /// </summary>
         public string Name { get; }
 
+        /// <summary>
+        /// 各トラックバーの定義。
+        /// </summary>
         public TrackbarDefinition[] Trackbars { get; }
+
+        /// <summary>
+        /// 各チェックボックスの定義。
+        /// </summary>
         public CheckboxDefinition[] Checkboxes { get; }
 
+        /// <summary>
+        /// <see cref="EffectType"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="flag">フラグ</param>
+        /// <param name="trackbarNum">トラックバーの個数</param>
+        /// <param name="checkboxNum">チェックボックスの個数</param>
+        /// <param name="extSize">拡張データのバイト長</param>
+        /// <param name="name">名前</param>
         public EffectType(int id, uint flag, uint trackbarNum, uint checkboxNum, uint extSize, string name)
         {
             Id = id;
@@ -32,6 +73,12 @@ namespace Karoterra.AupDotNet.ExEdit
             Checkboxes = new CheckboxDefinition[CheckboxNum];
         }
 
+        /// <summary>
+        /// <see cref="EffectType"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">定義データ</param>
+        /// <param name="id">ID</param>
+        /// <exception cref="ArgumentException"><c>data</c> の長さが正しくありません。</exception>
         public EffectType(ReadOnlySpan<byte> data, int id)
         {
             if (data.Length < Size)
@@ -49,6 +96,17 @@ namespace Karoterra.AupDotNet.ExEdit
             Checkboxes = new CheckboxDefinition[CheckboxNum];
         }
 
+        /// <summary>
+        /// <see cref="EffectType"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="flag">フラグ</param>
+        /// <param name="trackbarNum">トラックバーの個数</param>
+        /// <param name="checkboxNum">チェックボックスの個数</param>
+        /// <param name="extSize">拡張データのバイト長</param>
+        /// <param name="name">名前</param>
+        /// <param name="trackbars">トラックバーの定義</param>
+        /// <param name="checkboxes">チェックボックスの定義</param>
         public EffectType(
             int id, uint flag, uint trackbarNum, uint checkboxNum, uint extSize, string name,
             TrackbarDefinition[] trackbars, CheckboxDefinition[] checkboxes)
@@ -58,6 +116,14 @@ namespace Karoterra.AupDotNet.ExEdit
             checkboxes.CopyTo(Checkboxes, 0);
         }
 
+        /// <summary>
+        /// <see cref="EffectType"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">定義データ</param>
+        /// <param name="id">ID</param>
+        /// <param name="trackbars">トラックバーの定義</param>
+        /// <param name="checkboxes">チェックボックスの定義</param>
+        /// <exception cref="ArgumentException"><c>data</c> の長さが正しくありません。</exception>
         public EffectType(ReadOnlySpan<byte> data, int id, TrackbarDefinition[] trackbars, CheckboxDefinition[] checkboxes)
             : this(data, id)
         {
@@ -65,6 +131,10 @@ namespace Karoterra.AupDotNet.ExEdit
             checkboxes.CopyTo(Checkboxes, 0);
         }
 
+        /// <summary>
+        /// フィルタ効果の定義をダンプする。
+        /// </summary>
+        /// <param name="data">ダンプしたデータを格納する配列</param>
         public void Dump(Span<byte> data)
         {
             Flag.ToBytes().CopyTo(data);

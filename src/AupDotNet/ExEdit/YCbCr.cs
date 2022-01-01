@@ -4,6 +4,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// 輝度 Y と 色差 Cb, Cr で表現される色 YCbCr を表します。
+    /// </summary>
     public struct YCbCr : IEquatable<YCbCr>
     {
         public short Y { get; }

@@ -2,6 +2,11 @@ using Karoterra.AupDotNet.ExEdit.Effects;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// 標準のフィルタ効果ファクトリ。
+    /// 組込みフィルタ効果はそれぞれの <see cref="Effect"/> 派生クラスのインスタンスを、
+    /// 未知のフィルタ効果は <see cref="CustomEffect"/> のインスタンスを生成します。
+    /// </summary>
     public class EffectFactory : IEffectFactory
     {
         public Effect Create(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)

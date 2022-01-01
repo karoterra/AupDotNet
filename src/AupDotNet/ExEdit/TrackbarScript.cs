@@ -6,6 +6,9 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// 拡張編集のトラックバー変化方法スクリプトを表します。
+    /// </summary>
     public class TrackbarScript
     {
         public static readonly int Size = 128;
@@ -16,11 +19,14 @@ namespace Karoterra.AupDotNet.ExEdit
         public static readonly IReadOnlyList<TrackbarScript> Defaults;
 
         /// <summary>
-        /// 拡張編集組込みのトラックバー変化方法
+        /// 拡張編集組込みのトラックバー変化方法。
         /// </summary>
         public static readonly IReadOnlyList<TrackbarScript> BuiltIn;
 
         private string _name = "";
+        /// <summary>
+        /// スクリプト名。
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -34,6 +40,9 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// スクリプトファイル名。
+        /// </summary>
         public string Filename
         {
             get
@@ -48,8 +57,19 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// 中間点無視を有効。
+        /// </summary>
         public bool EnableTwoPoint { get; set; } = false;
+
+        /// <summary>
+        /// パラメータを有効。
+        /// </summary>
         public bool EnableParam { get; set; } = true;
+
+        /// <summary>
+        /// 加減速移動設定を有効。
+        /// </summary>
         public bool EnableSpeed { get; set; } = true;
 
         private static readonly char[] delim = new[] { '@' };
@@ -57,15 +77,27 @@ namespace Karoterra.AupDotNet.ExEdit
         private static readonly string paramSign = "--param:";
         private static readonly string speedSign = "--speed:";
 
+        /// <summary>
+        /// <see cref="TrackbarScript"/> のインスタンスを初期化します。
+        /// </summary>
         public TrackbarScript()
         {
         }
 
+        /// <summary>
+        /// <see cref="TrackbarScript"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="name">スクリプト名</param>
         public TrackbarScript(string name)
         {
             Name = name;
         }
 
+        /// <summary>
+        /// <see cref="TrackbarScript"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">トラックバー変化方法スクリプトのデータ</param>
+        /// <exception cref="ArgumentException"><c>data</c> の長さが正しくありません。</exception>
         public TrackbarScript(ReadOnlySpan<byte> data)
         {
             if (data.Length < Size)
@@ -75,11 +107,19 @@ namespace Karoterra.AupDotNet.ExEdit
             Name = data.ToCleanSjisString();
         }
 
+        /// <summary>
+        /// トラックバー変化方法スクリプト情報をダンプします。
+        /// </summary>
+        /// <param name="data">ダンプされたデータを格納する配列</param>
         public void Dump(Span<byte> data)
         {
             Name.ToSjisBytes(Size).CopyTo(data);
         }
 
+        /// <summary>
+        /// スクリプトをパースします。
+        /// </summary>
+        /// <param name="script">スクリプト</param>
         public void ParseScript(string script)
         {
             EnableTwoPoint = false;
