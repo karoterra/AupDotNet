@@ -82,6 +82,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[4] = value ? 1 : 0;
         }
 
+        /// <summary>合成モード</summary>
         public BlendMode BlendMode { get; set; }
 
         public ParticleEffect()

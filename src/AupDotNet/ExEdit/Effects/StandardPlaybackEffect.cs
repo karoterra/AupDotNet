@@ -9,7 +9,10 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     {
         public static EffectType EffectType { get; }
 
+        /// <summary>音量</summary>
         public Trackbar Volume => Trackbars[0];
+
+        /// <summary>左右</summary>
         public Trackbar Pan => Trackbars[1];
 
         public StandardPlaybackEffect()

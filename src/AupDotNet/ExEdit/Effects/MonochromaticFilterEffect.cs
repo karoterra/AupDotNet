@@ -22,6 +22,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>色の設定</summary>
         public Color Color { get; set; }
 
         public MonochromaticFilterEffect()

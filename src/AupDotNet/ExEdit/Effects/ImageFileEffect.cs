@@ -16,6 +16,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public int Field0x0 { get; set; }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;

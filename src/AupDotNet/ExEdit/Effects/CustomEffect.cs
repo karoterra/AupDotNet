@@ -2,8 +2,14 @@ using System;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// フィルタ効果定義が不明なフィルタ効果を表す <see cref="Effect"/>。
+    /// </summary>
     public class CustomEffect : Effect
     {
+        /// <summary>
+        /// 拡張データ
+        /// </summary>
         public byte[] Data { get; }
 
         public CustomEffect(EffectType type)

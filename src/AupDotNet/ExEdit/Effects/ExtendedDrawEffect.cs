@@ -14,22 +14,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
         public Trackbar Z => Trackbars[2];
+
+        /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[3];
+
+        /// <summary>透明度</summary>
         public Trackbar Alpha => Trackbars[4];
+        
+        /// <summary>縦横比</summary>
         public Trackbar AspectRatio => Trackbars[5];
+        
+        /// <summary>X軸回転</summary>
         public Trackbar RotateX => Trackbars[6];
+        
+        /// <summary>Y軸回転</summary>
         public Trackbar RotateY => Trackbars[7];
+        
+        /// <summary>Z軸回転</summary>
         public Trackbar RotateZ => Trackbars[8];
+        
+        /// <summary>中心X</summary>
         public Trackbar CenterX => Trackbars[9];
+        
+        /// <summary>中心Y</summary>
         public Trackbar CenterY => Trackbars[10];
+        
+        /// <summary>中心Z</summary>
         public Trackbar CenterZ => Trackbars[11];
 
+        /// <summary>裏面を表示しない</summary>
         public bool BackfaceCulling
         {
             get => Checkboxes[1] != 0;
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>合成モード</summary>
         public BlendMode BlendMode { get; set; }
 
         public ExtendedDrawEffect()

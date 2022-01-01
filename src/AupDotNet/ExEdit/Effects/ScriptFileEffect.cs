@@ -7,20 +7,30 @@ using System.IO;
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
     /// <summary>
-    /// AnimationEffect、CustomObjectEffect、CameraEffect、SceneChangeEffect用のベースクラス
+    /// <see cref="AnimationEffect"/>, <see cref="CustomObjectEffect"/>, <see cref="CameraEffect"/>, <see cref="SceneChangeEffect"/> 用のベースクラス。
     /// </summary>
     public abstract class ScriptFileEffect : Effect
     {
         public readonly int MaxNameLength = 256;
         public readonly int MaxParamsLength = 256;
 
+        /// <summary>
+        /// <c>obj.check0</c>
+        /// </summary>
         public bool Check0
         {
             get => Checkboxes[1] != 0;
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// スクリプト番号。
+        /// </summary>
         public short ScriptId { get; set; }
+
+        /// <summary>
+        /// スクリプトのディレクトリフィルタ。
+        /// </summary>
         public ScriptDirectory Directory { get; set; }
 
         private string _name = "";

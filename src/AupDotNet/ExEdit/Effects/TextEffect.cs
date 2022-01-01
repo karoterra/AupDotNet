@@ -5,15 +5,26 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 文字修飾の種類。
+    /// </summary>
     public enum TextType
     {
+        /// <summary>標準文字</summary>
         Normal = 0,
+        /// <summary>影付き文字</summary>
         Shadow = 1,
+        /// <summary>影付き文字(薄)</summary>
         LightShadow = 2,
+        /// <summary>縁取り文字</summary>
         Outline = 3,
+        /// <summary>縁取り文字(細)</summary>
         ThinOutline = 4,
     }
 
+    /// <summary>
+    /// 文字揃え、縦書きの種類
+    /// </summary>
     public enum TextAlign
     {
         TopLeft = 0,

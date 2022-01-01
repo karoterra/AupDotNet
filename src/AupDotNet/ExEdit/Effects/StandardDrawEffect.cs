@@ -14,10 +14,17 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public Trackbar X => Trackbars[0];
         public Trackbar Y => Trackbars[1];
         public Trackbar Z => Trackbars[2];
+
+        /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[3];
+
+        /// <summary>透明度</summary>
         public Trackbar Alpha => Trackbars[4];
+
+        /// <summary>回転</summary>
         public Trackbar Rotate => Trackbars[5];
 
+        /// <summary>合成モード</summary>
         public BlendMode BlendMode { get; set; }
 
         public StandardDrawEffect()

@@ -12,15 +12,20 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public readonly int MaxFilenameLength = 260;
         public static EffectType EffectType { get; }
 
+        /// <summary>再生位置</summary>
         public Trackbar Position => Trackbars[0];
+
+        /// <summary>再生速度</summary>
         public Trackbar Speed => Trackbars[1];
 
+        /// <summary>ループ再生</summary>
         public bool Loop
         {
             get => Checkboxes[0] != 0;
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>動画ファイルと連携</summary>
         public bool LinkVideo
         {
             get => Checkboxes[1] != 0;
@@ -28,6 +33,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _filename = "";
+        /// <summary>参照ファイル</summary>
         public string Filename
         {
             get => _filename;

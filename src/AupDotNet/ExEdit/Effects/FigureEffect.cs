@@ -22,10 +22,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>ライン幅</summary>
         public Trackbar LineWidth => Trackbars[2];
 
+        /// <summary>
+        /// 使用している組込み図形の種類
+        /// </summary>
+        /// <remarks>
+        /// 組込み図形以外の図形を使用している場合は <see cref="Name"/> にその情報が格納されます。
+        /// </remarks>
+        /// <seealso cref="NameType"/>
         public FigureType FigureType { get; set; } = FigureType.Circle;
+
+        /// <summary>色の設定</summary>
         public Color Color { get; set; } = Color.White;
 
         public string _name = "";
+        /// <summary>
+        /// 図形の名前
+        /// </summary>
+        /// <remarks>
+        /// 組込み図形以外の図形を使用している場合はここにその情報が格納されます。
+        /// <see cref="NameType"/> が <see cref="FigureNameType.Figure"/> の場合は figure フォルダの画像ファイル名(拡張子無し)がここに入ります。
+        /// </remarks>
+        /// <seealso cref="NameType"/>
         public string Name
         {
             get => _name;
@@ -39,6 +56,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// 図形の種類
+        /// </summary>
+        /// <remarks>
+        /// 組込み図形以外の図形を使用している場合は <see cref="Name"/> にその情報が格納されます。
+        /// <c>NameType</c> は <c>Name</c> がどのような種類の画像の情報を格納しているかを表します。
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>説明</description>
+        ///     </listheader>
+        ///     <item>
+        ///         <term><see cref="FigureNameType.BuiltIn"/></term>
+        ///         <description>
+        ///             組込み図形が選択されています。
+        ///             <see cref="Name"/> は <c>null</c> または空です。
+        ///             <see cref="FigureType"/> を参照してください。
+        ///         </description>
+        ///     </item>
+        ///     <item>
+        ///         <term><see cref="FigureNameType.Figure"/></term>
+        ///         <description>
+        ///             figureフォルダの画像が選択されています。
+        ///             <see cref="Name"/> には画像のファイル名(拡張子無し)が入っています。
+        ///         </description>
+        ///     </item>
+        ///     <item>
+        ///         <term><see cref="FigureNameType.File"/></term>
+        ///         <description>
+        ///             外部ファイルが参照されています。
+        ///             <see cref="Name"/> には画像ファイルの絶対パスの先頭に <c>*</c> が付いたものが入っています。
+        ///             画像ファイルのパスを取得する場合は <see cref="Filename"/> を参照してください。
+        ///         </description>
+        ///     </item>
+        /// </list>
+        /// </remarks>
         public FigureNameType NameType
         {
             get
@@ -49,6 +102,11 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// <see cref="NameType"/> が <see cref="FigureNameType.File"/> の場合は画像ファイルのパス。
+        /// それ以外の場合は <c>null</c>。
+        /// </summary>
+        /// <seealso cref="NameType"/>
         public string Filename
         {
             get => NameType == FigureNameType.File ? Name.Substring(1) : null;
