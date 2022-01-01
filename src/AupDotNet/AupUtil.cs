@@ -7,8 +7,16 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// <see cref="Karoterra.AupDotNet"/> で使うユーティリティ。
+    /// </summary>
     public static class AupUtil
     {
+        /// <summary>
+        /// リーダから圧縮されたデータを読み込む。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <param name="buf">読み込んだデータ</param>
         public static void Decomp(BinaryReader reader, byte[] buf)
         {
             int index = 0;
@@ -68,6 +76,11 @@ namespace Karoterra.AupDotNet
             return x[0] == x[1] && x[0] == x[2] && x[0] == x[3];
         }
 
+        /// <summary>
+        /// ライタにデータを圧縮して書き込む。
+        /// </summary>
+        /// <param name="writer">ライタ</param>
+        /// <param name="data">書き込むデータ</param>
         public static void Comp(BinaryWriter writer, ReadOnlySpan<byte> data)
         {
             while (data.Length > 0)
@@ -121,6 +134,12 @@ namespace Karoterra.AupDotNet
             }
         }
 
+        /// <summary>
+        /// リーダから圧縮された <c>byte</c> 配列を読み込む。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <param name="length">配列の長さ</param>
+        /// <returns></returns>
         public static byte[] DecompressUInt8Array(BinaryReader reader, int length)
         {
             var buf = new byte[length];
@@ -128,6 +147,12 @@ namespace Karoterra.AupDotNet
             return buf;
         }
 
+        /// <summary>
+        /// リーダから圧縮された <c>uint</c> 配列を読み込む。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <param name="length">配列の長さ</param>
+        /// <returns></returns>
         public static uint[] DecompressUInt32Array(BinaryReader reader, int length)
         {
             var buf = new byte[length * 4];
@@ -140,6 +165,11 @@ namespace Karoterra.AupDotNet
             return array;
         }
 
+        /// <summary>
+        /// ライタに <c>uint</c> 配列を圧縮して書き込む。
+        /// </summary>
+        /// <param name="writer">ライタ</param>
+        /// <param name="array">書き込む配列</param>
         public static void CompressUInt32Array(BinaryWriter writer, uint[] array)
         {
             var buf = new byte[array.Length * sizeof(uint)];

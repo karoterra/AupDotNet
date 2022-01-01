@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// 文字列のバイト長が上限を超えたときにスローされる例外。
+    /// </summary>
     [Serializable()]
     public class MaxByteCountOfStringException : Exception
     {

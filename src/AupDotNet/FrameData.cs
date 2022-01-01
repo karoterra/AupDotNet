@@ -1,5 +1,8 @@
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// フレームの情報を表すクラス。
+    /// </summary>
     public class FrameData
     {
         public uint Video { get; set; }
