@@ -9,6 +9,7 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class EffectFactory : IEffectFactory
     {
+        /// <inheritdoc/>
         public Effect Create(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)
         {
             if (type.Id < 0 || EffectType.Defaults.Length <= type.Id)

@@ -35,7 +35,14 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class Layer
     {
+        /// <summary>
+        /// レイヤー情報のバイナリサイズ。
+        /// </summary>
         public static readonly int Size = 76;
+
+        /// <summary>
+        /// レイヤー名の最大バイト数。
+        /// </summary>
         public static readonly int MaxNameLength = 64;
 
         /// <summary>

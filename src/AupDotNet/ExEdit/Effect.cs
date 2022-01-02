@@ -133,6 +133,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         /// <param name="writer">出力先</param>
         /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
+        /// <param name="chain">中間点で区切られたオブジェクトの後続オブジェクトであるか。<see cref="TimelineObject.Chain"/> の値。</param>
         public void Export(TextWriter writer, IReadOnlyList<TrackbarScript> trackbarScripts, bool chain)
         {
             writer.Write("_name=");

@@ -25,7 +25,14 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class Scene
     {
+        /// <summary>
+        /// シーン情報のバイナリサイズ。
+        /// </summary>
         public static readonly int Size = 220;
+
+        /// <summary>
+        /// シーン名の最大バイト数。
+        /// </summary>
         public static readonly int MaxNameLength = 64;
 
         /// <summary>
@@ -100,17 +107,64 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint SelectedFrameEnd { get; set; }
 
+        /// <summary>
+        /// グリッド(BPM)の表示
+        /// </summary>
         public bool EnableBpmGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)のテンポ
+        /// </summary>
         public uint BpmGridTempo { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)の基準フレーム番号
+        /// </summary>
         public uint BpmGridOffset { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の表示
+        /// </summary>
         public bool EnableXYGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の横幅
+        /// </summary>
         public uint XYGridWidth { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の縦幅
+        /// </summary>
         public uint XYGridHeight { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の表示
+        /// </summary>
         public bool EnableCameraGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の幅
+        /// </summary>
         public uint CameraGridSize { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の数量
+        /// </summary>
         public uint CameraGridNum { get; set; }
+
+        /// <summary>
+        /// フレーム領域外の表示
+        /// </summary>
         public bool ShowOutsideFrame { get; set; }
+
+        /// <summary>
+        /// フレーム領域外の大きさ
+        /// </summary>
         public uint OutsideFrameScale { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)の拍
+        /// </summary>
         public uint BpmGridBeat { get; set; }
         
         /// <summary>
@@ -118,6 +172,9 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint LayerScroll { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0xA0 から 0xDC
+        /// </summary>
         public byte[] Field0xA0_0xDC { get; } = new byte[60];
 
         /// <summary>

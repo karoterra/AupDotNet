@@ -8,7 +8,14 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public partial class EffectType
     {
+        /// <summary>
+        /// フィルタ効果定義のバイナリサイズ。
+        /// </summary>
         public static readonly int Size = 112;
+
+        /// <summary>
+        /// フィルタ効果名の最大バイト数。
+        /// </summary>
         public static readonly int MaxNameLength = 96;
 
         /// <summary>
@@ -144,6 +151,7 @@ namespace Karoterra.AupDotNet.ExEdit
             Name.ToSjisBytes(MaxNameLength).CopyTo(data.Slice(16, MaxNameLength));
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             return obj is EffectType et &&
@@ -155,6 +163,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 Name == et.Name;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return Id ^ (int)Flag ^ (int)TrackbarNum ^ (int)CheckboxNum ^ (int)ExtSize ^ Name.GetHashCode();

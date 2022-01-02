@@ -10,9 +10,19 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class ExEditProject : FilterProject
     {
+        /// <summary>
+        /// オブジェクトを選択していない場合の <see cref="EditingObject"/> の値。
+        /// </summary>
         public static readonly uint NoEditingObject = 0xFFFF_FFFF;
+
+        /// <summary>
+        /// <see cref="BpmGridTempo"/> のスケール。
+        /// </summary>
         protected static readonly int BpmGridTempoScale = 10000;
 
+        /// <summary>
+        /// オフセットアドレス 0xC
+        /// </summary>
         public uint Field0xC { get; set; }
 
         /// <summary>
@@ -20,16 +30,34 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint Zoom { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x14
+        /// </summary>
         public uint Field0x14 { get; set; }
 
         /// <summary>
         /// 選択中のオブジェクトのインデックス
         /// </summary>
+        /// <remarks>
+        /// オブジェクトを選択していない場合は <see cref="NoEditingObject"/> になります。
+        /// </remarks>
         public uint EditingObject { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x1C
+        /// </summary>
         public uint Field0x1C { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x20
+        /// </summary>
         public uint Field0x20 { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x24
+        /// </summary>
         public uint Field0x24 { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x28
+        /// </summary>
         public uint Field0x28 { get; set; }
 
         /// <summary>
@@ -97,6 +125,9 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint BpmGridBeat { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x60
+        /// </summary>
         public uint Field0x60 { get; set; }
 
         /// <summary>
@@ -104,8 +135,14 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint EditingScene { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x78
+        /// </summary>
         public uint Field0x78 { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x80 から 0xFF
+        /// </summary>
         public byte[] Field0x80_0xFF { get; } = new byte[128];
 
         /// <summary>
@@ -223,6 +260,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpData()
         {
             int size = 0x100 + Layer.Size * Layers.Count + Scene.Size * Scenes.Count;

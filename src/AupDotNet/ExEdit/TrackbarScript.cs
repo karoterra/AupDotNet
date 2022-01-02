@@ -11,6 +11,9 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class TrackbarScript
     {
+        /// <summary>
+        /// トラックバー変化方法スクリプト情報の基本バイナリサイズ。
+        /// </summary>
         public static readonly int Size = 128;
 
         /// <summary>

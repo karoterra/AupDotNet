@@ -7,6 +7,7 @@ namespace Karoterra.AupDotNet.ExEdit
     /// </summary>
     public class CustomEffectFactory : IEffectFactory
     {
+        /// <inheritdoc/>
         public Effect Create(EffectType type, Trackbar[] trackbars, int[] checkboxes, byte[] data)
         {
             return new CustomEffect(type, trackbars, checkboxes, data);
