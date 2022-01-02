@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet
     /// </summary>
     public abstract class FilterProject
     {
+        /// <summary>
+        /// フィルタプラグインのデータセクションのヘッダ。
+        /// </summary>
         protected static readonly string Header = "FilterProject 0.1\0";
 
         /// <summary>

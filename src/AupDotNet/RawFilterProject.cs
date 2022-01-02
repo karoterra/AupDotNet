@@ -43,6 +43,7 @@ namespace Karoterra.AupDotNet
             AupUtil.Decomp(reader, Data);
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpData()
         {
             return Data;

@@ -11,10 +11,29 @@ namespace Karoterra.AupDotNet
     /// </summary>
     public class EditHandle
     {
+        /// <summary>
+        /// 圧縮前の EditHandle のバイト長。
+        /// </summary>
         public static readonly int Size = 0x4c09e8;
+
+        /// <summary>
+        /// EditHandle の先頭の圧縮しない部分のバイト長。
+        /// </summary>
         public static readonly int UncompressedSize = 0x20c;
+
+        /// <summary>
+        /// ファイル名の最大バイト長。
+        /// </summary>
         public static readonly int MaxFilename = 260;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
+        /// </summary>
         public static readonly int MaxConfigFiles = 96;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる画像の最大個数。
+        /// </summary>
         public static readonly int MaxImages = 256;
 
         /// <summary>
@@ -117,8 +136,14 @@ namespace Karoterra.AupDotNet
         /// </summary>
         public int CurrentFrame { get; set; }
 
+        /// <summary>
+        /// ビデオ展開形式のビット数
+        /// </summary>
         public short VideoDecodeBit { get; set; }
 
+        /// <summary>
+        /// ビデオ展開形式
+        /// </summary>
         public uint VideoDecodeFormat { get; set; }
 
         /// <summary>
