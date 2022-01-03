@@ -10,6 +10,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class GradationEffect : Effect
     {
+        /// <summary>
+        /// グラデーションのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -53,21 +56,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int Shape { get; set; }
 
+        /// <summary>
+        /// <see cref="GradationEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public GradationEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="GradationEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public GradationEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="GradationEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public GradationEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             BlendMode = (BlendMode)data.Slice(0, 4).ToInt32();
@@ -78,6 +96,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Shape = data.Slice(12, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -90,6 +109,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("blend=");

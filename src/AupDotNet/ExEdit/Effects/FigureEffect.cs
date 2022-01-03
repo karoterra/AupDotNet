@@ -10,7 +10,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class FigureEffect : Effect
     {
+        /// <summary>
+        /// 図形の名前の最大バイト数。
+        /// </summary>
         public readonly int MaxNameLength = 256;
+
+        /// <summary>
+        /// 図形のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
@@ -34,12 +41,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>色の設定</summary>
         public Color Color { get; set; } = Color.White;
 
-        public string _name = "";
+        private string _name = "";
         /// <summary>
         /// 図形の名前
         /// </summary>
         /// <remarks>
         /// 組込み図形以外の図形を使用している場合はここにその情報が格納されます。
+        /// 文字列の最大バイト数は <see cref="MaxNameLength"/> です。
         /// <see cref="NameType"/> が <see cref="FigureNameType.Figure"/> の場合は figure フォルダの画像ファイル名(拡張子無し)がここに入ります。
         /// </remarks>
         /// <seealso cref="NameType"/>
@@ -113,21 +121,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Name = $"*{value}";
         }
 
+        /// <summary>
+        /// <see cref="FigureEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public FigureEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="FigureEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public FigureEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="FigureEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public FigureEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             FigureType = (FigureType)data.Slice(0, 4).ToInt32();
@@ -135,6 +158,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Name = data.Slice(8, MaxNameLength).ToCleanSjisString();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -144,6 +168,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class AudioDelayEffect : Effect
     {
+        /// <summary>
+        /// 音声ディレイのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -13,11 +16,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>遅延(ms)</summary>
         public Trackbar Delay => Trackbars[1];
 
+        /// <summary>
+        /// <see cref="AudioDelayEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public AudioDelayEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="AudioDelayEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public AudioDelayEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

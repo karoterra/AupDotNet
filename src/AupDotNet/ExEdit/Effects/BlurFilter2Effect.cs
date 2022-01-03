@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class BlurFilter2Effect : Effect
     {
+        /// <summary>
+        /// ぼかしフィルタのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -19,11 +22,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>上限値</summary>
         public Trackbar Upper => Trackbars[3];
 
+        /// <summary>
+        /// <see cref="BlurFilter2Effect"/> のインスタンスを初期化します。
+        /// </summary>
         public BlurFilter2Effect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="BlurFilter2Effect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public BlurFilter2Effect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

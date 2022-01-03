@@ -10,12 +10,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class FlashEffect : Effect
     {
+        /// <summary>
+        /// 閃光のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
         public Trackbar Intensity => Trackbars[0];
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[1];
+
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[2];
 
         /// <summary>サイズ固定</summary>
@@ -40,21 +46,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int Mode { get; set; }
 
+        /// <summary>
+        /// <see cref="FlashEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public FlashEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="FlashEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public FlashEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="FlashEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public FlashEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Color = data.ToColor();
@@ -62,6 +83,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mode = data.Slice(4, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -71,6 +93,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("color=");

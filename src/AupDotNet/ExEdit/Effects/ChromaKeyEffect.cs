@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ChromaKeyEffect : Effect
     {
+        /// <summary>
+        /// クロマキーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>色相範囲</summary>
@@ -40,23 +43,41 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>キー(未取得)</summary>
         public int Status { get; set; }
 
+        /// <summary>
+        /// 拡張データのオフセットアドレス 0x6。
+        /// </summary>
         public short Field0x6 { get; set; }
 
+        /// <summary>
+        /// <see cref="ChromaKeyEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ChromaKeyEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ChromaKeyEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="ChromaKeyEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public ChromaKeyEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Color = data.ToYCbCr();
@@ -64,6 +85,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Status = data.Slice(8, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -73,6 +95,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("color_yc=");

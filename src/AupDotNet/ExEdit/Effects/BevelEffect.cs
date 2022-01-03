@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class BevelEffect : Effect
     {
+        /// <summary>
+        /// 凸エッジのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>幅</summary>
@@ -16,11 +19,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>角度</summary>
         public Trackbar Angle => Trackbars[2];
 
+        /// <summary>
+        /// <see cref="BevelEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public BevelEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="BevelEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public BevelEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

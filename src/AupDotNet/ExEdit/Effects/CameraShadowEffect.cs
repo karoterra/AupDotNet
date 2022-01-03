@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraShadowEffect : Effect
     {
+        /// <summary>
+        /// シャドー(カメラ制御)のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>光源X</summary>
@@ -22,11 +25,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>精度</summary>
         public Trackbar Precision => Trackbars[4];
 
+        /// <summary>
+        /// <see cref="CameraShadowEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public CameraShadowEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="CameraShadowEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public CameraShadowEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

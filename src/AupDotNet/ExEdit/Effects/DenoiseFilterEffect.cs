@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DenoiseFilterEffect : Effect
     {
+        /// <summary>
+        /// ノイズ除去フィルタのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -16,11 +19,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>しきい値</summary>
         public Trackbar Threshold => Trackbars[2];
 
+        /// <summary>
+        /// <see cref="DenoiseFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public DenoiseFilterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="DenoiseFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public DenoiseFilterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

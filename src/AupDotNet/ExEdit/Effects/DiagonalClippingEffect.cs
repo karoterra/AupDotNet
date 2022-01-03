@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DiagonalClippingEffect : Effect
     {
+        /// <summary>
+        /// 斜めクリッピングのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>中心X</summary>
@@ -22,11 +25,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>幅</summary>
         public Trackbar Width => Trackbars[4];
 
+        /// <summary>
+        /// <see cref="DiagonalClippingEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public DiagonalClippingEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="DiagonalClippingEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public DiagonalClippingEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

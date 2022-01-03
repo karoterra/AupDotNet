@@ -8,6 +8,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraEffect : ScriptFileEffect
     {
+        /// <summary>
+        /// カメラ効果のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>
@@ -16,16 +19,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public static readonly IReadOnlyList<string> Defaults;
 
+        /// <summary>
+        /// <see cref="CameraEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public CameraEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="CameraEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public CameraEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="CameraEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public CameraEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {

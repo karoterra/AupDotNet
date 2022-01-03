@@ -22,7 +22,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class DisplacementEffect : Effect
     {
+        /// <summary>
+        /// マップの名前の最大バイト数。
+        /// </summary>
         public readonly int MaxNameLength = 256;
+
+        /// <summary>
+        /// ディスプレイスメントマップのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>変形X,拡大変形,回転変形</summary>
@@ -65,12 +72,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <seealso cref="NameType"/>
         public FigureType FigureType { get; set; } = FigureType.Circle;
 
-        public string _name = "";
+        private string _name = "";
         /// <summary>
         /// マップの名前
         /// </summary>
         /// <remarks>
         /// 組込み図形以外のマップを使用している場合はここにその情報が格納されます。
+        /// 文字列の最大バイト数は <see cref="MaxNameLength"/> です。
         /// <see cref="NameType"/> が <see cref="FigureNameType.Figure"/> の場合は figure フォルダの画像ファイル名(拡張子無し)がここに入ります。
         /// </remarks>
         /// <seealso cref="NameType"/>
@@ -184,21 +192,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>変形方法</summary>
         public DisplacementCalc Calc { get; set; }
 
+        /// <summary>
+        /// <see cref="DisplacementEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public DisplacementEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="DisplacementEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="DisplacementEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public DisplacementEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             FigureType = (FigureType)data.Slice(0, 4).ToInt32();
@@ -207,6 +230,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Calc = (DisplacementCalc)data.Slice(0x108, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -217,6 +241,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

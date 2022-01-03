@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class AudioFadeEffect : Effect
     {
+        /// <summary>
+        /// 音声フェードのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>イン</summary>
@@ -13,11 +16,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>アウト</summary>
         public Trackbar Out => Trackbars[1];
 
+        /// <summary>
+        /// <see cref="AudioFadeEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public AudioFadeEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="AudioFadeEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public AudioFadeEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
