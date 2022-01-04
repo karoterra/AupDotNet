@@ -39,14 +39,14 @@ namespace Karoterra.AupDotNet
         /// <summary>
         /// EditHandle のデータ
         /// </summary>
-        public byte[] Data { get; set; }
+        public byte[] Data { get; } = new byte[Size - UncompressedSize];
 
         /// <summary>
         /// フラグ
         /// </summary>
         public uint Flag { get; set; }
 
-        private string _editFilename;
+        private string _editFilename = string.Empty;
         /// <summary>
         /// 編集中のファイル名。
         /// </summary>
@@ -66,7 +66,7 @@ namespace Karoterra.AupDotNet
             }
         }
 
-        private string _outputFilename;
+        private string _outputFilename = string.Empty;
         /// <summary>
         /// 出力ファイル名。
         /// </summary>
@@ -86,7 +86,7 @@ namespace Karoterra.AupDotNet
             }
         }
 
-        private string _projectFilename;
+        private string _projectFilename = string.Empty;
         /// <summary>
         /// プロジェクトファイル名。
         /// </summary>
@@ -169,19 +169,18 @@ namespace Karoterra.AupDotNet
         /// <summary>
         /// プロジェクトファイルに含まれる FilterConfigFile の名前。
         /// </summary>
-        public readonly List<string> ConfigNames = new List<string>(MaxConfigFiles);
+        public readonly List<string> ConfigNames = new(MaxConfigFiles);
 
         /// <summary>
         /// プロジェクトファイルに含まれる画像のハンドル。
         /// </summary>
-        public readonly List<uint> ImageHandles = new List<uint>(MaxImages);
+        public readonly List<uint> ImageHandles = new(MaxImages);
 
         /// <summary>
         /// 新しい <see cref="EditHandle"/> のインスタンスを初期化します。
         /// </summary>
         public EditHandle()
         {
-            Data = new byte[Size - UncompressedSize];
         }
 
         /// <summary>
@@ -210,7 +209,6 @@ namespace Karoterra.AupDotNet
             Flag = reader.ReadUInt32();
             EditFilename = reader.ReadBytes(MaxFilename).ToCleanSjisString();
             OutputFilename = reader.ReadBytes(MaxFilename).ToCleanSjisString();
-            Data = new byte[Size - UncompressedSize];
             AupUtil.Decomp(reader, Data);
             var span = new ReadOnlySpan<byte>(Data);
 

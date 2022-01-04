@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
@@ -17,7 +16,7 @@ namespace Karoterra.AupDotNet
         /// <summary>
         /// フィルタプラグインの名前。
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// フィルタプラグインのデータをダンプします。
