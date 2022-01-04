@@ -60,7 +60,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public LayerFlag Flag { get; set; }
 
-        private string _name;
+        private string _name = string.Empty;
         /// <summary>
         /// レイヤー名
         /// </summary>

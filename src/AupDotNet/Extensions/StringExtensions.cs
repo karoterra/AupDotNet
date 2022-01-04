@@ -224,7 +224,7 @@ namespace Karoterra.AupDotNet.Extensions
         public static string ToUTF16ByteString(this string s, int length)
         {
             byte[] bytes = s.ToUTF16Bytes(length);
-            StringBuilder builder = new StringBuilder(bytes.Length * 2);
+            StringBuilder builder = new(bytes.Length * 2);
             foreach (byte b in bytes)
                 builder.Append(b.ToString("x2"));
             return builder.ToString();

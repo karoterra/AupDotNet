@@ -38,7 +38,7 @@ namespace Karoterra.AupDotNet.ExEdit
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
             => obj is YCbCr other && Equals(other);
 
         /// <inheritdoc/>
@@ -74,7 +74,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <returns>16進文字列</returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder(4 * 3);
+            var builder = new StringBuilder(4 * 3);
             builder.Append($"{(byte)(Y & 0xff):x2}");
             builder.Append($"{(byte)(Y >> 8):x2}");
             builder.Append($"{(byte)(Cb & 0xff):x2}");

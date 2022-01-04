@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
@@ -27,7 +25,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <returns>16進数の文字列</returns>
         public static string BytesToString(byte[] bytes)
         {
-            StringBuilder builder = new StringBuilder(bytes.Length * 2);
+            var builder = new StringBuilder(bytes.Length * 2);
             foreach (byte b in bytes)
                 builder.Append(b.ToString("x2"));
             return builder.ToString();

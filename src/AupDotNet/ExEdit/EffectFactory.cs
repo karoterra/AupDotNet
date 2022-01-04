@@ -21,119 +21,118 @@ namespace Karoterra.AupDotNet.ExEdit
                 return new CustomEffect(type, trackbars, checkboxes, data);
             }
 
-            switch ((EffectTypeId)type.Id)
+            return (EffectTypeId)type.Id switch
             {
-                case EffectTypeId.VideoFile: return new VideoFileEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ImageFile: return new ImageFileEffect(trackbars, checkboxes, data);
-                case EffectTypeId.AudioFile: return new AudioFileEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Text: return new TextEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Figure: return new FigureEffect(trackbars, checkboxes, data);
-                case EffectTypeId.FrameBuffer: return new FrameBufferEffect(trackbars, checkboxes);
-                case EffectTypeId.Waveform: return new WaveformEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Scene: return new SceneEffect(trackbars, checkboxes, data);
-                case EffectTypeId.SceneAudio: return new SceneAudioEffect(trackbars, checkboxes, data);
-                case EffectTypeId.PreviousObject: return new PreviousObjectEffect(trackbars, checkboxes);
-                case EffectTypeId.StandardDraw: return new StandardDrawEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ExtendedDraw: return new ExtendedDrawEffect(trackbars, checkboxes, data);
-                case EffectTypeId.StandardPlayback: return new StandardPlaybackEffect(trackbars, checkboxes);
-                case EffectTypeId.Particle: return new ParticleEffect(trackbars, checkboxes, data);
-                case EffectTypeId.SceneChange: return new SceneChangeEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ColorCorrection: return new ColorCorrectionEffect(trackbars, checkboxes);
-                case EffectTypeId.ColorCorrectionFilter: return new ColorCorrectionFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Clipping: return new ClippingEffect(trackbars, checkboxes);
-                case EffectTypeId.Blur: return new BlurEffect(trackbars, checkboxes);
-                case EffectTypeId.BorderBlur: return new BorderBlurEffect(trackbars, checkboxes);
-                case EffectTypeId.BlurFilter: return new BlurFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Mosaic: return new MosaicEffect(trackbars, checkboxes);
-                case EffectTypeId.MosaicFilter: return new MosaicFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Emission: return new EmissionEffect(trackbars, checkboxes, data);
-                case EffectTypeId.EmissionFilter: return new EmissionFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Flash: return new FlashEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Diffuse: return new DiffuseEffect(trackbars, checkboxes);
-                case EffectTypeId.DiffuseFilter: return new DiffuseFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Glow: return new GlowEffect(trackbars, checkboxes, data);
-                case EffectTypeId.GlowFilter: return new GlowFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ChromaKey: return new ChromaKeyEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ColorKey: return new ColorKeyEffect(trackbars, checkboxes, data);
-                case EffectTypeId.LuminanceKey: return new LuminanceKeyEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Light: return new LightEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Shadow: return new ShadowEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Border: return new BorderEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Bevel: return new BevelEffect(trackbars, checkboxes);
-                case EffectTypeId.EdgeExtraction: return new EdgeExtractionEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Sharpen: return new SharpenEffect(trackbars, checkboxes);
-                case EffectTypeId.Fade: return new FadeEffect(trackbars, checkboxes);
-                case EffectTypeId.Wipe: return new WipeEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Mask: return new MaskEffect(trackbars, checkboxes, data);
-                case EffectTypeId.DiagonalClipping: return new DiagonalClippingEffect(trackbars, checkboxes);
-                case EffectTypeId.RadialBlur: return new RadialBlurEffect(trackbars, checkboxes);
-                case EffectTypeId.RadialBlurFilter: return new RadialBlurFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.DirectionalBlur: return new DirectionalBlurEffect(trackbars, checkboxes);
-                case EffectTypeId.DirectionalBlurFilter: return new DirectionalBlurFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.LensBlur: return new LensBlurEffect(trackbars, checkboxes);
-                case EffectTypeId.LensBlurFilter: return new LensBlurFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.MotionBlur: return new MotionBlurEffect(trackbars, checkboxes);
-                case EffectTypeId.MotionBlurFilter: return new MotionBlurFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Position: return new PositionEffect(trackbars, checkboxes);
-                case EffectTypeId.Zoom: return new ZoomEffect(trackbars, checkboxes);
-                case EffectTypeId.Transparency: return new TransparencyEffect(trackbars, checkboxes);
-                case EffectTypeId.Rotation: return new RotationEffect(trackbars, checkboxes);
-                case EffectTypeId.AreaExpansion: return new AreaExpansionEffect(trackbars, checkboxes);
-                case EffectTypeId.Resize: return new ResizeEffect(trackbars, checkboxes);
-                case EffectTypeId.Rotation90: return new Rotation90Effect(trackbars, checkboxes);
-                case EffectTypeId.Vibration: return new VibrationEffect(trackbars, checkboxes);
-                case EffectTypeId.VibrationFilter: return new VibrationFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Inversion: return new InversionEffect(trackbars, checkboxes);
-                case EffectTypeId.InversionFilter: return new InversionFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Mirror: return new MirrorEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Raster: return new RasterEffect(trackbars, checkboxes);
-                case EffectTypeId.RasterFilter: return new RasterFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Ripple: return new RippleEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ImageLoop: return new ImageLoopEffect(trackbars, checkboxes);
-                case EffectTypeId.ImageLoopFilter: return new ImageLoopFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.PolarTransform: return new PolarTransformEffect(trackbars, checkboxes);
-                case EffectTypeId.Displacement: return new DisplacementEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Noise: return new NoiseEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ColorShift: return new ColorShiftEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ColorShiftFilter: return new ColorShiftFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Monochromatic: return new MonochromaticEffect(trackbars, checkboxes, data);
-                case EffectTypeId.MonochromaticFilter: return new MonochromaticFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Gradation: return new GradationEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ColorSettingEx: return new ColorSettingExEffect(trackbars, checkboxes);
-                case EffectTypeId.ColorSettingExFilter: return new ColorSettingExFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.GamutConversion: return new GamutConversionEffect(trackbars, checkboxes, data);
-                case EffectTypeId.AnimationEffect: return new AnimationEffect(trackbars, checkboxes, data);
-                case EffectTypeId.CustomObject: return new CustomObjectEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Script: return new ScriptEffect(trackbars, checkboxes, data);
-                case EffectTypeId.VideoComposition: return new VideoCompositionEffect(trackbars, checkboxes, data);
-                case EffectTypeId.ImageComposition: return new ImageCompositionEffect(trackbars, checkboxes, data);
-                case EffectTypeId.Deinterlacing: return new DeinterlacingEffect(trackbars, checkboxes, data);
-                case EffectTypeId.CameraOption: return new CameraOptionEffect(trackbars, checkboxes);
-                case EffectTypeId.OffScreen: return new OffScreenEffect(trackbars, checkboxes);
-                case EffectTypeId.Split: return new SplitEffect(trackbars, checkboxes);
-                case EffectTypeId.PartialFilter: return new PartialFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.AudioFade: return new AudioFadeEffect(trackbars, checkboxes);
-                case EffectTypeId.AudioDelay: return new AudioDelayEffect(trackbars, checkboxes);
-                case EffectTypeId.AudioDelayFilter: return new AudioDelayFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.Monaural: return new MonauralEffect(trackbars, checkboxes);
-                case EffectTypeId.TimeControl: return new TimeControlEffect(trackbars, checkboxes, data);
-                case EffectTypeId.GroupControl: return new GroupControlEffect(trackbars, checkboxes, data);
-                case EffectTypeId.CameraControl: return new CameraControlEffect(trackbars, checkboxes, data);
-
-                case EffectTypeId.CameraEffect: return new CameraEffect(trackbars, checkboxes, data);
-                case EffectTypeId.CameraShadow: return new CameraShadowEffect(trackbars, checkboxes);
-                case EffectTypeId.CameraScript: return new CameraScriptEffect(trackbars, checkboxes, data);
-                case EffectTypeId.DenoiseFilter: return new DenoiseFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.SharpenFilter: return new SharpenFilterEffect(trackbars, checkboxes);
-                case EffectTypeId.BlurFilter2: return new BlurFilter2Effect(trackbars, checkboxes);
-                case EffectTypeId.ClipResizeFilter: return new ClipResizeFilterEffect(trackbars, checkboxes, data);
-                case EffectTypeId.FillBorder: return new FillBorderEffect(trackbars, checkboxes);
-                case EffectTypeId.ColorCorrection2: return new ColorCorrection2Effect(trackbars, checkboxes);
-                case EffectTypeId.ColorCorrectionEx: return new ColorCorrectionExEffect(trackbars, checkboxes);
-                case EffectTypeId.VolumeFilter: return new VolumeFilterEffect(trackbars, checkboxes);
-
-                default: return new CustomEffect(type, trackbars, checkboxes, data);
-            }
+                EffectTypeId.VideoFile => new VideoFileEffect(trackbars, checkboxes, data),
+                EffectTypeId.ImageFile => new ImageFileEffect(trackbars, checkboxes, data),
+                EffectTypeId.AudioFile => new AudioFileEffect(trackbars, checkboxes, data),
+                EffectTypeId.Text => new TextEffect(trackbars, checkboxes, data),
+                EffectTypeId.Figure => new FigureEffect(trackbars, checkboxes, data),
+                EffectTypeId.FrameBuffer => new FrameBufferEffect(trackbars, checkboxes),
+                EffectTypeId.Waveform => new WaveformEffect(trackbars, checkboxes, data),
+                EffectTypeId.Scene => new SceneEffect(trackbars, checkboxes, data),
+                EffectTypeId.SceneAudio => new SceneAudioEffect(trackbars, checkboxes, data),
+                EffectTypeId.PreviousObject => new PreviousObjectEffect(trackbars, checkboxes),
+                EffectTypeId.StandardDraw => new StandardDrawEffect(trackbars, checkboxes, data),
+                EffectTypeId.ExtendedDraw => new ExtendedDrawEffect(trackbars, checkboxes, data),
+                EffectTypeId.StandardPlayback => new StandardPlaybackEffect(trackbars, checkboxes),
+                EffectTypeId.Particle => new ParticleEffect(trackbars, checkboxes, data),
+                EffectTypeId.SceneChange => new SceneChangeEffect(trackbars, checkboxes, data),
+                EffectTypeId.ColorCorrection => new ColorCorrectionEffect(trackbars, checkboxes),
+                EffectTypeId.ColorCorrectionFilter => new ColorCorrectionFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Clipping => new ClippingEffect(trackbars, checkboxes),
+                EffectTypeId.Blur => new BlurEffect(trackbars, checkboxes),
+                EffectTypeId.BorderBlur => new BorderBlurEffect(trackbars, checkboxes),
+                EffectTypeId.BlurFilter => new BlurFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Mosaic => new MosaicEffect(trackbars, checkboxes),
+                EffectTypeId.MosaicFilter => new MosaicFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Emission => new EmissionEffect(trackbars, checkboxes, data),
+                EffectTypeId.EmissionFilter => new EmissionFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.Flash => new FlashEffect(trackbars, checkboxes, data),
+                EffectTypeId.Diffuse => new DiffuseEffect(trackbars, checkboxes),
+                EffectTypeId.DiffuseFilter => new DiffuseFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Glow => new GlowEffect(trackbars, checkboxes, data),
+                EffectTypeId.GlowFilter => new GlowFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.ChromaKey => new ChromaKeyEffect(trackbars, checkboxes, data),
+                EffectTypeId.ColorKey => new ColorKeyEffect(trackbars, checkboxes, data),
+                EffectTypeId.LuminanceKey => new LuminanceKeyEffect(trackbars, checkboxes, data),
+                EffectTypeId.Light => new LightEffect(trackbars, checkboxes, data),
+                EffectTypeId.Shadow => new ShadowEffect(trackbars, checkboxes, data),
+                EffectTypeId.Border => new BorderEffect(trackbars, checkboxes, data),
+                EffectTypeId.Bevel => new BevelEffect(trackbars, checkboxes),
+                EffectTypeId.EdgeExtraction => new EdgeExtractionEffect(trackbars, checkboxes, data),
+                EffectTypeId.Sharpen => new SharpenEffect(trackbars, checkboxes),
+                EffectTypeId.Fade => new FadeEffect(trackbars, checkboxes),
+                EffectTypeId.Wipe => new WipeEffect(trackbars, checkboxes, data),
+                EffectTypeId.Mask => new MaskEffect(trackbars, checkboxes, data),
+                EffectTypeId.DiagonalClipping => new DiagonalClippingEffect(trackbars, checkboxes),
+                EffectTypeId.RadialBlur => new RadialBlurEffect(trackbars, checkboxes),
+                EffectTypeId.RadialBlurFilter => new RadialBlurFilterEffect(trackbars, checkboxes),
+                EffectTypeId.DirectionalBlur => new DirectionalBlurEffect(trackbars, checkboxes),
+                EffectTypeId.DirectionalBlurFilter => new DirectionalBlurFilterEffect(trackbars, checkboxes),
+                EffectTypeId.LensBlur => new LensBlurEffect(trackbars, checkboxes),
+                EffectTypeId.LensBlurFilter => new LensBlurFilterEffect(trackbars, checkboxes),
+                EffectTypeId.MotionBlur => new MotionBlurEffect(trackbars, checkboxes),
+                EffectTypeId.MotionBlurFilter => new MotionBlurFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Position => new PositionEffect(trackbars, checkboxes),
+                EffectTypeId.Zoom => new ZoomEffect(trackbars, checkboxes),
+                EffectTypeId.Transparency => new TransparencyEffect(trackbars, checkboxes),
+                EffectTypeId.Rotation => new RotationEffect(trackbars, checkboxes),
+                EffectTypeId.AreaExpansion => new AreaExpansionEffect(trackbars, checkboxes),
+                EffectTypeId.Resize => new ResizeEffect(trackbars, checkboxes),
+                EffectTypeId.Rotation90 => new Rotation90Effect(trackbars, checkboxes),
+                EffectTypeId.Vibration => new VibrationEffect(trackbars, checkboxes),
+                EffectTypeId.VibrationFilter => new VibrationFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Inversion => new InversionEffect(trackbars, checkboxes),
+                EffectTypeId.InversionFilter => new InversionFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Mirror => new MirrorEffect(trackbars, checkboxes, data),
+                EffectTypeId.Raster => new RasterEffect(trackbars, checkboxes),
+                EffectTypeId.RasterFilter => new RasterFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Ripple => new RippleEffect(trackbars, checkboxes, data),
+                EffectTypeId.ImageLoop => new ImageLoopEffect(trackbars, checkboxes),
+                EffectTypeId.ImageLoopFilter => new ImageLoopFilterEffect(trackbars, checkboxes),
+                EffectTypeId.PolarTransform => new PolarTransformEffect(trackbars, checkboxes),
+                EffectTypeId.Displacement => new DisplacementEffect(trackbars, checkboxes, data),
+                EffectTypeId.Noise => new NoiseEffect(trackbars, checkboxes, data),
+                EffectTypeId.ColorShift => new ColorShiftEffect(trackbars, checkboxes, data),
+                EffectTypeId.ColorShiftFilter => new ColorShiftFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.Monochromatic => new MonochromaticEffect(trackbars, checkboxes, data),
+                EffectTypeId.MonochromaticFilter => new MonochromaticFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.Gradation => new GradationEffect(trackbars, checkboxes, data),
+                EffectTypeId.ColorSettingEx => new ColorSettingExEffect(trackbars, checkboxes),
+                EffectTypeId.ColorSettingExFilter => new ColorSettingExFilterEffect(trackbars, checkboxes),
+                EffectTypeId.GamutConversion => new GamutConversionEffect(trackbars, checkboxes, data),
+                EffectTypeId.AnimationEffect => new AnimationEffect(trackbars, checkboxes, data),
+                EffectTypeId.CustomObject => new CustomObjectEffect(trackbars, checkboxes, data),
+                EffectTypeId.Script => new ScriptEffect(trackbars, checkboxes, data),
+                EffectTypeId.VideoComposition => new VideoCompositionEffect(trackbars, checkboxes, data),
+                EffectTypeId.ImageComposition => new ImageCompositionEffect(trackbars, checkboxes, data),
+                EffectTypeId.Deinterlacing => new DeinterlacingEffect(trackbars, checkboxes, data),
+                EffectTypeId.CameraOption => new CameraOptionEffect(trackbars, checkboxes),
+                EffectTypeId.OffScreen => new OffScreenEffect(trackbars, checkboxes),
+                EffectTypeId.Split => new SplitEffect(trackbars, checkboxes),
+                EffectTypeId.PartialFilter => new PartialFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.AudioFade => new AudioFadeEffect(trackbars, checkboxes),
+                EffectTypeId.AudioDelay => new AudioDelayEffect(trackbars, checkboxes),
+                EffectTypeId.AudioDelayFilter => new AudioDelayFilterEffect(trackbars, checkboxes),
+                EffectTypeId.Monaural => new MonauralEffect(trackbars, checkboxes),
+                EffectTypeId.TimeControl => new TimeControlEffect(trackbars, checkboxes, data),
+                EffectTypeId.GroupControl => new GroupControlEffect(trackbars, checkboxes, data),
+                EffectTypeId.CameraControl => new CameraControlEffect(trackbars, checkboxes, data),
+                EffectTypeId.CameraControlEx => new CustomEffect(type, trackbars, checkboxes, data),
+                EffectTypeId.CameraEffect => new CameraEffect(trackbars, checkboxes, data),
+                EffectTypeId.CameraShadow => new CameraShadowEffect(trackbars, checkboxes),
+                EffectTypeId.CameraScript => new CameraScriptEffect(trackbars, checkboxes, data),
+                EffectTypeId.DenoiseFilter => new DenoiseFilterEffect(trackbars, checkboxes),
+                EffectTypeId.SharpenFilter => new SharpenFilterEffect(trackbars, checkboxes),
+                EffectTypeId.BlurFilter2 => new BlurFilter2Effect(trackbars, checkboxes),
+                EffectTypeId.ClipResizeFilter => new ClipResizeFilterEffect(trackbars, checkboxes, data),
+                EffectTypeId.FillBorder => new FillBorderEffect(trackbars, checkboxes),
+                EffectTypeId.ColorCorrection2 => new ColorCorrection2Effect(trackbars, checkboxes),
+                EffectTypeId.ColorCorrectionEx => new ColorCorrectionExEffect(trackbars, checkboxes),
+                EffectTypeId.VolumeFilter => new VolumeFilterEffect(trackbars, checkboxes),
+                _ => new CustomEffect(type, trackbars, checkboxes, data),
+            };
         }
     }
 }

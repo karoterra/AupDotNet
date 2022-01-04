@@ -129,15 +129,13 @@ namespace Karoterra.AupDotNet.ExEdit
             EnableParam = false;
             EnableSpeed = false;
 
-            using (var reader = new StringReader(script))
+            using StringReader reader = new(script);
+            string? line;
+            while ((line = reader.ReadLine()) != null)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (line.StartsWith(twopointSign)) EnableTwoPoint = true;
-                    else if (line.StartsWith(paramSign)) EnableParam = true;
-                    else if (line.StartsWith(speedSign)) EnableSpeed = true;
-                }
+                if (line.StartsWith(twopointSign)) EnableTwoPoint = true;
+                else if (line.StartsWith(paramSign)) EnableParam = true;
+                else if (line.StartsWith(speedSign)) EnableSpeed = true;
             }
         }
 

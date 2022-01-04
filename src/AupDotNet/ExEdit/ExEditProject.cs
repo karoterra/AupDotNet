@@ -187,7 +187,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         /// <param name="rawFilter">生のフィルタプラグインデータ</param>
         /// <param name="effectFactory">フィルタ効果ファクトリ</param>
-        public ExEditProject(RawFilterProject rawFilter, IEffectFactory effectFactory = null)
+        public ExEditProject(RawFilterProject rawFilter, IEffectFactory? effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
 

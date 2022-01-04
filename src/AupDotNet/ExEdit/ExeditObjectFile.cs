@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using Karoterra.AupDotNet;
-using Karoterra.AupDotNet.ExEdit;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
@@ -55,17 +51,17 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <summary>
         /// シーン名
         /// </summary>
-        public string SceneName { get; set; }
+        public string SceneName { get; set; } = string.Empty;
 
         /// <summary>
         /// オブジェクト
         /// </summary>
-        public List<TimelineObject> Objects { get; } = new List<TimelineObject>();
+        public List<TimelineObject> Objects { get; } = new();
 
         /// <summary>
         /// トラックバー変化方法スクリプト
         /// </summary>
-        public List<TrackbarScript> TrackbarScripts { get; } = new List<TrackbarScript>();
+        public List<TrackbarScript> TrackbarScripts { get; } = new();
 
         /// <summary>
         /// <see cref="ExeditObjectFile"/> のインスタンスを初期化します。
