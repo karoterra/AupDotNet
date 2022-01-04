@@ -6,19 +6,53 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// AviUtl で扱われる EditHandle を表すクラス。
+    /// </summary>
     public class EditHandle
     {
+        /// <summary>
+        /// 圧縮前の EditHandle のバイト長。
+        /// </summary>
         public static readonly int Size = 0x4c09e8;
+
+        /// <summary>
+        /// EditHandle の先頭の圧縮しない部分のバイト長。
+        /// </summary>
         public static readonly int UncompressedSize = 0x20c;
+
+        /// <summary>
+        /// ファイル名の最大バイト長。
+        /// </summary>
         public static readonly int MaxFilename = 260;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
+        /// </summary>
         public static readonly int MaxConfigFiles = 96;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる画像の最大個数。
+        /// </summary>
         public static readonly int MaxImages = 256;
 
+        /// <summary>
+        /// EditHandle のデータ
+        /// </summary>
         public byte[] Data { get; set; }
 
+        /// <summary>
+        /// フラグ
+        /// </summary>
         public uint Flag { get; set; }
 
         private string _editFilename;
+        /// <summary>
+        /// 編集中のファイル名。
+        /// </summary>
+        /// <remarks>
+        /// 長さの上限は Shift JIS エンコーディングで <see cref="MaxFilename"/> バイトです。
+        /// </remarks>
         public string EditFilename
         {
             get => _editFilename;
@@ -33,6 +67,12 @@ namespace Karoterra.AupDotNet
         }
 
         private string _outputFilename;
+        /// <summary>
+        /// 出力ファイル名。
+        /// </summary>
+        /// <remarks>
+        /// 長さの上限は Shift JIS エンコーディングで <see cref="MaxFilename"/> バイトです。
+        /// </remarks>
         public string OutputFilename
         {
             get => _outputFilename;
@@ -47,6 +87,12 @@ namespace Karoterra.AupDotNet
         }
 
         private string _projectFilename;
+        /// <summary>
+        /// プロジェクトファイル名。
+        /// </summary>
+        /// <remarks>
+        /// 長さの上限は Shift JIS エンコーディングで <see cref="MaxFilename"/> バイトです。
+        /// </remarks>
         public string ProjectFilename
         {
             get => _projectFilename;
@@ -60,44 +106,99 @@ namespace Karoterra.AupDotNet
             }
         }
 
+        /// <summary>
+        /// フレームの横幅。
+        /// </summary>
         public int Width { get; set; }
 
+        /// <summary>
+        /// フレームの高さ。
+        /// </summary>
         public int Height { get; set; }
 
+        /// <summary>
+        /// フレーム数。
+        /// </summary>
         public int FrameNum { get; set; }
 
+        /// <summary>
+        /// 選択中フレームの開始フレーム。
+        /// </summary>
         public int SelectedFrameStart { get; set; }
 
+        /// <summary>
+        /// 選択中フレームの終了フレーム。
+        /// </summary>
         public int SelectedFrameEnd { get; set; }
 
+        /// <summary>
+        /// 現在表示中のフレーム。
+        /// </summary>
         public int CurrentFrame { get; set; }
 
+        /// <summary>
+        /// ビデオ展開形式のビット数
+        /// </summary>
         public short VideoDecodeBit { get; set; }
 
+        /// <summary>
+        /// ビデオ展開形式
+        /// </summary>
         public uint VideoDecodeFormat { get; set; }
 
+        /// <summary>
+        /// 音声のチャンネル数。
+        /// </summary>
         public short AudioCh { get; set; }
 
+        /// <summary>
+        /// 音声のサンプリングレート。
+        /// </summary>
         public int AudioRate { get; set; }
 
+        /// <summary>
+        /// 映像のフレームレート(分母)。
+        /// </summary>
         public int VideoScale { get; set; }
 
+        /// <summary>
+        /// 映像のフレームレート(分子)。
+        /// </summary>
         public int VideoRate { get; set; }
 
+        /// <summary>
+        /// プロジェクトファイルに含まれる FilterConfigFile の名前。
+        /// </summary>
         public readonly List<string> ConfigNames = new List<string>(MaxConfigFiles);
 
+        /// <summary>
+        /// プロジェクトファイルに含まれる画像のハンドル。
+        /// </summary>
         public readonly List<uint> ImageHandles = new List<uint>(MaxImages);
 
+        /// <summary>
+        /// 新しい <see cref="EditHandle"/> のインスタンスを初期化します。
+        /// </summary>
         public EditHandle()
         {
             Data = new byte[Size - UncompressedSize];
         }
 
+        /// <summary>
+        /// 指定したリーダから <see cref="EditHandle"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <exception cref="FileFormatException">EditHandle のデータではありません。</exception>
         public EditHandle(BinaryReader reader)
         {
             Read(reader);
         }
 
+        /// <summary>
+        /// 指定したリーダから EditHandle を読み込みます。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <exception cref="FileFormatException">EditHandle のデータではありません。</exception>
         public void Read(BinaryReader reader)
         {
             int size = reader.ReadInt32();
@@ -142,6 +243,10 @@ namespace Karoterra.AupDotNet
             }
         }
 
+        /// <summary>
+        /// 指定したライタに EditHandle を書き込みます。
+        /// </summary>
+        /// <param name="writer">ライタ</param>
         public void Write(BinaryWriter writer)
         {
             writer.Write(Size);

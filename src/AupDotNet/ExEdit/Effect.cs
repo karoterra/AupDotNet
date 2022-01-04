@@ -5,15 +5,35 @@ using System.Linq;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// フィルタ効果を表す抽象クラス。
+    /// </summary>
     public abstract class Effect
     {
+        /// <summary>
+        /// フィルタ効果の定義。
+        /// </summary>
         public EffectType Type { get; }
+
+        /// <summary>
+        /// フィルタ効果のフラグ。
+        /// </summary>
         public EffectFlag Flag { get; set; }
 
+        /// <summary>
+        /// トラックバー。
+        /// </summary>
         public Trackbar[] Trackbars { get; }
 
+        /// <summary>
+        /// チェックボックス。
+        /// </summary>
         public int[] Checkboxes { get; }
 
+        /// <summary>
+        /// <see cref="Effect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果の定義</param>
         protected Effect(EffectType type)
         {
             Type = type;
@@ -34,6 +54,13 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// <see cref="Effect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果の定義</param>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <exception cref="ArgumentException">配列の長さが正しくありません。</exception>
         protected Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
         {
             Type = type;
@@ -49,16 +76,33 @@ namespace Karoterra.AupDotNet.ExEdit
             Checkboxes = checkboxes.Clone() as int[];
         }
 
+        /// <summary>
+        /// <see cref="Effect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果の定義</param>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         protected Effect(EffectType type, Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : this(type, trackbars, checkboxes)
         {
             ParseExtData(data);
         }
 
+        /// <summary>
+        /// 拡張データをパースします。
+        /// 拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。
+        /// </summary>
+        /// <param name="data">拡張データ</param>
         protected virtual void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
         }
 
+        /// <summary>
+        /// 拡張データをパースします。
+        /// </summary>
+        /// <param name="data">拡張データ</param>
+        /// <exception cref="ArgumentException">拡張データの長さが正しくありません。</exception>
         public void ParseExtData(ReadOnlySpan<byte> data)
         {
             if (data != null)
@@ -74,16 +118,22 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// 拡張データをダンプします。
+        /// 拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。
+        /// </summary>
+        /// <returns>ダンプされたデータ</returns>
         public virtual byte[] DumpExtData()
         {
             return new byte[Type.ExtSize];
         }
 
         /// <summary>
-        /// オブジェクトファイルを出力する。
+        /// オブジェクトファイルにフィルタ効果の情報を出力します。
         /// </summary>
         /// <param name="writer">出力先</param>
         /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
+        /// <param name="chain">中間点で区切られたオブジェクトの後続オブジェクトであるか。<see cref="TimelineObject.Chain"/> の値。</param>
         public void Export(TextWriter writer, IReadOnlyList<TrackbarScript> trackbarScripts, bool chain)
         {
             writer.Write("_name=");
@@ -114,7 +164,8 @@ namespace Karoterra.AupDotNet.ExEdit
         }
 
         /// <summary>
-        /// オブジェクトファイルにEffectの拡張データを出力する
+        /// オブジェクトファイルにEffectの拡張データを出力します。
+        /// 拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。
         /// </summary>
         /// <param name="writer">出力先</param>
         public virtual void ExportExtData(TextWriter writer)

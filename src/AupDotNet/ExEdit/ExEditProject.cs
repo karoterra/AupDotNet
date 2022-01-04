@@ -5,44 +5,174 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// 拡張編集プラグインを表す <see cref="FilterProject"/>。
+    /// </summary>
     public class ExEditProject : FilterProject
     {
+        /// <summary>
+        /// オブジェクトを選択していない場合の <see cref="EditingObject"/> の値。
+        /// </summary>
         public static readonly uint NoEditingObject = 0xFFFF_FFFF;
+
+        /// <summary>
+        /// <see cref="BpmGridTempo"/> のスケール。
+        /// </summary>
         protected static readonly int BpmGridTempoScale = 10000;
 
+        /// <summary>
+        /// オフセットアドレス 0xC
+        /// </summary>
         public uint Field0xC { get; set; }
+
+        /// <summary>
+        /// タイムラインのズームレベル
+        /// </summary>
         public uint Zoom { get; set; }
+
+        /// <summary>
+        /// オフセットアドレス 0x14
+        /// </summary>
         public uint Field0x14 { get; set; }
+
+        /// <summary>
+        /// 選択中のオブジェクトのインデックス
+        /// </summary>
+        /// <remarks>
+        /// オブジェクトを選択していない場合は <see cref="NoEditingObject"/> になります。
+        /// </remarks>
         public uint EditingObject { get; set; }
+
+        /// <summary>
+        /// オフセットアドレス 0x1C
+        /// </summary>
         public uint Field0x1C { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x20
+        /// </summary>
         public uint Field0x20 { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x24
+        /// </summary>
         public uint Field0x24 { get; set; }
+        /// <summary>
+        /// オフセットアドレス 0x28
+        /// </summary>
         public uint Field0x28 { get; set; }
+
+        /// <summary>
+        /// 拡張編集プラグインのバージョン
+        /// </summary>
         public uint Version { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)の表示
+        /// </summary>
         public bool EnableBpmGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)のテンポ
+        /// </summary>
         public uint BpmGridTempo { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)の基準フレーム番号
+        /// </summary>
         public uint BpmGridOffset { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の表示
+        /// </summary>
         public bool EnableXYGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の横幅
+        /// </summary>
         public uint XYGridWidth { get; set; }
+
+        /// <summary>
+        /// グリッド(XY軸)の縦幅
+        /// </summary>
         public uint XYGridHeight { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の表示
+        /// </summary>
         public bool EnableCameraGrid { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の幅
+        /// </summary>
         public uint CameraGridWidth { get; set; }
+
+        /// <summary>
+        /// グリッド(カメラ制御)の数量
+        /// </summary>
         public uint CameraGridHeight { get; set; }
+
+        /// <summary>
+        /// フレーム領域外の表示
+        /// </summary>
         public bool ShowOutsideFrame { get; set; }
+
+        /// <summary>
+        /// フレーム領域外の大きさ
+        /// </summary>
         public uint OutsideFrameScale { get; set; }
+
+        /// <summary>
+        /// グリッド(BPM)の拍
+        /// </summary>
         public uint BpmGridBeat { get; set; }
+
+        /// <summary>
+        /// オフセットアドレス 0x60
+        /// </summary>
         public uint Field0x60 { get; set; }
+
+        /// <summary>
+        /// 編集中のシーン
+        /// </summary>
         public uint EditingScene { get; set; }
+
+        /// <summary>
+        /// オフセットアドレス 0x78
+        /// </summary>
         public uint Field0x78 { get; set; }
 
+        /// <summary>
+        /// オフセットアドレス 0x80 から 0xFF
+        /// </summary>
         public byte[] Field0x80_0xFF { get; } = new byte[128];
 
+        /// <summary>
+        /// レイヤー情報
+        /// </summary>
         public List<Layer> Layers { get; }
+
+        /// <summary>
+        /// シーン情報
+        /// </summary>
         public List<Scene> Scenes { get; }
+
+        /// <summary>
+        /// トラックバー変化方法スクリプト
+        /// </summary>
         public List<TrackbarScript> TrackbarScripts { get; }
+
+        /// <summary>
+        /// フィルタ効果の定義
+        /// </summary>
         public List<EffectType> EffectTypes { get; }
+
+        /// <summary>
+        /// タイムラインのオブジェクト
+        /// </summary>
         public List<TimelineObject> Objects { get; }
 
+        /// <summary>
+        /// <see cref="ExEditProject"/> のインスタンスを初期化します。
+        /// </summary>
         public ExEditProject()
         {
             Layers = new List<Layer>();
@@ -52,6 +182,11 @@ namespace Karoterra.AupDotNet.ExEdit
             Objects = new List<TimelineObject>();
         }
 
+        /// <summary>
+        /// <see cref="ExEditProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="rawFilter">生のフィルタプラグインデータ</param>
+        /// <param name="effectFactory">フィルタ効果ファクトリ</param>
         public ExEditProject(RawFilterProject rawFilter, IEffectFactory effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
@@ -125,6 +260,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpData()
         {
             int size = 0x100 + Layer.Size * Layers.Count + Scene.Size * Scenes.Count;
@@ -196,6 +332,9 @@ namespace Karoterra.AupDotNet.ExEdit
             return data;
         }
 
+        /// <summary>
+        /// <see cref="Objects"/> をソートします。
+        /// </summary>
         public void SortObjects()
         {
             Objects.Sort((x, y) =>
@@ -214,6 +353,12 @@ namespace Karoterra.AupDotNet.ExEdit
             });
         }
 
+        /// <summary>
+        /// 指定したシーン番号のシーンをオブジェクトファイルとして出力します。
+        /// </summary>
+        /// <param name="sceneIndex">シーン番号</param>
+        /// <param name="editHandle">EditHandle</param>
+        /// <returns>オブジェクトファイル</returns>
         public ExeditObjectFile ExportObject(int sceneIndex, EditHandle editHandle)
         {
             var scene = Scenes.Where(s => s.SceneIndex == sceneIndex).FirstOrDefault();

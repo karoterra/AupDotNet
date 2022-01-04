@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class TimeControlEffect : Effect
     {
+        /// <summary>
+        /// 時間制御のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>位置</summary>
@@ -30,29 +33,48 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>対象レイヤー数</summary>
         public int Range { get; set; }
 
+        /// <summary>
+        /// 拡張データの後半 16 バイト。
+        /// </summary>
         public byte[] Data { get; } = new byte[16];
 
+        /// <summary>
+        /// <see cref="TimeControlEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public TimeControlEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="TimeControlEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public TimeControlEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="TimeControlEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public TimeControlEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Range = data.Slice(0, 4).ToInt32();
             data.Slice(4, 16).CopyTo(Data);
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -61,6 +83,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("range=");

@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorSettingExEffect : Effect
     {
+        /// <summary>
+        /// 拡張色設定のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>R, H</summary>
@@ -23,11 +26,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="ColorSettingExEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ColorSettingExEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ColorSettingExEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ColorSettingExEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

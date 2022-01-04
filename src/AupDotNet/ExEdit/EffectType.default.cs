@@ -4,6 +4,9 @@ namespace Karoterra.AupDotNet.ExEdit
 {
     public partial class EffectType
     {
+        /// <summary>
+        /// 組込みフィルタ効果の定義
+        /// </summary>
         public static EffectType[] Defaults { get; } = new EffectType[]
         {
             VideoFileEffect.EffectType,

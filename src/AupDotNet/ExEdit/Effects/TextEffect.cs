@@ -5,34 +5,63 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 文字修飾の種類。
+    /// </summary>
     public enum TextType
     {
+        /// <summary>標準文字</summary>
         Normal = 0,
+        /// <summary>影付き文字</summary>
         Shadow = 1,
+        /// <summary>影付き文字(薄)</summary>
         LightShadow = 2,
+        /// <summary>縁取り文字</summary>
         Outline = 3,
+        /// <summary>縁取り文字(細)</summary>
         ThinOutline = 4,
     }
 
+    /// <summary>
+    /// 文字揃え、縦書きの種類
+    /// </summary>
     public enum TextAlign
     {
+        /// <summary>左寄せ[上]</summary>
         TopLeft = 0,
+        /// <summary>中央揃え[上]</summary>
         TopCenter,
+        /// <summary>右寄せ[上]</summary>
         TopRight,
+        /// <summary>左寄せ[中]</summary>
         MiddleLeft,
+        /// <summary>中央揃え[中]</summary>
         MiddleCenter,
+        /// <summary>右寄せ[中]</summary>
         MiddleRight,
+        /// <summary>左寄せ[下]</summary>
         BottomLeft,
+        /// <summary>中央揃え[下]</summary>
         BottomCenter,
+        /// <summary>右寄せ[下]</summary>
         BottomRight,
+        /// <summary>縦書 上寄[右]</summary>
         VerticalRightTop,
+        /// <summary>縦書 中央[右]</summary>
         VerticalRightMiddle,
+        /// <summary>縦書 下寄[右]</summary>
         VerticalRightBottom,
+        /// <summary>縦書 上寄[中]</summary>
         VerticalCenterTop,
+        /// <summary>縦書 中央[中]</summary>
         VerticalCenterMiddle,
+        /// <summary>縦書 下寄[中]</summary>
         VerticalCenterBottom,
+        /// <summary>縦書 上寄[左]</summary>
         VerticalLeftTop,
+        /// <summary>縦書 中央[左]</summary>
         VerticalLeftMiddle,
+        /// <summary>縦書 下寄[左]</summary>
         VerticalLeftBottom,
     }
 
@@ -41,8 +70,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class TextEffect : Effect
     {
+        /// <summary>
+        /// フォントの最大バイト数。
+        /// </summary>
         public readonly int MaxFontLength = 32;
+
+        /// <summary>
+        /// テキストの最大バイト数。
+        /// </summary>
         public readonly int MaxTextLength = 2048;
+
+        /// <summary>
+        /// テキストのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
@@ -72,12 +112,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>[B]ボタン(太字)</summary>
         public bool Bold
         {
             get => Checkboxes[3] != 0;
             set => Checkboxes[3] = value ? 1 : 0;
         }
 
+        /// <summary>[I]ボタン(斜体)</summary>
         public bool Italic
         {
             get => Checkboxes[4] != 0;
@@ -114,7 +156,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>影・縁色の設定</summary>
         public Color Color2 { get; set; }
 
-        public string _font = "MS UI Gothic";
+        private string _font = "MS UI Gothic";
+        /// <summary>
+        /// フォント指定
+        /// </summary>
+        /// <remarks>
+        /// 文字列の最大バイト数は <see cref="MaxFontLength"/> です。
+        /// </remarks>
         public string Font
         {
             get => _font;
@@ -129,6 +177,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         private string _text = "";
+        /// <summary>
+        /// エディットボックスに入力されたテキスト。
+        /// </summary>
+        /// <remarks>
+        /// 最大バイト数は <see cref="MaxTextLength"/> です。
+        /// </remarks>
         public string Text
         {
             get => _text;
@@ -142,21 +196,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// <see cref="TextEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public TextEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="TextEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public TextEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="TextEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public TextEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             TextType = (TextType)data[0];
@@ -173,6 +242,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Text = data.Slice(0x30, MaxTextLength).ToCleanUTF16String();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -191,6 +261,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

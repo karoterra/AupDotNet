@@ -5,7 +5,13 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 {
     /// <summary>
     /// シーンチェンジ
+    /// </summary>
+    /// <remarks>
     /// <list type="definition">
+    ///     <listheader>
+    ///         <term>シーンチェンジの種類</term>
+    ///         <description>説明</description>
+    ///     </listheader>
     ///     <item>
     ///         <term>組み込みシーンチェンジ</term>
     ///         <description>Nameは空、ScriptIdにインデックス入り、Paramsはnull。</description>
@@ -23,9 +29,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     ///         <description>Nameに画像ファイル名(拡張子無し)、ScriptIdに0が入り、Paramsはnull。</description>
     ///     </item>
     /// </list>
-    /// </summary>
+    /// </remarks>
     public class SceneChangeEffect : ScriptFileEffect
     {
+        /// <summary>
+        /// シーンチェンジのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>
@@ -49,16 +58,30 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="SceneChangeEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public SceneChangeEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="SceneChangeEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public SceneChangeEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="SceneChangeEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public SceneChangeEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {

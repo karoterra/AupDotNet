@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorShiftFilterEffect : Effect
     {
+        /// <summary>
+        /// 色ずれのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>ずれ幅</summary>
@@ -30,26 +33,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int ShiftType { get; set; }
 
+        /// <summary>
+        /// <see cref="ColorShiftFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ColorShiftFilterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ColorShiftFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ColorShiftFilterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="ColorShiftFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public ColorShiftFilterEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             ShiftType = data.Slice(0, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -57,6 +76,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

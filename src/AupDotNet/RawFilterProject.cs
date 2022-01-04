@@ -3,16 +3,32 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// フィルタプラグインのデータをそのまま <c>byte</c> 配列として保持する <see cref="FilterProject"/>。
+    /// </summary>
     public class RawFilterProject : FilterProject
     {
+        /// <summary>
+        /// フィルタプラグインのデータ
+        /// </summary>
         public byte[] Data { get; set; }
 
+        /// <summary>
+        /// 名前とデータを指定して <see cref="RawFilterProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="name">フィルタプラグインの名前</param>
+        /// <param name="data">フィルタプラグインのデータ</param>
         public RawFilterProject(string name, byte[] data)
         {
             Name = name;
             Data = data;
         }
 
+        /// <summary>
+        /// 指定したリーダから <see cref="RawFilterProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="reader">リーダ</param>
+        /// <exception cref="FileFormatException">フィルタプラグインのデータではありません。</exception>
         public RawFilterProject(BinaryReader reader)
         {
             var header = reader.ReadBytes(18).ToSjisString();
@@ -27,6 +43,7 @@ namespace Karoterra.AupDotNet
             AupUtil.Decomp(reader, Data);
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpData()
         {
             return Data;

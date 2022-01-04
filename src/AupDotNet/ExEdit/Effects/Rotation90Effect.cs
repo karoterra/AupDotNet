@@ -5,16 +5,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class Rotation90Effect : Effect
     {
+        /// <summary>
+        /// ローテーションのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>90度回転</summary>
         public Trackbar Rotation => Trackbars[0];
 
+        /// <summary>
+        /// <see cref="Rotation90Effect"/> のインスタンスを初期化します。
+        /// </summary>
         public Rotation90Effect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="Rotation90Effect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public Rotation90Effect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

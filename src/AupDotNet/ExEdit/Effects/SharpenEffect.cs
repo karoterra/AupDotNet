@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class SharpenEffect : Effect
     {
+        /// <summary>
+        /// シャープのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -13,11 +16,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>範囲</summary>
         public Trackbar Size => Trackbars[1];
 
+        /// <summary>
+        /// <see cref="SharpenEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public SharpenEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="SharpenEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public SharpenEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

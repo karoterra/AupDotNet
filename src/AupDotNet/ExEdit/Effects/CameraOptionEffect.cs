@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class CameraOptionEffect : Effect
     {
+        /// <summary>
+        /// カメラ制御オプションのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>カメラの方を向く</summary>
@@ -35,11 +38,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[3] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="CameraOptionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public CameraOptionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="CameraOptionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public CameraOptionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

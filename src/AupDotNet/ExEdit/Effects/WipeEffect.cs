@@ -9,7 +9,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class WipeEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 256;
+
+        /// <summary>
+        /// ワイプのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>イン</summary>
@@ -51,6 +58,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// transitionフォルダの画像を選んだ時はファイル名(拡張子無し)がここに入る
         /// </summary>
+        /// <remarks>文字列の最大バイト数は <see cref="MaxFilenameLength"/> です。</remarks>
         public string Filename
         {
             get => _filename;
@@ -64,27 +72,43 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// <see cref="WipeEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public WipeEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="WipeEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public WipeEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="WipeEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public WipeEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             WipeType = data.Slice(0, 4).ToInt32();
             Filename = data.Slice(4, MaxFilenameLength).ToCleanSjisString();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -93,6 +117,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

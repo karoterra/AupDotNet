@@ -4,13 +4,31 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// フィルタプラグインのデータを表すクラス用の抽象クラス。
+    /// </summary>
     public abstract class FilterProject
     {
+        /// <summary>
+        /// フィルタプラグインのデータセクションのヘッダ。
+        /// </summary>
         protected static readonly string Header = "FilterProject 0.1\0";
+
+        /// <summary>
+        /// フィルタプラグインの名前。
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// フィルタプラグインのデータをダンプします。
+        /// </summary>
+        /// <returns>フィルタプラグインのデータ</returns>
         public abstract byte[] DumpData();
 
+        /// <summary>
+        /// 指定したライタにフィルタプラグインのデータを書き込みます。
+        /// </summary>
+        /// <param name="writer">ライタ</param>
         public void Write(BinaryWriter writer)
         {
             writer.Write(Header.ToSjisBytes());

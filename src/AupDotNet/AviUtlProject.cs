@@ -6,33 +6,81 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet
 {
+    /// <summary>
+    /// AviUtl プロジェクトファイルを表すクラス。
+    /// </summary>
     public class AviUtlProject
     {
         const string Header = "AviUtl ProjectFile version 0.18\0";
+
+        /// <summary>
+        /// ファイル名の最大バイト長。
+        /// </summary>
         public readonly int MaxFilename = 260;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
+        /// </summary>
         public readonly int MaxConfigFiles = 96;
+
+        /// <summary>
+        /// プロジェクトファイルに含まれる画像の最大個数。
+        /// </summary>
         public readonly int MaxImages = 256;
 
+        /// <summary>
+        /// プロジェクトファイルの <see cref="EditHandle"/>。
+        /// </summary>
         public EditHandle EditHandle { get; set; }
 
+        /// <summary>
+        /// 各フレームの情報。
+        /// </summary>
         public readonly List<FrameData> Frames = new List<FrameData>();
 
+        /// <summary>
+        /// プロジェクトファイルに含まれている FilterConfigFile。
+        /// </summary>
         public readonly List<byte[]> ConfigFiles = new List<byte[]>();
+
+        /// <summary>
+        /// プロジェクトファイルに含まれている画像。
+        /// </summary>
         public readonly List<byte[]> Images = new List<byte[]>();
 
+        /// <summary>
+        /// 画像セクションとフッターの間にある未知のデータ。
+        /// 通常このリストの長さは0です。
+        /// </summary>
         public byte[] DataBeforeFooter { get; set; }
 
+        /// <summary>
+        /// プロジェクトファイルに含まれているフィルタプラグインのデータ。
+        /// </summary>
         public readonly List<FilterProject> FilterProjects = new List<FilterProject>();
 
+        /// <summary>
+        /// 空のプロジェクトファイルを表す新しい <see cref="AviUtlProject"/> のインスタンスを初期化します。
+        /// </summary>
         public AviUtlProject()
         {
         }
 
+        /// <summary>
+        /// 指定したリーダからプロジェクトファイルを読み込んで <see cref="AviUtlProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="reader">プロジェクトファイルを読み込むリーダ</param>
+        /// <exception cref="FileFormatException">AviUtl プロジェクトファイルとして読み込むことができません。</exception>
         public AviUtlProject(BinaryReader reader)
         {
             Read(reader);
         }
 
+        /// <summary>
+        /// 指定したファイルからプロジェクトファイルを読み込んで <see cref="AviUtlProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="path">ファイル名</param>
+        /// <exception cref="FileFormatException">AviUtl プロジェクトファイルとして読み込むことができません。</exception>
         public AviUtlProject(string path)
         {
             using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
@@ -41,6 +89,11 @@ namespace Karoterra.AupDotNet
             }
         }
 
+        /// <summary>
+        /// 指定したリーダからプロジェクトファイルを読み込みます。
+        /// </summary>
+        /// <param name="reader">プロジェクトファイルを読み込むリーダ</param>
+        /// <exception cref="FileFormatException">AviUtl プロジェクトファイルとして読み込むことができません。</exception>
         public void Read(BinaryReader reader)
         {
             var baseStream = reader.BaseStream;
@@ -112,6 +165,10 @@ namespace Karoterra.AupDotNet
             }
         }
 
+        /// <summary>
+        /// 指定したライタにプロジェクトファイルを書き込みます。
+        /// </summary>
+        /// <param name="writer">プロジェクトファイルを書き込むライタ</param>
         public void Write(BinaryWriter writer)
         {
             writer.Write(Header.ToSjisBytes());

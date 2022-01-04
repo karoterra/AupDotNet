@@ -10,10 +10,20 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ShadowEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 256;
+
+        /// <summary>
+        /// シャドーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
+
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[1];
 
         /// <summary>濃さ</summary>
@@ -47,27 +57,43 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// <see cref="ShadowEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ShadowEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ShadowEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ShadowEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="ShadowEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public ShadowEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Color = data.Slice(0, 4).ToColor(true);
             Filename = data.Slice(4, MaxFilenameLength).ToCleanSjisString();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -76,6 +102,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("color=");

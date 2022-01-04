@@ -4,13 +4,28 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 画像ファイル合成
+    /// </summary>
     public class ImageCompositionEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 256;
+
+        /// <summary>
+        /// 画像ファイル合成のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
+
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[1];
+        
+        /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[2];
 
         /// <summary>ループ画像</summary>
@@ -22,6 +37,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         private string _filename = "";
         /// <summary>参照ファイル</summary>
+        /// <remarks>文字列の最大バイト数は <see cref="MaxFilenameLength"/> です。</remarks>
         public string Filename
         {
             get => _filename;
@@ -46,27 +62,43 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int Mode { get; set; }
 
+        /// <summary>
+        /// <see cref="ImageCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ImageCompositionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ImageCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ImageCompositionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="ImageCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public ImageCompositionEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Mode = data.Slice(0, 4).ToInt32();
             Filename = data.Slice(4, MaxFilenameLength).ToCleanSjisString();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -75,6 +107,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("mode=");

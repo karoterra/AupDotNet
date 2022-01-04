@@ -7,38 +7,92 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
+    /// <summary>
+    /// オブジェクト情報フラグ
+    /// </summary>
     [Flags]
     public enum TimelineObjectFlag
     {
+        /// <summary>オブジェクトが有効</summary>
         Enable = 1,
 
+        /// <summary>上のオブジェクトでクリッピング</summary>
         Clipping = 0x0000_0100,
+        /// <summary>カメラ制御の対象</summary>
         Camera = 0x0000_0200,
 
+        /// <summary>メディアオブジェクト</summary>
         Media = 0x0001_0000,
+        /// <summary>音声</summary>
         Audio = 0x0002_0000,
+        /// <summary>メディアオブジェクト用のフィルタ効果、グループ制御</summary>
         MediaFilter = 0x0004_0000,
+        /// <summary>時間制御、グループ制御、カメラ制御、カメラ制御用のフィルタ効果</summary>
         Control = 0x0008_0000,
+        /// <summary>対象レイヤー範囲をタイムラインに表示</summary>
         Range = 0x0010_0000,
     }
 
+    /// <summary>
+    /// 拡張編集でタイムラインに配置するオブジェクトを表すクラス。
+    /// </summary>
     public class TimelineObject
     {
+        /// <summary>
+        /// オブジェクトの基本バイナリサイズ。
+        /// 拡張データのサイズはこれに含まれません。
+        /// </summary>
         public static readonly int BaseSize = 0x5C8;
+
+        /// <summary>
+        /// 拡張データの合計サイズが格納されいている場所のオフセットアドレス。
+        /// </summary>
         public static readonly int ExtSizeOffset = 0xF4;
+
+        /// <summary>
+        /// フィルタ効果の最大個数。
+        /// </summary>
         public static readonly int MaxEffect = 12;
+
+        /// <summary>
+        /// プレビュー文字列の最大バイト数。
+        /// </summary>
         public static readonly int MaxPreviewLength = 64;
 
+        /// <summary>
+        /// このオブジェクトがいずれの中間点グループにも属さない場合は <see cref="ChainGroup"/> はこの値になります。
+        /// </summary>
         public static readonly uint NoChainGroup = 0xFFFF_FFFF;
+
+        /// <summary>
+        /// このオブジェクトがいずれのグループにも属さない場合は <see cref="Group"/> はこの値になります。
+        /// </summary>
         public static readonly uint NoGroup = 0;
 
+        /// <summary>
+        /// オブジェクト情報をダンプした際のバイト長。
+        /// </summary>
         public uint Size => (uint)(BaseSize + ExtSize);
 
+        /// <summary>
+        /// オブジェクトのフラグ
+        /// </summary>
         public TimelineObjectFlag Flag { get; set; }
+
+        /// <summary>
+        /// 開始フレーム。
+        /// </summary>
         public uint StartFrame { get; set; }
+
+        /// <summary>
+        /// 終了フレーム。
+        /// </summary>
         public uint EndFrame { get; set; }
 
         private string _preview;
+        /// <summary>
+        /// プレビュー文字列。
+        /// </summary>
         public string Preview
         {
             get => _preview;
@@ -52,18 +106,68 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// 中間点グループ。
+        /// </summary>
+        /// <remarks>
+        /// この値が同じオブジェクトが同一の中間点グループに属する連結したオブジェクトとなります。
+        /// 中間点で区切られたオブジェクトでない場合は <see cref="NoChainGroup"/> になります。
+        /// </remarks>
         public uint ChainGroup { get; set; }
+
+        /// <summary>
+        /// 中間点で区切られたオブジェクトの後続か。
+        /// </summary>
+        /// <remarks>
+        /// 中間点で区切られたオブジェクトの内、先頭以外のオブジェクトの場合に <c>true</c> になります。
+        /// それ以外の場合は <c>false</c> になります。
+        /// </remarks>
         public bool Chain { get; set; }
 
+        /// <summary>
+        /// 各フィルタ効果の拡張データの合計。
+        /// </summary>
+        /// <remarks>
+        /// 中間点で区切られたオブジェクトの後続の場合、この値は 0 になります。
+        /// </remarks>
         public uint ExtSize => Chain ? 0 : (uint)Effects.Sum(x => x.Type.ExtSize);
 
+        /// <summary>
+        /// オフセットアドレス 0x4B8
+        /// </summary>
         public uint Field0x4B8 { get; set; }
+
+        /// <summary>
+        /// グループ番号。
+        /// </summary>
+        /// <remarks>
+        /// この値が同じオブジェクトが同一のグループに属するオブジェクトとなります。
+        /// いずれのグループにも属さない場合は <see cref="NoGroup"/> になります。
+        /// </remarks>
         public uint Group { get; set; }
+
+        /// <summary>
+        /// レイヤー番号。
+        /// </summary>
         public uint LayerIndex { get; set; }
+
+        /// <summary>
+        /// シーン番号。
+        /// </summary>
         public uint SceneIndex { get; set; }
 
+        /// <summary>
+        /// フィルタ効果。
+        /// </summary>
         public readonly List<Effect> Effects = new List<Effect>();
 
+        /// <summary>
+        /// <see cref="TimelineObject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">オブジェクト情報</param>
+        /// <param name="lastChainGroup">中間点グループ</param>
+        /// <param name="effectTypes">フィルタ効果定義</param>
+        /// <param name="effectFactory">フィルタ効果のファクトリ</param>
         public TimelineObject(ReadOnlySpan<byte> data, uint lastChainGroup, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
@@ -121,6 +225,11 @@ namespace Karoterra.AupDotNet.ExEdit
             }
         }
 
+        /// <summary>
+        /// オブジェクトをダンプします。
+        /// </summary>
+        /// <param name="data">オブジェクト情報を格納する配列</param>
+        /// <param name="editingScene">現在編集中のシーン</param>
         public void Dump(Span<byte> data, uint editingScene)
         {
             ((uint)Flag).ToBytes().CopyTo(data);
@@ -182,7 +291,7 @@ namespace Karoterra.AupDotNet.ExEdit
         }
 
         /// <summary>
-        /// オブジェクトファイルを出力する
+        /// オブジェクト情報をオブジェクトファイルに出力します。
         /// </summary>
         /// <param name="writer">出力先</param>
         /// <param name="index">オブジェクトのインデックス</param>

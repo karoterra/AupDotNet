@@ -5,17 +5,33 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class PositionEffect : Effect
     {
+        /// <summary>
+        /// 座標のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
+
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[1];
+
+        /// <summary>Z</summary>
         public Trackbar Z => Trackbars[2];
 
+        /// <summary>
+        /// <see cref="PositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public PositionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="PositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public PositionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

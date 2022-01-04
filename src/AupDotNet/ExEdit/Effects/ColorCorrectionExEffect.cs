@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ColorCorrectionExEffect : Effect
     {
+        /// <summary>
+        /// 拡張色調補正のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>Y(offs)</summary>
@@ -73,11 +76,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[2] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="ColorCorrectionExEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ColorCorrectionExEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ColorCorrectionExEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ColorCorrectionExEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

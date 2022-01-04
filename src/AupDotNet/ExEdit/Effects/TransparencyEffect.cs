@@ -5,16 +5,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class TransparencyEffect : Effect
     {
+        /// <summary>
+        /// 透明度のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>透明度</summary>
         public Trackbar Transparency => Trackbars[0];
 
+        /// <summary>
+        /// <see cref="TransparencyEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public TransparencyEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="TransparencyEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public TransparencyEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

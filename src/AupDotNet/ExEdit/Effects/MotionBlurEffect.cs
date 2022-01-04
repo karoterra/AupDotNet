@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MotionBlurEffect : Effect
     {
+        /// <summary>
+        /// モーションブラーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>間隔</summary>
@@ -34,11 +37,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[2] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="MotionBlurEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public MotionBlurEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="MotionBlurEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public MotionBlurEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

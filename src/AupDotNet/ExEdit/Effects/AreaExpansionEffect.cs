@@ -5,11 +5,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class AreaExpansionEffect : Effect
     {
+        /// <summary>
+        /// 領域拡張のフィルタ効果定義
+        /// </summary>
         public static EffectType EffectType { get; }
 
+        /// <summary>上</summary>
         public Trackbar Top => Trackbars[0];
+        /// <summary>下</summary>
         public Trackbar Bottom => Trackbars[1];
+        /// <summary>左</summary>
         public Trackbar Left => Trackbars[2];
+        /// <summary>右</summary>
         public Trackbar Right => Trackbars[3];
 
         /// <summary>塗りつぶし</summary>
@@ -19,11 +26,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="AreaExpansionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public AreaExpansionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="AreaExpansionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public AreaExpansionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
