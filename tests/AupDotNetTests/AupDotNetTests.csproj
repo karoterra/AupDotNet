@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AupDotNet\AupDotNet.csproj" />
+    <ProjectReference Include="..\..\src\AupDotNet\AupDotNet.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)\TestData\&quot; &quot;$(TargetDir)\TestData\&quot; /D/E/I/Y" />
+    <Exec Command="xcopy &quot;$(SolutionDir)\testdata\&quot; &quot;$(TargetDir)\TestData\&quot; /D/E/I/Y" />
   </Target>
 
 </Project>
