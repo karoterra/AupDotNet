@@ -10,7 +10,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class VideoFileEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 260;
+
+        /// <summary>
+        /// 動画ファイルのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>再生位置</summary>
@@ -35,6 +42,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         private string _filename = "";
         /// <summary>参照ファイル</summary>
+        /// <remarks>文字列の最大バイト数は <see cref="MaxFilenameLength"/> です。</remarks>
         public string Filename
         {
             get => _filename;
@@ -48,29 +56,48 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// 拡張データの後半 24 バイト。
+        /// </summary>
         public byte[] Data { get; } = new byte[24];
 
+        /// <summary>
+        /// <see cref="VideoFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public VideoFileEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="VideoFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public VideoFileEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="VideoFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public VideoFileEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
             data.Slice(MaxFilenameLength, 24).CopyTo(Data);
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -79,6 +106,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("file=");

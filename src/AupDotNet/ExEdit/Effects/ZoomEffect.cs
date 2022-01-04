@@ -5,19 +5,33 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ZoomEffect : Effect
     {
+        /// <summary>
+        /// 拡大率のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>拡大率</summary>
         public Trackbar Zoom => Trackbars[0];
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[1];
+        
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[2];
 
+        /// <summary>
+        /// <see cref="ZoomEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ZoomEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ZoomEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ZoomEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

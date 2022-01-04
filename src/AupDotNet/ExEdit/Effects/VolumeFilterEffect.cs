@@ -5,16 +5,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class VolumeFilterEffect : Effect
     {
+        /// <summary>
+        /// 音量の調整のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>レベル</summary>
         public Trackbar Level => Trackbars[0];
 
+        /// <summary>
+        /// <see cref="VolumeFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public VolumeFilterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="VolumeFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public VolumeFilterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

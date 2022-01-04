@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RasterEffect : Effect
     {
+        /// <summary>
+        /// ラスターのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>横幅</summary>
@@ -30,11 +33,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="RasterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public RasterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="RasterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public RasterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

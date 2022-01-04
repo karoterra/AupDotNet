@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MosaicEffect : Effect
     {
+        /// <summary>
+        /// モザイクのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>サイズ</summary>
@@ -17,11 +20,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="MosaicEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public MosaicEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="MosaicEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public MosaicEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

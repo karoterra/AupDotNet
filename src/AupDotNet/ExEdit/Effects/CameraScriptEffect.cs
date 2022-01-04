@@ -20,7 +20,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public static EffectType EffectType { get; }
 
         private string _text = "";
-        /// <summary>スクリプトテキスト</summary>
+        /// <summary>
+        /// エディットボックスに入力されたスクリプト。
+        /// </summary>
         /// <remarks>
         /// 最大バイト数は <see cref="MaxTextLength"/> です。
         /// </remarks>

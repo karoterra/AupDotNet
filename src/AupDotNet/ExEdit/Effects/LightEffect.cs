@@ -10,6 +10,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LightEffect : Effect
     {
+        /// <summary>
+        /// ライトのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -31,26 +34,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>色の設定</summary>
         public Color Color { get; set; }
 
+        /// <summary>
+        /// <see cref="LightEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public LightEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="LightEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public LightEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="LightEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public LightEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Color = data.ToColor(true);
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -58,6 +77,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("color=");

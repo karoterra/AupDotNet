@@ -11,7 +11,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public abstract class ScriptFileEffect : Effect
     {
+        /// <summary>
+        /// <see cref="Name"/> の最大バイト数。
+        /// </summary>
         public readonly int MaxNameLength = 256;
+
+        /// <summary>
+        /// <see cref="Params"/> を文字列にしたときの最大バイト数。
+        /// </summary>
         public readonly int MaxParamsLength = 256;
 
         /// <summary>
@@ -34,6 +41,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public ScriptDirectory Directory { get; set; }
 
         private string _name = "";
+        /// <summary>
+        /// 名前。
+        /// </summary>
+        /// <remarks>
+        /// 文字列の最大バイト数は <see cref="MaxNameLength"/> です。
+        /// </remarks>
         public string Name
         {
             get => _name;
@@ -47,23 +60,54 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// スクリプトのパラメータ。
+        /// キーは変数名、値は変数の値です。
+        /// </summary>
+        /// <remarks>
+        /// 拡張編集のスクリプトファイルでは <c>--param</c>, <c>--color</c>, <c>--file</c>, <c>--dialog</c> によってパラメータを保存することができます。
+        /// これは拡張データに <c>変数名1=値1;変数名2=値2;</c> のような形式で保存されます。
+        /// <c>Params</c> はこの変数名を Key、値を Value とする<see cref="Dictionary{TKey, TValue}"/>です。
+        /// 変数が <c>local</c> の場合は Key は <c>local 変数名</c> になります。
+        /// 拡張データに保存するときの最大バイト数は <see cref="MaxParamsLength"/> です。
+        /// </remarks>
+        /// <seealso cref="ParseParams(string)"/>
+        /// <seealso cref="BuildParams"/>
         public Dictionary<string, string> Params { get; set; }
 
+        /// <summary>
+        /// フィルタ効果定義を指定して <see cref="ScriptFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果定義</param>
         protected ScriptFileEffect(EffectType type)
             : base(type)
         {
         }
 
+        /// <summary>
+        /// フィルタ効果定義とトラックバー、チェックボックスの値を指定して <see cref="ScriptFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果定義</param>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         protected ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes)
             : base(type, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// フィルタ効果定義とトラックバー、チェックボックス、拡張データを指定して <see cref="ScriptFileEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="type">フィルタ効果定義</param>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         protected ScriptFileEffect(EffectType type, Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(type, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             ScriptId = data.Slice(0, 2).ToInt16();
@@ -72,6 +116,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Params = ParseParams(data.Slice(0x104, MaxParamsLength).ToCleanSjisString());
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -82,6 +127,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");
@@ -94,6 +140,11 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             writer.WriteLine(BuildParams());
         }
 
+        /// <summary>
+        /// スクリプトファイルのパラメータ文字列を <see cref="Params"/> が扱う辞書形式に構成します。
+        /// </summary>
+        /// <param name="str">スクリプトファイルのパラメータ文字列</param>
+        /// <returns><see cref="Params"/> が扱う辞書</returns>
         public static Dictionary<string, string> ParseParams(string str)
         {
             var dic = new Dictionary<string, string>();
@@ -141,6 +192,10 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return dic;
         }
 
+        /// <summary>
+        /// <see cref="Params"/> を拡張データに保存可能な文字列形式に変換します。
+        /// </summary>
+        /// <returns>パラメータ文字列</returns>
         public string BuildParams()
         {
             if (Params == null)

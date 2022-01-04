@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class ImageLoopEffect : Effect
     {
+        /// <summary>
+        /// 画像ループのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>横回数</summary>
@@ -26,11 +29,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="ImageLoopEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public ImageLoopEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="ImageLoopEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public ImageLoopEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

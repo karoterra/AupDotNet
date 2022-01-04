@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LuminanceKeyEffect : Effect
     {
+        /// <summary>
+        /// ルミナンスキーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>基準輝度</summary>
@@ -28,26 +31,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int TransparentType { get; set; }
 
+        /// <summary>
+        /// <see cref="AnimationEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public LuminanceKeyEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="AnimationEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public LuminanceKeyEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="AnimationEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public LuminanceKeyEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             TransparentType = data.ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -55,6 +74,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

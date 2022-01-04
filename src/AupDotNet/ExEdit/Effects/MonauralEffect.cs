@@ -5,16 +5,27 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class MonauralEffect : Effect
     {
+        /// <summary>
+        /// モノラル化のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>比率</summary>
         public Trackbar Ratio => Trackbars[0];
 
+        /// <summary>
+        /// <see cref="MonauralEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public MonauralEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="MonauralEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public MonauralEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

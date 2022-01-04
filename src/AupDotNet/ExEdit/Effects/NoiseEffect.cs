@@ -9,6 +9,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class NoiseEffect : Effect
     {
+        /// <summary>
+        /// ノイズのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>強さ</summary>
@@ -45,23 +48,41 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>シード</summary>
         public int Seed { get; set; }
 
+        /// <summary>
+        /// 拡張データのオフセットアドレス 0xC。
+        /// </summary>
         public int Field0xC { get; set; }
 
+        /// <summary>
+        /// <see cref="NoiseEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public NoiseEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="NoiseEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public NoiseEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="NoiseEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public NoiseEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             NoiseType = data.Slice(0, 4).ToInt32();
@@ -70,6 +91,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Field0xC = data.Slice(0xC, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -80,6 +102,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("type=");

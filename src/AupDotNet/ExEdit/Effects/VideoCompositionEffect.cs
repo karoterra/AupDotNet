@@ -4,9 +4,19 @@ using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit.Effects
 {
+    /// <summary>
+    /// 動画ファイル合成
+    /// </summary>
     public class VideoCompositionEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 260;
+
+        /// <summary>
+        /// 動画ファイル合成のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>再生範囲,オフセット</summary>
@@ -47,6 +57,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         private string _filename = "";
         /// <summary>参照ファイル</summary>
+        /// <remarks>文字列の最大バイト数は <see cref="MaxFilenameLength"/> です。</remarks>
         public string Filename
         {
             get => _filename;
@@ -60,6 +71,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// 拡張データのオフセットアドレス 0x104 から 20 バイト分のデータ。
+        /// </summary>
         public byte[] Field0x104 { get; } = new byte[20];
 
         /// <summary>
@@ -71,21 +85,36 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         public int Mode { get; set; }
 
+        /// <summary>
+        /// <see cref="VideoCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public VideoCompositionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="VideoCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="VideoCompositionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public VideoCompositionEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
@@ -93,6 +122,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mode = data.Slice(0x118, 4).ToInt32();
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -102,6 +132,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("file=");

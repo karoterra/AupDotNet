@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class InversionEffect : Effect
     {
+        /// <summary>
+        /// 反転のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>上下反転</summary>
@@ -42,11 +45,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[4] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="InversionEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public InversionEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="InversionEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public InversionEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

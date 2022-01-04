@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class LensBlurFilterEffect : Effect
     {
+        /// <summary>
+        /// レンズブラーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>範囲</summary>
@@ -13,11 +16,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>光の強さ</summary>
         public Trackbar Intensity => Trackbars[1];
 
+        /// <summary>
+        /// <see cref="LensBlurFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public LensBlurFilterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="LensBlurFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public LensBlurFilterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

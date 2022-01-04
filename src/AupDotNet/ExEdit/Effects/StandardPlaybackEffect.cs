@@ -7,6 +7,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class StandardPlaybackEffect : Effect
     {
+        /// <summary>
+        /// 標準再生のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>音量</summary>
@@ -15,11 +18,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>左右</summary>
         public Trackbar Pan => Trackbars[1];
 
+        /// <summary>
+        /// <see cref="StandardPlaybackEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public StandardPlaybackEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="StandardPlaybackEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public StandardPlaybackEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

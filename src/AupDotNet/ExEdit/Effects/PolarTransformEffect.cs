@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class PolarTransformEffect : Effect
     {
+        /// <summary>
+        /// 極座標変換のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>中心幅</summary>
@@ -19,11 +22,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>渦巻</summary>
         public Trackbar Spiral => Trackbars[3];
 
+        /// <summary>
+        /// <see cref="PolarTransformEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public PolarTransformEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="PolarTransformEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public PolarTransformEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

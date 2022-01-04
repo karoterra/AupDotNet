@@ -5,6 +5,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class RadialBlurEffect : Effect
     {
+        /// <summary>
+        /// 放射ブラーのフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>範囲</summary>
@@ -23,11 +26,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[0] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="RadialBlurEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public RadialBlurEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="RadialBlurEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public RadialBlurEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {

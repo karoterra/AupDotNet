@@ -10,7 +10,14 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class WaveformEffect : Effect
     {
+        /// <summary>
+        /// ファイル名の最大バイト数。
+        /// </summary>
         public readonly int MaxFilenameLength = 260;
+
+        /// <summary>
+        /// 音声波形表示のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
         /// <summary>横幅</summary>
@@ -34,6 +41,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         private string _filename = "";
         /// <summary>参照ファイル</summary>
+        /// <remarks>文字列の最大バイト数は <see cref="MaxFilenameLength"/> です。</remarks>
         public string Filename
         {
             get => _filename;
@@ -47,6 +55,9 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             }
         }
 
+        /// <summary>
+        /// 拡張データのオフセットアドレス 0x104 から 20 バイト分。
+        /// </summary>
         public byte[] Field0x104 { get; } = new byte[20];
 
         /// <summary>波形の種類</summary>
@@ -70,26 +81,42 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>波形タイプ(0/1)</summary>
         public Color Color { get; set; }
 
+        /// <summary>sample_n</summary>
         public int SampleN { get; set; }
 
         /// <summary>ミラー</summary>
         public bool Mirror { get; set; }
 
+        /// <summary>
+        /// <see cref="WaveformEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public WaveformEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="WaveformEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public WaveformEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックス、拡張データを指定して <see cref="WaveformEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
+        /// <param name="data">拡張データ</param>
         public WaveformEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan<byte> data)
             : base(EffectType, trackbars, checkboxes, data)
         {
         }
 
+        /// <inheritdoc/>
         protected override void ParseExtDataInternal(ReadOnlySpan<byte> data)
         {
             Filename = data.Slice(0, MaxFilenameLength).ToCleanSjisString();
@@ -105,6 +132,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             Mirror = data[0x12C] != 0;
         }
 
+        /// <inheritdoc/>
         public override byte[] DumpExtData()
         {
             var data = new byte[Type.ExtSize];
@@ -122,6 +150,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             return data;
         }
 
+        /// <inheritdoc/>
         public override void ExportExtData(TextWriter writer)
         {
             writer.Write("file=");

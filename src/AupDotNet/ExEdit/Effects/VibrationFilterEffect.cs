@@ -5,10 +5,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// </summary>
     public class VibrationFilterEffect : Effect
     {
+        /// <summary>
+        /// 振動のフィルタ効果定義。
+        /// </summary>
         public static EffectType EffectType { get; }
 
+        /// <summary>X</summary>
         public Trackbar X => Trackbars[0];
+        
+        /// <summary>Y</summary>
         public Trackbar Y => Trackbars[1];
+        
+        /// <summary>Z</summary>
         public Trackbar Z => Trackbars[2];
 
         /// <summary>周期</summary>
@@ -28,11 +36,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             set => Checkboxes[1] = value ? 1 : 0;
         }
 
+        /// <summary>
+        /// <see cref="VibrationFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
         public VibrationFilterEffect()
             : base(EffectType)
         {
         }
 
+        /// <summary>
+        /// トラックバーとチェックボックスの値を指定して <see cref="VibrationFilterEffect"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="trackbars">トラックバー</param>
+        /// <param name="checkboxes">チェックボックス</param>
         public VibrationFilterEffect(Trackbar[] trackbars, int[] checkboxes)
             : base(EffectType, trackbars, checkboxes)
         {
