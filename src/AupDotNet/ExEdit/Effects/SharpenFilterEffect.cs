@@ -51,7 +51,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("下限値", 1, 0, 1024, 128),
                     new TrackbarDefinition("上限値", 1, 0, 1024, 1024),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

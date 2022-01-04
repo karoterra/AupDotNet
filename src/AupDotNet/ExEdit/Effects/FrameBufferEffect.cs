@@ -39,7 +39,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 5, 0x04000008, 0, 1, 0, "フレームバッファ",
-                new TrackbarDefinition[] { },
+                System.Array.Empty<TrackbarDefinition>(),
                 new CheckboxDefinition[]
                 {
                     new CheckboxDefinition("フレームバッファをクリア", true, 0),

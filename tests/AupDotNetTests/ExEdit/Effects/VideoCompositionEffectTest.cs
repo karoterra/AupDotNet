@@ -53,7 +53,7 @@ namespace AupDotNetTests.ExEdit.Effects
             var data = video.DumpExtData();
             int len = video.Filename.GetSjisByteCount() + 1;
             Assert.IsTrue(data.Take(len).SequenceEqual(custom.Data.Take(len)), message);
-            len = video.MaxFilenameLength;
+            len = VideoCompositionEffect.MaxFilenameLength;
             Assert.IsTrue(data.Skip(len).SequenceEqual(custom.Data.Skip(len)), message);
         }
 

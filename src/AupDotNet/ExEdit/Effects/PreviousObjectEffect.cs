@@ -34,8 +34,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 9, 0x04000008, 0, 0, 0, "直前オブジェクト",
-                new TrackbarDefinition[] {},
-                new CheckboxDefinition[] {}
+                Array.Empty<TrackbarDefinition>(),
+                Array.Empty<CheckboxDefinition>()
             );
         }
     }

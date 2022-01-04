@@ -45,7 +45,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("音量", 10, 0, 5000, 1000),
                     new TrackbarDefinition("左右", 10, -1000, 1000, 0),
                 },
-                new CheckboxDefinition[] { }
+                Array.Empty<CheckboxDefinition>()
             );
         }
     }

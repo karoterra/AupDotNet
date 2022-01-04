@@ -13,7 +13,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// ファイル名の最大バイト数。
         /// </summary>
-        public readonly int MaxFilenameLength = 256;
+        public static readonly int MaxFilenameLength = 256;
 
         /// <summary>
         /// 画像ファイルのフィルタ効果定義。
@@ -97,7 +97,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 1, 0x04000408, 0, 1, 260, "画像ファイル",
-                new TrackbarDefinition[] {},
+                Array.Empty<TrackbarDefinition>(),
                 new CheckboxDefinition[]
                 {
                     new CheckboxDefinition("参照ファイル", false, 0),

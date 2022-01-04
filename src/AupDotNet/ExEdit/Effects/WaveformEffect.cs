@@ -13,7 +13,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// ファイル名の最大バイト数。
         /// </summary>
-        public readonly int MaxFilenameLength = 260;
+        public static readonly int MaxFilenameLength = 260;
 
         /// <summary>
         /// 音声波形表示のフィルタ効果定義。

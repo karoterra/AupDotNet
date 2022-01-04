@@ -12,7 +12,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// テキストの最大バイト数。
         /// </summary>
-        public readonly int MaxTextLength = 2048;
+        public static readonly int MaxTextLength = 2048;
 
         /// <summary>
         /// スクリプト制御のフィルタ効果定義。
@@ -93,8 +93,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 81, 0x04000420, 0, 0, 2048, "スクリプト制御",
-                new TrackbarDefinition[] { },
-                new CheckboxDefinition[] { }
+                Array.Empty<TrackbarDefinition>(),
+                Array.Empty<CheckboxDefinition>()
             );
         }
     }

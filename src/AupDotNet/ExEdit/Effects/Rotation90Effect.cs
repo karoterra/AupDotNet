@@ -39,7 +39,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 {
                     new TrackbarDefinition("90度回転", 1, -4, 4, 0),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

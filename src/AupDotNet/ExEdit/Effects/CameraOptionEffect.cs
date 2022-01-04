@@ -60,7 +60,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 85, 0x04000020, 0, 4, 0, "カメラ制御オプション",
-                new TrackbarDefinition[] { },
+                System.Array.Empty<TrackbarDefinition>(),
                 new CheckboxDefinition[]
                 {
                     new CheckboxDefinition("カメラの方を向く", true, 0),

@@ -25,7 +25,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// マップの名前の最大バイト数。
         /// </summary>
-        public readonly int MaxNameLength = 256;
+        public static readonly int MaxNameLength = 256;
 
         /// <summary>
         /// ディスプレイスメントマップのフィルタ効果定義。
@@ -155,7 +155,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// それ以外の場合は <c>null</c>。
         /// </summary>
         /// <seealso cref="NameType"/>
-        public string Filename
+        public string? Filename
         {
             get => NameType == FigureNameType.File ? Name.Substring(1) : null;
             set => Name = $"*{value}";
@@ -171,7 +171,11 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
             get
             {
                 if (NameType != FigureNameType.Scene) return null;
+#if NETSTANDARD2_0
                 bool success = int.TryParse(Name.Substring(1), out int scene);
+#else
+                bool success = int.TryParse(Name.AsSpan(1), out int scene);
+#endif
                 if (success) return scene;
                 else return null;
             }
