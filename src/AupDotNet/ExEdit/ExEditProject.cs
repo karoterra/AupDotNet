@@ -18,7 +18,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <summary>
         /// <see cref="BpmGridTempo"/> のスケール。
         /// </summary>
-        protected static readonly int BpmGridTempoScale = 10000;
+        public static readonly int BpmGridTempoScale = 10000;
 
         /// <summary>
         /// オフセットアドレス 0xC

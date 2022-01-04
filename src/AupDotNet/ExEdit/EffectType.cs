@@ -51,12 +51,12 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <summary>
         /// 各トラックバーの定義。
         /// </summary>
-        public TrackbarDefinition[] Trackbars { get; }
+        public TrackbarDefinition?[] Trackbars { get; }
 
         /// <summary>
         /// 各チェックボックスの定義。
         /// </summary>
-        public CheckboxDefinition[] Checkboxes { get; }
+        public CheckboxDefinition?[] Checkboxes { get; }
 
         /// <summary>
         /// <see cref="EffectType"/> のインスタンスを初期化します。
