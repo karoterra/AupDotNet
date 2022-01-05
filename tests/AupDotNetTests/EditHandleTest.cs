@@ -88,7 +88,15 @@ namespace AupDotNetTests
             Assert.AreEqual(src.VideoScale, dst.VideoScale, "VideoScale");
             Assert.AreEqual(src.VideoRate, dst.VideoRate, "VideoRate");
 
-            Assert.IsTrue(src.ConfigNames.SequenceEqual(dst.ConfigNames), "ConfigNames");
+            CollectionAssert.AreEqual(
+                src.FilterConfigs.Select(x => x.Name).ToArray(),
+                dst.FilterConfigs.Select(x => x.Name).ToArray());
+            for (int i = 0; i < src.FilterConfigs.Count; i++)
+            {
+                CollectionAssert.AreEqual(
+                    src.FilterConfigs[i].Data,
+                    dst.FilterConfigs[i].Data);
+            }
             Assert.IsTrue(src.ImageHandles.SequenceEqual(dst.ImageHandles), "ImageHandles");
 
             var srcData = new ReadOnlySpan<byte>(src.Data);

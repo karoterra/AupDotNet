@@ -168,9 +168,9 @@ namespace Karoterra.AupDotNet
         public List<FrameData> Frames { get; } = new();
 
         /// <summary>
-        /// プロジェクトファイルに含まれる FilterConfigFile の名前。
+        /// プロジェクトファイルに含まれる FilterConfigFile。
         /// </summary>
-        public readonly List<string> ConfigNames = new(MaxConfigFiles);
+        public List<FilterConfig> FilterConfigs { get; } = new();
 
         /// <summary>
         /// プロジェクトファイルに含まれる画像のハンドル。
@@ -226,14 +226,6 @@ namespace Karoterra.AupDotNet
             VideoScale = span.Slice(0x468 - UncompressedSize, 4).ToInt32();
             VideoRate = span.Slice(0x46c - UncompressedSize, 4).ToInt32();
 
-            ConfigNames.Clear();
-            for (int i = 0; i < MaxConfigFiles; i++)
-            {
-                ConfigNames.Add(
-                    span.Slice(0x20d18 - UncompressedSize + i * MaxFilename, MaxFilename)
-                        .ToCleanSjisString()
-                );
-            }
             ImageHandles.Clear();
             for (int i = 0; i < MaxImages; i++)
             {
@@ -268,6 +260,17 @@ namespace Karoterra.AupDotNet
                     Field9 = array9[i],
                 });
             }
+
+            FilterConfigs.Clear();
+            for (int i = 0; i < MaxConfigFiles; i++)
+            {
+                var name = span.Slice(0x20d18 - UncompressedSize + i * MaxFilename, MaxFilename)
+                    .ToCleanSjisString();
+                if (string.IsNullOrEmpty(name)) continue;
+                var configSize = reader.ReadInt32();
+                var data = reader.ReadBytes(configSize);
+                FilterConfigs.Add(new FilterConfig(name, data));
+            }
         }
 
         /// <summary>
@@ -296,10 +299,15 @@ namespace Karoterra.AupDotNet
             VideoScale.ToBytes().CopyTo(span.Slice(0x468 - UncompressedSize, 4));
             VideoRate.ToBytes().CopyTo(span.Slice(0x46c - UncompressedSize, 4));
 
-            for (int i = 0; i < MaxConfigFiles && i < ConfigNames.Count; i++)
+            int index = 0;
+            foreach (var name in FilterConfigs
+                .Select(x => x.Name)
+                .Concat(Enumerable.Repeat(string.Empty, MaxConfigFiles))
+                .Take(MaxConfigFiles))
             {
-                ConfigNames[i].ToSjisBytes(MaxFilename)
-                    .CopyTo(span.Slice(0x20d18 - UncompressedSize + i * MaxFilename));
+                name.ToSjisBytes(MaxFilename)
+                    .CopyTo(span.Slice(0x20d18 - UncompressedSize + index * MaxFilename));
+                index++;
             }
             for (int i = 0; i < MaxImages && i < ImageHandles.Count; i++)
             {
@@ -320,6 +328,12 @@ namespace Karoterra.AupDotNet
             AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
+
+            foreach (var config in FilterConfigs.Take(MaxConfigFiles))
+            {
+                writer.Write(config.Data.Length);
+                writer.Write(config.Data);
+            }
         }
     }
 }

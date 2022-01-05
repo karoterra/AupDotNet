@@ -34,11 +34,6 @@ namespace Karoterra.AupDotNet
         public EditHandle EditHandle { get; set; } = new();
 
         /// <summary>
-        /// プロジェクトファイルに含まれている FilterConfigFile。
-        /// </summary>
-        public readonly List<byte[]> ConfigFiles = new();
-
-        /// <summary>
         /// プロジェクトファイルに含まれている画像。
         /// </summary>
         public readonly List<byte[]> Images = new();
@@ -99,15 +94,6 @@ namespace Karoterra.AupDotNet
 
             EditHandle.Read(reader);
 
-            ConfigFiles.Clear();
-            foreach (var name in EditHandle.ConfigNames)
-            {
-                if (!string.IsNullOrEmpty(name))
-                {
-                    var size = reader.ReadInt32();
-                    ConfigFiles.Add(reader.ReadBytes(size));
-                }
-            }
             Images.Clear();
             foreach (var handle in EditHandle.ImageHandles)
             {
@@ -138,11 +124,6 @@ namespace Karoterra.AupDotNet
             writer.Write(Header.ToSjisBytes());
             EditHandle.Write(writer);
 
-            foreach (var config in ConfigFiles)
-            {
-                writer.Write(config.Length);
-                writer.Write(config);
-            }
             foreach (var image in Images)
             {
                 writer.Write(image.Length);
