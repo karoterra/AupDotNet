@@ -89,18 +89,19 @@ namespace AupDotNetTests
                 Assert.IsTrue(expected.Equals(aup1.Frames[i]));
             }
 
-            using var ms = new MemoryStream();
-            using var bw = new BinaryWriter(ms);
-            using var br = new BinaryReader(ms);
-
-            aup1.Write(bw);
-            ms.Position = 0;
-            AviUtlProject aup2 = new AviUtlProject(br);
-
-            Assert.AreEqual(aup1.Frames.Count, aup2.Frames.Count, "Frames count");
-            for (int i = 0; i < aup1.Frames.Count; i++)
+            using (var ms = new MemoryStream())
+            using (var bw = new BinaryWriter(ms))
+            using (var br = new BinaryReader(ms))
             {
-                Assert.IsTrue(aup1.Frames[i].Equals(aup2.Frames[i]), $"Frames[{i}]");
+                aup1.Write(bw);
+                ms.Position = 0;
+                AviUtlProject aup2 = new AviUtlProject(br);
+
+                Assert.AreEqual(aup1.Frames.Count, aup2.Frames.Count, "Frames count");
+                for (int i = 0; i < aup1.Frames.Count; i++)
+                {
+                    Assert.IsTrue(aup1.Frames[i].Equals(aup2.Frames[i]), $"Frames[{i}]");
+                }
             }
         }
 
@@ -131,19 +132,21 @@ namespace AupDotNetTests
                 CollectionAssert.AreEqual(data, filter.DumpData());
             }
 
-            using var ms = new MemoryStream();
-            using var bw = new BinaryWriter(ms);
-            using var br = new BinaryReader(ms);
-            aup1.Write(bw);
-            ms.Position = 0;
-            AviUtlProject aup2 = new AviUtlProject(br);
-            Assert.AreEqual(aup1.FilterProjects.Count, aup2.FilterProjects.Count, "FilterProjects count");
-            for (int i = 0; i < aup1.FilterProjects.Count; i++)
+            using (var ms = new MemoryStream())
+            using (var bw = new BinaryWriter(ms))
+            using (var br = new BinaryReader(ms))
             {
-                FilterProject f1 = aup1.FilterProjects[i];
-                FilterProject f2 = aup2.FilterProjects[i];
-                Assert.AreEqual(f1.Name, f2.Name, $"Filter name {i}");
-                CollectionAssert.AreEqual(f1.DumpData(), f2.DumpData());
+                aup1.Write(bw);
+                ms.Position = 0;
+                AviUtlProject aup2 = new AviUtlProject(br);
+                Assert.AreEqual(aup1.FilterProjects.Count, aup2.FilterProjects.Count, "FilterProjects count");
+                for (int i = 0; i < aup1.FilterProjects.Count; i++)
+                {
+                    FilterProject f1 = aup1.FilterProjects[i];
+                    FilterProject f2 = aup2.FilterProjects[i];
+                    Assert.AreEqual(f1.Name, f2.Name, $"Filter name {i}");
+                    CollectionAssert.AreEqual(f1.DumpData(), f2.DumpData());
+                }
             }
         }
     }
