@@ -34,11 +34,6 @@ namespace Karoterra.AupDotNet
         public EditHandle EditHandle { get; set; } = new();
 
         /// <summary>
-        /// 各フレームの情報。
-        /// </summary>
-        public readonly List<FrameData> Frames = new();
-
-        /// <summary>
         /// プロジェクトファイルに含まれている FilterConfigFile。
         /// </summary>
         public readonly List<byte[]> ConfigFiles = new();
@@ -64,7 +59,6 @@ namespace Karoterra.AupDotNet
         /// </summary>
         public AviUtlProject()
         {
-            EditHandle = new EditHandle();
         }
 
         /// <summary>
@@ -104,35 +98,6 @@ namespace Karoterra.AupDotNet
             }
 
             EditHandle.Read(reader);
-            var frameNum = reader.ReadInt32();
-
-            var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var audios = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var array2 = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var array3 = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var inters = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var index24Fps = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var editFlags = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var configs = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var vcms = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var array9 = AupUtil.DecompressUInt8Array(reader, frameNum);
-            Frames.Clear();
-            for (int i = 0; i < frameNum; i++)
-            {
-                Frames.Add(new FrameData()
-                {
-                    Video = videos[i],
-                    Audio = audios[i],
-                    Field2 = array2[i],
-                    Field3 = array3[i],
-                    Inter = inters[i],
-                    Index24Fps = index24Fps[i],
-                    EditFlag = editFlags[i],
-                    Config = configs[i],
-                    Vcm = vcms[i],
-                    Field9 = array9[i],
-                });
-            }
 
             ConfigFiles.Clear();
             foreach (var name in EditHandle.ConfigNames)
@@ -172,17 +137,6 @@ namespace Karoterra.AupDotNet
         {
             writer.Write(Header.ToSjisBytes());
             EditHandle.Write(writer);
-            writer.Write(Frames.Count);
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Video).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Inter).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
 
             foreach (var config in ConfigFiles)
             {

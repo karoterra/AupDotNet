@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Karoterra.AupDotNet.Extensions;
 
 
@@ -117,11 +118,6 @@ namespace Karoterra.AupDotNet
         public int Height { get; set; }
 
         /// <summary>
-        /// フレーム数。
-        /// </summary>
-        public int FrameNum { get; set; }
-
-        /// <summary>
         /// 選択中フレームの開始フレーム。
         /// </summary>
         public int SelectedFrameStart { get; set; }
@@ -165,6 +161,11 @@ namespace Karoterra.AupDotNet
         /// 映像のフレームレート(分子)。
         /// </summary>
         public int VideoRate { get; set; }
+
+        /// <summary>
+        /// 各フレームの情報。
+        /// </summary>
+        public List<FrameData> Frames { get; } = new();
 
         /// <summary>
         /// プロジェクトファイルに含まれる FilterConfigFile の名前。
@@ -215,7 +216,6 @@ namespace Karoterra.AupDotNet
             ProjectFilename = span.Slice(0, MaxFilename).ToCleanSjisString();
             Width = span.Slice(0x310 - UncompressedSize, 4).ToInt32();
             Height = span.Slice(0x314 - UncompressedSize, 4).ToInt32();
-            FrameNum = span.Slice(0x318 - UncompressedSize, 4).ToInt32();
             SelectedFrameStart = span.Slice(0x31c - UncompressedSize, 4).ToInt32();
             SelectedFrameEnd = span.Slice(0x320 - UncompressedSize, 4).ToInt32();
             CurrentFrame = span.Slice(0x330 - UncompressedSize, 4).ToInt32();
@@ -239,6 +239,35 @@ namespace Karoterra.AupDotNet
             {
                 ImageHandles.Add(span.Slice(0x4bbd98 - UncompressedSize + i * 4, 4).ToUInt32());
             }
+
+            var frameNum = reader.ReadInt32();
+            var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var audios = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var array2 = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var array3 = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var inters = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var index24Fps = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var editFlags = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var configs = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var vcms = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var array9 = AupUtil.DecompressUInt8Array(reader, frameNum);
+            Frames.Clear();
+            for (int i = 0; i < frameNum; i++)
+            {
+                Frames.Add(new FrameData()
+                {
+                    Video = videos[i],
+                    Audio = audios[i],
+                    Field2 = array2[i],
+                    Field3 = array3[i],
+                    Inter = inters[i],
+                    Index24Fps = index24Fps[i],
+                    EditFlag = editFlags[i],
+                    Config = configs[i],
+                    Vcm = vcms[i],
+                    Field9 = array9[i],
+                });
+            }
         }
 
         /// <summary>
@@ -256,7 +285,7 @@ namespace Karoterra.AupDotNet
             ProjectFilename.ToSjisBytes(MaxFilename).CopyTo(span.Slice(0, MaxFilename));
             Width.ToBytes().CopyTo(span.Slice(0x310 - UncompressedSize, 4));
             Height.ToBytes().CopyTo(span.Slice(0x314 - UncompressedSize, 4));
-            FrameNum.ToBytes().CopyTo(span.Slice(0x318 - UncompressedSize, 4));
+            Frames.Count.ToBytes().CopyTo(span.Slice(0x318 - UncompressedSize, 4));
             SelectedFrameStart.ToBytes().CopyTo(span.Slice(0x31c - UncompressedSize, 4));
             SelectedFrameEnd.ToBytes().CopyTo(span.Slice(0x320 - UncompressedSize, 4));
             CurrentFrame.ToBytes().CopyTo(span.Slice(0x330 - UncompressedSize, 4));
@@ -279,6 +308,18 @@ namespace Karoterra.AupDotNet
             }
 
             AupUtil.Comp(writer, Data);
+
+            writer.Write(Frames.Count);
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Video).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Inter).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
         }
     }
 }
