@@ -27,7 +27,7 @@ namespace AupDotNetTests.ExEdit
             AviUtlProject aup = new AviUtlProject(filename);
             ExEditProject exedit = ExeditTestUtil.GetExEdit(aup);
 
-            var ts = exedit.TrackbarScripts.Where(ts => ts.Name == "トラックバーサンプル").FirstOrDefault();
+            var ts = exedit.TrackbarScripts.Where(x => x.Name == "トラックバーサンプル").FirstOrDefault();
             if (ts != null)
             {
                 ts.EnableParam = true;
@@ -46,7 +46,7 @@ namespace AupDotNetTests.ExEdit
                 writer.NewLine = "\r\n";
                 exo.Write(writer);
 
-                var actual = writer.ToString().Split("\r\n");
+                var actual = writer.ToString().Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < expected.Length; i++)
                 {
                     Assert.AreEqual(expected[i], actual[i], $"Line {i + 1}");

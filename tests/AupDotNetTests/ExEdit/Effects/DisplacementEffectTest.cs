@@ -83,7 +83,7 @@ namespace AupDotNetTests.ExEdit.Effects
             var data = disp.DumpExtData();
             var len = 4 + disp.Name.GetSjisByteCount() + 1;
             Assert.IsTrue(data.Take(len).SequenceEqual(custom.Data.Take(len)), message);
-            len = 4 + disp.MaxNameLength;
+            len = 4 + DisplacementEffect.MaxNameLength;
             Assert.IsTrue(data.Skip(len).SequenceEqual(custom.Data.Skip(len)), message);
         }
 

@@ -39,7 +39,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 {
                     new TrackbarDefinition("透明度", 10, 0, 1000, 0),
                 },
-                new CheckboxDefinition[] {}
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

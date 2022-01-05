@@ -63,7 +63,7 @@ namespace Karoterra.AupDotNet
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is FrameData frame &&
                 Video == frame.Video && Audio == frame.Audio &&

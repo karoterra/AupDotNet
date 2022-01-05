@@ -58,7 +58,7 @@ namespace AupDotNetTests.ExEdit.Effects
             var data = wave.DumpExtData();
             int len = wave.Filename.GetSjisByteCount() + 1;
             Assert.IsTrue(data.Take(len).SequenceEqual(custom.Data.Take(len)), message);
-            len = wave.MaxFilenameLength;
+            len = WaveformEffect.MaxFilenameLength;
             Assert.IsTrue(data.Skip(len).SequenceEqual(custom.Data.Skip(len)), message);
         }
 

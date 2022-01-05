@@ -60,7 +60,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 61, 0x04000000, 0, 4, 0, "反転",
-                new TrackbarDefinition[] { },
+                System.Array.Empty<TrackbarDefinition>(),
                 new CheckboxDefinition[]
                 {
                     new CheckboxDefinition("上下反転", true, 0),

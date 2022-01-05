@@ -86,7 +86,7 @@ namespace AupDotNetTests.ExEdit.Effects
             var data = mask.DumpExtData();
             var len = 4 + mask.Name.GetSjisByteCount() + 1;
             Assert.IsTrue(data.Take(len).SequenceEqual(custom.Data.Take(len)), message);
-            len = 4 + mask.MaxNameLength;
+            len = 4 + MaskEffect.MaxNameLength;
             Assert.IsTrue(data.Skip(len).SequenceEqual(custom.Data.Skip(len)), message);
         }
 

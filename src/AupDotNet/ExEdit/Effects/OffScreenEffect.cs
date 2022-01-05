@@ -32,8 +32,8 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 86, 0x04000020, 0, 0, 0, "オフスクリーン描画",
-                new TrackbarDefinition[] { },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<TrackbarDefinition>(),
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

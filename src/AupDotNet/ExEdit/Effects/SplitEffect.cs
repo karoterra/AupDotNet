@@ -43,7 +43,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("横分割数", 1, 1, 100, 10),
                     new TrackbarDefinition("縦分割数", 1, 1, 100, 10),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

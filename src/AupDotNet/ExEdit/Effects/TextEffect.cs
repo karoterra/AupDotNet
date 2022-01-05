@@ -73,12 +73,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// フォントの最大バイト数。
         /// </summary>
-        public readonly int MaxFontLength = 32;
+        public static readonly int MaxFontLength = 32;
 
         /// <summary>
         /// テキストの最大バイト数。
         /// </summary>
-        public readonly int MaxTextLength = 2048;
+        public static readonly int MaxTextLength = 2048;
 
         /// <summary>
         /// テキストのフィルタ効果定義。

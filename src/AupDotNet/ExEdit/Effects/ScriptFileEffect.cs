@@ -14,12 +14,12 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// <see cref="Name"/> の最大バイト数。
         /// </summary>
-        public readonly int MaxNameLength = 256;
+        public static readonly int MaxNameLength = 256;
 
         /// <summary>
         /// <see cref="Params"/> を文字列にしたときの最大バイト数。
         /// </summary>
-        public readonly int MaxParamsLength = 256;
+        public static readonly int MaxParamsLength = 256;
 
         /// <summary>
         /// <c>obj.check0</c>
@@ -73,7 +73,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </remarks>
         /// <seealso cref="ParseParams(string)"/>
         /// <seealso cref="BuildParams"/>
-        public Dictionary<string, string> Params { get; set; }
+        public Dictionary<string, string>? Params { get; set; }
 
         /// <summary>
         /// フィルタ効果定義を指定して <see cref="ScriptFileEffect"/> のインスタンスを初期化します。
@@ -145,7 +145,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// </summary>
         /// <param name="str">スクリプトファイルのパラメータ文字列</param>
         /// <returns><see cref="Params"/> が扱う辞書</returns>
-        public static Dictionary<string, string> ParseParams(string str)
+        public static Dictionary<string, string>? ParseParams(string str)
         {
             var dic = new Dictionary<string, string>();
             if (str == null || str == "")
@@ -214,7 +214,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                 }
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             foreach (var pair in Params)
             {
                 sb.Append(pair.Key);

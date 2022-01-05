@@ -77,7 +77,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         {
             EffectType = new EffectType(
                 84, 0x04000420, 0, 1, 4, "インターレース解除",
-                new TrackbarDefinition[] { },
+                Array.Empty<TrackbarDefinition>(),
                 new CheckboxDefinition[]
                 {
                     new CheckboxDefinition("奇数解除", false, 0),

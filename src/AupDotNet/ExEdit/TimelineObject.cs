@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Karoterra.AupDotNet.ExEdit.Effects;
 using Karoterra.AupDotNet.Extensions;
 
 namespace Karoterra.AupDotNet.ExEdit
@@ -89,7 +88,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         public uint EndFrame { get; set; }
 
-        private string _preview;
+        private string _preview = string.Empty;
         /// <summary>
         /// プレビュー文字列。
         /// </summary>
@@ -159,7 +158,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <summary>
         /// フィルタ効果。
         /// </summary>
-        public readonly List<Effect> Effects = new List<Effect>();
+        public readonly List<Effect> Effects = new();
 
         /// <summary>
         /// <see cref="TimelineObject"/> のインスタンスを初期化します。
@@ -168,7 +167,7 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <param name="lastChainGroup">中間点グループ</param>
         /// <param name="effectTypes">フィルタ効果定義</param>
         /// <param name="effectFactory">フィルタ効果のファクトリ</param>
-        public TimelineObject(ReadOnlySpan<byte> data, uint lastChainGroup, IReadOnlyList<EffectType> effectTypes, IEffectFactory effectFactory = null)
+        public TimelineObject(ReadOnlySpan<byte> data, uint lastChainGroup, IReadOnlyList<EffectType> effectTypes, IEffectFactory? effectFactory = null)
         {
             if (effectFactory == null) effectFactory = new EffectFactory();
 

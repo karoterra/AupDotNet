@@ -39,7 +39,7 @@ namespace AupDotNetTests.ExEdit.Effects
             var data = audio.DumpExtData();
             int len = audio.Filename.GetSjisByteCount() + 1;
             Assert.IsTrue(data.Take(len).SequenceEqual(custom.Data.Take(len)), message);
-            len = audio.MaxFilenameLength;
+            len = AudioFileEffect.MaxFilenameLength;
             Assert.IsTrue(data.Skip(len).SequenceEqual(custom.Data.Skip(len)), message);
         }
 

@@ -16,54 +16,55 @@ namespace Karoterra.AupDotNet
         /// <summary>
         /// ファイル名の最大バイト長。
         /// </summary>
-        public readonly int MaxFilename = 260;
+        public static readonly int MaxFilename = 260;
 
         /// <summary>
         /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
         /// </summary>
-        public readonly int MaxConfigFiles = 96;
+        public static readonly int MaxConfigFiles = 96;
 
         /// <summary>
         /// プロジェクトファイルに含まれる画像の最大個数。
         /// </summary>
-        public readonly int MaxImages = 256;
+        public static readonly int MaxImages = 256;
 
         /// <summary>
         /// プロジェクトファイルの <see cref="EditHandle"/>。
         /// </summary>
-        public EditHandle EditHandle { get; set; }
+        public EditHandle EditHandle { get; set; } = new();
 
         /// <summary>
         /// 各フレームの情報。
         /// </summary>
-        public readonly List<FrameData> Frames = new List<FrameData>();
+        public readonly List<FrameData> Frames = new();
 
         /// <summary>
         /// プロジェクトファイルに含まれている FilterConfigFile。
         /// </summary>
-        public readonly List<byte[]> ConfigFiles = new List<byte[]>();
+        public readonly List<byte[]> ConfigFiles = new();
 
         /// <summary>
         /// プロジェクトファイルに含まれている画像。
         /// </summary>
-        public readonly List<byte[]> Images = new List<byte[]>();
+        public readonly List<byte[]> Images = new();
 
         /// <summary>
         /// 画像セクションとフッターの間にある未知のデータ。
         /// 通常このリストの長さは0です。
         /// </summary>
-        public byte[] DataBeforeFooter { get; set; }
+        public byte[] DataBeforeFooter { get; set; } = Array.Empty<byte>();
 
         /// <summary>
         /// プロジェクトファイルに含まれているフィルタプラグインのデータ。
         /// </summary>
-        public readonly List<FilterProject> FilterProjects = new List<FilterProject>();
+        public readonly List<FilterProject> FilterProjects = new();
 
         /// <summary>
         /// 空のプロジェクトファイルを表す新しい <see cref="AviUtlProject"/> のインスタンスを初期化します。
         /// </summary>
         public AviUtlProject()
         {
+            EditHandle = new EditHandle();
         }
 
         /// <summary>
@@ -83,10 +84,8 @@ namespace Karoterra.AupDotNet
         /// <exception cref="FileFormatException">AviUtl プロジェクトファイルとして読み込むことができません。</exception>
         public AviUtlProject(string path)
         {
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
-            {
-                Read(reader);
-            }
+            using BinaryReader reader = new(File.OpenRead(path));
+            Read(reader);
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace Karoterra.AupDotNet
                 throw new FileFormatException("Cannot find AviUtl ProjectFile header.");
             }
 
-            EditHandle = new EditHandle(reader);
+            EditHandle.Read(reader);
             var frameNum = reader.ReadInt32();
 
             var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
@@ -205,7 +204,12 @@ namespace Karoterra.AupDotNet
             }
         }
 
-        byte[] SkipToFooter(BinaryReader reader)
+        /// <summary>
+        /// リーダーをフッターが見つかるまで進めます。
+        /// </summary>
+        /// <param name="reader">AviUtl プロジェクトファイルを読み込むリーダー</param>
+        /// <returns>フッターの前のデータ</returns>
+        protected static byte[] SkipToFooter(BinaryReader reader)
         {
             int index = 0;
             var footer = Header.ToSjisBytes();

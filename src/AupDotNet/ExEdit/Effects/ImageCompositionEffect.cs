@@ -12,7 +12,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         /// <summary>
         /// ファイル名の最大バイト数。
         /// </summary>
-        public readonly int MaxFilenameLength = 256;
+        public static readonly int MaxFilenameLength = 256;
 
         /// <summary>
         /// 画像ファイル合成のフィルタ効果定義。

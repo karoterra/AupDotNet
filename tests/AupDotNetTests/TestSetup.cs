@@ -9,7 +9,9 @@ namespace AupDotNetTests
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
+#if !NET472
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+#endif
         }
     }
 }

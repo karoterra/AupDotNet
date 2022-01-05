@@ -51,7 +51,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("回転", 10, -36000, 36000, 0),
                     new TrackbarDefinition("渦巻", 100, -800, 800, 0),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

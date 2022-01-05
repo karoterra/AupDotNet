@@ -55,7 +55,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("ぼかし", 1, 0, 2000, 1),
                     new TrackbarDefinition("幅", 1, -2000, 2000, 0),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

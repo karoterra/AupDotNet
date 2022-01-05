@@ -43,7 +43,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("範囲", 1, 0, 500, 20),
                     new TrackbarDefinition("角度", 10, -36000, 36000, 500),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }

@@ -68,12 +68,12 @@ namespace Karoterra.AupDotNet.ExEdit
             {
                 throw new ArgumentException("Trackbars' length is invalid");
             }
-            Trackbars = trackbars.Clone() as Trackbar[];
+            Trackbars = trackbars;
             if (checkboxes.Length != type.CheckboxNum)
             {
                 throw new ArgumentException("Checkboxes' length is invalid");
             }
-            Checkboxes = checkboxes.Clone() as int[];
+            Checkboxes = checkboxes;
         }
 
         /// <summary>

@@ -51,7 +51,7 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
                     new TrackbarDefinition("速度X", 10, -10000, 10000, 0),
                     new TrackbarDefinition("速度Y", 10, -10000, 10000, 0),
                 },
-                new CheckboxDefinition[] { }
+                System.Array.Empty<CheckboxDefinition>()
             );
         }
     }
