@@ -44,7 +44,7 @@ namespace ReadWriteExEdit
             {
                 Console.WriteLine($"バージョン: {exedit.Version}");
                 Console.WriteLine($"タイムラインのズームレベル: {exedit.Zoom}");
-                Console.WriteLine($"グリッド(BPM): {exedit.EnableBpmGrid} BPM:{exedit.BpmGridTempo} 拍子:{exedit.BpmGridBeat} 基準フレーム:{exedit.BpmGridOffset}");
+                Console.WriteLine($"グリッド(BPM): {exedit.EnableBpmGrid} BPM:{(double)exedit.BpmGridTempo / ExEditProject.BpmGridTempoScale} 拍子:{exedit.BpmGridBeat} 基準フレーム:{exedit.BpmGridOffset}");
                 Console.WriteLine($"グリッド(XY軸): {exedit.EnableXYGrid} 横幅:{exedit.XYGridWidth} 縦幅:{exedit.XYGridHeight}");
                 Console.WriteLine($"グリッド(カメラ制御): {exedit.EnableCameraGrid} 横:{exedit.CameraGridWidth} 縦:{exedit.CameraGridHeight}");
                 Console.WriteLine($"フレーム領域外を表示: {exedit.ShowOutsideFrame}");
@@ -61,7 +61,7 @@ namespace ReadWriteExEdit
                 {
                     Console.WriteLine($"  Scene:{scenes.SceneIndex} Name:{scenes.Name} Flag:{scenes.Flag} Height:{scenes.Height} Width:{scenes.Width}");
                 }
-                Console.WriteLine($"トラックバースクリプト ({exedit.TrackbarScripts.Length})");
+                Console.WriteLine($"トラックバースクリプト ({exedit.TrackbarScripts.Count})");
                 foreach (var ts in exedit.TrackbarScripts)
                 {
                     Console.WriteLine($"  {ts.Name}");
