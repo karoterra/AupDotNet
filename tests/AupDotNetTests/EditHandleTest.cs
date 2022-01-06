@@ -97,7 +97,20 @@ namespace AupDotNetTests
                     src.FilterConfigs[i].Data,
                     dst.FilterConfigs[i].Data);
             }
-            Assert.IsTrue(src.ImageHandles.SequenceEqual(dst.ImageHandles), "ImageHandles");
+            CollectionAssert.AreEqual(
+                src.ClippedImages.Select(x => x?.Handle ?? ClippedImage.NoDataHandle).ToArray(),
+                dst.ClippedImages.Select(x => x?.Handle ?? ClippedImage.NoDataHandle).ToArray());
+            for (int i = 0; i < src.ClippedImages.Length; i++)
+            {
+                if (src.ClippedImages[i] == null)
+                {
+                    Assert.IsNull(dst.ClippedImages[i]);
+                    continue;
+                }
+                CollectionAssert.AreEqual(
+                    src.ClippedImages[i].Data,
+                    dst.ClippedImages[i].Data);
+            }
 
             var srcData = new ReadOnlySpan<byte>(src.Data);
             var dstData = new ReadOnlySpan<byte>(dst.Data);

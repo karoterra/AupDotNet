@@ -14,29 +14,9 @@ namespace Karoterra.AupDotNet
         const string Header = "AviUtl ProjectFile version 0.18\0";
 
         /// <summary>
-        /// ファイル名の最大バイト長。
-        /// </summary>
-        public static readonly int MaxFilename = 260;
-
-        /// <summary>
-        /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
-        /// </summary>
-        public static readonly int MaxConfigFiles = 96;
-
-        /// <summary>
-        /// プロジェクトファイルに含まれる画像の最大個数。
-        /// </summary>
-        public static readonly int MaxImages = 256;
-
-        /// <summary>
         /// プロジェクトファイルの <see cref="EditHandle"/>。
         /// </summary>
         public EditHandle EditHandle { get; set; } = new();
-
-        /// <summary>
-        /// プロジェクトファイルに含まれている画像。
-        /// </summary>
-        public readonly List<byte[]> Images = new();
 
         /// <summary>
         /// 画像セクションとフッターの間にある未知のデータ。
@@ -94,17 +74,6 @@ namespace Karoterra.AupDotNet
 
             EditHandle.Read(reader);
 
-            Images.Clear();
-            foreach (var handle in EditHandle.ImageHandles)
-            {
-                if (handle != 0)
-                {
-                    var size = reader.ReadInt32();
-                    Images.Add(reader.ReadBytes(size));
-                }
-            }
-
-
             DataBeforeFooter = SkipToFooter(reader);
 
             FilterProjects.Clear();
@@ -123,12 +92,6 @@ namespace Karoterra.AupDotNet
         {
             writer.Write(Header.ToSjisBytes());
             EditHandle.Write(writer);
-
-            foreach (var image in Images)
-            {
-                writer.Write(image.Length);
-                writer.Write(image);
-            }
 
             writer.Write(DataBeforeFooter);
             writer.Write(Header.ToSjisBytes());

@@ -173,9 +173,9 @@ namespace Karoterra.AupDotNet
         public List<FilterConfig> FilterConfigs { get; } = new();
 
         /// <summary>
-        /// プロジェクトファイルに含まれる画像のハンドル。
+        /// クリップボードから貼り付けた画像。
         /// </summary>
-        public readonly List<uint> ImageHandles = new(MaxImages);
+        public ClippedImage?[] ClippedImages { get; } = new ClippedImage[MaxImages];
 
         /// <summary>
         /// 新しい <see cref="EditHandle"/> のインスタンスを初期化します。
@@ -226,12 +226,6 @@ namespace Karoterra.AupDotNet
             VideoScale = span.Slice(0x468 - UncompressedSize, 4).ToInt32();
             VideoRate = span.Slice(0x46c - UncompressedSize, 4).ToInt32();
 
-            ImageHandles.Clear();
-            for (int i = 0; i < MaxImages; i++)
-            {
-                ImageHandles.Add(span.Slice(0x4bbd98 - UncompressedSize + i * 4, 4).ToUInt32());
-            }
-
             var frameNum = reader.ReadInt32();
             var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
             var audios = AupUtil.DecompressUInt32Array(reader, frameNum);
@@ -266,10 +260,23 @@ namespace Karoterra.AupDotNet
             {
                 var name = span.Slice(0x20d18 - UncompressedSize + i * MaxFilename, MaxFilename)
                     .ToCleanSjisString();
-                if (string.IsNullOrEmpty(name)) continue;
+                if (string.IsNullOrEmpty(name)) break;
                 var configSize = reader.ReadInt32();
                 var data = reader.ReadBytes(configSize);
                 FilterConfigs.Add(new FilterConfig(name, data));
+            }
+
+            for (int i = 0; i < MaxImages; i++)
+            {
+                var handle = span.Slice(0x4bbd98 - UncompressedSize + i * 4, 4).ToUInt32();
+                if (handle == ClippedImage.NoDataHandle)
+                {
+                    ClippedImages[i] = null;
+                    continue;
+                }
+                var imageSize = reader.ReadInt32();
+                var data = reader.ReadBytes(imageSize);
+                ClippedImages[i] = new ClippedImage(handle, data);
             }
         }
 
@@ -309,10 +316,12 @@ namespace Karoterra.AupDotNet
                     .CopyTo(span.Slice(0x20d18 - UncompressedSize + index * MaxFilename));
                 index++;
             }
-            for (int i = 0; i < MaxImages && i < ImageHandles.Count; i++)
+            index = 0;
+            foreach (var handle in ClippedImages
+                .Select(x => x?.Handle ?? ClippedImage.NoDataHandle))
             {
-                ImageHandles[i].ToBytes()
-                    .CopyTo(span.Slice(0x4bbd98 - UncompressedSize + i * 4));
+                handle.ToBytes().CopyTo(span.Slice(0x4bbd98 - UncompressedSize + index * 4));
+                index++;
             }
 
             AupUtil.Comp(writer, Data);
@@ -333,6 +342,13 @@ namespace Karoterra.AupDotNet
             {
                 writer.Write(config.Data.Length);
                 writer.Write(config.Data);
+            }
+            foreach (var image in ClippedImages)
+            {
+                if (image == null || image.Handle == ClippedImage.NoDataHandle)
+                    continue;
+                writer.Write(image.Data.Length);
+                writer.Write(image.Data);
             }
         }
     }
