@@ -246,12 +246,12 @@ namespace Karoterra.AupDotNet
                     Audio = audios[i],
                     Field2 = array2[i],
                     Field3 = array3[i],
-                    Inter = inters[i],
+                    Inter = (FrameStatusInter)inters[i],
                     Index24Fps = index24Fps[i],
-                    EditFlag = editFlags[i],
+                    EditFlag = (EditFrameEditFlag)editFlags[i],
                     Config = configs[i],
                     Vcm = vcms[i],
-                    Field9 = array9[i],
+                    Clip = array9[i],
                 });
             }
 
@@ -331,12 +331,12 @@ namespace Karoterra.AupDotNet
             AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
             AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
             AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Inter).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => (byte)f.Inter).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => (byte)f.EditFlag).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
             AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Clip).ToArray());
 
             foreach (var config in FilterConfigs.Take(MaxConfigFiles))
             {

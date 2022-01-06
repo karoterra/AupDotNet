@@ -151,12 +151,12 @@ namespace AupDotNetTests
                     Audio = uint.Parse(elements[1]),
                     Field2 = uint.Parse(elements[2]),
                     Field3 = uint.Parse(elements[3]),
-                    Inter = byte.Parse(elements[4]),
+                    Inter = (FrameStatusInter)byte.Parse(elements[4]),
                     Index24Fps = byte.Parse(elements[5]),
-                    EditFlag = byte.Parse(elements[6]),
+                    EditFlag = (EditFrameEditFlag)byte.Parse(elements[6]),
                     Config = byte.Parse(elements[7]),
                     Vcm = byte.Parse(elements[8]),
-                    Field9 = byte.Parse(elements[9]),
+                    Clip = byte.Parse(elements[9]),
                 };
                 Assert.IsTrue(expected.Equals(edit1.Frames[i]));
             }

@@ -10,7 +10,7 @@
         "EditFlag": 0,
         "Config": 0,
         "Vcm": 0,
-        "Field9": 0
+        "Clip": 0
     },
     "B": {
         "Video": 1,
@@ -22,6 +22,6 @@
         "EditFlag": 0,
         "Config": 0,
         "Vcm": 0,
-        "Field9": 0
+        "Clip": 0
     }
 }
