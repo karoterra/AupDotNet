@@ -14,39 +14,9 @@ namespace Karoterra.AupDotNet
         const string Header = "AviUtl ProjectFile version 0.18\0";
 
         /// <summary>
-        /// ファイル名の最大バイト長。
-        /// </summary>
-        public static readonly int MaxFilename = 260;
-
-        /// <summary>
-        /// プロジェクトファイルに含まれる FilterConfigFile の最大個数。
-        /// </summary>
-        public static readonly int MaxConfigFiles = 96;
-
-        /// <summary>
-        /// プロジェクトファイルに含まれる画像の最大個数。
-        /// </summary>
-        public static readonly int MaxImages = 256;
-
-        /// <summary>
         /// プロジェクトファイルの <see cref="EditHandle"/>。
         /// </summary>
         public EditHandle EditHandle { get; set; } = new();
-
-        /// <summary>
-        /// 各フレームの情報。
-        /// </summary>
-        public readonly List<FrameData> Frames = new();
-
-        /// <summary>
-        /// プロジェクトファイルに含まれている FilterConfigFile。
-        /// </summary>
-        public readonly List<byte[]> ConfigFiles = new();
-
-        /// <summary>
-        /// プロジェクトファイルに含まれている画像。
-        /// </summary>
-        public readonly List<byte[]> Images = new();
 
         /// <summary>
         /// 画像セクションとフッターの間にある未知のデータ。
@@ -64,7 +34,6 @@ namespace Karoterra.AupDotNet
         /// </summary>
         public AviUtlProject()
         {
-            EditHandle = new EditHandle();
         }
 
         /// <summary>
@@ -104,55 +73,6 @@ namespace Karoterra.AupDotNet
             }
 
             EditHandle.Read(reader);
-            var frameNum = reader.ReadInt32();
-
-            var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var audios = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var array2 = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var array3 = AupUtil.DecompressUInt32Array(reader, frameNum);
-            var inters = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var index24Fps = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var editFlags = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var configs = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var vcms = AupUtil.DecompressUInt8Array(reader, frameNum);
-            var array9 = AupUtil.DecompressUInt8Array(reader, frameNum);
-            Frames.Clear();
-            for (int i = 0; i < frameNum; i++)
-            {
-                Frames.Add(new FrameData()
-                {
-                    Video = videos[i],
-                    Audio = audios[i],
-                    Field2 = array2[i],
-                    Field3 = array3[i],
-                    Inter = inters[i],
-                    Index24Fps = index24Fps[i],
-                    EditFlag = editFlags[i],
-                    Config = configs[i],
-                    Vcm = vcms[i],
-                    Field9 = array9[i],
-                });
-            }
-
-            ConfigFiles.Clear();
-            foreach (var name in EditHandle.ConfigNames)
-            {
-                if (!string.IsNullOrEmpty(name))
-                {
-                    var size = reader.ReadInt32();
-                    ConfigFiles.Add(reader.ReadBytes(size));
-                }
-            }
-            Images.Clear();
-            foreach (var handle in EditHandle.ImageHandles)
-            {
-                if (handle != 0)
-                {
-                    var size = reader.ReadInt32();
-                    Images.Add(reader.ReadBytes(size));
-                }
-            }
-
 
             DataBeforeFooter = SkipToFooter(reader);
 
@@ -172,28 +92,6 @@ namespace Karoterra.AupDotNet
         {
             writer.Write(Header.ToSjisBytes());
             EditHandle.Write(writer);
-            writer.Write(Frames.Count);
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Video).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
-            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Inter).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.EditFlag).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
-            AupUtil.Comp(writer, Frames.Select(f => f.Field9).ToArray());
-
-            foreach (var config in ConfigFiles)
-            {
-                writer.Write(config.Length);
-                writer.Write(config);
-            }
-            foreach (var image in Images)
-            {
-                writer.Write(image.Length);
-                writer.Write(image);
-            }
 
             writer.Write(DataBeforeFooter);
             writer.Write(Header.ToSjisBytes());

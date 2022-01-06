@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Karoterra.AupDotNet.Extensions;
 
 
@@ -117,11 +118,6 @@ namespace Karoterra.AupDotNet
         public int Height { get; set; }
 
         /// <summary>
-        /// フレーム数。
-        /// </summary>
-        public int FrameNum { get; set; }
-
-        /// <summary>
         /// 選択中フレームの開始フレーム。
         /// </summary>
         public int SelectedFrameStart { get; set; }
@@ -167,14 +163,19 @@ namespace Karoterra.AupDotNet
         public int VideoRate { get; set; }
 
         /// <summary>
-        /// プロジェクトファイルに含まれる FilterConfigFile の名前。
+        /// 各フレームの情報。
         /// </summary>
-        public readonly List<string> ConfigNames = new(MaxConfigFiles);
+        public List<FrameStatus> Frames { get; } = new();
 
         /// <summary>
-        /// プロジェクトファイルに含まれる画像のハンドル。
+        /// プロジェクトファイルに含まれる FilterConfigFile。
         /// </summary>
-        public readonly List<uint> ImageHandles = new(MaxImages);
+        public List<FilterConfig> FilterConfigs { get; } = new();
+
+        /// <summary>
+        /// クリップボードから貼り付けた画像。
+        /// </summary>
+        public ClippedImage?[] ClippedImages { get; } = new ClippedImage[MaxImages];
 
         /// <summary>
         /// 新しい <see cref="EditHandle"/> のインスタンスを初期化します。
@@ -215,7 +216,6 @@ namespace Karoterra.AupDotNet
             ProjectFilename = span.Slice(0, MaxFilename).ToCleanSjisString();
             Width = span.Slice(0x310 - UncompressedSize, 4).ToInt32();
             Height = span.Slice(0x314 - UncompressedSize, 4).ToInt32();
-            FrameNum = span.Slice(0x318 - UncompressedSize, 4).ToInt32();
             SelectedFrameStart = span.Slice(0x31c - UncompressedSize, 4).ToInt32();
             SelectedFrameEnd = span.Slice(0x320 - UncompressedSize, 4).ToInt32();
             CurrentFrame = span.Slice(0x330 - UncompressedSize, 4).ToInt32();
@@ -226,18 +226,57 @@ namespace Karoterra.AupDotNet
             VideoScale = span.Slice(0x468 - UncompressedSize, 4).ToInt32();
             VideoRate = span.Slice(0x46c - UncompressedSize, 4).ToInt32();
 
-            ConfigNames.Clear();
+            var frameNum = reader.ReadInt32();
+            var videos = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var audios = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var array2 = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var array3 = AupUtil.DecompressUInt32Array(reader, frameNum);
+            var inters = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var index24Fps = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var editFlags = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var configs = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var vcms = AupUtil.DecompressUInt8Array(reader, frameNum);
+            var array9 = AupUtil.DecompressUInt8Array(reader, frameNum);
+            Frames.Clear();
+            for (int i = 0; i < frameNum; i++)
+            {
+                Frames.Add(new FrameStatus()
+                {
+                    Video = videos[i],
+                    Audio = audios[i],
+                    Field2 = array2[i],
+                    Field3 = array3[i],
+                    Inter = (FrameStatusInter)inters[i],
+                    Index24Fps = index24Fps[i],
+                    EditFlag = (EditFrameEditFlag)editFlags[i],
+                    Config = configs[i],
+                    Vcm = vcms[i],
+                    Clip = array9[i],
+                });
+            }
+
+            FilterConfigs.Clear();
             for (int i = 0; i < MaxConfigFiles; i++)
             {
-                ConfigNames.Add(
-                    span.Slice(0x20d18 - UncompressedSize + i * MaxFilename, MaxFilename)
-                        .ToCleanSjisString()
-                );
+                var name = span.Slice(0x20d18 - UncompressedSize + i * MaxFilename, MaxFilename)
+                    .ToCleanSjisString();
+                if (string.IsNullOrEmpty(name)) break;
+                var configSize = reader.ReadInt32();
+                var data = reader.ReadBytes(configSize);
+                FilterConfigs.Add(new FilterConfig(name, data));
             }
-            ImageHandles.Clear();
+
             for (int i = 0; i < MaxImages; i++)
             {
-                ImageHandles.Add(span.Slice(0x4bbd98 - UncompressedSize + i * 4, 4).ToUInt32());
+                var handle = span.Slice(0x4bbd98 - UncompressedSize + i * 4, 4).ToUInt32();
+                if (handle == ClippedImage.NoDataHandle)
+                {
+                    ClippedImages[i] = null;
+                    continue;
+                }
+                var imageSize = reader.ReadInt32();
+                var data = reader.ReadBytes(imageSize);
+                ClippedImages[i] = new ClippedImage(handle, data);
             }
         }
 
@@ -256,7 +295,7 @@ namespace Karoterra.AupDotNet
             ProjectFilename.ToSjisBytes(MaxFilename).CopyTo(span.Slice(0, MaxFilename));
             Width.ToBytes().CopyTo(span.Slice(0x310 - UncompressedSize, 4));
             Height.ToBytes().CopyTo(span.Slice(0x314 - UncompressedSize, 4));
-            FrameNum.ToBytes().CopyTo(span.Slice(0x318 - UncompressedSize, 4));
+            Frames.Count.ToBytes().CopyTo(span.Slice(0x318 - UncompressedSize, 4));
             SelectedFrameStart.ToBytes().CopyTo(span.Slice(0x31c - UncompressedSize, 4));
             SelectedFrameEnd.ToBytes().CopyTo(span.Slice(0x320 - UncompressedSize, 4));
             CurrentFrame.ToBytes().CopyTo(span.Slice(0x330 - UncompressedSize, 4));
@@ -267,18 +306,50 @@ namespace Karoterra.AupDotNet
             VideoScale.ToBytes().CopyTo(span.Slice(0x468 - UncompressedSize, 4));
             VideoRate.ToBytes().CopyTo(span.Slice(0x46c - UncompressedSize, 4));
 
-            for (int i = 0; i < MaxConfigFiles && i < ConfigNames.Count; i++)
+            int index = 0;
+            foreach (var name in FilterConfigs
+                .Select(x => x.Name)
+                .Concat(Enumerable.Repeat(string.Empty, MaxConfigFiles))
+                .Take(MaxConfigFiles))
             {
-                ConfigNames[i].ToSjisBytes(MaxFilename)
-                    .CopyTo(span.Slice(0x20d18 - UncompressedSize + i * MaxFilename));
+                name.ToSjisBytes(MaxFilename)
+                    .CopyTo(span.Slice(0x20d18 - UncompressedSize + index * MaxFilename));
+                index++;
             }
-            for (int i = 0; i < MaxImages && i < ImageHandles.Count; i++)
+            index = 0;
+            foreach (var handle in ClippedImages
+                .Select(x => x?.Handle ?? ClippedImage.NoDataHandle))
             {
-                ImageHandles[i].ToBytes()
-                    .CopyTo(span.Slice(0x4bbd98 - UncompressedSize + i * 4));
+                handle.ToBytes().CopyTo(span.Slice(0x4bbd98 - UncompressedSize + index * 4));
+                index++;
             }
 
             AupUtil.Comp(writer, Data);
+
+            writer.Write(Frames.Count);
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Video).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Audio).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field2).ToArray());
+            AupUtil.CompressUInt32Array(writer, Frames.Select(f => f.Field3).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => (byte)f.Inter).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Index24Fps).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => (byte)f.EditFlag).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Config).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Vcm).ToArray());
+            AupUtil.Comp(writer, Frames.Select(f => f.Clip).ToArray());
+
+            foreach (var config in FilterConfigs.Take(MaxConfigFiles))
+            {
+                writer.Write(config.Data.Length);
+                writer.Write(config.Data);
+            }
+            foreach (var image in ClippedImages)
+            {
+                if (image == null || image.Handle == ClippedImage.NoDataHandle)
+                    continue;
+                writer.Write(image.Data.Length);
+                writer.Write(image.Data);
+            }
         }
     }
 }

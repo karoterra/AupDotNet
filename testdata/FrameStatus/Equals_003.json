@@ -10,11 +10,11 @@
         "EditFlag": 0,
         "Config": 0,
         "Vcm": 0,
-        "Field9": 0
+        "Clip": 0
     },
     "B": {
-        "Video": 1,
-        "Audio": 0,
+        "Video": 0,
+        "Audio": 1,
         "Field2": 0,
         "Field3": 0,
         "Inter": 0,
@@ -22,6 +22,6 @@
         "EditFlag": 0,
         "Config": 0,
         "Vcm": 0,
-        "Field9": 0
+        "Clip": 0
     }
 }

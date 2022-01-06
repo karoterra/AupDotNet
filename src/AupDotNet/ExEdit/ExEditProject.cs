@@ -376,7 +376,7 @@ namespace Karoterra.AupDotNet.ExEdit
             }
             if (sceneIndex == EditingScene)
             {
-                length = editHandle.FrameNum;
+                length = editHandle.Frames.Count;
             }
 
             var exo = new ExeditObjectFile()
