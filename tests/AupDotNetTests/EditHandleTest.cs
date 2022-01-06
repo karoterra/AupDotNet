@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using Karoterra.AupDotNet;
@@ -174,6 +175,44 @@ namespace AupDotNetTests
                 for (int i = 0; i < aup.EditHandle.Frames.Count; i++)
                 {
                     Assert.IsTrue(edit1.Frames[i].Equals(edit2.Frames[i]), $"Frames[{i}]");
+                }
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(@"TestData\ClippedImage\colorful.zip")]
+        public void Test_ClippedImage(string path)
+        {
+            using (var archive = ZipFile.OpenRead(path))
+            {
+                var aupPath = Path.GetFileNameWithoutExtension(path) + ".aup";
+                var entry = archive.GetEntry(aupPath);
+                ClippedImage[] images = null;
+                using (var zipped = entry.Open())
+                using (var mem = new MemoryStream())
+                using (var br = new BinaryReader(mem))
+                {
+                    zipped.CopyTo(mem);
+                    mem.Position = 0;
+                    var aup = new AviUtlProject(br);
+                    images = aup.EditHandle.ClippedImages;
+                }
+
+                for (int i = 0; i < images.Length; i++)
+                {
+                    entry = archive.GetEntry($"image_{i}.dat");
+                    if (images[i] != null)
+                    {
+                        using (var br = new BinaryReader(entry.Open()))
+                        {
+                            var data = br.ReadBytes((int)entry.Length);
+                            CollectionAssert.AreEqual(images[i].Data, data, $"images[{i}]");
+                        }
+                    }
+                    else
+                    {
+                        Assert.IsNull(entry, $"images[{i}]");
+                    }
                 }
             }
         }
