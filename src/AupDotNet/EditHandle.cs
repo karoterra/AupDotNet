@@ -165,7 +165,7 @@ namespace Karoterra.AupDotNet
         /// <summary>
         /// 各フレームの情報。
         /// </summary>
-        public List<FrameData> Frames { get; } = new();
+        public List<FrameStatus> Frames { get; } = new();
 
         /// <summary>
         /// プロジェクトファイルに含まれる FilterConfigFile。
@@ -240,7 +240,7 @@ namespace Karoterra.AupDotNet
             Frames.Clear();
             for (int i = 0; i < frameNum; i++)
             {
-                Frames.Add(new FrameData()
+                Frames.Add(new FrameStatus()
                 {
                     Video = videos[i],
                     Audio = audios[i],

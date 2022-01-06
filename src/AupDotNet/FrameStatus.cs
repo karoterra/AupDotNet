@@ -3,7 +3,7 @@ namespace Karoterra.AupDotNet
     /// <summary>
     /// フレームの情報を表すクラス。
     /// </summary>
-    public class FrameData
+    public class FrameStatus
     {
         /// <summary>
         /// 映像の参照フレーム。
@@ -56,16 +56,16 @@ namespace Karoterra.AupDotNet
         public byte Field9 { get; set; }
 
         /// <summary>
-        /// <see cref="FrameData"/> のインスタンスを初期化します。
+        /// <see cref="FrameStatus"/> のインスタンスを初期化します。
         /// </summary>
-        public FrameData()
+        public FrameStatus()
         {
         }
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)
         {
-            return obj is FrameData frame &&
+            return obj is FrameStatus frame &&
                 Video == frame.Video && Audio == frame.Audio &&
                 Field2 == frame.Field2 && Field3 == frame.Field3 &&
                 Inter == frame.Inter && Index24Fps == frame.Index24Fps &&

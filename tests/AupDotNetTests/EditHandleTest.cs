@@ -145,7 +145,7 @@ namespace AupDotNetTests
             for (int i = 0; i < csv.Length; i++)
             {
                 var elements = csv[i].Split(',');
-                FrameData expected = new FrameData()
+                FrameStatus expected = new FrameStatus()
                 {
                     Video = uint.Parse(elements[0]),
                     Audio = uint.Parse(elements[1]),
