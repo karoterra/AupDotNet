@@ -32,13 +32,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// ミラーの方向
-        /// <list type="bullet">
-        ///     <item>0. 上側</item>
-        ///     <item>1. 下側</item>
-        ///     <item>2. 左側</item>
-        ///     <item>3. 右側</item>
-        /// </list>
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>映す画像の方向</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>上側</description></item>
+        ///     <item><term>1</term><description>下側</description></item>
+        ///     <item><term>2</term><description>左側</description></item>
+        ///     <item><term>3</term><description>右側</description></item>
+        /// </list>
+        /// </remarks>
         public int Direction { get; set; }
 
         /// <summary>

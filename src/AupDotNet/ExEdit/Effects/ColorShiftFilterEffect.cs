@@ -25,12 +25,18 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// 色ずれの種類
-        /// <list type="bullet">
-        ///     <item>0. 赤緑</item>
-        ///     <item>1. 赤青</item>
-        ///     <item>2. 緑青</item>
-        /// </list>
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>色ずれの種類</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>赤緑</description></item>
+        ///     <item><term>1</term><description>赤青</description></item>
+        ///     <item><term>2</term><description>緑青</description></item>
+        /// </list>
+        /// </remarks>
         public int ShiftType { get; set; }
 
         /// <summary>

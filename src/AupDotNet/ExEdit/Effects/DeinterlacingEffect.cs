@@ -15,12 +15,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public static EffectType EffectType { get; }
 
         /// <summary>
-        /// <list type="bullet">
-        ///     <item>0. 奇数解除</item>
-        ///     <item>1. 偶数解除</item>
-        ///     <item>2. 二重化</item>
-        /// </list>
+        /// インターレース解除の種類
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>インターレース解除の種類</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>奇数解除</description></item>
+        ///     <item><term>1</term><description>偶数解除</description></item>
+        ///     <item><term>2</term><description>二重化</description></item>
+        /// </list>
+        /// </remarks>
         public int Mode { get; set; }
 
         /// <summary>

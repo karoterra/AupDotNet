@@ -52,14 +52,21 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         }
 
         /// <summary>
-        /// <list type="bullet">
-        ///     <item>0. 前方から合成</item>
-        ///     <item>1. 後方から合成</item>
-        ///     <item>2. 色情報を上書き</item>
-        ///     <item>3. 輝度をアルファ値として上書き</item>
-        ///     <item>4. 輝度をアルファ値として乗算</item>
-        /// </list>
+        /// 合成モード
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>合成モード</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>前方から合成</description></item>
+        ///     <item><term>1</term><description>後方から合成</description></item>
+        ///     <item><term>2</term><description>色情報を上書き</description></item>
+        ///     <item><term>3</term><description>輝度をアルファ値として上書き</description></item>
+        ///     <item><term>4</term><description>輝度をアルファ値として乗算</description></item>
+        /// </list>
+        /// </remarks>
         public int Mode { get; set; }
 
         /// <summary>

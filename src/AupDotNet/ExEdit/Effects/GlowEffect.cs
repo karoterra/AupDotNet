@@ -42,15 +42,21 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// 形状
-        /// <list type="bullet">
-        ///     <item>0. 通常</item>
-        ///     <item>1. クロス(4本)</item>
-        ///     <item>2. クロス(4本斜め)</item>
-        ///     <item>3. クロス(8本)</item>
-        ///     <item>4. ライン(横)</item>
-        ///     <item>5. ライン(縦)</item>
-        /// </list>
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>発光する部分の形状</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>通常</description></item>
+        ///     <item><term>1</term><description>クロス(4本)</description></item>
+        ///     <item><term>2</term><description>クロス(4本斜め)</description></item>
+        ///     <item><term>3</term><description>クロス(8本)</description></item>
+        ///     <item><term>4</term><description>ライン(横)</description></item>
+        ///     <item><term>5</term><description>ライン(縦)</description></item>
+        /// </list>
+        /// </remarks>
         public int ShapeType { get; set; }
 
         /// <summary>

@@ -22,13 +22,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// 種類
-        /// <list type="bullet">
-        ///     <item>0. 暗い部分を透過</item>
-        ///     <item>1. 明るい部分を透過</item>
-        ///     <item>2. 明暗部分を透過</item>
-        ///     <item>3. 明暗部分を透過(ぼかし無し)</item>
-        /// </list>
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>透過させる方法</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>暗い部分を透過</description></item>
+        ///     <item><term>1</term><description>明るい部分を透過</description></item>
+        ///     <item><term>2</term><description>明暗部分を透過</description></item>
+        ///     <item><term>3</term><description>明暗部分を透過(ぼかし無し)</description></item>
+        /// </list>
+        /// </remarks>
         public int TransparentType { get; set; }
 
         /// <summary>

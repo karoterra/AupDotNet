@@ -38,12 +38,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public bool NoColor { get; set; }
 
         /// <summary>
-        /// <list type="bullet">
-        ///     <item>0. 前方に合成</item>
-        ///     <item>1. 後方に合成</item>
-        ///     <item>2. 光成分のみ</item>
-        /// </list>
+        /// 合成モード
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>合成モード</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>前方に合成</description></item>
+        ///     <item><term>1</term><description>後方に合成</description></item>
+        ///     <item><term>2</term><description>光成分のみ</description></item>
+        /// </list>
+        /// </remarks>
         public int Mode { get; set; }
 
         /// <summary>
