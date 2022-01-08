@@ -44,12 +44,16 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// ワイプの種類
-        /// <list type="bullet">
-        ///     <item>0. ワイプ(円)</item>
-        ///     <item>1. ワイプ(四角)</item>
-        ///     <item>2. ワイプ(時計)</item>
-        ///     <item>3. ワイプ(横)</item>
-        ///     <item>4. ワイプ(縦)</item>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>ワイプの種類</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>ワイプ(円)</description></item>
+        ///     <item><term>1</term><description>ワイプ(四角)</description></item>
+        ///     <item><term>2</term><description>ワイプ(時計)</description></item>
+        ///     <item><term>3</term><description>ワイプ(横)</description></item>
+        ///     <item><term>4</term><description>ワイプ(縦)</description></item>
         /// </list>
         /// </summary>
         public int WipeType { get; set; }

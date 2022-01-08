@@ -7,26 +7,40 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
     /// シーンチェンジ
     /// </summary>
     /// <remarks>
-    /// <list type="definition">
+    /// <list type="table">
     ///     <listheader>
     ///         <term>シーンチェンジの種類</term>
     ///         <description>説明</description>
     ///     </listheader>
     ///     <item>
     ///         <term>組み込みシーンチェンジ</term>
-    ///         <description>Nameは空、ScriptIdにインデックス入り、Paramsはnull。</description>
+    ///         <description>
+    ///             <see cref="ScriptFileEffect.Name"/> は空、
+    ///             <see cref="ScriptFileEffect.ScriptId"/> にインデックスが入り、
+    ///             <see cref="ScriptFileEffect.Params"/> は<c>null</c>。
+    ///         </description>
     ///     </item>
     ///     <item>
     ///         <term>exedit.scnのスクリプト</term>
-    ///         <description>Nameにスクリプト名、ScriptIdに1が入る。</description>
+    ///         <description>
+    ///             <see cref="ScriptFileEffect.Name"/> にスクリプト名、
+    ///             <see cref="ScriptFileEffect.ScriptId"/> に1が入る。
+    ///         </description>
     ///     </item>
     ///     <item>
     ///         <term>ユーザ定義スクリプト</term>
-    ///         <description>Nameにスクリプト名、ScriptIdに2が入る。</description>
+    ///         <description>
+    ///             <see cref="ScriptFileEffect.Name"/> にスクリプト名、
+    ///             <see cref="ScriptFileEffect.ScriptId"/> に2が入る。
+    ///         </description>
     ///     </item>
     ///     <item>
     ///         <term>transition画像</term>
-    ///         <description>Nameに画像ファイル名(拡張子無し)、ScriptIdに0が入り、Paramsはnull。</description>
+    ///         <description>
+    ///             <see cref="ScriptFileEffect.Name"/> に画像ファイル名(拡張子無し)、
+    ///             <see cref="ScriptFileEffect.ScriptId"/> に0が入り、
+    ///             <see cref="ScriptFileEffect.Params"/> は<c>null</c>。
+    ///         </description>
     ///     </item>
     /// </list>
     /// </remarks>

@@ -47,13 +47,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
 
         /// <summary>
         /// グラデーションの形状
-        /// <list type="bullet">
-        ///     <item>0. 線</item>
-        ///     <item>1. 円</item>
-        ///     <item>2. 四角形</item>
-        ///     <item>3. 凸形</item>
-        /// </list>
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>グラデーションの形状</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>線</description></item>
+        ///     <item><term>1</term><description>円</description></item>
+        ///     <item><term>2</term><description>四角形</description></item>
+        ///     <item><term>3</term><description>凸形</description></item>
+        /// </list>
+        /// </remarks>
         public int Shape { get; set; }
 
         /// <summary>

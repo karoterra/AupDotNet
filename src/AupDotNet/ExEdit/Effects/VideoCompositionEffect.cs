@@ -77,12 +77,19 @@ namespace Karoterra.AupDotNet.ExEdit.Effects
         public byte[] Field0x104 { get; } = new byte[20];
 
         /// <summary>
-        /// <list type="bullet">
-        ///     <item>0. 色情報を上書き</item>
-        ///     <item>1. 輝度をアルファ値として上書き</item>
-        ///     <item>2. 輝度をアルファ値として乗算</item>
-        /// </list>
+        /// 合成モード
         /// </summary>
+        /// <remarks>
+        /// <list type="table">
+        ///     <listheader>
+        ///         <term>値</term>
+        ///         <description>合成モード</description>
+        ///     </listheader>
+        ///     <item><term>0</term><description>色情報を上書き</description></item>
+        ///     <item><term>1</term><description>輝度をアルファ値として上書き</description></item>
+        ///     <item><term>2</term><description>輝度をアルファ値として乗算</description></item>
+        /// </list>
+        /// </remarks>
         public int Mode { get; set; }
 
         /// <summary>
