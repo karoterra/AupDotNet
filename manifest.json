@@ -1,0 +1,2031 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/workspace/AviUtlScript/AupDotNet/doc",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/aup_and_AupDotNet.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/aup_and_AupDotNet.html",
+          "hash": "pEFuMpvr4fbkauTFdNXmmUtSCsaaKlH8aNIWXBLh1nU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/samples.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/samples.html",
+          "hash": "Suhy0j6TFPI5WPakPhqD5oyiHF5ZLtVA+rNArGpv/OY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "rDIGv6RNKj8kSOoEdklHoBLfLDdXTBwgYkDJfi6Rysg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "LkLaDz6L8yVTuTmhjnRy4RbEzIt753v25eXAAu+7IYQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.AupUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.AupUtil.html",
+          "hash": "XRRtFy7UN0/TIyQsTuGmZTvPH5kw+vtvQGlQxXlkvf4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.AviUtlProject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.AviUtlProject.html",
+          "hash": "x0POj4RZpxgJf6FOsF5hcBsMkTj+9ppKxDqBhBaTj4Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ClippedImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ClippedImage.html",
+          "hash": "GF4TU2spOpsPHw8QxefWY3J/ispnaWhtIGtnM0T1TZ4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.EditFrameEditFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.EditFrameEditFlag.html",
+          "hash": "zLW/HRKF5xzz+S3WquauRJQtTEEySnP0W3/1rL83vCQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.EditHandle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.EditHandle.html",
+          "hash": "gUri/1qsb5Baap5GXkjBaxJ7EvVJLtemB+lg0CwgnJc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.CheckboxDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.CheckboxDefinition.html",
+          "hash": "WGFGJiBvqBqA5JyRGjhNIVycqcHAGWINTiXRKABRQjE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.CustomEffectFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.CustomEffectFactory.html",
+          "hash": "F25S3dTSHAmccq70bnRH/6Vgf3AhNTf1nQpXzH38DZs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effect.html",
+          "hash": "8RDbTG+Odrm40W3i9ddasibYN8ZOAMTrkUt2gnMGizY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.EffectFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.EffectFactory.html",
+          "hash": "v4UrbCVwxES1jJZa6Dwi1KLw3lWRYUKdSnhJX41M7+U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.EffectFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.EffectFlag.html",
+          "hash": "bv8DR8FjI8FsS4A1zBK49X3+zwM+bjsH0XgzCPodzqw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.EffectType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.EffectType.html",
+          "hash": "IsfraIt/ls2hBpnI+j0WTyliFgI/eikA0ymGgKjWJ/4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.EffectTypeId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.EffectTypeId.html",
+          "hash": "M836FO9VsE29lh0+Ow2T7K+AXMfUUjGgqiW0Ys5Y08o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AnimationEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AnimationEffect.html",
+          "hash": "nfkjdEnSaeMe6BR7Nf+eRR5+/UtkZestbAwt89ljD5I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AreaExpansionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AreaExpansionEffect.html",
+          "hash": "PAeXZ0UK4rDj+0WD0d7kJeLvYN+L8NVPQEYrNCUGtms="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AudioDelayEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AudioDelayEffect.html",
+          "hash": "93iFSazvIwit6kqlEn0IuvCLlnwvu96lL3uAT/99AQ8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AudioDelayFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AudioDelayFilterEffect.html",
+          "hash": "WTZ7HeOg3dPJpONXRH7Ge7nBuA+bgqJkV4H15eHuVbg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AudioFadeEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AudioFadeEffect.html",
+          "hash": "2K6gympiJ1GotCre40KN+6YVEdk1VOcOD2M9VhTDRKQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.AudioFileEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.AudioFileEffect.html",
+          "hash": "V9aTRX6b9RbnyCKC92xyzvMt0/75WiGHSz25ueTyiQc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BevelEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BevelEffect.html",
+          "hash": "O94ONW2rUyRKWH6ra6dlNVKK1TRfA23AE/Q9SX4RPZg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BlendMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BlendMode.html",
+          "hash": "A+iO2tdFEWb87UHSio9MpwacmExhDHgZqr111wjnHYs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BlurEffect.html",
+          "hash": "FA2ohxH63o7fcvJKgKzehJghkPue8i2XK78p/sIsv3w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BlurFilter2Effect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BlurFilter2Effect.html",
+          "hash": "QXEs3ZqQ5isEZ/EyqumLB7XGKkvKILbATx+6bDUcgj4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BlurFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BlurFilterEffect.html",
+          "hash": "YhTUzotw1Bav/+DzBjFZoTU/0qZKEVlPj7GmPQ2XX6E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BorderBlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BorderBlurEffect.html",
+          "hash": "4zKAwRGufSOJYR7HUM576Xlaf3DA0l6SgDxgu1md8sA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.BorderEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.BorderEffect.html",
+          "hash": "Rkb/f9L6MoKFHOO+tFimq+TIDldK7piItWBCSva6j5k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CameraControlEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CameraControlEffect.html",
+          "hash": "POKYd0r+b3/ofsunb1AB6T6FjtBKMB19oZ45NuZATyc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CameraEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CameraEffect.html",
+          "hash": "B+tTvmq3NT2tJ6gl/IP0aQdH7QcgzSgx4vmSEB4WxQU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CameraOptionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CameraOptionEffect.html",
+          "hash": "TI9nUKlTTExuT0L8CXJdAynYsu47umgR+4i4H2Y9dmw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CameraScriptEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CameraScriptEffect.html",
+          "hash": "mwoCoJZPsh4ySMawakPq/0/zZzrDnSz2POY+qyW7THk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CameraShadowEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CameraShadowEffect.html",
+          "hash": "Yq+h5GoxBAElvTw3WHR34pu7rBRs5hmcV3yHqim/yy8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ChromaKeyEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ChromaKeyEffect.html",
+          "hash": "w1LNfVFOD+B2WAnlGhTgIvQUeBJVwtbmazWHW0QCK2s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ClipResizeFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ClipResizeFilterEffect.html",
+          "hash": "mlpQYccv6WxD3at1SlP3WGMjfX1/mVtKod+GK23kcrg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ClippingEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ClippingEffect.html",
+          "hash": "KwSLLzt8WfehhTNqRcpiSTyDAOSWoj0OWuYCmCvJ0gs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrection2Effect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrection2Effect.html",
+          "hash": "Ue21MyXRlHpTepTlOZayqn4GGSwa5UCGcFNY9wJlwsg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionEffect.html",
+          "hash": "lOfESzK4HCkvv6HaUc+qjdDFViCLovehQR2Ell9U3W8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionExEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionExEffect.html",
+          "hash": "iwundI2rKI6kPQGI3iVnfkduHqGgzddYM+r9T/ub/fg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorCorrectionFilterEffect.html",
+          "hash": "87CyNkEcqvH/lYYxqLIOEaa9wcBMLxwzJau+Ajq56eQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorKeyEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorKeyEffect.html",
+          "hash": "S0N9S0Vv9mKdQH69m0lJzFGxbAU8eMskhjTgC+oilDY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorSettingExEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorSettingExEffect.html",
+          "hash": "FV8HXc9908qTkvlwlzPdN3KyMxWlW7YTHEGOeeSMy2I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorSettingExFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorSettingExFilterEffect.html",
+          "hash": "uUXqwEIGv+j1Oc9JsytkAIttBEN/JbQfmFxeJkh0ZxY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorShiftEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorShiftEffect.html",
+          "hash": "TwW3T7Bh1pNwUMyUyF9rLdhwo7KN9+Qih1VJG5fsjoE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ColorShiftFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ColorShiftFilterEffect.html",
+          "hash": "lxP5jg8g9py2+TI0pKjVgYy6/jRgy7YrnySkTpPOrug="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CustomEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CustomEffect.html",
+          "hash": "U5ay70IXMc8LJHr0lMZ9ghc35mXljdcCHABxX8XRi6I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.CustomObjectEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.CustomObjectEffect.html",
+          "hash": "q98KkRM+aMvnd5MwT/gT8J0IR3TLx6jnS+lexxMxWs4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DeinterlacingEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DeinterlacingEffect.html",
+          "hash": "Ti2hriDeO+5oLPvLomApY0dUBajhBCH58sbODReMcew="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DenoiseFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DenoiseFilterEffect.html",
+          "hash": "N5K+WvGKe286yvFQ+TijwmhowM4GaYYiJbe/Phldbd8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DiagonalClippingEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DiagonalClippingEffect.html",
+          "hash": "RvcReRv1+PjfXqgFKt24sPBWo20hSv4Gl067iVJrEXs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DiffuseEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DiffuseEffect.html",
+          "hash": "CAcvw9SEGg0g1PkGiuxxxGgjmCyN/jhtGA6b82bxGsQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DiffuseFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DiffuseFilterEffect.html",
+          "hash": "u448N1GxaGQ4SK/s/omLZ+9UN1mlwoP0Wfc4gsOcnyY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DirectionalBlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DirectionalBlurEffect.html",
+          "hash": "jKwm/Gea/HkAJGq4AzTow0VE4sTmQBkyJNPgy2a6fe4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DirectionalBlurFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DirectionalBlurFilterEffect.html",
+          "hash": "2NkrKpxn1rmU/bHOGKDb2D5FFXEWSYn2lQI9Bq8Wr8Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DisplacementCalc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DisplacementCalc.html",
+          "hash": "mMI29WZBKomNmx9S4Ze99hhvOZHPaYljBxmpTPCeZ2g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.DisplacementEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.DisplacementEffect.html",
+          "hash": "oYJ25P33WBGwSW7XoxXf6DLcWGOWEphlui1QrTCWE28="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.EdgeExtractionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.EdgeExtractionEffect.html",
+          "hash": "FvEHO7I6xQxwX7yE61WSfoIMIq5OazIwhrKJwFj5xT8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.EmissionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.EmissionEffect.html",
+          "hash": "bw/3D7e7GaD7zs1K4J/0a4DMhl5zW0RN8iHtrzvupwc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.EmissionFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.EmissionFilterEffect.html",
+          "hash": "VbUGSx/BW+sUJcyblxiJqOyR8iuhl/kMpzqbeOxE5fw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ExtendedDrawEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ExtendedDrawEffect.html",
+          "hash": "Lv36MeqzcKnqVAr1qDYO4wFw/Z2AYzdTMCEOZSmdaSE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FadeEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FadeEffect.html",
+          "hash": "gNTSDxjTNBnVSqkFw3+QUHsTbXZSw7skl8wpYtwLiEM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FigureEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FigureEffect.html",
+          "hash": "MWvOtgw1Op0PHT3vK9ZI+8Wi8nU512T+43ELHk5amBE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html",
+          "hash": "wbsnlFMfopV8Btqx8buF06MfQTMhUBX3bt5rr32rY/U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FigureType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FigureType.html",
+          "hash": "WeyMhXAjLsV49g+m8RLSBzq2aBIrOg/fcJZfiEVrEfk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FillBorderEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FillBorderEffect.html",
+          "hash": "F75Wt5SXkC5Zs8jD0OsxFFAvoiXMa6Ow38V5kqhzhMk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FlashEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FlashEffect.html",
+          "hash": "g98zK9Ui5pn0HRJ1wT1VbjN4m9YUjmDcfewNuwK/EXQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.FrameBufferEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.FrameBufferEffect.html",
+          "hash": "kGTLnW88a+XujJwQbL0W7cbFlozj04zEyxlbxMCgdPk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.GamutConversionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.GamutConversionEffect.html",
+          "hash": "WamePXRSFp4gZ48wvbITwQC50NIqromFLUsjugpo7aI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.GlowEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.GlowEffect.html",
+          "hash": "Y+tMPogKQmgFf5ltQbb5UeqI/nEOI9dKO6dAralm+C8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.GlowFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.GlowFilterEffect.html",
+          "hash": "2J3IDOK5pjH8ifkFVDxIRvkBfQHn/vE8yly/pEwoGIU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.GradationEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.GradationEffect.html",
+          "hash": "Ts1DQdVYj4K3h2sP68Z65t8wxUbyj5rYv7tXZwUuBzc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.GroupControlEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.GroupControlEffect.html",
+          "hash": "x9ReddCwuMoIM289OoyUvb5w3XIf+vsGRKnFpnbZriw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ImageCompositionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ImageCompositionEffect.html",
+          "hash": "t3zcHnCb7r8kvmHrBRhtYL0kKl6tfNMNb596MHKHVS0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ImageFileEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ImageFileEffect.html",
+          "hash": "s5Lgj3Gto5XLpOninxGIx/HWfyy52rgps1l3I3bvPbU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ImageLoopEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ImageLoopEffect.html",
+          "hash": "kyKglI/DZJePNb0kMY3B9e34NVvOSvJm5lZry+bwfTo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ImageLoopFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ImageLoopFilterEffect.html",
+          "hash": "F79OuV6trQP1C6l84Ib1YonB/rNbq3yUknp9C/g7u/U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.InversionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.InversionEffect.html",
+          "hash": "Nigeg1bhxZAuwLrVbpYy5AD2yDmnaIQHlSgZMS3BO+Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.InversionFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.InversionFilterEffect.html",
+          "hash": "e4FkmGpJLkTMjUbgR01bUnQ5J/+cV/4MZEwE1m+6iJc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.LensBlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.LensBlurEffect.html",
+          "hash": "pLxJMTNWD1/ciMA14P5+Y/NAMIDednCUsGzPJLZd3oc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.LensBlurFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.LensBlurFilterEffect.html",
+          "hash": "X0zgtr7ZmlRz95qGEuTnT4Kht9NvQsFoA/0IlsbC5Eo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.LightEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.LightEffect.html",
+          "hash": "nzhosE7Xn0qEKc56hoSDSWuvnMWdJX7OG+x+KBw64gM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.LuminanceKeyEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.LuminanceKeyEffect.html",
+          "hash": "cmxzY6VGTeQHmfgkNB8md0njIYL3ane6f4zBz7Wtl5E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html",
+          "hash": "nHKhcdN0jerQoaEa6k6cXM1vw9LwYObH9g7CQV3b644="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MirrorEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MirrorEffect.html",
+          "hash": "9oCQdzW4gD9OU1iA5WvjdG+2MNx7Bfkx82iZJ5KmNOo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MonauralEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MonauralEffect.html",
+          "hash": "pPc33OFwr9UX6moplzTocDl0tip67J2eRcOsLTRqaJk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MonochromaticEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MonochromaticEffect.html",
+          "hash": "CD2wZgDZTRJDvKoouZ2I4Vue4E0rTRSnV2SN2l+2kCk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MonochromaticFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MonochromaticFilterEffect.html",
+          "hash": "zAvPtATDBVMruLv0XGToGedanM1Q2UZyXCzSLGrDi+M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MosaicEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MosaicEffect.html",
+          "hash": "jF9noFgBxSwihKPiKHSG0jXqfN/BkI/MunLQ6qvujb8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MosaicFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MosaicFilterEffect.html",
+          "hash": "pN8zqT5KuOmHeTrj/t3boEH9cXyvv76lh3+XE9ThNI0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MotionBlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MotionBlurEffect.html",
+          "hash": "Q/3+5wU/9Q+viMiK+2FACNYuyvKpklpSori5kdlFfSU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.MotionBlurFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.MotionBlurFilterEffect.html",
+          "hash": "B/k3HUEFpElpPApE/bLWLmBq/J6MR8ZhaZyZ+zfCLbQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.NoiseEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.NoiseEffect.html",
+          "hash": "92g01REsfhlwP7P8sSnFpXi+2TcILVzYEm0s1CQIuk4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.OffScreenEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.OffScreenEffect.html",
+          "hash": "MUZjf+lo0lTt4THrhNIPMGkD+9ftosLoP+qWvrWbtNY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.PartialFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.PartialFilterEffect.html",
+          "hash": "hz8ss8AeZoZqEANVKxcZvX8iKEq90/ezO/Vj1U200I4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ParticleEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ParticleEffect.html",
+          "hash": "s5hnMamIezMEdo4spBOg6Vavb/ydNrXRouG6U9Hbtzo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.PolarTransformEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.PolarTransformEffect.html",
+          "hash": "8LSfS+2KsTIEwqJYIaeskZzoXnDDH4H5Kpwu0HH31u8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.PositionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.PositionEffect.html",
+          "hash": "M2s/mJrQ5cJ6KX85TJebRQKNxYHqKBB1x7nCSZEM4WU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.PreviousObjectEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.PreviousObjectEffect.html",
+          "hash": "YSjEvjPcvgV7gZrPWSJA9EOzj/JyWzECD8o0VOtFS7A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RadialBlurEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RadialBlurEffect.html",
+          "hash": "jQD1JS82CegPFAF0Km96r8Y5g1nsuJ0V+JWtxRCVGCw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RadialBlurFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RadialBlurFilterEffect.html",
+          "hash": "0xWNK6Lod2jWxzW75wXXB1nECkK79fDcLMjdXCwXaYw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RasterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RasterEffect.html",
+          "hash": "AoYTEBC5eRct9KeQIeYZHz5hP4tV5tR6MNCi2BqjRIU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RasterFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RasterFilterEffect.html",
+          "hash": "4d5/p6DeqR7Ifhqr6M1lsmcygI5KblOtAKvqg5pwndc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ResizeEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ResizeEffect.html",
+          "hash": "Xy2dX5TbuQ/Xui4Iy1f6usoFqJlaELxZf4wAE4a8XA4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RippleEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RippleEffect.html",
+          "hash": "Cq0G0IUZ7smI9bVvA/aWls3Cf+HH7BfAa5SANW8LKeI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.Rotation90Effect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.Rotation90Effect.html",
+          "hash": "Aee5hntMaQAt8vQK1/vkJmKwOx43BO2/PFqRMkcjodM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.RotationEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.RotationEffect.html",
+          "hash": "V3OXTWfxz/XcqGKolo0kn+ElkUEXHGFfKPDA7Klo8r0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SceneAudioEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SceneAudioEffect.html",
+          "hash": "M3fdEVEua4zyEuuL3lRBzrAFVWHyW8o+chdwqonHEcU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SceneChangeEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SceneChangeEffect.html",
+          "hash": "BdPKVvhPT+ynf89sisbctmLPp0WW6OnmXx+BnH72y2M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SceneEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SceneEffect.html",
+          "hash": "KjHqWKaxyNjlPM8My+lrNhsSMw0RMvl81aTCoH53tCw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ScriptDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ScriptDirectory.html",
+          "hash": "shsEYsH93u6zuD87RVPlHDkDtiqCo3gETfWq8PEUmUA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ScriptEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ScriptEffect.html",
+          "hash": "djn7zXK1cOdDSe+1nTUaN3cftDTT3aZbhHnt8hz2Yjo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ScriptFileEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ScriptFileEffect.html",
+          "hash": "pQbEbl7btAb6xin72rEhHrGjByHfSiKcp7GxE3mJa48="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ShadowEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ShadowEffect.html",
+          "hash": "kR1uwxgirKNXgOLX1OTp/Mm7ZLktHW+E4ojCsXVqEr8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SharpenEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SharpenEffect.html",
+          "hash": "u3H+ZVjqbc+wZMg8hro3/eFuwZq7tbK22XRXcCWJZmg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SharpenFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SharpenFilterEffect.html",
+          "hash": "fcD5P/VNqMT4iMH+EhFHX2Xr2m62L6sLxZB+MefUzIw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.SplitEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.SplitEffect.html",
+          "hash": "gxknTiQVJFC0zC21lo1hvxdRGaziOKw1t9S+Cdsnt+M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.StandardDrawEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.StandardDrawEffect.html",
+          "hash": "qLZKkxtjvAlphHNw2S/JJ+uX7EWY+iwZaCIP3Y5zhFE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.StandardPlaybackEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.StandardPlaybackEffect.html",
+          "hash": "78mFxc63kIpFNWxXB6yspqfrD9CVv5pz2V80fYGRBYc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.TextAlign.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.TextAlign.html",
+          "hash": "brWCtfqXTIY4j3SPSSHwVpBtFncY7Km3Vo50Wg/O0TQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.TextEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.TextEffect.html",
+          "hash": "rHifARN09WEsftLmnfO4RUcVTWsEDRu17iTusEQ4Iuw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.TextType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.TextType.html",
+          "hash": "Jw3OXLFn6wg7kifKtP5e9spIQBsGK340eRuMO+qS/fc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.TimeControlEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.TimeControlEffect.html",
+          "hash": "aDXPpoQ/mh6jnZEuoFbyvOiszWX3vKEvDBbBIpr1KHo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.TransparencyEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.TransparencyEffect.html",
+          "hash": "JtPsuzumFRL2viz8h35zQwY0g/u7ffk/o9ibnBr0Ajg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.VibrationEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.VibrationEffect.html",
+          "hash": "i0S2BeV255IoqTAsykG0V70VY2EE/IaobWrScHItr1w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.VibrationFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.VibrationFilterEffect.html",
+          "hash": "KH6+l7esPNgqylQLVbsyU7skomtNsojv1P1gfvyaNH4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.VideoCompositionEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.VideoCompositionEffect.html",
+          "hash": "HdESvtnR8Ea2fs2a1xHlWQIiROg2JUcRZoXUvXgp+TA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.VideoFileEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.VideoFileEffect.html",
+          "hash": "PfmtlBClx7d6e4ZvUvD9tuxi7rwagX281A9ie7TGgz0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.VolumeFilterEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.VolumeFilterEffect.html",
+          "hash": "bHeS4AIhHds8pDHDBwJpwYxF5jEfd0hQXwQqob+QQM0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.WaveformEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.WaveformEffect.html",
+          "hash": "oEFZxtYFarcCiiCRvBcncayQzs+NzWHzySW37BwvwAM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.WipeEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.WipeEffect.html",
+          "hash": "Cae4D9nGb5T+AtjBQadN+g+y2APqdXAXVoVkDm1RmTg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.ZoomEffect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.ZoomEffect.html",
+          "hash": "V5tTZPGuhavVmaS6Mo51dYdiHQq+tz7ggyVjcnxM4Yk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Effects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Effects.html",
+          "hash": "MXrCol/d6x7LOWcuAr1lO8OqFUMWmOHh9VNXBeWq/MI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.ExEditProject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.ExEditProject.html",
+          "hash": "3k+dxOLq3AYhmOHlUMHfgwkMyR93aWLnOE2P7vr1kyk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.ExeditObjectFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.ExeditObjectFile.html",
+          "hash": "oWYvLR0waf+xANmgyWcOQDW2qEr2I3ohmSlPTayJkJw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.ExeditUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.ExeditUtil.html",
+          "hash": "mekliLzCjvmuAeGj+ZhgemO3dR+DlFAv+f9wsrQlJMs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.IEffectFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.IEffectFactory.html",
+          "hash": "Q7MUtIVX4zppd/+O3C/Jp1Wjx9sTDBnsMjL4tfXIQu8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Layer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Layer.html",
+          "hash": "7iCRBtYFyAFIqI5lhNcMpzNfa5MmjBgqqlSCHDmvfTU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.LayerFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.LayerFlag.html",
+          "hash": "sUFgrU0rYPGUDOyH1DAzJezAxgU0D/vcih//m0gLJtY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Scene.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Scene.html",
+          "hash": "LRvUHensEGaRt7MloXf4sHfaaS/ALDU7TuKDBaFiC0E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.SceneFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.SceneFlag.html",
+          "hash": "f+SLN+y5/SuLqh6k9wOEQbjQPM3L3j0HUl8rEZIx3Jg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TimelineObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TimelineObject.html",
+          "hash": "rJ7yj2ejqkqdeVRsn6mrBvGoUtU6Wv06ML8Y62qB2ek="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TimelineObjectFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TimelineObjectFlag.html",
+          "hash": "g1qGBoXEu2wFpfyjTdz/sZyxQpb3ZYwQdsLi4+TCa2c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.Trackbar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.Trackbar.html",
+          "hash": "pLdZcSQPjyQ5AtcX8AC8jgrVzWZjtvhY/HHMusNTb/w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TrackbarDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TrackbarDefinition.html",
+          "hash": "ftnuduzCVRa+82cQTzIpNQw9dYi/9EGLlV7/+UKZQ1M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TrackbarFlag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TrackbarFlag.html",
+          "hash": "lAS10aJQMkWrR31pskCb18HhGjTnHARsoYuzFMCU8s8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TrackbarScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TrackbarScript.html",
+          "hash": "415t6iZMsifQczGsM4PAlEtBTWJ55Xf70XQ/KO09FxI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.TrackbarType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.TrackbarType.html",
+          "hash": "Uy7KNFZ5Y5jAwBbT5kIKlkiV3PxuGmzJyLFelEtSbtE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.YCbCr.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.YCbCr.html",
+          "hash": "bimRzfM3cIS0x+4+9tkEXBzdLzhxDbTfT4sosor1fxs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.ExEdit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.ExEdit.html",
+          "hash": "wo7q87wGugT/dRzuvxcGOLzQ3yErW3nHxki612k6lbk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.Extensions.BooleanExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.Extensions.BooleanExtensions.html",
+          "hash": "tNandLcIimiYTDt8rBL8tmXSwKVjVIn7Goc3pTfIiQ8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.Extensions.ColorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.Extensions.ColorExtensions.html",
+          "hash": "0OVMOT3hRMIFmHV0SDbojuOw95vjW6CXF8WDxTzkOHA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.Extensions.IntegerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.Extensions.IntegerExtensions.html",
+          "hash": "kpNqKZBKty1uFzxTSbBBmKiKw9tbuglnCbXxeaMFgg8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.Extensions.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.Extensions.StringExtensions.html",
+          "hash": "2l/lppdR3cpzkGFQltDVqpsOnD+ZZBWyZv1Xh0vjDlA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.Extensions.html",
+          "hash": "sdb7gv+EPPm/qNGW0TPrszGfsqbgJBMCu4NiDDak248="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.FilterConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.FilterConfig.html",
+          "hash": "7MncHRJN7SpJlas0fyVvQz9t7didkqx25FaOwhdJY0A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.FilterProject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.FilterProject.html",
+          "hash": "tS0FaE7y5KpY+p0+LXZVLBg5L4ClTp74QewR921lku4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.FrameStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.FrameStatus.html",
+          "hash": "RftEkf0MzitkJhaWjf7NleYVrEJGLyqGfVlCvJr2vXs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.FrameStatusInter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.FrameStatusInter.html",
+          "hash": "hlT5/UUXQJi76dH3XMSjkRSw3eF2/cd4Sk7JrIRcHRg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.MaxByteCountOfStringException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.MaxByteCountOfStringException.html",
+          "hash": "npqDW+vgg2i6V1UeCwivPASIK2Z2OUQEL67+IZXa1dU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.RawFilterProject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.RawFilterProject.html",
+          "hash": "yXt6Z6wRon/4pHnpGJ4Tw+w6MG1Ty4qGzzXwlxJO/5Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Karoterra.AupDotNet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Karoterra.AupDotNet.html",
+          "hash": "Bei9W/2c2ksuZPL1gMTXkcuOGlqwoVGiz7h9+kiyJpE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "2Y8HXYrnyR7+Z4lo6O9t6sUNbKDBCljom+UCgsnCrGw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "a3vbDgR2WNONEO8A70Wsxam46CXfvkA1xdYVJ3yyA1A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 158,
+          "skipped_file_count": 158
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

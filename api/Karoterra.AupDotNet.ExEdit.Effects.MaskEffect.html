@@ -1,0 +1,947 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MaskEffect
+   | AupDotNet Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MaskEffect
+   | AupDotNet Documentation ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect">
+  
+  
+  <h1 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect" class="text-break">Class MaskEffect
+  </h1>
+  <div class="markdown level0 summary"><p>マスク</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html">Effect</a></div>
+    <div class="level2"><span class="xref">MaskEffect</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_Type">Effect.Type</a>
+    </div>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_Flag">Effect.Flag</a>
+    </div>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_Trackbars">Effect.Trackbars</a>
+    </div>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_Checkboxes">Effect.Checkboxes</a>
+    </div>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_ParseExtData_System_ReadOnlySpan_System_Byte__">Effect.ParseExtData(ReadOnlySpan&lt;Byte&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_Export_System_IO_TextWriter_System_Collections_Generic_IReadOnlyList_Karoterra_AupDotNet_ExEdit_TrackbarScript__System_Boolean_">Effect.Export(TextWriter, IReadOnlyList&lt;TrackbarScript&gt;, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.html">Karoterra.AupDotNet.ExEdit.Effects</a></h6>
+  <h6><strong>Assembly</strong>: Karoterra.AupDotNet.dll</h6>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MaskEffect : Effect</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L187">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor">MaskEffect()</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html">MaskEffect</a> のインスタンスを初期化します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaskEffect()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_Karoterra_AupDotNet_ExEdit_Trackbar___System_Int32___.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.%23ctor(Karoterra.AupDotNet.ExEdit.Trackbar%5B%5D%2CSystem.Int32%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L197">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_Karoterra_AupDotNet_ExEdit_Trackbar___System_Int32___" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor(Karoterra.AupDotNet.ExEdit.Trackbar[],System.Int32[])">MaskEffect(Trackbar[], Int32[])</h4>
+  <div class="markdown level1 summary"><p>トラックバーとチェックボックスの値を指定して <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html">MaskEffect</a> のインスタンスを初期化します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaskEffect(Trackbar[] trackbars, int[] checkboxes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a>[]</td>
+        <td><span class="parametername">trackbars</span></td>
+        <td><p>トラックバー</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>[]</td>
+        <td><span class="parametername">checkboxes</span></td>
+        <td><p>チェックボックス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_Karoterra_AupDotNet_ExEdit_Trackbar___System_Int32___System_ReadOnlySpan_System_Byte__.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.%23ctor(Karoterra.AupDotNet.ExEdit.Trackbar%5B%5D%2CSystem.Int32%5B%5D%2CSystem.ReadOnlySpan%7BSystem.Byte%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L208">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect__ctor_Karoterra_AupDotNet_ExEdit_Trackbar___System_Int32___System_ReadOnlySpan_System_Byte__" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.#ctor(Karoterra.AupDotNet.ExEdit.Trackbar[],System.Int32[],System.ReadOnlySpan{System.Byte})">MaskEffect(Trackbar[], Int32[], ReadOnlySpan&lt;Byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>トラックバーとチェックボックス、拡張データを指定して <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html">MaskEffect</a> のインスタンスを初期化します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaskEffect(Trackbar[] trackbars, int[] checkboxes, ReadOnlySpan&lt;byte&gt; data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a>[]</td>
+        <td><span class="parametername">trackbars</span></td>
+        <td><p>トラックバー</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>[]</td>
+        <td><span class="parametername">checkboxes</span></td>
+        <td><p>チェックボックス</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>&gt;</td>
+        <td><span class="parametername">data</span></td>
+        <td><p>拡張データ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_MaxNameLength.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.MaxNameLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L15">View Source</a>
+  </span>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_MaxNameLength" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.MaxNameLength">MaxNameLength</h4>
+  <div class="markdown level1 summary"><p>マスクの名前の最大バイト数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly int MaxNameLength</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_AspectRatio.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.AspectRatio%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L35">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_AspectRatio_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.AspectRatio*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_AspectRatio" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.AspectRatio">AspectRatio</h4>
+  <div class="markdown level1 summary"><p>縦横比</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar AspectRatio { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Blur.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Blur%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L38">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Blur_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Blur*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Blur" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Blur">Blur</h4>
+  <div class="markdown level1 summary"><p>ぼかし</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar Blur { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_EffectType.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.EffectType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L20">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_EffectType_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.EffectType*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_EffectType" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.EffectType">EffectType</h4>
+  <div class="markdown level1 summary"><p>マスクのフィルタ効果定義。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EffectType EffectType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.EffectType.html">EffectType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.FigureType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L61">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.FigureType*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.FigureType">FigureType</h4>
+  <div class="markdown level1 summary"><p>使用している組込み図形の種類</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FigureType FigureType { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureType.html">FigureType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>組込み図形以外のマスクを使用している場合は <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> にその情報が格納されます。</p>
+</div>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Filename%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L146">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Filename*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Filename">Filename</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a> が <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_File">File</a> の場合は画像ファイルのパス。
+それ以外の場合は <code>null</code>。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Filename { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Fit.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Fit%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L48">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Fit_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Fit*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Fit" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Fit">Fit</h4>
+  <div class="markdown level1 summary"><p>元のサイズに合わせる</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Fit { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Invert.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Invert%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L41">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Invert_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Invert*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Invert" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Invert">Invert</h4>
+  <div class="markdown level1 summary"><p>マスクの反転</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Invert { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Mode.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Mode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L182">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Mode_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Mode*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Mode" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Mode">Mode</h4>
+  <div class="markdown level1 summary"><p>シーン選択時に有効。
+1: シーンの長さを合わせる
+2: シーンを逆再生</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Mode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L73">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Name*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Name">Name</h4>
+  <div class="markdown level1 summary"><p>マスクの名前</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>組込み図形以外のマスクを使用している場合はここにその情報が格納されます。
+文字列の最大バイト数は <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_MaxNameLength">MaxNameLength</a> です。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a> が <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_Figure">Figure</a> の場合は figure フォルダの画像ファイル名(拡張子無し)がここに入ります。</p>
+</div>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.NameType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L130">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.NameType*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.NameType">NameType</h4>
+  <div class="markdown level1 summary"><p>マスクの種類</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FigureNameType NameType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html">FigureNameType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>組込み図形以外のマスクを使用している場合は <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> にその情報が格納されます。
+<code>NameType</code> は <code>Name</code> がどのような種類のマスクの情報を格納しているかを表します。</p>
+<table><thead><tr><th>値</th><th>説明</th></tr></thead><tbody><tr><td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_BuiltIn">BuiltIn</a></td><td>
+            組込み図形が選択されています。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> は <code>null</code> または空です。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_FigureType">FigureType</a> を参照してください。
+</td></tr><tr><td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_Figure">Figure</a></td><td>
+    figureフォルダの画像が選択されています。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> には画像のファイル名(拡張子無し)が入っています。
+</td></tr><tr><td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_File">File</a></td><td>
+    外部ファイルが参照されています。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> には画像ファイルの絶対パスの先頭に <code>*</code> が付いたものが入っています。
+画像ファイルのパスを取得する場合は <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename">Filename</a> を参照してください。
+</td></tr><tr><td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_Scene">Scene</a></td><td>
+    シーンが参照されています。
+<a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Name">Name</a> にはシーン番号の前に <code>:</code> が付いたものが入っています。
+シーン番号を取得する場合は <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Filename">Filename</a> を参照してください。
+</td></tr></tbody></table>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Rotate.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Rotate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L29">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Rotate_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Rotate*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Rotate" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Rotate">Rotate</h4>
+  <div class="markdown level1 summary"><p>回転</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar Rotate { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Scene.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Scene%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L157">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Scene_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Scene*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Scene" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Scene">Scene</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a> が <a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.FigureNameType.html#Karoterra_AupDotNet_ExEdit_Effects_FigureNameType_Scene">Scene</a> の場合はシーン番号。
+それ以外の場合は <code>null</code>。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Scene { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Scene_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.html#Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_NameType">NameType</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Size.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Size%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L32">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Size_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Size*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Size" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Size">Size</h4>
+  <div class="markdown level1 summary"><p>サイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar Size { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_X.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.X%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L23">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_X_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.X*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_X" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.X">X</h4>
+  <div class="markdown level1 summary"><p>X</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar X { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Y.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L26">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Y_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Y*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_Y" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.Y">Y</h4>
+  <div class="markdown level1 summary"><p>Y</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Trackbar Y { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Karoterra.AupDotNet.ExEdit.Trackbar.html">Trackbar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_DumpExtData.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.DumpExtData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L222">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_DumpExtData_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.DumpExtData*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_DumpExtData" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.DumpExtData">DumpExtData()</h4>
+  <div class="markdown level1 summary"><p>拡張データをダンプします。
+拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override byte[] DumpExtData()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><p>ダンプされたデータ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_DumpExtData">Effect.DumpExtData()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ExportExtData_System_IO_TextWriter_.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ExportExtData(System.IO.TextWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L232">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ExportExtData_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ExportExtData*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ExportExtData_System_IO_TextWriter_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ExportExtData(System.IO.TextWriter)">ExportExtData(TextWriter)</h4>
+  <div class="markdown level1 summary"><p>オブジェクトファイルにEffectの拡張データを出力します。
+拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void ExportExtData(TextWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>出力先</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_ExportExtData_System_IO_TextWriter_">Effect.ExportExtData(TextWriter)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ParseExtDataInternal_System_ReadOnlySpan_System_Byte__.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ParseExtDataInternal(System.ReadOnlySpan%7BSystem.Byte%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L214">View Source</a>
+  </span>
+  <a id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ParseExtDataInternal_" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ParseExtDataInternal*"></a>
+  <h4 id="Karoterra_AupDotNet_ExEdit_Effects_MaskEffect_ParseExtDataInternal_System_ReadOnlySpan_System_Byte__" data-uid="Karoterra.AupDotNet.ExEdit.Effects.MaskEffect.ParseExtDataInternal(System.ReadOnlySpan{System.Byte})">ParseExtDataInternal(ReadOnlySpan&lt;Byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>拡張データをパースします。
+拡張データをもつフィルタ効果の派生クラスはこのメソッドをオーバーロードしてください。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ParseExtDataInternal(ReadOnlySpan&lt;byte&gt; data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>&gt;</td>
+        <td><span class="parametername">data</span></td>
+        <td><p>拡張データ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Karoterra.AupDotNet.ExEdit.Effect.html#Karoterra_AupDotNet_ExEdit_Effect_ParseExtDataInternal_System_ReadOnlySpan_System_Byte__">Effect.ParseExtDataInternal(ReadOnlySpan&lt;Byte&gt;)</a></div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/karoterra/AupDotNet/new/main/apiSpec/new?filename=Karoterra_AupDotNet_ExEdit_Effects_MaskEffect.md&amp;value=---%0Auid%3A%20Karoterra.AupDotNet.ExEdit.Effects.MaskEffect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/karoterra/AupDotNet/blob/main/src/AupDotNet/ExEdit/Effects/MaskEffect.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2021-2022 karoterra.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
