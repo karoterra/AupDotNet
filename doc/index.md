@@ -1,6 +1,10 @@
 # **AupDotNet**
 **AupDotNet** は [AviUtl](http://spring-fragrance.mints.ne.jp/aviutl/) プロジェクトファイル (*.aup) を扱うための .NET クラスライブラリです。
 
+- [NuGet.org](https://www.nuget.org/packages/Karoterra.AupDotNet/)
+- [Release Notes](../CHANGELOG.md)
+- [Source repository](https://github.com/karoterra/AupDotNet)
+
 ## 主な機能
 
 - プロジェクトファイルの読込、編集、保存
