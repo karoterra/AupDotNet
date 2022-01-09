@@ -148,38 +148,36 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <summary>
         /// レイヤー情報
         /// </summary>
-        public List<Layer> Layers { get; }
+        public List<Layer> Layers { get; } = new();
 
         /// <summary>
         /// シーン情報
         /// </summary>
-        public List<Scene> Scenes { get; }
+        public List<Scene> Scenes { get; } = new();
 
         /// <summary>
         /// トラックバー変化方法スクリプト
         /// </summary>
-        public List<TrackbarScript> TrackbarScripts { get; }
+        public List<TrackbarScript> TrackbarScripts { get; } = new();
 
         /// <summary>
         /// フィルタ効果の定義
         /// </summary>
-        public List<EffectType> EffectTypes { get; }
+        public List<EffectType> EffectTypes { get; } = new();
 
         /// <summary>
         /// タイムラインのオブジェクト
         /// </summary>
-        public List<TimelineObject> Objects { get; }
+        public List<TimelineObject> Objects { get; } = new();
 
         /// <summary>
         /// <see cref="ExEditProject"/> のインスタンスを初期化します。
         /// </summary>
         public ExEditProject()
         {
-            Layers = new List<Layer>();
-            Scenes = new List<Scene>();
-            TrackbarScripts = new List<TrackbarScript>(TrackbarScript.Defaults);
-            EffectTypes = new List<EffectType>(EffectType.Defaults);
-            Objects = new List<TimelineObject>();
+            Name = "拡張編集";
+            TrackbarScripts.AddRange(TrackbarScript.Defaults);
+            EffectTypes.AddRange(EffectType.Defaults);
         }
 
         /// <summary>
@@ -189,11 +187,30 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <param name="effectFactory">フィルタ効果ファクトリ</param>
         public ExEditProject(RawFilterProject rawFilter, IEffectFactory? effectFactory = null)
         {
+            Name = "拡張編集";
+            Read(rawFilter.Data, effectFactory);
+        }
+
+        /// <summary>
+        /// <see cref="ExEditProject"/> のインスタンスを初期化します。
+        /// </summary>
+        /// <param name="data">フィルタプラグインデータ</param>
+        /// <param name="effectFactory">フィルタ効果ファクトリ</param>
+        public ExEditProject(ReadOnlySpan<byte> data, IEffectFactory? effectFactory = null)
+        {
+            Name = "拡張編集";
+            Read(data, effectFactory);
+        }
+
+        /// <summary>
+        /// フィルタプラグインデータを読み込みます。
+        /// </summary>
+        /// <param name="data">フィルタプラグインデータ</param>
+        /// <param name="effectFactory">フィルタ効果ファクトリ</param>
+        public void Read(ReadOnlySpan<byte> data, IEffectFactory? effectFactory = null)
+        {
             if (effectFactory == null) effectFactory = new EffectFactory();
 
-            Name = "拡張編集";
-
-            var data = new ReadOnlySpan<byte>(rawFilter.Data);
             var effectTypeNum = data.Slice(4, 4).ToUInt32();
             var objectNum = data.Slice(8, 4).ToUInt32();
             Field0xC = data.Slice(0xC, 4).ToUInt32();
@@ -226,31 +243,31 @@ namespace Karoterra.AupDotNet.ExEdit
             data.Slice(0x80, Field0x80_0xFF.Length).CopyTo(Field0x80_0xFF);
 
             int cursor = 0x100;
-            Layers = new List<Layer>((int)layerNum);
+            Layers.Clear();
             for (uint i = 0; i < layerNum; i++)
             {
                 Layers.Add(new Layer(data.Slice(cursor, Layer.Size)));
                 cursor += Layer.Size;
             }
-            Scenes = new List<Scene>((int)sceneNum);
+            Scenes.Clear();
             for (uint i = 0; i < sceneNum; i++)
             {
                 Scenes.Add(new Scene(data.Slice(cursor, Scene.Size)));
                 cursor += Scene.Size;
             }
-            TrackbarScripts = new List<TrackbarScript>((int)trackbarScriptNum);
+            TrackbarScripts.Clear();
             for (uint i = 0; i < trackbarScriptNum; i++)
             {
                 TrackbarScripts.Add(new TrackbarScript(data.Slice(cursor, TrackbarScript.Size)));
                 cursor += TrackbarScript.Size;
             }
-            EffectTypes = new List<EffectType>((int)effectTypeNum);
+            EffectTypes.Clear();
             for (int i = 0; i < effectTypeNum; i++)
             {
                 EffectTypes.Add(new EffectType(data.Slice(cursor, EffectType.Size), i));
                 cursor += EffectType.Size;
             }
-            Objects = new List<TimelineObject>((int)objectNum);
+            Objects.Clear();
             var lastChainGroup = TimelineObject.NoChainGroup;
             for (int i = 0; i < objectNum; i++)
             {
