@@ -14,6 +14,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "../CHANGELOG.md",
+      "output": {
+        ".html": {
+          "relative_path": "CHANGELOG.html",
+          "hash": "oXTF5Eo41w/6ukBPlNKz+9MqjueT7I2l8FLf0NDEgeg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/aup_and_AupDotNet.md",
       "output": {
         ".html": {
@@ -54,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "LkLaDz6L8yVTuTmhjnRy4RbEzIt753v25eXAAu+7IYQ="
+          "hash": "Xu6H4pd3AS/KZb5X6I1uLZO9inN+Pc++hVtho/FGjIw="
         }
       },
       "is_incremental": false,
@@ -1614,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Karoterra.AupDotNet.ExEdit.ExEditProject.html",
-          "hash": "3k+dxOLq3AYhmOHlUMHfgwkMyR93aWLnOE2P7vr1kyk="
+          "hash": "xngzOzFmRMI+2MjIbYwObIHth3hVIGgkrINckFTYQ5o="
         }
       },
       "is_incremental": false,
@@ -1993,8 +2005,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 3,
-          "skipped_file_count": 3
+          "total_file_count": 4,
+          "skipped_file_count": 4
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

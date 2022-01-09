@@ -16587,6 +16587,15 @@ references:
   commentId: M:Karoterra.AupDotNet.ExEdit.ExEditProject.#ctor(Karoterra.AupDotNet.RawFilterProject,Karoterra.AupDotNet.ExEdit.IEffectFactory)
   fullName: Karoterra.AupDotNet.ExEdit.ExEditProject.ExEditProject(Karoterra.AupDotNet.RawFilterProject, Karoterra.AupDotNet.ExEdit.IEffectFactory)
   nameWithType: ExEditProject.ExEditProject(RawFilterProject, IEffectFactory)
+- uid: Karoterra.AupDotNet.ExEdit.ExEditProject.#ctor(System.ReadOnlySpan{System.Byte},Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  name: ExEditProject(ReadOnlySpan<Byte>, IEffectFactory)
+  href: api/Karoterra.AupDotNet.ExEdit.ExEditProject.html#Karoterra_AupDotNet_ExEdit_ExEditProject__ctor_System_ReadOnlySpan_System_Byte__Karoterra_AupDotNet_ExEdit_IEffectFactory_
+  commentId: M:Karoterra.AupDotNet.ExEdit.ExEditProject.#ctor(System.ReadOnlySpan{System.Byte},Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  name.vb: ExEditProject(ReadOnlySpan(Of Byte), IEffectFactory)
+  fullName: Karoterra.AupDotNet.ExEdit.ExEditProject.ExEditProject(System.ReadOnlySpan<System.Byte>, Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  fullName.vb: Karoterra.AupDotNet.ExEdit.ExEditProject.ExEditProject(System.ReadOnlySpan(Of System.Byte), Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  nameWithType: ExEditProject.ExEditProject(ReadOnlySpan<Byte>, IEffectFactory)
+  nameWithType.vb: ExEditProject.ExEditProject(ReadOnlySpan(Of Byte), IEffectFactory)
 - uid: Karoterra.AupDotNet.ExEdit.ExEditProject.#ctor*
   name: ExEditProject
   href: api/Karoterra.AupDotNet.ExEdit.ExEditProject.html#Karoterra_AupDotNet_ExEdit_ExEditProject__ctor_
@@ -16931,6 +16940,22 @@ references:
   isSpec: "True"
   fullName: Karoterra.AupDotNet.ExEdit.ExEditProject.OutsideFrameScale
   nameWithType: ExEditProject.OutsideFrameScale
+- uid: Karoterra.AupDotNet.ExEdit.ExEditProject.Read(System.ReadOnlySpan{System.Byte},Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  name: Read(ReadOnlySpan<Byte>, IEffectFactory)
+  href: api/Karoterra.AupDotNet.ExEdit.ExEditProject.html#Karoterra_AupDotNet_ExEdit_ExEditProject_Read_System_ReadOnlySpan_System_Byte__Karoterra_AupDotNet_ExEdit_IEffectFactory_
+  commentId: M:Karoterra.AupDotNet.ExEdit.ExEditProject.Read(System.ReadOnlySpan{System.Byte},Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  name.vb: Read(ReadOnlySpan(Of Byte), IEffectFactory)
+  fullName: Karoterra.AupDotNet.ExEdit.ExEditProject.Read(System.ReadOnlySpan<System.Byte>, Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  fullName.vb: Karoterra.AupDotNet.ExEdit.ExEditProject.Read(System.ReadOnlySpan(Of System.Byte), Karoterra.AupDotNet.ExEdit.IEffectFactory)
+  nameWithType: ExEditProject.Read(ReadOnlySpan<Byte>, IEffectFactory)
+  nameWithType.vb: ExEditProject.Read(ReadOnlySpan(Of Byte), IEffectFactory)
+- uid: Karoterra.AupDotNet.ExEdit.ExEditProject.Read*
+  name: Read
+  href: api/Karoterra.AupDotNet.ExEdit.ExEditProject.html#Karoterra_AupDotNet_ExEdit_ExEditProject_Read_
+  commentId: Overload:Karoterra.AupDotNet.ExEdit.ExEditProject.Read
+  isSpec: "True"
+  fullName: Karoterra.AupDotNet.ExEdit.ExEditProject.Read
+  nameWithType: ExEditProject.Read
 - uid: Karoterra.AupDotNet.ExEdit.ExEditProject.Scenes
   name: Scenes
   href: api/Karoterra.AupDotNet.ExEdit.ExEditProject.html#Karoterra_AupDotNet_ExEdit_ExEditProject_Scenes
