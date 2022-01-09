@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Linq;
 using Karoterra.AupDotNet;
 using Karoterra.AupDotNet.ExEdit;
+using Karoterra.AupDotNet.Extensions;
 
 namespace AupDotNetTests.ExEdit
 {
@@ -197,6 +198,24 @@ namespace AupDotNetTests.ExEdit
             exedit = new ExEditProject(rawFilter);
             var actual = exedit.DumpData();
             Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+
+        [TestMethod]
+        public void Test_ReadInvalidData()
+        {
+            var exedit = new ExEditProject();
+            Assert.ThrowsException<IndexOutOfRangeException>(() =>
+            {
+                exedit.Read(Array.Empty<byte>());
+            });
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                exedit.Read(new byte[] {0, 0, 0, 0});
+            });
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                exedit.Read("80EE".ToSjisBytes());
+            });
         }
     }
 }

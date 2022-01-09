@@ -207,8 +207,14 @@ namespace Karoterra.AupDotNet.ExEdit
         /// </summary>
         /// <param name="data">フィルタプラグインデータ</param>
         /// <param name="effectFactory">フィルタ効果ファクトリ</param>
+        /// <exception cref="ArgumentException"><c>data</c> は拡張編集のデータではありません。</exception>
         public void Read(ReadOnlySpan<byte> data, IEffectFactory? effectFactory = null)
         {
+            if (data.ToUInt32() != 0x45453038)
+            {
+                throw new ArgumentException("\"80EE\" header not found.");
+            }
+
             if (effectFactory == null) effectFactory = new EffectFactory();
 
             var effectTypeNum = data.Slice(4, 4).ToUInt32();
