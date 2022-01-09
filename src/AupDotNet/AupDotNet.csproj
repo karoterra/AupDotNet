@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <RootNamespace>Karoterra.AupDotNet</RootNamespace>
     <AssemblyName>Karoterra.AupDotNet</AssemblyName>
     <PackageId>Karoterra.AupDotNet</PackageId>
-    <Version>0.0.0</Version>
+    <Version>0.1.0</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
     <Authors>karoterra</Authors>
