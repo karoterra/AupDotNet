@@ -1,10 +1,14 @@
 # AupDotNet
-
 [AviUtl](http://spring-fragrance.mints.ne.jp/aviutl/)
-プロジェクトファイルを .NET で読込・編集するためのクラスライブラリ．
+プロジェクトファイルを .NET で読込・編集するためのクラスライブラリです。
+
+[![Nuget](https://img.shields.io/nuget/v/Karoterra.AupDotNet)](https://www.nuget.org/packages/Karoterra.AupDotNet/)
+[![Nuget](https://img.shields.io/nuget/dt/Karoterra.AupDotNet)](https://www.nuget.org/packages/Karoterra.AupDotNet/)
 
 ## 使い方
-リファレンスは[こちら](https://karoterra.github.io/AupDotNet/index.html)。
+[NuGet](https://www.nuget.org/packages/Karoterra.AupDotNet/) からインストールしてご利用ください。
+
+リファレンスは[こちら](https://karoterra.github.io/AupDotNet/index.html)にあります。
 
 使用例は以下を参照してください。
 
@@ -16,3 +20,6 @@
 ## ライセンス
 このソフトウェアは MIT ライセンスのもとで公開されます。
 詳細は [LICENSE](LICENSE) を参照してください。
+
+## 更新履歴
+[ChangeLog](CHANGELOG.md) を参照してください。
