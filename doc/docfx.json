@@ -29,6 +29,10 @@
         "dest": "api"
       },
       {
+        "files": [ "CHANGELOG.md" ],
+        "src": ".."
+      },
+      {
         "files": [
           "articles/**.md",
           "articles/**/toc.yml",
