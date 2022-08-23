@@ -7,6 +7,8 @@
   "FrameNum": 6,
   "SelectedFrameStart": 0,
   "SelectedFrameEnd": 5,
+  "ResizedWidth": 640,
+  "ResizedHeight": 480,
   "CurrentFrame": 3,
   "AudioCh": 2,
   "AudioRate": 44100,

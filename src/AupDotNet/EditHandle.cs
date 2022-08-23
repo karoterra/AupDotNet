@@ -108,13 +108,19 @@ namespace Karoterra.AupDotNet
         }
 
         /// <summary>
-        /// フレームの横幅。
+        /// フレームのサイズ変更前の横幅。
         /// </summary>
+        /// <remarks>
+        /// プロジェクト作成時の横幅。
+        /// </remarks>
         public int Width { get; set; }
 
         /// <summary>
-        /// フレームの高さ。
+        /// フレームのサイズ変更前の高さ。
         /// </summary>
+        /// <remarks>
+        /// プロジェクト作成時の高さ。
+        /// </remarks>
         public int Height { get; set; }
 
         /// <summary>
@@ -126,6 +132,24 @@ namespace Karoterra.AupDotNet
         /// 選択中フレームの終了フレーム。
         /// </summary>
         public int SelectedFrameEnd { get; set; }
+
+        /// <summary>
+        /// フレームのサイズ変更後の横幅。
+        /// </summary>
+        /// <remarks>
+        /// AviUtlの「サイズの変更」やサイズ変更系のフィルタープラグインを使用してサイズを変更した場合の横幅。
+        /// 使用していない(変更していない)場合プロジェクト作成時の横幅と同じになる。
+        /// </remarks>
+        public int ResizedWidth { get; set; }
+
+        /// <summary>
+        /// フレームのサイズ変更後の高さ。
+        /// </summary>
+        /// <remarks>
+        /// AviUtlの「サイズの変更」やサイズ変更系のフィルタープラグインを使用してサイズを変更した場合の高さ。
+        /// 使用していない(変更していない)場合プロジェクト作成時の高さと同じになる。
+        /// </remarks>
+        public int ResizedHeight { get; set; }
 
         /// <summary>
         /// 現在表示中のフレーム。
@@ -218,6 +242,8 @@ namespace Karoterra.AupDotNet
             Height = span.Slice(0x314 - UncompressedSize, 4).ToInt32();
             SelectedFrameStart = span.Slice(0x31c - UncompressedSize, 4).ToInt32();
             SelectedFrameEnd = span.Slice(0x320 - UncompressedSize, 4).ToInt32();
+            ResizedWidth = span.Slice(0x328 - UncompressedSize, 4).ToInt32();
+            ResizedHeight = span.Slice(0x32c - UncompressedSize, 4).ToInt32();
             CurrentFrame = span.Slice(0x330 - UncompressedSize, 4).ToInt32();
             VideoDecodeBit = span.Slice(0x3de - UncompressedSize, 2).ToInt16();
             VideoDecodeFormat = span.Slice(0x3e0 - UncompressedSize, 4).ToUInt32();
@@ -298,6 +324,8 @@ namespace Karoterra.AupDotNet
             Frames.Count.ToBytes().CopyTo(span.Slice(0x318 - UncompressedSize, 4));
             SelectedFrameStart.ToBytes().CopyTo(span.Slice(0x31c - UncompressedSize, 4));
             SelectedFrameEnd.ToBytes().CopyTo(span.Slice(0x320 - UncompressedSize, 4));
+            ResizedWidth.ToBytes().CopyTo(span.Slice(0x328 - UncompressedSize, 4));
+            ResizedHeight.ToBytes().CopyTo(span.Slice(0x32c - UncompressedSize, 4));
             CurrentFrame.ToBytes().CopyTo(span.Slice(0x330 - UncompressedSize, 4));
             VideoDecodeBit.ToBytes().CopyTo(span.Slice(0x3de - UncompressedSize, 2));
             VideoDecodeFormat.ToBytes().CopyTo(span.Slice(0x3e0 - UncompressedSize, 4));
