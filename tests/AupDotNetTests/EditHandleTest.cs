@@ -18,6 +18,8 @@ namespace AupDotNetTests
         public int FrameNum { get; set; }
         public int SelectedFrameStart { get; set; }
         public int SelectedFrameEnd { get; set; }
+        public int ResizedWidth { get; set; }
+        public int ResizedHeight { get; set; }
         public int CurrentFrame { get; set; }
         public short AudioCh { get; set; }
         public int AudioRate { get; set; }
@@ -47,6 +49,8 @@ namespace AupDotNetTests
             Assert.AreEqual(expected.FrameNum, aup.EditHandle.Frames.Count, "FrameNum");
             Assert.AreEqual(expected.SelectedFrameStart, aup.EditHandle.SelectedFrameStart, "SelectedFrameStart");
             Assert.AreEqual(expected.SelectedFrameEnd, aup.EditHandle.SelectedFrameEnd, "SelectedFrameEnd");
+            Assert.AreEqual(expected.ResizedWidth, aup.EditHandle.ResizedWidth, "ResizedWidth");
+            Assert.AreEqual(expected.ResizedHeight, aup.EditHandle.ResizedHeight, "ResizedHeight");
             Assert.AreEqual(expected.CurrentFrame, aup.EditHandle.CurrentFrame, "CurrentFrame");
             Assert.AreEqual(expected.AudioCh, aup.EditHandle.AudioCh, "AudioCh");
             Assert.AreEqual(expected.AudioRate, aup.EditHandle.AudioRate, "AudioRate");
@@ -81,6 +85,8 @@ namespace AupDotNetTests
             Assert.AreEqual(src.Frames.Count, dst.Frames.Count, "FrameNum");
             Assert.AreEqual(src.SelectedFrameStart, dst.SelectedFrameStart, "SelectedFrameStart");
             Assert.AreEqual(src.SelectedFrameEnd, dst.SelectedFrameEnd, "SelectedFrameEnd");
+            Assert.AreEqual(src.ResizedWidth, dst.ResizedWidth, "ResizedWidth");
+            Assert.AreEqual(src.ResizedHeight, dst.ResizedHeight, "ResizedHeight");
             Assert.AreEqual(src.CurrentFrame, dst.CurrentFrame, "CurrentFrame");
             Assert.AreEqual(src.VideoDecodeBit, dst.VideoDecodeBit, "VideoDecodeBit");
             Assert.AreEqual(src.VideoDecodeFormat, dst.VideoDecodeFormat, "VideoDecodeFormat");
