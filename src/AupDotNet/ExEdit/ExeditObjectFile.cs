@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Karoterra.AupDotNet.ExEdit
 {
@@ -59,6 +60,11 @@ namespace Karoterra.AupDotNet.ExEdit
         public List<TimelineObject> Objects { get; } = new();
 
         /// <summary>
+        /// 他のシーンも含めたプロジェクト全体の元のオブジェクト配列
+        /// </summary>
+        public List<TimelineObject> AllObjects { get; } = new();
+
+        /// <summary>
         /// トラックバー変化方法スクリプト
         /// </summary>
         public List<TrackbarScript> TrackbarScripts { get; } = new();
@@ -102,7 +108,10 @@ namespace Karoterra.AupDotNet.ExEdit
 
             for (int i = 0; i < Objects.Count; i++)
             {
-                Objects[i].ExportObject(writer, i, TrackbarScripts);
+                TimelineObject? chainParent = Objects[i].Chain
+                    ? AllObjects.FirstOrDefault(obj => !obj.Chain && obj.ChainGroup == (int)Objects[i].ChainGroup)
+                    : null;
+                Objects[i].ExportObject(writer, i, TrackbarScripts, chainParent);
             }
         }
     }

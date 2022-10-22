@@ -134,10 +134,18 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <param name="writer">出力先</param>
         /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
         /// <param name="chain">中間点で区切られたオブジェクトの後続オブジェクトであるか。<see cref="TimelineObject.Chain"/> の値。</param>
-        public void Export(TextWriter writer, IReadOnlyList<TrackbarScript> trackbarScripts, bool chain)
+        /// <param name="chainParent">中間点グループの先頭オブジェクトにある該当フィルタ効果。自分が先頭あるいは中間点で区切られていない場合は null</param>
+        public void Export(TextWriter writer, IReadOnlyList<TrackbarScript> trackbarScripts, bool chain, Effect? chainParent)
         {
             writer.Write("_name=");
             writer.WriteLine(Type.Name);
+
+            var effectFlag = chainParent?.Flag ?? Flag;
+            if (!effectFlag.HasFlag(EffectFlag.Enable))
+            {
+                writer.WriteLine("_disable=1");
+            }
+
             for (int i = 0; i < Trackbars.Length; i++)
             {
                 var def = Type.Trackbars[i];

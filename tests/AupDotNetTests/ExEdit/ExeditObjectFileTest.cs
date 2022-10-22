@@ -22,6 +22,7 @@ namespace AupDotNetTests.ExEdit
         [DataRow(@"TestData\Exedit\Chain.aup", 1)]
         [DataRow(@"TestData\Exedit\Group.aup", 0)]
         [DataRow(@"TestData\Exedit\Group.aup", 1)]
+        [DataRow(@"TestData\Exedit\DisabledEffect.aup", 0)]
         public void Test_Write(string filename, int scene)
         {
             AviUtlProject aup = new AviUtlProject(filename);

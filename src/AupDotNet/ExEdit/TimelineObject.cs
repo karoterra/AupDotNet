@@ -295,7 +295,8 @@ namespace Karoterra.AupDotNet.ExEdit
         /// <param name="writer">出力先</param>
         /// <param name="index">オブジェクトのインデックス</param>
         /// <param name="trackbarScripts">ExEditProjectが持っているTrackbarScriptのリスト</param>
-        public void ExportObject(TextWriter writer, int index, IReadOnlyList<TrackbarScript> trackbarScripts)
+        /// <param name="chainParent">中間点グループの先頭オブジェクト。自分が先頭あるいは中間点で区切られていない場合は null</param>
+        public void ExportObject(TextWriter writer, int index, IReadOnlyList<TrackbarScript> trackbarScripts, TimelineObject? chainParent)
         {
             writer.Write('[');
             writer.Write(index);
@@ -339,7 +340,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 writer.Write('.');
                 writer.Write(i);
                 writer.WriteLine(']');
-                Effects[i].Export(writer, trackbarScripts, Chain);
+                Effects[i].Export(writer, trackbarScripts, Chain, chainParent?.Effects[i]);
             }
         }
     }

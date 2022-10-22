@@ -415,6 +415,7 @@ namespace Karoterra.AupDotNet.ExEdit
                 SceneName = scene?.Name ?? string.Empty,
             };
             exo.Objects.AddRange(Objects.Where(obj => obj.SceneIndex == sceneIndex));
+            exo.AllObjects.AddRange(Objects);
             exo.TrackbarScripts.AddRange(TrackbarScripts);
 
             return exo;
