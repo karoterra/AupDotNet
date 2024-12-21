@@ -16,10 +16,6 @@ namespace Karoterra.AupDotNet.ExEdit
             {
                 return new CustomEffect(type, trackbars, checkboxes, data);
             }
-            if (!type.Equals(EffectType.Defaults[type.Id]))
-            {
-                return new CustomEffect(type, trackbars, checkboxes, data);
-            }
 
             return (EffectTypeId)type.Id switch
             {
