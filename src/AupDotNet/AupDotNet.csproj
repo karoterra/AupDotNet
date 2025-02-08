@@ -5,7 +5,7 @@
     <RootNamespace>Karoterra.AupDotNet</RootNamespace>
     <AssemblyName>Karoterra.AupDotNet</AssemblyName>
     <PackageId>Karoterra.AupDotNet</PackageId>
-    <Version>0.1.2</Version>
+    <Version>0.2.0</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
     <Authors>karoterra</Authors>

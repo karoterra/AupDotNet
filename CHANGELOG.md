@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.2.0 (2025-02-08)
+- Update framework to net8 #7
+- Upgrade dependencies #8
+
 # 0.1.2 (2024-12-21)
 - Update dependencies to address security advisory #4
 - Fix EffectType detection in EffectFactory for patch.aul (#3) #5
