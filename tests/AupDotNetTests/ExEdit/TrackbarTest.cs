@@ -16,7 +16,7 @@ namespace AupDotNetTests.ExEdit
         [DataRow(0x1234006FU, TrackbarType.Script, TrackbarFlag.Acceleration | TrackbarFlag.Deceleration, 0x1234)]
         [DataRow(0x00010040U, TrackbarType.Stop, TrackbarFlag.Acceleration, 1)]
         [DataRow(0x00000021U, TrackbarType.Liner, TrackbarFlag.Deceleration, 0)]
-        [DataRow(0x00100002U, TrackbarType.Curve, 0, 0x10)]
+        [DataRow(0x00100002U, TrackbarType.Curve, (TrackbarFlag)0, 0x10)]
         public void Test_Transition(uint transition, TrackbarType type, TrackbarFlag flag, int script)
         {
             Trackbar trackbar = new Trackbar(0, 0, transition, 0);
