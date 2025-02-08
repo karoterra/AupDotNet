@@ -45,15 +45,5 @@ namespace Karoterra.AupDotNet
             : base($"Byte count of {name} must be less than {maxSize}.")
         {
         }
-
-        /// <summary>
-        /// シリアル化したデータを使用して、<see cref="MaxByteCountOfStringException"/> のインスタンスを初期化します。
-        /// </summary>
-        /// <param name="info">シリアル化されたオブジェクトデータを保持するオブジェクト。</param>
-        /// <param name="context">転送元または転送先に関するコンテキスト情報。</param>
-        protected MaxByteCountOfStringException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }
